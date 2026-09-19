@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'secondary': '#006398', 'on-primary': '#ffffff', 'on-primary-fixed-variant': '#005137', 'inverse-primary': '#68dba9', 'primary': '#006948', 'secondary-fixed-dim': '#93ccff', 'secondary-container': '#5bb8fe', 'surface-tint': '#006c4a', 'tertiary-fixed': '#6ffbbe', 'on-error-container': '#93000a', 'on-error': '#ffffff', 'inverse-on-surface': '#eef0ff', 'surface-container-high': '#e2e7ff', 'tertiary-container': '#00855b', 'on-surface': '#131b2e', 'outline': '#6d7a72', 'outline-variant': '#bccac0', 'on-primary-container': '#f5fff7', 'on-secondary': '#ffffff', 'on-tertiary-container': '#f5fff6', 'error': '#ba1a1a', 'on-tertiary-fixed': '#002113', 'tertiary-fixed-dim': '#4edea3', 'surface-dim': '#d2d9f4', 'on-tertiary': '#ffffff', 'error-container': '#ffdad6', 'tertiary': '#006947', 'surface-container-low': '#f2f3ff', 'primary-container': '#00855d', 'on-secondary-fixed': '#001d31', 'primary-fixed': '#85f8c4', 'surface-container-highest': '#dae2fd', 'on-background': '#131b2e', 'on-secondary-container': '#00476e', 'on-tertiary-fixed-variant': '#005236', 'secondary-fixed': '#cce5ff', 'inverse-surface': '#283044', 'on-primary-fixed': '#002114', 'on-surface-variant': '#3d4a42', 'surface-bright': '#faf8ff', 'on-secondary-fixed-variant': '#004b73', 'surface': '#faf8ff', 'surface-container-lowest': '#ffffff', 'primary-fixed-dim': '#68dba9', 'surface-container': '#eaedff', 'surface-variant': '#dae2fd', 'background': '#faf8ff' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'margin-md': '2rem', 'space-xs': '0.25rem', 'space-xl': '2rem', 'gutter-lg': '2rem', 'space-2xl': '3rem', 'space-lg': '1.5rem', 'space-3xl': '4rem', 'gutter-md': '1.5rem', 'space-sm': '0.5rem', 'margin': '1rem', 'space-2xs': '0.125rem', 'margin-lg': '3rem', 'gutter': '1rem', 'space-md': '1rem' }, fontFamily: { 'body-md-medium': ['Hanken Grotesk'], 'headline-lg-mobile': ['Space Grotesk'], 'label-sm': ['JetBrains Mono'], 'display-lg-mobile': ['Space Grotesk'], 'label-lg': ['JetBrains Mono'], 'display-lg': ['Space Grotesk'], 'headline-md': ['Space Grotesk'], 'body-lg-medium': ['Hanken Grotesk'], 'headline-lg': ['Space Grotesk'], 'label-md': ['JetBrains Mono'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'body-sm': ['Hanken Grotesk'], 'headline-sm': ['Space Grotesk'] }, fontSize: { 'body-md-medium': ['14px', { lineHeight: '22px', fontWeight: '500' }], 'headline-lg-mobile': ['26px', { lineHeight: '34px', letterSpacing: '-0.015em', fontWeight: '700' }], 'label-sm': ['10px', { lineHeight: '14px', letterSpacing: '0.05em', fontWeight: '500' }], 'display-lg-mobile': ['36px', { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' }], 'label-lg': ['13px', { lineHeight: '18px', letterSpacing: '0.02em', fontWeight: '600' }], 'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-md': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-lg-medium': ['16px', { lineHeight: '26px', fontWeight: '500' }], 'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.015em', fontWeight: '700' }], 'label-md': ['11px', { lineHeight: '16px', letterSpacing: '0.04em', fontWeight: '500' }], 'body-md': ['14px', { lineHeight: '22px', fontWeight: '400' }], 'body-lg': ['16px', { lineHeight: '26px', fontWeight: '400' }], 'body-sm': ['12px', { lineHeight: '18px', fontWeight: '400' }], 'headline-sm': ['20px', { lineHeight: '28px', letterSpacing: '-0.005em', fontWeight: '600' }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Geometric futsal ball emblem fused with glowing tactical circuit lines and lightning arrow representing tactical AI intelligence. Brand logo. - Primary color: #10b981 - Font: spaceGrotesk - Mode: dark - Roundness: rounded-md" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1W39kko8s2e0OoDxy4EePSkixUzIOlf6cDdDljrwZ1H4EyQlS_2Ai6QV0vWqjfbZ6puQi9KVNiD8dzq3X_2t-iQ9KAtvgQ-OL87dZ06PFbJwWZwRMJJAlk1NWhXrvmCWo_OiCHII1EPkn8JGIApXtRWU2cN-7WptJ2lLMzbggaFBWLTsuZmDyi3TaPA4brmZMxGbFkhf9zUeegs5lux7Q65tlhFITJGNaGw8rkG_9g3b2OtPLcAAOVS-g"/><div class="flex flex-col truncate"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none truncate">FutsalCoach AI</span><span class="font-label-sm text-label-sm text-primary uppercase tracking-widest leading-tight mt-space-2xs truncate">Explorar</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Buscar y filtrar tácticas" class="w-11 h-11 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">tune</span></button><div class="relative flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1X0QROsr3Cr2bmbEO1z8fXhIb3AiB05bG-M4Gjw2wKXuWNGlX9_ysOmrqfZJBvuZ2LU_OKBIC_YlF_w2Q1oTnXlgzFEH4d9ETf4uzfCWIhN_lPdA14j5Gvqsfdr3zraRMCJ1lDNbd-5pfTixSvREwkiW47m8YVUvRHWCl4EptYUaq1NZ91bjEbWxdjGa0-dZBU9ATcCU-V4GmJFHRuWvF2k08fkKf0IbEmoLE7wkFP0lR8K2Qb_pLMl8w"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full">
+<!-- Top Category Selector Bar -->
+<section class="w-full px-margin pt-space-sm pb-space-xs">
+<div class="flex items-center justify-between gap-space-sm mb-space-xs">
+<div class="flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Acceso Abierto • Modo Formación</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-space-2xs rounded">U14 / 12-13 años</span>
+</div>
+<!-- Scrollable Age Group Pills -->
+<div class="flex items-center gap-space-xs overflow-x-auto py-space-2xs no-scrollbar -mx-margin px-margin">
+<button class="flex-shrink-0 flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-primary text-on-primary shadow-sm hover:bg-primary-container transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-md text-label-md whitespace-nowrap">Infantil (U14 • 12-13 a)</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="font-label-md text-label-md whitespace-nowrap">Alevín (U12)</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="font-label-md text-label-md whitespace-nowrap">Cadete (U16)</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="font-label-md text-label-md whitespace-nowrap">Juvenil (U19)</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="font-label-md text-label-md whitespace-nowrap">Senior / Pro</span>
+</button>
+</div>
+</section>
+<!-- Pedagogical Objectives & Tactical Focus Card -->
+<section class="px-margin pt-space-xs pb-space-sm">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm p-space-md">
+<!-- Emerald tactical accent bar inside -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+<div class="flex items-start justify-between gap-space-sm pl-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-snug">Foco Metodológico Infantil</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Etapa de Asimilación Táctica Cognitiva</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-space-2xs font-label-sm text-label-sm px-space-xs py-space-2xs rounded bg-surface-container text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">timer</span> 12-18 min/tarea
+        </span>
+</div>
+<div class="grid grid-cols-1 gap-space-xs pl-space-xs">
+<div class="flex items-start gap-space-xs p-space-xs rounded-lg bg-surface-container-low/60">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 flex-shrink-0">schema</span>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold block">Modelo de Juego Estructurado</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Iniciación dinámica a sistemas base <span class="font-label-sm text-label-sm text-primary font-bold">3-1 con pívot fijador</span> y transición a rotación continua <span class="font-label-sm text-label-sm text-primary font-bold">4-0</span>.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-xs p-space-xs rounded-lg bg-surface-container-low/60">
+<span class="material-symbols-outlined text-secondary text-[18px] mt-0.5 flex-shrink-0">flag_circle</span>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold block">Conceptos Clave de Comprensión</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Desmarques de ruptura al espacio ciego, fijación del par defensivo y repliegue ordenado de seguridad.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Drill Filter Tabs -->
+<section class="px-margin pt-space-xs pb-space-sm">
+<div class="flex items-center justify-between mb-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Biblioteca de Tareas</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">18 ejercicios adaptados</span>
+</div>
+<!-- Filter chips with count badges -->
+<div class="flex items-center gap-space-xs overflow-x-auto py-space-2xs no-scrollbar -mx-margin px-margin">
+<button class="drill-tab flex-shrink-0 px-space-sm py-space-2xs rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-2xs" type="button">
+<span>Todos</span>
+<span class="bg-surface-container-lowest/30 px-1.5 py-0.5 rounded-full text-[10px]">18</span>
+</button>
+<button class="drill-tab flex-shrink-0 px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-space-2xs" type="button">
+<span>Salida de Presión</span>
+<span class="text-outline text-[10px]">5</span>
+</button>
+<button class="drill-tab flex-shrink-0 px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-space-2xs" type="button">
+<span>Dualidades</span>
+<span class="text-outline text-[10px]">4</span>
+</button>
+<button class="drill-tab flex-shrink-0 px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-space-2xs" type="button">
+<span>Defensa</span>
+<span class="text-outline text-[10px]">5</span>
+</button>
+<button class="drill-tab flex-shrink-0 px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-space-2xs" type="button">
+<span>Finalización</span>
+<span class="text-outline text-[10px]">4</span>
+</button>
+</div>
+</section>
+<!-- Drill Card 1: Detailed Pitch Board View -->
+<section class="px-margin mb-space-md">
+<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden flex flex-col">
+<!-- Card Header -->
+<div class="p-space-md pb-space-xs">
+<div class="flex items-center justify-between gap-space-xs mb-space-2xs">
+<span class="inline-flex items-center gap-space-2xs font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider bg-surface-container-low px-space-xs py-space-2xs rounded">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Salida de Presión 3-1
+          </span>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">schedule</span> 15 min</span>
+<span>•</span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">group</span> 6+1P</span>
+</div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-snug">
+          Rueda de 3 con salida en paralela y fijación al 2º palo
+        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+          Circulación rápida cierre-ala. Desmarque de ruptura por línea de banda y finalización cruzada con llegada de ala débil.
+        </p>
+</div>
+<!-- High-Precision Tactical Futsal Half-Court SVG Diagram (2:1 aspect ratio) -->
+<div class="px-space-md py-space-xs">
+<div class="relative w-full aspect-[2/1] bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-2 shadow-inner">
+<svg class="w-full h-full select-none" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Court Perimeter and Lines -->
+<rect fill="#f8fafc" height="180" rx="4" stroke="#cbd5e1" stroke-width="2" width="380" x="10" y="10"></rect>
+<!-- Midfield Line (Left Side of Half-Court) -->
+<line stroke="#cbd5e1" stroke-width="2" x1="20" x2="20" y1="10" y2="190"></line>
+<!-- Goal Area D (6m arc around right goal) -->
+<path d="M 390,40 A 60,60 0 0,0 330,100 A 60,60 0 0,0 390,160" fill="none" stroke="#cbd5e1" stroke-width="2"></path>
+<!-- Goal Box (3m post) -->
+<rect fill="#006948" height="40" rx="2" width="6" x="390" y="80"></rect>
+<!-- Penalty Spot (6m) -->
+<circle cx="330" cy="100" fill="#cbd5e1" r="2.5"></circle>
+<!-- Second Penalty Spot (10m) -->
+<circle cx="270" cy="100" fill="#cbd5e1" r="2.5"></circle>
+<!-- Tactical Pass Vectors (Emerald Curved Dashed Paths) -->
+<!-- Pass 1: Cierre (4) -> Ala Izq (7) -->
+<path d="M 80,100 Q 140,80 180,48" fill="none" stroke="#006948" stroke-dasharray="5,4" stroke-width="2.5"></path>
+<polygon fill="#006948" points="183,46 172,45 178,54"></polygon>
+<!-- Pass 2: Paralela al espacio ciego -->
+<path d="M 195,45 Q 260,35 315,35" fill="none" stroke="#006948" stroke-dasharray="5,4" stroke-width="2.5"></path>
+<polygon fill="#006948" points="318,35 308,31 310,41"></polygon>
+<!-- Movement Vector: Desmarque del pívot (9) -->
+<path d="M 270,85 Q 295,65 310,45" fill="none" stroke="#006398" stroke-dasharray="3,3" stroke-width="2"></path>
+<polygon fill="#006398" points="312,42 303,46 309,52"></polygon>
+<!-- Final pass to 2nd Post -->
+<path d="M 325,45 L 348,135" fill="none" stroke="#006948" stroke-dasharray="4,4" stroke-width="2.5"></path>
+<polygon fill="#006948" points="349,139 344,129 353,131"></polygon>
+<!-- Movement Vector: Ala Débil (11) llegando al 2º palo -->
+<path d="M 150,155 Q 250,165 340,145" fill="none" stroke="#006398" stroke-dasharray="3,3" stroke-width="2"></path>
+<polygon fill="#006398" points="344,144 334,144 337,152"></polygon>
+<!-- Player Tokens (Home Dark Slate, Away Blue, GK Green) -->
+<!-- GK Defender (13) in goal area -->
+<circle cx="380" cy="100" fill="#006948" r="10"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="9" font-weight="700" text-anchor="middle" x="380" y="104">1</text>
+<!-- Cierre (4) -->
+<circle cx="70" cy="100" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="70" y="104">4</text>
+<!-- Ala Salida (7) -->
+<circle cx="185" cy="45" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="185" y="49">7</text>
+<!-- Defensor en zona (2) -->
+<circle cx="210" cy="70" fill="#006398" r="10"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="9" font-weight="700" text-anchor="middle" x="210" y="74">D2</text>
+<!-- Pívot / Desmarque (9) -->
+<circle cx="265" cy="85" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="265" y="89">9</text>
+<!-- Ala Contraria / 2º Palo (11) -->
+<circle cx="140" cy="155" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="140" y="159">11</text>
+<!-- Futsal Ball Indicator -->
+<circle cx="85" cy="105" fill="#f59e0b" r="4.5" stroke="#ffffff" stroke-width="1.5"></circle>
+</svg>
+<!-- Interactive Play Badge on Diagram -->
+<div class="absolute bottom-2 left-2 px-space-xs py-1 rounded bg-surface-container-lowest/90 backdrop-blur text-on-surface text-[11px] font-label-md flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            Media Pista • Fase Ofensiva
+          </div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-space-md pt-space-xs flex items-center justify-between gap-space-sm bg-surface-container-low/40 mt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+            Intensidad Media
+          </span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+            Espacio Reducido
+          </span>
+</div>
+<button class="tactical-cta px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-body-md-medium text-body-md-medium hover:bg-primary-container transition-all flex items-center gap-space-2xs shadow-sm active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+<span>Abrir en Pizarra</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Drill Card 2: Dualidad Pase y Va -->
+<section class="px-margin mb-space-md">
+<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden flex flex-col">
+<div class="p-space-md pb-space-xs">
+<div class="flex items-center justify-between gap-space-xs mb-space-2xs">
+<span class="inline-flex items-center gap-space-2xs font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider bg-surface-container-low px-space-xs py-space-2xs rounded">
+            Dualidad &amp; Bloqueo
+          </span>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">schedule</span> 12 min</span>
+<span>•</span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">group</span> 8 jugadores</span>
+</div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-snug">
+          Dualidad "Pase y Va" con bloqueo ciego al ala opuesta
+        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+          Ataque de 2x2 + comodín interior. Trabajo de ritmo temporal para generar línea limpia de pase y tiro exterior a 1 toque.
+        </p>
+</div>
+<!-- Tactical SVG Schematic 2 -->
+<div class="px-space-md py-space-xs">
+<div class="relative w-full aspect-[2/1] bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-2 shadow-inner">
+<svg class="w-full h-full select-none" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#f8fafc" height="180" rx="4" stroke="#cbd5e1" stroke-width="2" width="380" x="10" y="10"></rect>
+<line stroke="#cbd5e1" stroke-dasharray="6,4" stroke-width="2" x1="200" x2="200" y1="10" y2="190"></line>
+<circle cx="200" cy="100" fill="none" r="30" stroke="#cbd5e1" stroke-width="2"></circle>
+<circle cx="200" cy="100" fill="#cbd5e1" r="3"></circle>
+<!-- Movement and Pass Arrows -->
+<path d="M 100,140 L 160,80" fill="none" stroke="#006948" stroke-dasharray="5,4" stroke-width="2.5"></path>
+<polygon fill="#006948" points="163,77 153,80 159,88"></polygon>
+<path d="M 100,140 Q 140,160 210,130" fill="none" stroke="#006398" stroke-dasharray="3,3" stroke-width="2"></path>
+<polygon fill="#006398" points="214,128 206,134 212,140"></polygon>
+<!-- Return vector -->
+<path d="M 170,75 Q 220,80 260,110" fill="none" stroke="#006948" stroke-dasharray="4,4" stroke-width="2.5"></path>
+<polygon fill="#006948" points="263,113 253,109 258,118"></polygon>
+<!-- Players -->
+<circle cx="95" cy="145" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="95" y="149">5</text>
+<circle cx="165" cy="70" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="165" y="74">8</text>
+<circle cx="180" cy="115" fill="#006398" r="10"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="9" font-weight="700" text-anchor="middle" x="180" y="119">D3</text>
+<circle cx="270" cy="120" fill="#131b2e" r="11"></circle>
+<text fill="#ffffff" font-family="'JetBrains Mono'" font-size="10" font-weight="700" text-anchor="middle" x="270" y="124">10</text>
+</svg>
+<div class="absolute bottom-2 left-2 px-space-xs py-1 rounded bg-surface-container-lowest/90 backdrop-blur text-on-surface text-[11px] font-label-md flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            Zona Central • Toma de Decisión Rápida
+          </div>
+</div>
+</div>
+<div class="p-space-md pt-space-xs flex items-center justify-between gap-space-sm bg-surface-container-low/40 mt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+            Técnica Táctica
+          </span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+            Transición
+          </span>
+</div>
+<button class="tactical-cta px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-body-md-medium text-body-md-medium hover:bg-primary-container transition-all flex items-center gap-space-2xs shadow-sm active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+<span>Abrir en Pizarra</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Drill Card 3: Presión Alta -->
+<section class="px-margin mb-space-md">
+<div class="rounded-xl bg-surface-container-lowest shadow-sm p-space-md">
+<div class="flex items-center justify-between gap-space-xs mb-space-2xs">
+<span class="inline-flex items-center gap-space-2xs font-label-sm text-label-sm text-error font-bold uppercase tracking-wider bg-error-container/30 text-on-error-container px-space-xs py-space-2xs rounded">
+          Fase Defensiva Activa
+        </span>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">schedule</span> 18 min</span>
+<span>•</span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">group</span> 10 jugadores</span>
+</div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-snug">
+        Presión alta al rombo con cobertura de línea de pase
+      </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+        Mecanismo en "Y" con orientación de perfil defensivo hacia banda, provocando pérdida inducida en zona de finalización infantil.
+      </p>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs border-t-0 bg-surface-container-low/50 p-space-xs rounded-lg">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">security</span>
+<span>Disparador: Balón retrasado al portero</span>
+</div>
+<button class="p-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors flex items-center gap-1 font-label-md text-label-md" type="button">
+<span>Ver Detalles</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Contextual AI Assistant Floating Suggestion Banner -->
+<section class="px-margin mb-space-xl">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-high shadow-md p-space-md text-on-surface">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-space-2xs mb-space-2xs">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wider">Asistente Táctico IA</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-outline">Sugerencia en vivo</span>
+</div>
+<p class="font-body-md-medium text-body-md-medium text-on-surface leading-snug">
+            ¿Tienes bajas hoy y solo cuentas con 7 jugadores en la sesión?
+          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 mb-space-sm">
+            La IA puede reajustar los roles y dimensiones de estas 3 tareas de Infantil en 5 segundos.
+          </p>
+<button class="w-full sm:w-auto px-space-md py-space-xs rounded-lg bg-secondary text-on-secondary font-body-md-medium text-body-md-medium hover:bg-on-secondary-container transition-all flex items-center justify-center gap-space-xs shadow-sm active:scale-98" id="btn-ask-ai" type="button">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span>Adaptar ejercicios para 7 jugadores</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Micro-interaction for Drill Filter Tabs & AI trigger
+  (function() {
+    const tabs = document.querySelectorAll('.drill-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-on-primary');
+          t.classList.add('bg-surface-container-low', 'text-on-surface');
+        });
+        tab.classList.remove('bg-surface-container-low', 'text-on-surface');
+        tab.classList.add('bg-primary', 'text-on-primary');
+      });
+    });
+
+    const aiButton = document.getElementById('btn-ask-ai');
+    if (aiButton) {
+      aiButton.addEventListener('click', function() {
+        const originalHtml = this.innerHTML;
+        this.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Adaptando tareas a 3x3 + 1...</span>';
+        setTimeout(() => {
+          this.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span><span>¡Tareas adaptadas con éxito!</span>';
+          this.classList.remove('bg-secondary');
+          this.classList.add('bg-primary');
+          setTimeout(() => {
+            this.innerHTML = originalHtml;
+            this.classList.remove('bg-primary');
+            this.classList.add('bg-secondary');
+          }, 2400);
+        }, 1100);
+      });
+    }
+
+    const ctaButtons = document.querySelectorAll('.tactical-cta');
+    ctaButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const span = this.querySelector('span:last-child');
+        if (span) {
+          const prev = span.innerText;
+          span.innerText = 'Cargando Pizarra...';
+          setTimeout(() => { span.innerText = prev; }, 1200);
+        }
+      });
+    });
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-body-md-medium"><div class="grid grid-cols-4 items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center gap-space-2xs h-full w-full transition-colors text-primary font-body-md-medium" data-path="explorar" href="#"><span class="material-symbols-outlined text-[22px]">sports_soccer</span><span class="font-label-md text-label-md tracking-tight">Explorar</span></a><a class="flex flex-col items-center justify-center gap-space-2xs h-full w-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="pizarra-y-tareas" href="#"><span class="material-symbols-outlined text-[22px]">draw</span><span class="font-label-md text-label-md tracking-tight">Pizarra</span></a><a class="flex flex-col items-center justify-center gap-space-2xs h-full w-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="asistente-ia" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">smart_toy</span><span class="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-secondary"></span></div><span class="font-label-md text-label-md tracking-tight">Asistente IA</span></a><a class="flex flex-col items-center justify-center gap-space-2xs h-full w-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="mi-club-pro" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">shield_person</span><span class="material-symbols-outlined text-[11px] absolute -bottom-1 -right-2 text-outline">lock</span></div><span class="font-label-md text-label-md tracking-tight">Mi Club</span></a></div></nav></body></html>

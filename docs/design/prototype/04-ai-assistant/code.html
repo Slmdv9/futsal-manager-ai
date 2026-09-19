@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'secondary': '#006398', 'on-primary': '#ffffff', 'on-primary-fixed-variant': '#005137', 'inverse-primary': '#68dba9', 'primary': '#006948', 'secondary-fixed-dim': '#93ccff', 'secondary-container': '#5bb8fe', 'surface-tint': '#006c4a', 'tertiary-fixed': '#6ffbbe', 'on-error-container': '#93000a', 'on-error': '#ffffff', 'inverse-on-surface': '#eef0ff', 'surface-container-high': '#e2e7ff', 'tertiary-container': '#00855b', 'on-surface': '#131b2e', 'outline': '#6d7a72', 'outline-variant': '#bccac0', 'on-primary-container': '#f5fff7', 'on-secondary': '#ffffff', 'on-tertiary-container': '#f5fff6', 'error': '#ba1a1a', 'on-tertiary-fixed': '#002113', 'tertiary-fixed-dim': '#4edea3', 'surface-dim': '#d2d9f4', 'on-tertiary': '#ffffff', 'error-container': '#ffdad6', 'tertiary': '#006947', 'surface-container-low': '#f2f3ff', 'primary-container': '#00855d', 'on-secondary-fixed': '#001d31', 'primary-fixed': '#85f8c4', 'surface-container-highest': '#dae2fd', 'on-background': '#131b2e', 'on-secondary-container': '#00476e', 'on-tertiary-fixed-variant': '#005236', 'secondary-fixed': '#cce5ff', 'inverse-surface': '#283044', 'on-primary-fixed': '#002114', 'on-surface-variant': '#3d4a42', 'surface-bright': '#faf8ff', 'on-secondary-fixed-variant': '#004b73', 'surface': '#faf8ff', 'surface-container-lowest': '#ffffff', 'primary-fixed-dim': '#68dba9', 'surface-container': '#eaedff', 'surface-variant': '#dae2fd', 'background': '#faf8ff' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'margin-md': '2rem', 'space-xs': '0.25rem', 'space-xl': '2rem', 'gutter-lg': '2rem', 'space-2xl': '3rem', 'space-lg': '1.5rem', 'space-3xl': '4rem', 'gutter-md': '1.5rem', 'space-sm': '0.5rem', 'margin': '1rem', 'space-2xs': '0.125rem', 'margin-lg': '3rem', 'gutter': '1rem', 'space-md': '1rem' }, fontFamily: { 'body-md-medium': ['Hanken Grotesk'], 'headline-lg-mobile': ['Space Grotesk'], 'label-sm': ['JetBrains Mono'], 'display-lg-mobile': ['Space Grotesk'], 'label-lg': ['JetBrains Mono'], 'display-lg': ['Space Grotesk'], 'headline-md': ['Space Grotesk'], 'body-lg-medium': ['Hanken Grotesk'], 'headline-lg': ['Space Grotesk'], 'label-md': ['JetBrains Mono'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'body-sm': ['Hanken Grotesk'], 'headline-sm': ['Space Grotesk'] }, fontSize: { 'body-md-medium': ['14px', { lineHeight: '22px', fontWeight: '500' }], 'headline-lg-mobile': ['26px', { lineHeight: '34px', letterSpacing: '-0.015em', fontWeight: '700' }], 'label-sm': ['10px', { lineHeight: '14px', letterSpacing: '0.05em', fontWeight: '500' }], 'display-lg-mobile': ['36px', { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' }], 'label-lg': ['13px', { lineHeight: '18px', letterSpacing: '0.02em', fontWeight: '600' }], 'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-md': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-lg-medium': ['16px', { lineHeight: '26px', fontWeight: '500' }], 'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.015em', fontWeight: '700' }], 'label-md': ['11px', { lineHeight: '16px', letterSpacing: '0.04em', fontWeight: '500' }], 'body-md': ['14px', { lineHeight: '22px', fontWeight: '400' }], 'body-lg': ['16px', { lineHeight: '26px', fontWeight: '400' }], 'body-sm': ['12px', { lineHeight: '18px', fontWeight: '400' }], 'headline-sm': ['20px', { lineHeight: '28px', letterSpacing: '-0.005em', fontWeight: '600' }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Geometric futsal ball emblem fused with glowing tactical circuit lines and lightning arrow representing tactical AI intelligence. Brand logo. - Primary color: #10b981 - Font: spaceGrotesk - Mode: dark - Roundness: rounded-md" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1W39kko8s2e0OoDxy4EePSkixUzIOlf6cDdDljrwZ1H4EyQlS_2Ai6QV0vWqjfbZ6puQi9KVNiD8dzq3X_2t-iQ9KAtvgQ-OL87dZ06PFbJwWZwRMJJAlk1NWhXrvmCWo_OiCHII1EPkn8JGIApXtRWU2cN-7WptJ2lLMzbggaFBWLTsuZmDyi3TaPA4brmZMxGbFkhf9zUeegs5lux7Q65tlhFITJGNaGw8rkG_9g3b2OtPLcAAOVS-g"/><div class="flex flex-col truncate"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none truncate">FutsalCoach AI</span><span class="font-label-sm text-label-sm text-primary uppercase tracking-widest leading-tight mt-space-2xs truncate">Asistente Ia</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Buscar y filtrar tácticas" class="w-11 h-11 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">tune</span></button><div class="relative flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1X0QROsr3Cr2bmbEO1z8fXhIb3AiB05bG-M4Gjw2wKXuWNGlX9_ysOmrqfZJBvuZ2LU_OKBIC_YlF_w2Q1oTnXlgzFEH4d9ETf4uzfCWIhN_lPdA14j5Gvqsfdr3zraRMCJ1lDNbd-5pfTixSvREwkiW47m8YVUvRHWCl4EptYUaq1NZ91bjEbWxdjGa0-dZBU9ATcCU-V4GmJFHRuWvF2k08fkKf0IbEmoLE7wkFP0lR8K2Qb_pLMl8w"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full">
+<!-- Assistant Header Bar -->
+<div class="bg-surface-container-lowest shadow-sm px-margin py-space-sm flex flex-col gap-space-sm sticky top-0 z-20">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 relative">
+<span class="material-symbols-outlined text-[24px]">smart_toy</span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary absolute -bottom-0.5 -right-0.5 ring-2 ring-surface-container-lowest animate-pulse"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Copilot IA Táctico</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-space-xs py-0.5 rounded-full flex-shrink-0">PRO RFEF</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+            En línea · Acceso Libre Metodología
+          </span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md flex items-center gap-1 hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Nuevo chat</span>
+</button>
+</div>
+<!-- Quick Prompt Pills -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-0.5 -mx-margin px-margin">
+<button class="flex-shrink-0 px-space-sm py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm hover:bg-primary/10 hover:text-primary transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">play_arrow</span>
+        Salida 3-1
+      </button>
+<button class="flex-shrink-0 px-space-sm py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm hover:bg-primary/10 hover:text-primary transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">security</span>
+        Defender 5v4
+      </button>
+<button class="flex-shrink-0 px-space-sm py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm hover:bg-primary/10 hover:text-primary transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">fitness_center</span>
+        Calentamiento U12
+      </button>
+<button class="flex-shrink-0 px-space-sm py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm hover:bg-primary/10 hover:text-primary transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-error">sports</span>
+        Faltas directas
+      </button>
+</div>
+</div>
+<!-- Chat Scroll Area -->
+<div class="flex flex-col px-margin py-space-md gap-space-lg">
+<!-- Conversation Divider -->
+<div class="flex items-center justify-center gap-space-sm my-space-xs">
+<span class="h-px bg-surface-container-highest flex-1"></span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider px-space-xs">Sesión de Táctica Libre · Hoy</span>
+<span class="h-px bg-surface-container-highest flex-1"></span>
+</div>
+<!-- Coach / User Bubble -->
+<div class="flex flex-col items-end gap-space-2xs max-w-[90%] self-end">
+<div class="flex items-center gap-1.5 mr-space-xs">
+<span class="font-label-md text-label-md text-outline">Míster (Acceso Libre)</span>
+<span class="font-label-sm text-label-sm text-outline">18:42</span>
+</div>
+<div class="bg-primary text-on-primary rounded-2xl rounded-tr-xs px-space-md py-space-sm shadow-md font-body-md text-body-md leading-relaxed">
+        Tengo entrenamiento de Infantil (U14) hoy con 9 jugadores y nos cuesta superar la presión alta al hombre. ¿Qué ejercicio me recomiendas?
+      </div>
+<span class="font-label-sm text-label-sm text-primary flex items-center gap-0.5 mr-space-xs">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Enviado
+      </span>
+</div>
+<!-- AI Bot Message Bundle -->
+<div class="flex flex-col items-start gap-space-sm max-w-[98%] self-start">
+<div class="flex items-center gap-space-xs ml-space-xs">
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[13px]">bolt</span>
+</div>
+<span class="font-body-md-medium text-body-md-medium text-on-surface">Copilot IA Futsal</span>
+<span class="font-label-sm text-label-sm text-outline">18:43</span>
+</div>
+<!-- Tactical Diagnosis Card -->
+<div class="w-full bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-secondary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span>Diagnóstico Táctico (Infantil U14)</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          En categoría U14, la presión individual agresiva satura el canal cognitivo del portador del balón (fijación ocular al balón en vez de al espacio). Para romper el acoso al hombre con 9 jugadores, el antídoto clave es la <strong class="text-on-surface font-body-md-medium">movilidad sin balón con finta previa</strong> y generar juego de espaldas para activar la <strong class="text-on-surface font-body-md-medium">paralela al espacio ciego</strong>.
+        </p>
+</div>
+<!-- Embedded Drill Card -->
+<div class="w-full bg-surface-container-lowest rounded-2xl p-space-md shadow-md flex flex-col gap-space-md">
+<!-- Drill Header -->
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-col min-w-0">
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm uppercase px-space-xs py-0.5 rounded w-fit mb-1 font-semibold">Tarea Principal · 9 Jugadores</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Rueda de 3 con Salida en Paralela y 2º Palo</h3>
+</div>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="font-label-lg text-label-lg text-primary font-bold">15 MIN</span>
+<span class="font-label-sm text-label-sm text-outline">Intensidad Alta</span>
+</div>
+</div>
+<!-- Mini Tactical Court Pitch Diagram -->
+<div class="relative w-full rounded-xl overflow-hidden bg-surface-container shadow-inner aspect-[2/1] flex items-center justify-center p-2">
+<!-- Pitch SVG Markings -->
+<svg class="w-full h-full text-outline-variant" fill="none" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Court Outer Border -->
+<rect fill="#f8fafc" height="188" rx="8" stroke="currentColor" stroke-width="2" width="388" x="6" y="6"></rect>
+<!-- Halfway Line -->
+<line stroke="currentColor" stroke-width="2" x1="200" x2="200" y1="6" y2="194"></line>
+<!-- Center Circle -->
+<circle cx="200" cy="100" r="32" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="200" cy="100" fill="currentColor" r="2.5"></circle>
+<!-- Left Penalty Area (6m D) -->
+<path d="M 6 45 H 48 A 55 55 0 0 1 48 155 H 6" stroke="currentColor" stroke-width="2"></path>
+<circle cx="60" cy="100" fill="currentColor" r="2.5"></circle>
+<!-- Right Penalty Area (6m D) -->
+<path d="M 394 45 H 352 A 55 55 0 0 0 352 155 H 394" stroke="currentColor" stroke-width="2"></path>
+<circle cx="340" cy="100" fill="currentColor" r="2.5"></circle>
+<!-- Tactical Run Dashed Vectors -->
+<!-- Cierre pass to Ala -->
+<path d="M 75 100 Q 115 130 150 148" marker-end="url(#arrow)" stroke="#006948" stroke-dasharray="4 3" stroke-width="2.5"></path>
+<!-- Ala pass to Paralela -->
+<path d="M 160 148 Q 230 155 295 160" stroke="#006948" stroke-dasharray="4 3" stroke-width="2.5"></path>
+<!-- Cut to 2nd Post -->
+<path d="M 170 45 Q 260 55 335 88" stroke="#006398" stroke-dasharray="4 3" stroke-width="2.5"></path>
+<!-- Ball marker -->
+<circle cx="152" cy="150" fill="#006948" r="4"></circle>
+<defs>
+<marker id="arrow" markerheight="4" markerwidth="4" orient="auto-start-reverse" refx="4" refy="3" viewbox="0 0 6 6">
+<path d="M 0 0 L 6 3 L 0 6 z" fill="#006948"></path>
+</marker>
+</defs>
+</svg>
+<!-- Interactive Tactical Player Tokens on top of court -->
+<!-- P1 Cierre -->
+<div class="absolute left-[16%] top-[45%] flex flex-col items-center">
+<span class="w-6 h-6 rounded-full bg-on-surface text-on-primary font-label-sm text-label-sm font-bold flex items-center justify-center shadow-md ring-1 ring-white">4</span>
+<span class="font-label-sm text-[9px] text-on-surface font-semibold mt-0.5">Cierre</span>
+</div>
+<!-- P2 Ala Derecha -->
+<div class="absolute left-[36%] bottom-[12%] flex flex-col items-center">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold flex items-center justify-center shadow-md ring-1 ring-white animate-bounce">7</span>
+<span class="font-label-sm text-[9px] text-primary font-semibold mt-0.5">Ala</span>
+</div>
+<!-- P3 Pivot / 2º Palo -->
+<div class="absolute left-[40%] top-[14%] flex flex-col items-center">
+<span class="w-6 h-6 rounded-full bg-secondary text-on-primary font-label-sm text-label-sm font-bold flex items-center justify-center shadow-md ring-1 ring-white">9</span>
+<span class="font-label-sm text-[9px] text-secondary font-semibold mt-0.5">Pívot</span>
+</div>
+<!-- Defender 1 (Press) -->
+<div class="absolute left-[39%] bottom-[28%] flex flex-col items-center opacity-85">
+<span class="w-5 h-5 rounded-full bg-error text-on-error font-label-sm text-[9px] font-bold flex items-center justify-center shadow">D</span>
+</div>
+<!-- Target Finisher Zone -->
+<div class="absolute right-[14%] top-[42%] flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">sports_soccer</span>
+</div>
+<span class="font-label-sm text-[9px] text-primary font-bold mt-0.5">Gol 2º Palo</span>
+</div>
+</div>
+<!-- 3 Coaching Key Tips -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low rounded-xl p-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">lightbulb</span>
+            Pautas Clave del Ejercicio:
+          </span>
+<div class="grid grid-cols-1 gap-space-xs mt-1">
+<div class="flex items-start gap-space-xs">
+<span class="w-4 h-4 rounded-full bg-primary/20 text-primary font-label-sm text-label-sm flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+<p class="font-body-sm text-body-sm text-on-surface"><strong class="font-body-md-medium">Regla de 2 toques:</strong> Obliga a pensar antes de recibir y no da tiempo a la fijación defensiva rival.</p>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="w-4 h-4 rounded-full bg-primary/20 text-primary font-label-sm text-label-sm flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+<p class="font-body-sm text-body-sm text-on-surface"><strong class="font-body-md-medium">Finta de apoyo y rotura:</strong> El ala amaga al pie y rompe en velocidad a la espalda del par.</p>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="w-4 h-4 rounded-full bg-primary/20 text-primary font-label-sm text-label-sm flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+<p class="font-body-sm text-body-sm text-on-surface"><strong class="font-body-md-medium">Fijación 2º palo:</strong> El pívot arrastra su marca al punto de penalti y ataca el segundo poste.</p>
+</div>
+</div>
+</div>
+<!-- Action CTA Buttons inside Response -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-2xs">
+<button class="w-full py-2.5 px-space-sm rounded-lg bg-primary text-on-primary font-body-md-medium text-body-md-medium flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98] transition-transform" type="button">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+<span class="truncate">Abrir en Pizarra</span>
+</button>
+<button class="w-full py-2.5 px-space-sm rounded-lg bg-surface-container text-on-surface font-body-md-medium text-body-md-medium flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span class="truncate">Descargar PDF</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Suggested Follow-up Quick Replies -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Sugerencias de continuidad:
+      </span>
+<div class="flex flex-col gap-space-xs">
+<button class="w-full text-left p-space-sm rounded-xl bg-surface-container-lowest text-on-surface hover:bg-primary/5 hover:text-primary transition-all font-body-sm text-body-sm shadow-sm flex items-center justify-between group">
+<span>¿Cómo adapto esto si el rival defiende en zona?</span>
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</button>
+<button class="w-full text-left p-space-sm rounded-xl bg-surface-container-lowest text-on-surface hover:bg-primary/5 hover:text-primary transition-all font-body-sm text-body-sm shadow-sm flex items-center justify-between group">
+<span>Dame una variante competitiva con sistema de puntuación rápida</span>
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Interactive Input Dock -->
+<div class="sticky bottom-0 bg-surface-container-lowest/95 backdrop-blur-md px-margin pt-space-xs pb-space-sm shadow-[0_-4px_16px_rgba(0,0,0,0.04)] z-30">
+<div class="flex items-center gap-space-xs bg-surface-container-low rounded-2xl px-space-sm py-1.5 focus-within:ring-2 focus-within:ring-primary">
+<button aria-label="Adjuntar táctica o archivo" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[22px]">attach_file</span>
+</button>
+<input class="w-full bg-transparent text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none min-w-0 py-1" id="tactical-chat-input" placeholder="Pregunta sobre táctica, pizarras o ejercicios..." type="text"/>
+<button aria-label="Grabar audio" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[22px]">mic</span>
+</button>
+<button aria-label="Enviar consulta táctica" class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm hover:bg-primary-container active:scale-95 transition-all" id="send-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+<!-- Micro Disclaimer -->
+<div class="text-center pt-space-xs">
+<p class="font-label-sm text-[10px] text-outline">
+        Asistente táctico con acceso libre ilimitado para entrenadores de fútbol sala.
+      </p>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const input = document.getElementById('tactical-chat-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    if (input && sendBtn) {
+      const handleSend = () => {
+        const val = input.value.trim();
+        if (val.length > 0) {
+          input.value = '';
+          input.placeholder = 'Analizando variantes tácticas...';
+          setTimeout(() => {
+            input.placeholder = 'Pregunta sobre táctica, pizarras o ejercicios...';
+          }, 2000);
+        }
+      };
+
+      sendBtn.addEventListener('click', handleSend);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleSend();
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-body-md-medium"><div class="grid grid-cols-4 items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-space-2xs h-full w-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="explorar" href="#"><span class="material-symbols-outlined text-[22px]">sports_soccer</span><span class="font-label-md text-label-md tracking-tight">Explorar</span></a><a class="flex flex-col items-center justify-center gap-space-2xs h-full w-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="pizarra-y-tareas" href="#"><span class="material-symbols-outlined text-[22px]">draw</span><span class="font-label-md text-label-md tracking-tight">Pizarra</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-2xs h-full w-full transition-colors text-primary font-body-md-medium" data-path="asistente-ia" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">smart_toy</span><span class="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-secondary"></span></div><span class="font-label-md text-label-md tracking-tight">Asistente IA</span></a><a class="flex flex-col items-center justify-center gap-space-2xs h-full w-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="mi-club-pro" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">shield_person</span><span class="material-symbols-outlined text-[11px] absolute -bottom-1 -right-2 text-outline">lock</span></div><span class="font-label-md text-label-md tracking-tight">Mi Club</span></a></div></nav></body></html>
