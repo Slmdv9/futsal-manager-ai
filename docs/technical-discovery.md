@@ -12,6 +12,13 @@ A native mobile app built with React Native and Expo, targeting phones and table
 - **TypeScript** across app and API routes.
 - **Versioned JSON content package** in the repo, validated at build time and shared by the app bundle and the API.
 
+## Commands
+
+- Install: `npm install`
+- Verify: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`) — also executed by `./init.sh`
+- Start: `npm start` (Expo dev server; `init.sh` never starts it)
+- Bundle smoke: `npx expo export --platform android --output-dir dist`
+
 ## Data and Storage
 
 - Curated seed content lives as versioned JSON in the repo: Exercises (with Board Data) and per-Category Programming. It is validated against the Board Data schema at build time and shared by the app bundle and the API. No database in the MVP.

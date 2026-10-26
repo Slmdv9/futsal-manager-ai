@@ -3,13 +3,13 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `chore/harness-starter` (pushed to `origin`)
-- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/pull/new/chore/harness-starter` (agents cannot create PRs with the current `gh` account)
+- Current branch: `feat/bootstrap-app-shell`
+- Pull request: pending — push the branch and open it from the web once this feature is ready for independent validation
 - Standard startup path: `./init.sh`
-- Standard verification path: provisional — not bootstrapped yet
-- Current next ready feature: `bootstrap-app-shell`
-- Current blocker: none for bootstrap; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
-- Last verified at: `2026-10-26` (harness and decisions; no application code)
+- Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
+- Current next ready feature: `bootstrap-app-shell` implemented, awaiting independent validation; then `design-system-tokens`
+- Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
+- Last verified at: `2026-10-26` (`bootstrap-app-shell`: verify, Android export, and dev-server smoke)
 
 ## Session Log
 
@@ -45,3 +45,14 @@
 - Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`.
 - Known risk or unresolved issue: the pull request must be opened manually by the user.
 - Next best step: open the PR to `main` from the web, then start `feat/bootstrap-app-shell` from an updated `main`.
+
+### Session 004
+
+- Date: `2026-10-26`
+- Goal: Implement `bootstrap-app-shell` from its feature spec.
+- Completed: scaffolded an Expo SDK 58 + Expo Router + TypeScript app, added a Spanish home placeholder, lint/typecheck/verify scripts, `.gitignore`, and a real non-blocking `init.sh`; updated `AGENTS.md` for the bootstrapped state.
+- Verification run: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor` 20/20); `./init.sh`; `npx expo export --platform android`; `CI=1 npx expo start` dev-server smoke.
+- Evidence captured: verify exit 0; init exit 0; Android bundle exported (1,306 modules); Metro status returned `running`.
+- Files or artifacts updated: `package.json`, `package-lock.json`, `app.json`, `tsconfig.json`, `eslint.config.js`, `.gitignore`, `src/app/_layout.tsx`, `src/app/index.tsx`, `assets/`, `init.sh`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`, `docs/specs/bootstrap-app-shell.md`.
+- Known risk or unresolved issue: manual visual render on a device/simulator was not performed; `npm audit` reports 5 high-severity transitive issues in Expo CLI tooling with no non-breaking fix.
+- Next best step: independent validation of `bootstrap-app-shell`, then `design-system-tokens`.
