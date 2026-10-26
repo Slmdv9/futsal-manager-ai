@@ -29,6 +29,23 @@ Before writing code:
 4. Run `./init.sh`.
 5. If baseline verification fails, fix the baseline before adding new feature work.
 
+## Branch And Pull Request Workflow
+
+This repository works one branch per SDD phase and never commits directly to `main`.
+
+1. Update `main` and create a branch from it before starting a phase.
+2. Name the branch by phase:
+   - `docs/<phase>` for discovery or documentation phases (e.g. `docs/build-brief`).
+   - `chore/<phase>` for harness or maintenance phases (e.g. `chore/harness-starter`).
+   - `feat/<feature-id>` for implementation features (e.g. `feat/bootstrap-app-shell`).
+3. Keep the branch scoped to one phase or one feature in `feature_list.json`.
+4. Commit on the branch using Conventional Commit messages.
+5. When the phase is ready, push the branch and open a pull request to `main`. Do not merge it unless the user asks.
+6. The pull request body must include the phase or feature id, what changed, verification actually run, and remaining risks.
+7. Record the branch name and pull request status in `PROGRESS.md` before ending the session.
+
+Do not reuse a merged phase branch for unrelated work.
+
 ## Non-Negotiable Product Constraints
 
 - **MVP is anonymous.** No accounts, login, registration, teams, rosters, or coach-owned calendars. Those are a later phase.
@@ -73,4 +90,4 @@ Before implementation begins, resolve the blocking open questions in `docs/risks
 
 ## End Of Session
 
-Before ending a session: update `PROGRESS.md` and `feature_list.json`, record unresolved risks or blockers, and leave the repo runnable through `./init.sh`.
+Before ending a session: update `PROGRESS.md` and `feature_list.json`, record unresolved risks or blockers, leave the repo runnable through `./init.sh`, and push the phase branch with its pull request to `main`.
