@@ -7,8 +7,8 @@
 - Standard startup path: `./init.sh`
 - Standard verification path: provisional — not bootstrapped yet
 - Current next ready feature: `bootstrap-app-shell`
-- Current blocker: stack decision pending; Board Data schema and seed content licensing must be resolved before board and content work
-- Last verified at: `2026-10-26` (harness only; no application code)
+- Current blocker: none for bootstrap; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
+- Last verified at: `2026-10-26` (harness and decisions; no application code)
 
 ## Session Log
 
@@ -22,3 +22,14 @@
 - Files or artifacts updated: `AGENTS.md`, `init.sh`, `PROGRESS.md`, `feature_list.json`.
 - Known risk or unresolved issue: stack is undecided, so no real install/verify/start commands exist yet; seed content licensing is still blocking.
 - Next best step: resolve the stack decision, then implement `bootstrap-app-shell`.
+
+### Session 002
+
+- Date: `2026-10-26`
+- Goal: Unblock implementation decisions before coding.
+- Completed: resolved stack, board rendering, seed licensing, AI provider, content storage, anonymous quota, offline persistence, and seed scope.
+- Verification run: decisions recorded in `docs/technical-discovery.md`, `docs/risks-and-open-questions.md`, `AGENTS.md`, and `feature_list.json`.
+- Evidence captured: no remaining blocking questions; `bootstrap-app-shell` is ready.
+- Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `docs/technical-discovery.md`, `docs/risks-and-open-questions.md`, `feature_list.json`.
+- Known risk or unresolved issue: DevExpert `chat` structured-output reliability and the exact Board Data schema still need implementation-time validation.
+- Next best step: implement `bootstrap-app-shell` with Expo.

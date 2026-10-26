@@ -17,7 +17,7 @@ Read on demand:
 
 ## Project Status
 
-Pre-bootstrap. The discovery documents and the minimal startup harness exist, but there is no application code, no framework, and no chosen stack yet. The stack decision is a blocking open question; do not scaffold an app until it is resolved.
+Pre-bootstrap. The discovery documents and the minimal startup harness exist, and the stack is decided: React Native + Expo with Expo Router, `react-native-svg` for the board, Expo Router API routes on EAS Hosting, and DevExpert Inference for AI. There is no application code yet; start with `bootstrap-app-shell`.
 
 ## Startup Workflow
 
@@ -35,9 +35,10 @@ Before writing code:
 - **Categories are official RFEF age brackets** (Prebenjamín U8 … Senior), never skill tiers.
 - **The board is a renderer.** It draws structured `Board Data` (tokens, cones, arrows, ordered phases) and must preserve a 2:1 pitch ratio. It never invents content.
 - **AI must be grounded.** Session generator, variant adapter, and chatbot answer from seeded exercises and category programming, and must not fabricate library content.
-- **LLM calls are server-side only** and bounded by a daily anonymous quota. Never expose API keys client-side.
+- **AI provider is DevExpert Inference** (OpenAI-compatible, model `chat` for all features). LLM calls are server-side only and bounded by 5 anonymous requests per day keyed by installation ID plus hashed IP. Never expose API keys client-side.
+- **Content is original plus CMD Mora material** used with club permission; external reference sites are inspiration only.
 - **Language split:** app UI and exercise content in Spanish; repository documents and code identifiers in English.
-- **Content is curated**, not generated on demand. Licensing of seed sources is unresolved.
+- **Content is curated**, not generated on demand. Content and the board must work offline from the bundled JSON; AI results are saved locally.
 
 ## Working Rules
 
