@@ -3,15 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/app-navigation-shell`
-- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/app-navigation-shell`
+- Current branch: `main` at `af588e3` (PR #5 merged)
+- Pull request: none open; `app-navigation-shell` reached `main` through PR #5
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell` and `design-system-tokens` are accepted; `app-navigation-shell` is implemented and verified, pending independent validation.
-- Next ready feature after acceptance: `board-data-schema`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted.
+- Next ready feature: `board-data-schema`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`app-navigation-shell`: four-tab shell, active/selected states, locked Mi Club, gallery outside tabs, deep link, Fast Refresh, and full reload on the physical Android device)
+- Last verified at: `2026-10-26` (`app-navigation-shell` independent validation: gate, clean typecheck, Android export, four tabs, selected states, locked Mi Club, gallery round trip, Fast Refresh, and full reload on the physical Android device)
 
 ## Session Log
 
@@ -102,3 +102,14 @@
 - Files or artifacts updated: `src/app/_layout.tsx`, `src/app/(tabs)/*`, `src/components/navigation/*`, `src/app/index.tsx` (deleted), `docs/specs/app-navigation-shell.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
 - Known risk or unresolved issue: the 11 px nav labels are a documented exception to DESIGN.md's 16 px body minimum; tablet and physical iOS rendering remain unverified; the Expo Go `Tools` overlay appears over the top-right of screens only in development.
 - Next best step: open the phase pull request, validate `app-navigation-shell`, then plan `board-data-schema` from an updated `main`.
+
+### Session 009
+
+- Date: `2026-10-26`
+- Goal: Independently validate `app-navigation-shell` and record acceptance.
+- Completed: validation returned `accept` with no blocking findings; recorded the acceptance and the follow-up observations in the harness state.
+- Verification run: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor` 20/20), `./init.sh` exit 0, typecheck after deleting generated Expo router types and `expo-env.d.ts`, `npx expo export --platform android`, static color/dependency scans, Expo Go checks for cold start, all four tabs, selected states, locked Mi Club, gallery round trip, Fast Refresh, full reload, and a 320 dp/1.3x font-scale stress check.
+- Evidence captured: clean tree at `af588e3`; navigation remains functional at narrow width and large font scale, but the `Asistente IA` label truncates; `logcat` clean; device resolution and font scale restored.
+- Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `feature_list.json`, `docs/specs/app-navigation-shell.md`.
+- Known risks: the 11 px nav labels remain a deliberate design exception; `Asistente IA` truncation is a follow-up polish item before `mobile-device-verification`; tablet and physical iOS remain unverified.
+- Next best step: create `feat/board-data-schema` from `main` and plan the schema with the feature-spec workflow.

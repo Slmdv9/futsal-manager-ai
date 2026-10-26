@@ -66,7 +66,7 @@
       "bootstrap-app-shell",
       "design-system-tokens"
     ],
-    "status": "passing",
+    "status": "accepted",
     "verification": [
       "Open the app on a phone viewport.",
       "Tap each navigation item and confirm the correct section opens.",
@@ -86,9 +86,12 @@
       "Mi Club rendered a lock symbol, `SIGUIENTE FASE`, `Disponible en una próxima fase`, and the anonymous-MVP explanation with no team, roster, or calendar UI.",
       "`Ver sistema de diseño` opened `/design-system` with no tab bar, Android back returned to Explorar, and a cold deep link to `/mi-club` selected the Mi Club tab.",
       "Fast Refresh verified by editing the Pizarra headline and observing `· FR` on device; the change was reverted and observed again.",
-      "Full reload verified by force-stopping Expo Go and reopening `exp://127.0.0.1:8081`; `adb logcat` showed no React Native warnings, errors, or missing-symbol failures."
+      "Full reload verified by force-stopping Expo Go and reopening `exp://127.0.0.1:8081`; `adb logcat` showed no React Native warnings, errors, or missing-symbol failures.",
+      "Independent validation verdict: accept at `af588e3`, with no blocking findings. The validator reran `npm run verify` (20/20), `./init.sh` (exit 0), typecheck after deleting generated Expo router types and `expo-env.d.ts`, Android export, and rechecked cold start, all four tabs, selected states, locked Mi Club, gallery round trip, Fast Refresh, and full reload on the Galaxy M13.",
+      "Verifier stress checks: at 320 dp width and at `font_scale 1.3`, navigation still works but the `Asistente IA` tab label truncates to `Asistent…`.",
+      "Non-blocking validator observations: PROGRESS branch/PR bookkeeping was stale after the merge, and `TAB_CONTENT_HEIGHT` duplicates the existing `spacing['3xl']` token."
     ],
-    "notes": "The prototype dock is the visual source. Nav labels intentionally use the 11 px `labelMd` token, a documented exception to DESIGN.md's 16 px body-text minimum. Mi Club remains a locked next-phase entry point with no team or roster implementation. Tablet and iOS rendering remain unverified on physical hardware. Spec: docs/specs/app-navigation-shell.md."
+    "notes": "The prototype dock is the visual source. Nav labels intentionally use the 11 px `labelMd` token, a documented exception to DESIGN.md's 16 px body-text minimum. Mi Club remains a locked next-phase entry point with no team or roster implementation. Tablet and iOS rendering remain unverified on physical hardware. Follow-up candidate before `mobile-device-verification`: handle `Asistente IA` truncation at narrow widths and large font scales. Spec: docs/specs/app-navigation-shell.md."
   },
   {
     "id": "board-data-schema",

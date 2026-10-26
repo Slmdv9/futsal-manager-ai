@@ -18,7 +18,7 @@ Read on demand:
 
 ## Project Status
 
-Bootstrapped and design system implemented. The app shell runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell` and `design-system-tokens` are accepted; `app-navigation-shell` is implemented and verified, pending independent validation. After acceptance, the next ready feature is `board-data-schema`. The physical device loop is documented in `docs/device-development-workflow.md`.
+Bootstrapped, design system, and navigation implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted. The next ready feature is `board-data-schema`. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 
