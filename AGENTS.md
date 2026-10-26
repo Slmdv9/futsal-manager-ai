@@ -17,7 +17,17 @@ Read on demand:
 
 ## Project Status
 
-Pre-bootstrap. There is no application code, no framework, and no chosen stack yet. The stack decision is a blocking open question; do not scaffold an app until it is resolved. The startup harness (`init.sh`, `PROGRESS.md`, `feature_list.json`) has not been created yet.
+Pre-bootstrap. The discovery documents and the minimal startup harness exist, but there is no application code, no framework, and no chosen stack yet. The stack decision is a blocking open question; do not scaffold an app until it is resolved.
+
+## Startup Workflow
+
+Before writing code:
+
+1. Confirm the working directory with `pwd`.
+2. Read `PROGRESS.md` for current verified state and the next step.
+3. Read `feature_list.json` and pick the first ready unfinished feature in list order.
+4. Run `./init.sh`.
+5. If baseline verification fails, fix the baseline before adding new feature work.
 
 ## Non-Negotiable Product Constraints
 
@@ -40,7 +50,7 @@ Pre-bootstrap. There is no application code, no framework, and no chosen stack y
 
 ## Verification
 
-There is no build or test command yet. Once the stack is chosen:
+`./init.sh` is the standard startup path and is provisional until the stack is bootstrapped. Once the stack is chosen:
 
 - Validate every seeded exercise's `Board Data` against the agreed schema; unvalidated data must not be published.
 - Add golden tests for board phase playback (positions and order).
@@ -52,6 +62,14 @@ There is no build or test command yet. Once the stack is chosen:
 
 A feature is done only when: the target behavior works, the relevant verification actually ran, evidence is recorded, the app still starts from the standard path, and affected docs are updated.
 
-## Pending Harness
+## Required Artifacts
 
-Before implementation begins, generate `init.sh`, `PROGRESS.md`, and `feature_list.json`, and resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack).
+- `feature_list.json`: source of truth for feature state and verification evidence.
+- `PROGRESS.md`: current verified state and lightweight session log.
+- `init.sh`: standard startup and verification path.
+
+Before implementation begins, resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack). The first ready feature is `bootstrap-app-shell`.
+
+## End Of Session
+
+Before ending a session: update `PROGRESS.md` and `feature_list.json`, record unresolved risks or blockers, and leave the repo runnable through `./init.sh`.
