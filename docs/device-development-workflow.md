@@ -149,6 +149,7 @@ Before handing a notable change back:
 | --- | --- |
 | `adb: command not found` | Export `ANDROID_HOME` and add `platform-tools` to `PATH`. |
 | Device `unauthorized` | Accept the USB debugging prompt on the phone. |
+| App immediately returns to the launcher | The phone may be locked or asleep; run `adb shell input keyevent KEYCODE_WAKEUP`, `adb shell wm dismiss-keyguard`, and swipe up. |
 | App cannot reach Metro | Run `adb reverse --list`; re-add `adb reverse tcp:8081 tcp:8081`. |
 | Expo Go SDK warning | Install the Expo Go client matching the project SDK. |
 | Port 8081 already in use | `lsof -i :8081`, or start with `--port`. |
