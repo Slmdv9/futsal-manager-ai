@@ -18,7 +18,7 @@ Read on demand:
 
 ## Project Status
 
-Bootstrapped. The app shell runs on React Native + Expo (Expo Router) with a Spanish home placeholder. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell` is accepted; the next feature is `design-system-tokens`. The physical device loop is documented in `docs/device-development-workflow.md`.
+Bootstrapped and design system implemented. The app shell runs on React Native + Expo (Expo Router) with a Spanish home placeholder and a `/design-system` gallery. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell` is accepted; `design-system-tokens` is implemented and verified, pending independent validation. After acceptance, the next feature is `app-navigation-shell`. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 

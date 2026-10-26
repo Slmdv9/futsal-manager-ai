@@ -3,14 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `chore/device-development-workflow`
-- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...chore/device-development-workflow`
+- Current branch: `feat/design-system-tokens`
+- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/design-system-tokens`
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
-- Current next ready feature: `design-system-tokens` (`bootstrap-app-shell` is accepted)
+- Current state: `bootstrap-app-shell` is accepted; `design-system-tokens` is implemented and verified, pending independent validation.
+- Next ready feature after acceptance: `app-navigation-shell`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`bootstrap-app-shell`: verification gate, physical Android render in Expo Go and a native debug build, Fast Refresh, full reload, and device workflow docs)
+- Last verified at: `2026-10-26` (`design-system-tokens`: verification gate, home and gallery render on the physical Android device, all component states, Fast Refresh, and full reload)
 
 ## Session Log
 
@@ -68,3 +69,14 @@
 - Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `app.json`, `package.json`, `init.sh`, `feature_list.json`, `docs/specs/bootstrap-app-shell.md`, `docs/technical-discovery.md`, `docs/risks-and-open-questions.md`, `docs/device-development-workflow.md`.
 - Known risk or unresolved issue: the Android device is 32-bit only, so the debug build produces `armeabi-v7a` libraries and Google Play release builds must add `arm64-v8a`; the local application ID is still the template placeholder `com.anonymous.futsalmanagerai`; physical iOS is not part of the verified loop yet.
 - Next best step: open the phase pull request, then implement `design-system-tokens` and verify it on the device.
+
+### Session 006
+
+- Date: `2026-10-26`
+- Goal: Plan and implement `design-system-tokens`, then verify the tokens and primitives on the physical Android device.
+- Completed: created `docs/specs/design-system-tokens.md`; installed the three Google Font families; added `src/theme` tokens, `src/components/ui` primitives, a splash-gated font loader, the `/design-system` gallery, and a token-based home route with a link to the gallery.
+- Verification run: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor` 20/20), `./init.sh` exit 0, `npx expo export --platform android` (1,269 modules), literal-hex scan over `src/app` and `src/components`, Expo Go deep link and tap navigation, `uiautomator` dumps, focused-input typing, Fast Refresh edit/revert, and force-stop/full relaunch.
+- Evidence captured: home and gallery rendered with Space Grotesk, Hanken Grotesk, and JetBrains Mono on `SM-M135F`; palette, typography scale, spacing, radii, primary/AI/secondary/disabled buttons, cards, chips, and input default/error/focus states all matched `DESIGN.md`; no React Native errors, warnings, or font failures in `logcat`.
+- Files or artifacts updated: `package.json`, `package-lock.json`, `src/theme/*`, `src/components/ui/*`, `src/app/_layout.tsx`, `src/app/index.tsx`, `src/app/design-system.tsx`, `docs/specs/design-system-tokens.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
+- Known risk or unresolved issue: independent validation has not run yet; `npm audit` still reports 5 high-severity transitive advisories in Expo CLI/code-signing tooling with no non-breaking fix.
+- Next best step: open the phase pull request, validate `design-system-tokens`, then start `app-navigation-shell` from an updated `main`.
