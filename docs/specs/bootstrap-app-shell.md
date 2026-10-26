@@ -145,14 +145,14 @@ Paths are provisional only where the Expo template chooses a different filename 
 
 ## Implementation Tasks
 
-- [ ] Scaffold Expo SDK 58 app with Expo Router and TypeScript.
-- [ ] Replace template screens with `app/_layout.tsx` and `app/index.tsx`.
-- [ ] Add `start`, `android`, `ios`, `lint`, `typecheck`, and `verify` scripts.
-- [ ] Add `.gitignore` and ensure no generated files are committed.
-- [ ] Update `init.sh` to run the non-blocking verification gate and print the start command.
-- [ ] Run `npm install` and `npm run verify`.
-- [ ] Start the app once and confirm the home route renders.
-- [ ] Update `AGENTS.md`, `PROGRESS.md`, and `feature_list.json` with evidence.
+- [x] Scaffold Expo SDK 58 app with Expo Router and TypeScript.
+- [x] Replace template screens with `src/app/_layout.tsx` and `src/app/index.tsx`.
+- [x] Add `start`, `android`, `ios`, `lint`, `typecheck`, and `verify` scripts.
+- [x] Add `.gitignore` and ensure no generated files are committed.
+- [x] Update `init.sh` to run the non-blocking verification gate and print the start command.
+- [x] Run `npm install` and `npm run verify`.
+- [x] Start the app once and confirm the home route renders.
+- [x] Update `AGENTS.md`, `PROGRESS.md`, and `feature_list.json` with evidence.
 
 ## Verification Plan
 

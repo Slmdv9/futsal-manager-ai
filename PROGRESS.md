@@ -3,13 +3,14 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/bootstrap-app-shell`
-- Pull request: pending — push the branch and open it from the web once this feature is ready for independent validation
+- Current branch: `chore/device-development-workflow`
+- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...chore/device-development-workflow`
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
-- Current next ready feature: `bootstrap-app-shell` implemented, awaiting independent validation; then `design-system-tokens`
+- Current next ready feature: `design-system-tokens` (`bootstrap-app-shell` is accepted)
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
-- Last verified at: `2026-10-26` (`bootstrap-app-shell`: verify, Android export, and dev-server smoke)
+- Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
+- Last verified at: `2026-10-26` (`bootstrap-app-shell`: verification gate, physical Android render in Expo Go and a native debug build, Fast Refresh, full reload, and device workflow docs)
 
 ## Session Log
 
@@ -56,3 +57,14 @@
 - Files or artifacts updated: `package.json`, `package-lock.json`, `app.json`, `tsconfig.json`, `eslint.config.js`, `.gitignore`, `src/app/_layout.tsx`, `src/app/index.tsx`, `assets/`, `init.sh`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`, `docs/specs/bootstrap-app-shell.md`.
 - Known risk or unresolved issue: manual visual render on a device/simulator was not performed; `npm audit` reports 5 high-severity transitive issues in Expo CLI tooling with no non-breaking fix.
 - Next best step: independent validation of `bootstrap-app-shell`, then `design-system-tokens`.
+
+### Session 005
+
+- Date: `2026-10-26`
+- Goal: Independently validate `bootstrap-app-shell` and establish the physical Android development loop.
+- Completed: validation returned `accept` with no blocking findings; installed Expo Go 58.0.5 on the connected Galaxy M13; verified the Spanish home route, Fast Refresh, and full reload; added the native debug configuration and scripts; documented the workflow in `docs/device-development-workflow.md` and linked it from `AGENTS.md`.
+- Verification run: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor` 20/20), `npm ci --dry-run`, `./init.sh` exit 0, `adb devices -l`, Expo Go deep link, `uiautomator` dumps, full deep-link reload, `npm run android` (12m 48s first build, 60 MB APK), native Fast Refresh, and native force-stop/relaunch.
+- Evidence captured: device `SM-M135F` on Android 14 (`armeabi-v7a`); rendered text `Futsal Manager AI`, the Spanish subtitle, and `Aplicación en construcción` in both Expo Go and the native app; no React Native or fatal errors in `logcat`.
+- Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `app.json`, `package.json`, `init.sh`, `feature_list.json`, `docs/specs/bootstrap-app-shell.md`, `docs/technical-discovery.md`, `docs/risks-and-open-questions.md`, `docs/device-development-workflow.md`.
+- Known risk or unresolved issue: the Android device is 32-bit only, so the debug build produces `armeabi-v7a` libraries and Google Play release builds must add `arm64-v8a`; the local application ID is still the template placeholder `com.anonymous.futsalmanagerai`; physical iOS is not part of the verified loop yet.
+- Next best step: open the phase pull request, then implement `design-system-tokens` and verify it on the device.

@@ -13,11 +13,12 @@ This repository contains **Futsal Manager AI**, a mobile-first, Spanish-language
 Read on demand:
 
 - `docs/technical-discovery.md` — stack, data, integrations, testing, observability, operations.
+- `docs/device-development-workflow.md` — build, launch, reload, and inspect the app on the connected Android device.
 - `docs/design/prototype/` — original prototype screens, HTML references, and the full source-of-truth `DESIGN.md`.
 
 ## Project Status
 
-Bootstrapped. The app shell runs on React Native + Expo (Expo Router) with a Spanish home placeholder. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell` is implemented and ready for independent validation; the next feature is `design-system-tokens`.
+Bootstrapped. The app shell runs on React Native + Expo (Expo Router) with a Spanish home placeholder. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell` is accepted; the next feature is `design-system-tokens`. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 
@@ -68,7 +69,9 @@ Do not reuse a merged phase branch for unrelated work.
 
 ## Verification
 
-`./init.sh` is the standard startup path. It runs `npm run verify` (ESLint, `tsc --noEmit`, and `expo-doctor`) and never starts a long-running server. Start the app with `npm start`. Once content and AI exist:
+`./init.sh` is the standard startup path. It runs `npm run verify` (ESLint, `tsc --noEmit`, and `expo-doctor`) and never starts a long-running server. Start the app with `npm start`. For every notable UI or behavior change, follow `docs/device-development-workflow.md` and verify the change on the connected Android device before handoff.
+
+Once content and AI exist:
 
 - Validate every seeded exercise's `Board Data` against the agreed schema; unvalidated data must not be published.
 - Add golden tests for board phase playback (positions and order).
@@ -86,7 +89,7 @@ A feature is done only when: the target behavior works, the relevant verificatio
 - `PROGRESS.md`: current verified state and lightweight session log.
 - `init.sh`: standard startup and verification path.
 
-Before implementation begins, resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack). The first ready feature is `bootstrap-app-shell`.
+Before implementation begins, resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack). The next ready feature is `design-system-tokens`.
 
 ## End Of Session
 
