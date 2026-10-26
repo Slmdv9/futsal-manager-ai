@@ -17,7 +17,34 @@ Read on demand:
 
 ## Project Status
 
-Pre-bootstrap. There is no application code, no framework, and no chosen stack yet. The stack decision is a blocking open question; do not scaffold an app until it is resolved. The startup harness (`init.sh`, `PROGRESS.md`, `feature_list.json`) has not been created yet.
+Pre-bootstrap. The discovery documents and the minimal startup harness exist, and the stack is decided: React Native + Expo with Expo Router, `react-native-svg` for the board, Expo Router API routes on EAS Hosting, and DevExpert Inference for AI. There is no application code yet; start with `bootstrap-app-shell`.
+
+## Startup Workflow
+
+Before writing code:
+
+1. Confirm the working directory with `pwd`.
+2. Read `PROGRESS.md` for current verified state and the next step.
+3. Read `feature_list.json` and pick the first ready unfinished feature in list order.
+4. Run `./init.sh`.
+5. If baseline verification fails, fix the baseline before adding new feature work.
+
+## Branch And Pull Request Workflow
+
+This repository works one branch per SDD phase and never commits directly to `main`.
+
+1. Update `main` and create a branch from it before starting a phase.
+2. Name the branch by phase:
+   - `docs/<phase>` for discovery or documentation phases (e.g. `docs/build-brief`).
+   - `chore/<phase>` for harness or maintenance phases (e.g. `chore/harness-starter`).
+   - `feat/<feature-id>` for implementation features (e.g. `feat/bootstrap-app-shell`).
+3. Keep the branch scoped to one phase or one feature in `feature_list.json`.
+4. Commit on the branch using Conventional Commit messages.
+5. When the phase is ready, push the branch and give the user the GitHub compare URL. The user opens the pull request from the web; do not try to create it with `gh`.
+6. Before handoff, prepare a suggested PR title and body with the phase or feature id, what changed, verification actually run, and remaining risks.
+7. Record the branch name and PR status in `PROGRESS.md` before ending the session.
+
+Do not reuse a merged phase branch for unrelated work.
 
 ## Non-Negotiable Product Constraints
 
@@ -25,9 +52,10 @@ Pre-bootstrap. There is no application code, no framework, and no chosen stack y
 - **Categories are official RFEF age brackets** (Prebenjamín U8 … Senior), never skill tiers.
 - **The board is a renderer.** It draws structured `Board Data` (tokens, cones, arrows, ordered phases) and must preserve a 2:1 pitch ratio. It never invents content.
 - **AI must be grounded.** Session generator, variant adapter, and chatbot answer from seeded exercises and category programming, and must not fabricate library content.
-- **LLM calls are server-side only** and bounded by a daily anonymous quota. Never expose API keys client-side.
+- **AI provider is DevExpert Inference** (OpenAI-compatible, model `chat` for all features). LLM calls are server-side only and bounded by 5 anonymous requests per day keyed by installation ID plus hashed IP. Never expose API keys client-side.
+- **Content is original plus CMD Mora material** used with club permission; external reference sites are inspiration only.
 - **Language split:** app UI and exercise content in Spanish; repository documents and code identifiers in English.
-- **Content is curated**, not generated on demand. Licensing of seed sources is unresolved.
+- **Content is curated**, not generated on demand. Content and the board must work offline from the bundled JSON; AI results are saved locally.
 
 ## Working Rules
 
@@ -40,7 +68,7 @@ Pre-bootstrap. There is no application code, no framework, and no chosen stack y
 
 ## Verification
 
-There is no build or test command yet. Once the stack is chosen:
+`./init.sh` is the standard startup path and is provisional until the stack is bootstrapped. Once the stack is chosen:
 
 - Validate every seeded exercise's `Board Data` against the agreed schema; unvalidated data must not be published.
 - Add golden tests for board phase playback (positions and order).
@@ -52,6 +80,14 @@ There is no build or test command yet. Once the stack is chosen:
 
 A feature is done only when: the target behavior works, the relevant verification actually ran, evidence is recorded, the app still starts from the standard path, and affected docs are updated.
 
-## Pending Harness
+## Required Artifacts
 
-Before implementation begins, generate `init.sh`, `PROGRESS.md`, and `feature_list.json`, and resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack).
+- `feature_list.json`: source of truth for feature state and verification evidence.
+- `PROGRESS.md`: current verified state and lightweight session log.
+- `init.sh`: standard startup and verification path.
+
+Before implementation begins, resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack). The first ready feature is `bootstrap-app-shell`.
+
+## End Of Session
+
+Before ending a session: update `PROGRESS.md` and `feature_list.json`, record unresolved risks or blockers, leave the repo runnable through `./init.sh`, push the phase branch, and leave the compare URL for the user to open the pull request.

@@ -1,0 +1,510 @@
+[
+  {
+    "id": "bootstrap-app-shell",
+    "area": "foundation",
+    "title": "Bootstrap a runnable app shell",
+    "user_visible_behavior": "The repository has a runnable app with a home route, one install command, one verification command, and one start command, all documented in init.sh.",
+    "depends_on": [],
+    "status": "not_started",
+    "verification": [
+      "Run the documented install command from a clean checkout.",
+      "Run the documented verification command and confirm it passes.",
+      "Start the app and load the home route on a phone-sized viewport.",
+      "Replace the provisional commands in init.sh with the real install, verify, and start commands."
+    ],
+    "evidence": [],
+    "notes": "Stack is decided: React Native + Expo (Expo Router), react-native-svg for the board, Expo Router API routes on EAS Hosting. Record the real install, verify, and start commands in init.sh."
+  },
+  {
+    "id": "design-system-tokens",
+    "area": "foundation",
+    "title": "Implement design tokens and base UI primitives",
+    "user_visible_behavior": "Buttons, cards, chips, inputs, and typography render with the DESIGN.md tokens on a mobile viewport.",
+    "depends_on": [
+      "bootstrap-app-shell"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Render a small style gallery route or story page.",
+      "Compare primary, AI, card, chip, and input states against DESIGN.md tokens.",
+      "Confirm no colors or fonts outside DESIGN.md are introduced."
+    ],
+    "evidence": [],
+    "notes": "Source of truth: DESIGN.md and docs/design/prototype/futsal_tactical_edge/DESIGN.md."
+  },
+  {
+    "id": "app-navigation-shell",
+    "area": "foundation",
+    "title": "Add mobile navigation shell",
+    "user_visible_behavior": "A coach can move between Explorar, Pizarra, Asistente IA, and a locked Mi Club entry using Spanish labels and a bottom navigation bar.",
+    "depends_on": [
+      "bootstrap-app-shell",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Open the app on a phone viewport.",
+      "Tap each navigation item and confirm the correct section opens.",
+      "Confirm Mi Club shows a locked next-phase state, not a broken route."
+    ],
+    "evidence": [],
+    "notes": "Matches the prototype bottom navigation; Mi Club is a next-phase entry point and must not be implemented in the MVP."
+  },
+  {
+    "id": "board-data-schema",
+    "area": "content",
+    "title": "Define and validate the Board Data schema",
+    "user_visible_behavior": "An exercise's Board Data (tokens, cones, arrows, labels, ordered phases) validates against a versioned schema, and invalid data is rejected.",
+    "depends_on": [
+      "bootstrap-app-shell"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Validate a valid multi-phase Board Data fixture and confirm it passes.",
+      "Validate fixtures with a missing phase coordinate and an unknown token type; confirm both fail with a clear error.",
+      "Record the schema version in the repository."
+    ],
+    "evidence": [],
+    "notes": "Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio."
+  },
+  {
+    "id": "content-model-and-store",
+    "area": "content",
+    "title": "Add exercise, category, and programming data model",
+    "user_visible_behavior": "The app can read exercises mapped to RFEF categories and one programming record per category from a single content source.",
+    "depends_on": [
+      "bootstrap-app-shell"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Load the seeded data through the app's read layer.",
+      "Confirm an exercise mapped to two categories appears under both without duplication.",
+      "Confirm all seven RFEF categories exist as reference data."
+    ],
+    "evidence": [],
+    "notes": "Categories are RFEF age brackets, never skill tiers (CONTEXT.md)."
+  },
+  {
+    "id": "seed-content-licensing",
+    "area": "content",
+    "title": "Record provenance and licensing for seed content",
+    "user_visible_behavior": "Every exercise and programming record carries a source and license/attribution field, and content without a permitted status cannot be published.",
+    "depends_on": [
+      "content-model-and-store"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Inspect seeded records and confirm each has source and license/attribution metadata.",
+      "Attempt to publish a record marked unlicensed and confirm it is blocked.",
+      "Run the content validation check and confirm it fails on missing provenance."
+    ],
+    "evidence": [],
+    "notes": "Licensing is a blocking risk. Reference inputs: adrimartinofutsal.es.tl, futsalcoach.es, keepmove.net, ejerciciosdefutbolsala.com, and the CMD Mora presentation."
+  },
+  {
+    "id": "seed-infantil-u14",
+    "area": "content",
+    "title": "Seed Infantil U14 exercises and programming",
+    "user_visible_behavior": "An anonymous coach can browse a complete Infantil U14 set: programming plus a library of exercises, each with valid Board Data.",
+    "depends_on": [
+      "content-model-and-store",
+      "board-data-schema",
+      "seed-content-licensing"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Run Board Data validation over every Infantil U14 exercise and confirm all pass.",
+      "Confirm the Infantil U14 programming record renders all required sections.",
+      "Confirm every seeded exercise carries provenance and license metadata."
+    ],
+    "evidence": [],
+    "notes": "First full category; the prototype and build brief both use Infantil U14."
+  },
+  {
+    "id": "seed-remaining-categories",
+    "area": "content",
+    "title": "Seed representative exercises for remaining categories",
+    "user_visible_behavior": "Each remaining RFEF category has at least a minimum exercise set and a programming record, so filters never lead to empty screens.",
+    "depends_on": [
+      "seed-infantil-u14"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Open each of the seven categories and confirm at least one exercise and one programming record exist.",
+      "Run Board Data validation over all new exercises.",
+      "Confirm category mapping uses RFEF brackets, with no Chupetín-style stage leaked into filters."
+    ],
+    "evidence": [],
+    "notes": "Minimum scope: three exercises plus one programming record per remaining category. Content is original or CMD Mora used with club permission; external reference sites are inspiration only."
+  },
+  {
+    "id": "category-filter",
+    "area": "browse",
+    "title": "Filter exercises and programming by category",
+    "user_visible_behavior": "Selecting an RFEF category filters the exercise library and programming to that category, and the selection persists while navigating.",
+    "depends_on": [
+      "seed-infantil-u14"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Select Infantil U14 and confirm only its exercises and programming appear.",
+      "Select Senior and confirm the content swaps.",
+      "Confirm an exercise tagged to two categories appears under both."
+    ],
+    "evidence": [],
+    "notes": "Anonymous, no registration required."
+  },
+  {
+    "id": "explore-general-screen",
+    "area": "browse",
+    "title": "Build the general explore screen",
+    "user_visible_behavior": "A coach sees the category filter, weekly exercises, the methodology overview, and an entry point to the AI session generator, matching the prototype.",
+    "depends_on": [
+      "app-navigation-shell",
+      "category-filter",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Open Explorar on a phone viewport and compare layout with docs/design/prototype/01-explore-general.",
+      "Select a category and confirm the weekly exercises update.",
+      "Confirm the AI session entry point is visible and reachable one-handed."
+    ],
+    "evidence": [],
+    "notes": "Reference: docs/design/prototype/01-explore-general/code.html."
+  },
+  {
+    "id": "explore-by-category-screen",
+    "area": "browse",
+    "title": "Build the explore-by-category screen",
+    "user_visible_behavior": "A coach sees the selected category's methodology focus, key concepts, and its filtered exercise library with an open-on-board action.",
+    "depends_on": [
+      "app-navigation-shell",
+      "category-filter",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Open a category and confirm methodology focus and key concepts render.",
+      "Confirm the library lists only that category's exercises.",
+      "Confirm the open-on-board action targets the selected exercise."
+    ],
+    "evidence": [],
+    "notes": "Reference: docs/design/prototype/02-explore-by-category/code.html."
+  },
+  {
+    "id": "exercise-detail-screen",
+    "area": "browse",
+    "title": "Build the exercise detail screen",
+    "user_visible_behavior": "A coach sees an exercise's objective, category, duration, players, space, intensity, coaching cues, and ordered phase explanations.",
+    "depends_on": [
+      "content-model-and-store",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Open a seeded exercise and confirm every metadata field is shown.",
+      "Confirm coaching cues and phase explanations render in order.",
+      "Confirm a missing optional field does not break the screen."
+    ],
+    "evidence": [],
+    "notes": "Reference: docs/design/prototype/03-exercise-detail-board/code.html."
+  },
+  {
+    "id": "tactics-board-renderer",
+    "area": "board",
+    "title": "Render Board Data on a 2:1 tactics board",
+    "user_visible_behavior": "The board draws the pitch, player and keeper tokens, cones, and arrows from Board Data while preserving a 2:1 aspect ratio on any viewport.",
+    "depends_on": [
+      "board-data-schema",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Render a seeded exercise and confirm tokens, cones, and arrows match the source data.",
+      "Resize from phone to tablet and confirm the pitch stays 2:1.",
+      "Render a half-court exercise and confirm it degrades gracefully."
+    ],
+    "evidence": [],
+    "notes": "The board is a renderer and must not invent content. Player tokens are circular with mono shirt numbers."
+  },
+  {
+    "id": "board-phase-playback",
+    "area": "board",
+    "title": "Play board phases step by step",
+    "user_visible_behavior": "A coach can step through and replay ordered phases, with each phase showing its positions, arrows, and explanation.",
+    "depends_on": [
+      "tactics-board-renderer"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Open a three-phase exercise and step Fase 1, Fase 2, Fase 3, confirming positions and order.",
+      "Use replay and confirm it restarts at phase one.",
+      "Confirm the reduced-motion preference disables non-essential animation."
+    ],
+    "evidence": [],
+    "notes": "Phase playback is UI state, not persisted content."
+  },
+  {
+    "id": "board-golden-tests",
+    "area": "quality",
+    "title": "Add golden tests for board playback",
+    "user_visible_behavior": "Automated tests fail when phase positions or their order change unexpectedly.",
+    "depends_on": [
+      "board-phase-playback"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Run the golden test suite and confirm it passes on the current board.",
+      "Change one phase coordinate deliberately and confirm the suite fails.",
+      "Revert the change and confirm the suite passes again."
+    ],
+    "evidence": [],
+    "notes": "Required by AGENTS.md verification rules."
+  },
+  {
+    "id": "llm-gateway",
+    "area": "ai",
+    "title": "Add a server-side LLM gateway",
+    "user_visible_behavior": "AI features call one server-side gateway that holds the API key and logs category, feature, latency, and token/cost estimate.",
+    "depends_on": [
+      "bootstrap-app-shell"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Call the gateway from the app and confirm a response is returned.",
+      "Confirm the API key is not present in any client bundle or network payload.",
+      "Confirm a gateway log entry records feature, latency, and cost estimate."
+    ],
+    "evidence": [],
+    "notes": "Use DevExpert Inference (OpenAI-compatible, DEVEXPERT_BASE_URL and DEVEXPERT_API_KEY, model chat). Never expose API keys client-side."
+  },
+  {
+    "id": "grounding-retrieval",
+    "area": "ai",
+    "title": "Ground AI on seeded exercises and programming",
+    "user_visible_behavior": "Given a category and query, the system retrieves relevant seeded exercises and programming to include in the AI context.",
+    "depends_on": [
+      "seed-infantil-u14",
+      "llm-gateway"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Query for an Infantil U14 defensive exercise and confirm the retrieved context contains matching seeded exercises.",
+      "Confirm an archived exercise is excluded from retrieval.",
+      "Confirm a category with no exercises returns an explicit empty context, not invented content."
+    ],
+    "evidence": [],
+    "notes": "Retrieval approach (embeddings vs keyword) is an implementation-time decision."
+  },
+  {
+    "id": "ai-session-generator-api",
+    "area": "ai",
+    "title": "Generate a grounded session from constraints",
+    "user_visible_behavior": "The API returns an objective and an ordered set of seeded exercises for a category and constraints such as player count, space, and focus.",
+    "depends_on": [
+      "llm-gateway",
+      "grounding-retrieval"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Request an Infantil U14 session for 9 players and confirm the response references seeded exercises.",
+      "Confirm every returned exercise id exists and is published.",
+      "Confirm an impossible constraint returns a clear refusal instead of fabricated exercises."
+    ],
+    "evidence": [],
+    "notes": "Must be traceable to the library (build-brief success criteria)."
+  },
+  {
+    "id": "ai-session-generator-ui",
+    "area": "ai",
+    "title": "Add the AI session generator to explore",
+    "user_visible_behavior": "A coach enters a category and constraints, sees a generated session, and can open a proposed exercise on the board.",
+    "depends_on": [
+      "ai-session-generator-api",
+      "explore-general-screen",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Generate a session from the explore screen on a phone viewport.",
+      "Confirm each proposed exercise can open on the board.",
+      "Confirm loading, error, and quota states are handled."
+    ],
+    "evidence": [],
+    "notes": "Entry point visible on the general explore screen."
+  },
+  {
+    "id": "ai-variant-adapter-api",
+    "area": "ai",
+    "title": "Adapt an exercise to player count and space",
+    "user_visible_behavior": "The API returns a variant of a source exercise adjusted to a constraint, with valid Board Data and a visible link to the source exercise.",
+    "depends_on": [
+      "llm-gateway",
+      "grounding-retrieval",
+      "board-data-schema"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Request a 7-player variant of a seeded exercise and confirm the Board Data validates.",
+      "Confirm the response cites the source exercise.",
+      "Confirm an invalid constraint is rejected clearly."
+    ],
+    "evidence": [],
+    "notes": "Variants are ephemeral in the MVP."
+  },
+  {
+    "id": "ai-variant-adapter-ui",
+    "area": "ai",
+    "title": "Add the AI variant adapter to exercise detail",
+    "user_visible_behavior": "A coach can request a variant from an exercise page and open the adapted exercise on the board.",
+    "depends_on": [
+      "ai-variant-adapter-api",
+      "exercise-detail-screen",
+      "tactics-board-renderer"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Request a variant from a seeded exercise on a phone viewport.",
+      "Confirm the adapted exercise renders on the board.",
+      "Confirm the source exercise remains reachable."
+    ],
+    "evidence": [],
+    "notes": "Reference: docs/design/prototype/03-exercise-detail-board/code.html."
+  },
+  {
+    "id": "ai-chat-api",
+    "area": "ai",
+    "title": "Answer coaching questions with grounded chat",
+    "user_visible_behavior": "The API answers a coaching question using retrieved seeded content and returns the exercises it used.",
+    "depends_on": [
+      "llm-gateway",
+      "grounding-retrieval"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Ask a category-specific coaching question and confirm the answer cites seeded exercises.",
+      "Ask for an exercise that does not exist in the library and confirm the API refuses to fabricate it.",
+      "Confirm the response includes source exercise ids."
+    ],
+    "evidence": [],
+    "notes": "Chat context in the MVP is the selected category and current exercise or programming, not a team."
+  },
+  {
+    "id": "ai-chat-ui",
+    "area": "ai",
+    "title": "Build the AI tactical assistant screen",
+    "user_visible_behavior": "A coach can chat with the assistant, see grounded answers with exercise previews, use suggested follow-ups, and open a proposal on the board.",
+    "depends_on": [
+      "ai-chat-api",
+      "app-navigation-shell",
+      "design-system-tokens"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Send a question on a phone viewport and confirm the answer and exercise preview render.",
+      "Tap a suggested follow-up and confirm it sends a new message.",
+      "Open a proposed exercise on the board from the chat."
+    ],
+    "evidence": [],
+    "notes": "Reference: docs/design/prototype/04-ai-assistant/code.html."
+  },
+  {
+    "id": "anonymous-ai-quota",
+    "area": "ai",
+    "title": "Enforce a daily anonymous AI quota",
+    "user_visible_behavior": "Anonymous users get a fixed number of AI requests per day, enforced server-side; browsing and the board keep working when the quota is reached.",
+    "depends_on": [
+      "llm-gateway"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Exhaust the quota and confirm further AI requests are blocked with a clear message.",
+      "Confirm browsing and board playback still work after the quota is reached.",
+      "Simulate a new day and confirm the quota resets."
+    ],
+    "evidence": [],
+    "notes": "5 requests per day, keyed by Expo installation ID plus hashed IP, enforced server-side. Consider shared club networks and the timezone used for the daily reset."
+  },
+  {
+    "id": "ai-grounding-tests",
+    "area": "quality",
+    "title": "Add adversarial AI grounding tests",
+    "user_visible_behavior": "Automated tests fail if any AI feature invents library content or ignores the selected category.",
+    "depends_on": [
+      "ai-session-generator-api",
+      "ai-variant-adapter-api",
+      "ai-chat-api"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Run the grounding suite and confirm it passes.",
+      "Add an adversarial prompt that asks for a non-existent exercise and confirm it is rejected.",
+      "Confirm every AI output under test references only published exercise ids."
+    ],
+    "evidence": [],
+    "notes": "Required by AGENTS.md verification rules."
+  },
+  {
+    "id": "offline-content-bundle",
+    "area": "content",
+    "title": "Load content and board offline from bundled JSON",
+    "user_visible_behavior": "The exercise library, programming, and board playback work with no connectivity from a bundled content package.",
+    "depends_on": [
+      "content-model-and-store",
+      "board-phase-playback"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Enable airplane mode and open the exercise library.",
+      "Open a seeded exercise and play its phases offline.",
+      "Confirm a missing or invalid bundled package fails the build rather than shipping."
+    ],
+    "evidence": [],
+    "notes": "Content is versioned JSON validated at build time and shipped with the app bundle."
+  },
+  {
+    "id": "local-ai-results-persistence",
+    "area": "ai",
+    "title": "Save generated AI results on device",
+    "user_visible_behavior": "A coach can reopen a generated session or variant after restarting the app, including without connectivity.",
+    "depends_on": [
+      "ai-session-generator-ui",
+      "ai-variant-adapter-ui"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Generate a session and a variant, close the app, reopen offline, and confirm both are still available.",
+      "Confirm saved results use a versioned local record format.",
+      "Confirm the coach can clear saved results."
+    ],
+    "evidence": [],
+    "notes": "Store on device only; no account or cloud sync in the MVP."
+  },
+  {
+    "id": "mobile-device-verification",
+    "area": "quality",
+    "title": "Verify the MVP on a real phone and tablet",
+    "user_visible_behavior": "The end-to-end anonymous flow works and is legible on a real phone and tablet at pitch distance.",
+    "depends_on": [
+      "board-phase-playback",
+      "explore-general-screen",
+      "explore-by-category-screen",
+      "exercise-detail-screen",
+      "ai-session-generator-ui",
+      "ai-variant-adapter-ui",
+      "ai-chat-ui",
+      "anonymous-ai-quota",
+      "offline-content-bundle",
+      "local-ai-results-persistence"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Complete filter, exercise, board, AI session, and board again on a real phone.",
+      "Repeat on a tablet and confirm pitch-distance legibility.",
+      "Record device models and any issues in PROGRESS.md."
+    ],
+    "evidence": [],
+    "notes": "Manual validation; cannot be replaced by desktop emulation. Record evidence in PROGRESS.md."
+  }
+]

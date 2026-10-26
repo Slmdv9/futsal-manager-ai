@@ -2,30 +2,28 @@
 
 ## Product Surface
 
-Mobile-first is the priority (phone and tablet carried to training sessions), with responsive tablet/desktop layouts as a secondary benefit. The prototype defines four screens and a 2:1 pitch board. Final surface/stack was deliberately deferred until after this brief.
+A native mobile app built with React Native and Expo, targeting phones and tablets carried to training sessions. Web is not a target for the MVP. The prototype defines four screens and a 2:1 pitch board.
 
-## Candidate Stack
+## Chosen Stack
 
-Not yet decided. Candidates considered:
-
-- **Next.js (React) full-stack**, responsive/PWA, server layer calls the LLM — recommended if the team is web-oriented; fastest path to the board + chat + grounded AI.
-- **Separate API (Node/NestJS or FastAPI) + SPA** — clearer separation, more setup.
-- **Flutter mobile app** — best native mobile feel on pitch, higher cost to build the interactive board and web presence.
-
-Decision is deferred; see `risks-and-open-questions.md` (Implementation-Time).
+- **React Native + Expo** with Expo Router for navigation.
+- **`react-native-svg`** for the tactics board, rendering full token/arrow/cone positions per phase and interpolating between phases.
+- **Expo Router API routes** deployed on **EAS Hosting** for the server-side LLM gateway and quota enforcement.
+- **TypeScript** across app and API routes.
+- **Versioned JSON content package** in the repo, validated at build time and shared by the app bundle and the API.
 
 ## Data and Storage
 
-- Curated seed content: Exercises (with Board Data) and per-Category Programming. Read-heavy, low write volume in the MVP.
-- Exercise Library and Programming can be stored as structured records or versioned content files; Board Data is a JSON-like document validated against a fixed schema.
-- No user accounts or personal data in the MVP, which keeps privacy scope small. Anonymous quota state must be stored server-side (by IP/device signal), not only client-side.
-- Accepted AI sessions/variants are ephemeral in the MVP unless the coach exports them (deferred).
+- Curated seed content lives as versioned JSON in the repo: Exercises (with Board Data) and per-Category Programming. It is validated against the Board Data schema at build time and shared by the app bundle and the API. No database in the MVP.
+- Content scope: Infantil U14 fully seeded (programming plus library), and a minimum of three exercises plus a programming record for each of the other six RFEF categories.
+- No user accounts or personal data in the MVP, which keeps privacy scope small. Anonymous quota state (5 AI requests per day) is keyed by Expo installation ID plus a hashed IP and stored server-side, never only client-side.
+- Content and board playback work offline from the bundled JSON. AI-generated sessions and variants are persisted locally on the device so a coach can reopen them without connectivity.
 
 ## Integrations
 
-- **LLM API** for the session generator, variant adapter, and chatbot.
+- **DevExpert Inference API**, OpenAI-compatible (`DEVEXPERT_API_KEY`, base URL from their docs, model `chat` for all three features). A `transcribe` model exists for voice, but voice input is deferred beyond the MVP.
 - Grounding layer that feeds selected Category, Programming, and retrieved Exercises into the LLM prompts (retrieval over the seeded library).
-- Board renderer consumes Board Data; AI features must emit Board Data, not images.
+- Board renderer consumes Board Data via `react-native-svg`; AI features must emit Board Data, not images.
 
 ## Authentication and Authorization
 
@@ -34,8 +32,8 @@ Decision is deferred; see `risks-and-open-questions.md` (Implementation-Time).
 
 ## Deployment and Operations
 
-- Depends on the stack decision. Prefer a managed host with serverless functions for the AI endpoints and static/edge serving for the board.
-- The LLM API key must live server-side only; never expose it to the client.
+- Expo Router API routes on EAS Hosting serve the LLM gateway and quota checks. The app ships as native iOS/Android builds via EAS.
+- `DEVEXPERT_API_KEY` lives server-side only in EAS environment variables; never expose it to the client.
 - Operational ownership: the project owner operates and maintains the app on day one. The system must prevent the two most likely mistakes: exposing the LLM key / burning quota (server-side key + quota) and serving unvalidated Board Data (schema check before publish).
 
 ## Testing and Verification
@@ -43,8 +41,9 @@ Decision is deferred; see `risks-and-open-questions.md` (Implementation-Time).
 - Board Data schema validation as a first-class test: every seeded exercise must validate and render.
 - Golden-file tests for board playback (phase positions and order) to catch regressions.
 - AI grounding tests: outputs must reference seeded exercises/categories; adversarial prompts must not fabricate library content.
-- Quota tests: verify the daily limit is enforced server-side and resets correctly.
-- Manual device testing on a real phone and tablet for pitch-distance legibility.
+- Quota tests: verify the 5/day limit is enforced server-side by installation ID plus hashed IP and resets correctly.
+- Offline tests: confirm bundled content and board playback work with no connectivity, and that locally saved AI results reopen after an app restart.
+- Manual device testing on a real iOS/Android phone and tablet for pitch-distance legibility.
 
 ## Observability
 
@@ -54,7 +53,9 @@ Decision is deferred; see `risks-and-open-questions.md` (Implementation-Time).
 
 ## Constraints
 
+- React Native/Expo on iOS and Android; no web target in the MVP.
 - Board must preserve a 2:1 futsal pitch aspect ratio regardless of viewport.
 - App UI and content in Spanish; project documents in English.
-- Anonymous AI must stay within a sustainable daily quota.
-- Seed content licensing/attribution for external reference sites is unresolved and may constrain what can be shipped.
+- Anonymous AI is capped at 5 requests per day per installation ID plus hashed IP.
+- Seed content is original plus CMD Mora material used with club permission; the external reference sites are inspiration only, not redistribution sources.
+- Voice input is out of the MVP.
