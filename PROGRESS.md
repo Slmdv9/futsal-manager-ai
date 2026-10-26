@@ -3,15 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `main` at `bb291e2` (PR #4 merged)
-- Pull request: none open; `design-system-tokens` reached `main` through PR #4
+- Current branch: `feat/app-navigation-shell`
+- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/app-navigation-shell`
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell` and `design-system-tokens` are accepted; `app-navigation-shell` is the next ready feature.
-- Next ready feature: `app-navigation-shell`
+- Current state: `bootstrap-app-shell` and `design-system-tokens` are accepted; `app-navigation-shell` is implemented and verified, pending independent validation.
+- Next ready feature after acceptance: `board-data-schema`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`design-system-tokens` independent validation: verification gate, clean-checkout typecheck, Android export, gallery, input focus, Fast Refresh, and full reload on the physical Android device)
+- Last verified at: `2026-10-26` (`app-navigation-shell`: four-tab shell, active/selected states, locked Mi Club, gallery outside tabs, deep link, Fast Refresh, and full reload on the physical Android device)
 
 ## Session Log
 
@@ -91,3 +91,14 @@
 - Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
 - Known risk or unresolved issue: non-blocking polish items remain (input label association, soft focus ring fidelity, `bodyMd` 14 px versus the DESIGN.md 16 px body minimum); physical iOS is still unverified.
 - Next best step: create `feat/app-navigation-shell` from `main` and plan it with the feature-spec workflow.
+
+### Session 008
+
+- Date: `2026-10-26`
+- Goal: Plan and implement `app-navigation-shell`, then verify the four-section shell on the physical Android device.
+- Completed: created `docs/specs/app-navigation-shell.md`; added the `(tabs)` route group with Explorar, Pizarra, Asistente IA, and Mi Club; added `TabIcon` and `SectionPlaceholder`; configured a token-based bottom bar with safe-area sizing, Material/SF symbols, the AI dot, and the lock badge; moved the home placeholder into Explorar and kept `/design-system` outside the tabs.
+- Verification run: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor` 20/20), `./init.sh` exit 0, `npx expo export --platform android`, Expo Go deep links, `uiautomator` dumps for every tab, tap navigation, selected-state checks, `Ver sistema de diseño` round trip, Fast Refresh edit/revert, and force-stop/full relaunch.
+- Evidence captured: `SM-M135F` on Android 14 with Expo Go 58.0.5; each tab item is 168 px tall (about 61 dp) in one row; Mi Club shows the lock and `SIGUIENTE FASE` copy without team UI; the gallery renders without a tab bar; no React Native warnings or errors in `logcat`.
+- Files or artifacts updated: `src/app/_layout.tsx`, `src/app/(tabs)/*`, `src/components/navigation/*`, `src/app/index.tsx` (deleted), `docs/specs/app-navigation-shell.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
+- Known risk or unresolved issue: the 11 px nav labels are a documented exception to DESIGN.md's 16 px body minimum; tablet and physical iOS rendering remain unverified; the Expo Go `Tools` overlay appears over the top-right of screens only in development.
+- Next best step: open the phase pull request, validate `app-navigation-shell`, then plan `board-data-schema` from an updated `main`.
