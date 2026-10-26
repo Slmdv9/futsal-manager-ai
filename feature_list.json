@@ -32,14 +32,28 @@
     "depends_on": [
       "bootstrap-app-shell"
     ],
-    "status": "not_started",
+    "status": "passing",
     "verification": [
       "Render a small style gallery route or story page.",
       "Compare primary, AI, card, chip, and input states against DESIGN.md tokens.",
       "Confirm no colors or fonts outside DESIGN.md are introduced."
     ],
-    "evidence": [],
-    "notes": "Source of truth: DESIGN.md and docs/design/prototype/futsal_tactical_edge/DESIGN.md."
+    "evidence": [
+      "Spec created at `docs/specs/design-system-tokens.md`.",
+      "Installed Expo-compatible `@expo-google-fonts/space-grotesk`, `@expo-google-fonts/hanken-grotesk`, and `@expo-google-fonts/jetbrains-mono`; fonts load in `src/app/_layout.tsx` behind the splash gate.",
+      "Implemented `src/theme` tokens and `src/components/ui` primitives (`AppText`, `AppButton`, `Card`, `Chip`, `AppInput`); the home route and `/design-system` gallery consume them.",
+      "`npm run verify` passed after implementation: expo lint, `tsc --noEmit`, and `expo-doctor` 20/20 checks.",
+      "`./init.sh` exited 0, ran `npm run verify`, and printed `npm start` without starting the dev server.",
+      "`rg '#[0-9a-fA-F]{3,8}' src/app src/components` returned no matches, so screens and primitives contain no literal colors.",
+      "Physical Android verification on Samsung Galaxy M13 (Android 14, Expo Go 58.0.5): home rendered with Space Grotesk, Hanken Grotesk, and JetBrains Mono; `Ver sistema de diseño` navigated to `/design-system`.",
+      "Gallery verified section by section via screenshots and `uiautomator` dumps: palette hex values, full typography scale, spacing scale, radii, primary/AI/secondary/disabled buttons, cards, four chips, and input default/error states.",
+      "Focused input was exercised on device: the primary ring appeared and `Infantil` was typed into the field; the error field kept its red border and message.",
+      "Fast Refresh verified by editing the gallery heading on disk and observing `Sistema de diseño · FR` on the device without a reload; the change was reverted and observed again.",
+      "Full reload verified by force-stopping Expo Go and reopening `exp://127.0.0.1:8081/--/design-system`; fonts rendered correctly and `adb logcat` showed no React Native errors, warnings, or font failures.",
+      "`npx expo export --platform android` bundled 1,269 modules successfully.",
+      "Added `eslint-import-resolver-typescript@3.10.1` as a devDependency so ESLint can resolve the `@/` path alias under the Expo flat config."
+    ],
+    "notes": "Source of truth: DESIGN.md and docs/design/prototype/futsal_tactical_edge/DESIGN.md. Root DESIGN.md tokens win on conflicts. Custom font families load through expo-font; weights are selected by explicit family key because fontWeight is unreliable for custom fonts on Android. Spec: docs/specs/design-system-tokens.md."
   },
   {
     "id": "app-navigation-shell",
