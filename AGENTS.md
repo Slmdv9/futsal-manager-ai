@@ -40,9 +40,9 @@ This repository works one branch per SDD phase and never commits directly to `ma
    - `feat/<feature-id>` for implementation features (e.g. `feat/bootstrap-app-shell`).
 3. Keep the branch scoped to one phase or one feature in `feature_list.json`.
 4. Commit on the branch using Conventional Commit messages.
-5. When the phase is ready, push the branch and open a pull request to `main`. Do not merge it unless the user asks.
-6. The pull request body must include the phase or feature id, what changed, verification actually run, and remaining risks.
-7. Record the branch name and pull request status in `PROGRESS.md` before ending the session.
+5. When the phase is ready, push the branch and give the user the GitHub compare URL. The user opens the pull request from the web; do not try to create it with `gh`.
+6. Before handoff, prepare a suggested PR title and body with the phase or feature id, what changed, verification actually run, and remaining risks.
+7. Record the branch name and PR status in `PROGRESS.md` before ending the session.
 
 Do not reuse a merged phase branch for unrelated work.
 
@@ -90,4 +90,4 @@ Before implementation begins, resolve the blocking open questions in `docs/risks
 
 ## End Of Session
 
-Before ending a session: update `PROGRESS.md` and `feature_list.json`, record unresolved risks or blockers, leave the repo runnable through `./init.sh`, and push the phase branch with its pull request to `main`.
+Before ending a session: update `PROGRESS.md` and `feature_list.json`, record unresolved risks or blockers, leave the repo runnable through `./init.sh`, push the phase branch, and leave the compare URL for the user to open the pull request.
