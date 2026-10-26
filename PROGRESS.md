@@ -3,15 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/design-system-tokens`
-- Pull request: the user opens it from the web at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/design-system-tokens`
+- Current branch: `main` at `bb291e2` (PR #4 merged)
+- Pull request: none open; `design-system-tokens` reached `main` through PR #4
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell` is accepted; `design-system-tokens` is implemented and verified, pending independent validation.
-- Next ready feature after acceptance: `app-navigation-shell`
+- Current state: `bootstrap-app-shell` and `design-system-tokens` are accepted; `app-navigation-shell` is the next ready feature.
+- Next ready feature: `app-navigation-shell`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`design-system-tokens`: verification gate, home and gallery render on the physical Android device, all component states, Fast Refresh, and full reload)
+- Last verified at: `2026-10-26` (`design-system-tokens` independent validation: verification gate, clean-checkout typecheck, Android export, gallery, input focus, Fast Refresh, and full reload on the physical Android device)
 
 ## Session Log
 
@@ -80,3 +80,14 @@
 - Files or artifacts updated: `package.json`, `package-lock.json`, `src/theme/*`, `src/components/ui/*`, `src/app/_layout.tsx`, `src/app/index.tsx`, `src/app/design-system.tsx`, `docs/specs/design-system-tokens.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
 - Known risk or unresolved issue: independent validation has not run yet; `npm audit` still reports 5 high-severity transitive advisories in Expo CLI/code-signing tooling with no non-breaking fix.
 - Next best step: open the phase pull request, validate `design-system-tokens`, then start `app-navigation-shell` from an updated `main`.
+
+### Session 007
+
+- Date: `2026-10-26`
+- Goal: Independently validate `design-system-tokens` and record acceptance before starting the next feature.
+- Completed: validation returned `accept` with no blocking findings; recorded the acceptance in `feature_list.json`, `PROGRESS.md`, and `AGENTS.md`.
+- Verification run: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor` 20/20, twice), `./init.sh` exit 0, typecheck after deleting generated Expo router types and `expo-env.d.ts`, `npx expo export --platform android`, literal-color scan, Expo Go device checks for gallery, focused input, Fast Refresh, and force-stop/full relaunch, `adb logcat` warning scan, and `npm audit`.
+- Evidence captured: clean working tree at `bb291e2`; 7/7 acceptance scenarios pass; no React Native errors, warnings, or font failures on `SM-M135F`; no literal colors outside `src/theme`; `npm audit` keeps 5 pre-existing high-severity transitive advisories with no non-breaking fix.
+- Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
+- Known risk or unresolved issue: non-blocking polish items remain (input label association, soft focus ring fidelity, `bodyMd` 14 px versus the DESIGN.md 16 px body minimum); physical iOS is still unverified.
+- Next best step: create `feat/app-navigation-shell` from `main` and plan it with the feature-spec workflow.
