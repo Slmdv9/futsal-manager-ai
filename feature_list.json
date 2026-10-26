@@ -32,7 +32,7 @@
     "depends_on": [
       "bootstrap-app-shell"
     ],
-    "status": "passing",
+    "status": "accepted",
     "verification": [
       "Render a small style gallery route or story page.",
       "Compare primary, AI, card, chip, and input states against DESIGN.md tokens.",
@@ -51,7 +51,9 @@
       "Fast Refresh verified by editing the gallery heading on disk and observing `Sistema de diseño · FR` on the device without a reload; the change was reverted and observed again.",
       "Full reload verified by force-stopping Expo Go and reopening `exp://127.0.0.1:8081/--/design-system`; fonts rendered correctly and `adb logcat` showed no React Native errors, warnings, or font failures.",
       "`npx expo export --platform android` bundled 1,269 modules successfully.",
-      "Added `eslint-import-resolver-typescript@3.10.1` as a devDependency so ESLint can resolve the `@/` path alias under the Expo flat config."
+      "Added `eslint-import-resolver-typescript@3.10.1` as a devDependency so ESLint can resolve the `@/` path alias under the Expo flat config.",
+      "Independent validation verdict: accept at `bb291e2`, with no blocking findings. The validator reran `npm run verify` (20/20) and `./init.sh` (exit 0), passed typecheck after deleting generated Expo router types and `expo-env.d.ts`, exported the Android bundle, scanned for literal colors, and rechecked the gallery, input focus, Fast Refresh, and full reload on the Galaxy M13.",
+      "Non-blocking validator observations: input labels are not programmatically associated with their fields; the focus ring uses opaque `primaryFixed` instead of the prototype's soft emerald ring; `bodyMd` is 14 px while DESIGN.md asks for a 16 px body minimum."
     ],
     "notes": "Source of truth: DESIGN.md and docs/design/prototype/futsal_tactical_edge/DESIGN.md. Root DESIGN.md tokens win on conflicts. Custom font families load through expo-font; weights are selected by explicit family key because fontWeight is unreliable for custom fonts on Android. Spec: docs/specs/design-system-tokens.md."
   },
@@ -64,14 +66,29 @@
       "bootstrap-app-shell",
       "design-system-tokens"
     ],
-    "status": "not_started",
+    "status": "passing",
     "verification": [
       "Open the app on a phone viewport.",
       "Tap each navigation item and confirm the correct section opens.",
       "Confirm Mi Club shows a locked next-phase state, not a broken route."
     ],
-    "evidence": [],
-    "notes": "Matches the prototype bottom navigation; Mi Club is a next-phase entry point and must not be implemented in the MVP."
+    "evidence": [
+      "Spec created at `docs/specs/app-navigation-shell.md`.",
+      "Added the `(tabs)` route group with Explorar, Pizarra, Asistente IA, and Mi Club; removed the old single-stack home route.",
+      "Added `TabIcon` and `SectionPlaceholder` under `src/components/navigation`; icons use `expo-symbols` with Material Symbols on Android and SF Symbols on iOS through the already-installed `expo-symbols` package.",
+      "Configured the tab bar with design tokens only: `surface`, `outlineVariant`, `primary`, `textVariant`, `secondary`, and `outline`; `labelMd` labels; 22 px icons; 64 dp content height plus the bottom safe-area inset.",
+      "`npm run verify` passed: expo lint, `tsc --noEmit`, and `expo-doctor` 20/20 checks.",
+      "`./init.sh` exited 0, ran `npm run verify`, and printed `npm start` without starting the dev server.",
+      "`npx expo export --platform android` bundled successfully (2.9 MB Hermes bundle).",
+      "Physical Android verification on Samsung Galaxy M13 (Android 14, Expo Go 58.0.5): cold start landed on Explorar with `selected: true` in the `uiautomator` dump.",
+      "Tapped Pizarra, Asistente IA, Mi Club, and Explorar; each screen rendered its Spanish placeholder and the matching tab became the only selected item.",
+      "Tab items measured `[0,2105][270,2273]`, `[270,2105][540,2273]`, `[540,2105][810,2273]`, and `[810,2105][1080,2273]`; each is 168 px tall (about 61 dp at 2.75 density), above the 44 dp minimum, in one row.",
+      "Mi Club rendered a lock symbol, `SIGUIENTE FASE`, `Disponible en una próxima fase`, and the anonymous-MVP explanation with no team, roster, or calendar UI.",
+      "`Ver sistema de diseño` opened `/design-system` with no tab bar, Android back returned to Explorar, and a cold deep link to `/mi-club` selected the Mi Club tab.",
+      "Fast Refresh verified by editing the Pizarra headline and observing `· FR` on device; the change was reverted and observed again.",
+      "Full reload verified by force-stopping Expo Go and reopening `exp://127.0.0.1:8081`; `adb logcat` showed no React Native warnings, errors, or missing-symbol failures."
+    ],
+    "notes": "The prototype dock is the visual source. Nav labels intentionally use the 11 px `labelMd` token, a documented exception to DESIGN.md's 16 px body-text minimum. Mi Club remains a locked next-phase entry point with no team or roster implementation. Tablet and iOS rendering remain unverified on physical hardware. Spec: docs/specs/app-navigation-shell.md."
   },
   {
     "id": "board-data-schema",
