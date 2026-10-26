@@ -5,7 +5,7 @@
     "title": "Bootstrap a runnable app shell",
     "user_visible_behavior": "The repository has a runnable app with a home route, one install command, one verification command, and one start command, all documented in init.sh.",
     "depends_on": [],
-    "status": "passing",
+    "status": "accepted",
     "verification": [
       "Run the documented install command from a clean checkout.",
       "Run the documented verification command and confirm it passes.",
@@ -13,13 +13,16 @@
       "Replace the provisional commands in init.sh with the real install, verify, and start commands."
     ],
     "evidence": [
-      "`npm run verify` passed: expo lint, `tsc --noEmit`, and `expo-doctor` 20/20 checks.",
+      "`npm run verify` passed: expo lint, `tsc --noEmit`, and `expo-doctor` 20/20 checks; rerun during independent validation.",
       "`./init.sh` exited 0, ran `npm run verify`, and printed `npm start` without starting the dev server.",
       "`npx expo export --platform android` bundled 1,306 modules successfully.",
       "`CI=1 npx expo start --port 8081` returned Metro status `running`.",
-      "Manual visual render on a simulator/device was not performed."
+      "Physical Android render verified on Samsung Galaxy M13 (Android 14): Expo Go 58.0.5 displayed `Futsal Manager AI`, the Spanish subtitle, and `Aplicación en construcción` through a `uiautomator` dump.",
+      "Fast Refresh verified by changing the home status text on disk and observing the new text on the device; full reload verified by relaunching `exp://127.0.0.1:8081`.",
+      "Native debug build verified with `npm run android` (`expo run:android`): Gradle build succeeded, the 60 MB APK installed as `com.anonymous.futsalmanagerai`, and the Spanish home route rendered; Fast Refresh and a force-stop/full relaunch worked in the native app.",
+      "Independent validation verdict: accept, with no blocking findings."
     ],
-    "notes": "Expo SDK 58.0.19, Expo Router, TypeScript. ESLint is pinned to 9 because eslint-config-expo's plugins are incompatible with ESLint 10. `npm run verify` is the standard gate; `npm start` is never run by init.sh. Spec: docs/specs/bootstrap-app-shell.md."
+    "notes": "Expo SDK 58.0.19, Expo Router, TypeScript. ESLint is pinned to 9 because eslint-config-expo's plugins are incompatible with ESLint 10. `npm run verify` is the standard gate; `npm start` is never run by init.sh. Device loop: docs/device-development-workflow.md. Local debug application ID is the template placeholder `com.anonymous.futsalmanagerai` until a production ID is chosen. Spec: docs/specs/bootstrap-app-shell.md."
   },
   {
     "id": "design-system-tokens",

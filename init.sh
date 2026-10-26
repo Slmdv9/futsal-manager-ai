@@ -12,4 +12,4 @@ echo "Running baseline verification..."
 npm run verify
 
 echo "Startup command: npm start"
-echo "Manual follow-up: run 'npm start' and open the app in Expo Go or a simulator."
+echo "Manual follow-up: see docs/device-development-workflow.md to open the app on a device or simulator."
