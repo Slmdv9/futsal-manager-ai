@@ -13,12 +13,13 @@ This repository contains **Futsal Manager AI**, a mobile-first, Spanish-language
 Read on demand:
 
 - `docs/technical-discovery.md` — stack, data, integrations, testing, observability, operations.
+- `docs/board-data-schema.md` — Board Data v1.0.0 contract, coordinates, limits, validation, and versioning.
 - `docs/device-development-workflow.md` — build, launch, reload, and inspect the app on the connected Android device.
 - `docs/design/prototype/` — original prototype screens, HTML references, and the full source-of-truth `DESIGN.md`.
 
 ## Project Status
 
-Bootstrapped, design system, and navigation implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted. The next ready feature is `board-data-schema`. The physical device loop is documented in `docs/device-development-workflow.md`.
+Bootstrapped, design system, navigation, and the Board Data contract implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted; `board-data-schema` is implemented and verified, pending independent validation. The next ready feature after acceptance is `content-model-and-store`. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 
@@ -69,12 +70,13 @@ Do not reuse a merged phase branch for unrelated work.
 
 ## Verification
 
-`./init.sh` is the standard startup path. It runs `npm run verify` (ESLint, `tsc --noEmit`, and `expo-doctor`) and never starts a long-running server. Start the app with `npm start`. For every notable UI or behavior change, follow `docs/device-development-workflow.md` and verify the change on the connected Android device before handoff.
+`./init.sh` is the standard startup path. It runs `npm run verify` (ESLint, `tsc --noEmit`, the Board Data schema tests via `npm test`, and `expo-doctor`) and never starts a long-running server. Start the app with `npm start`. For every notable UI or behavior change, follow `docs/device-development-workflow.md` and verify the change on the connected Android device before handoff.
 
-Once content and AI exist:
+For Board Data:
 
-- Validate every seeded exercise's `Board Data` against the agreed schema; unvalidated data must not be published.
-- Add golden tests for board phase playback (positions and order).
+- Validate every authored, seeded, or AI-generated payload with `parseBoardData` against `docs/board-data-schema.md`; unvalidated data must not be published or rendered.
+- Add fixtures and `node:test` coverage for every contract change; `npm test` must stay green.
+- Add golden tests for board phase playback (positions and order) once the renderer and playback exist.
 - Add grounding tests: AI output must reference seeded exercises/categories and resist adversarial prompts that try to fabricate content.
 - Test quota enforcement server-side.
 - Manually test the board and screens on a real phone and tablet.
@@ -89,7 +91,7 @@ A feature is done only when: the target behavior works, the relevant verificatio
 - `PROGRESS.md`: current verified state and lightweight session log.
 - `init.sh`: standard startup and verification path.
 
-Before implementation begins, resolve the blocking open questions in `docs/risks-and-open-questions.md` (seed content licensing, Board Data schema, stack). The next ready feature is `design-system-tokens`.
+There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature after `board-data-schema` acceptance is `content-model-and-store`.
 
 ## End Of Session
 

@@ -1,0 +1,367 @@
+{
+  "schemaVersion": "1.0.0",
+  "pitch": {
+    "format": "full"
+  },
+  "tokens": [
+    {
+      "id": "por-local",
+      "kind": "keeper",
+      "team": "home",
+      "label": "POR"
+    },
+    {
+      "id": "cierre",
+      "kind": "player",
+      "team": "home",
+      "label": "CIE"
+    },
+    {
+      "id": "ala-derecha",
+      "kind": "player",
+      "team": "home",
+      "label": "AD"
+    },
+    {
+      "id": "ala-izquierda",
+      "kind": "player",
+      "team": "home",
+      "label": "AI"
+    },
+    {
+      "id": "pivot",
+      "kind": "player",
+      "team": "home",
+      "label": "PIV"
+    },
+    {
+      "id": "por-rival",
+      "kind": "keeper",
+      "team": "away",
+      "label": "POR"
+    },
+    {
+      "id": "defensor-1",
+      "kind": "player",
+      "team": "away",
+      "label": "D1"
+    },
+    {
+      "id": "defensor-2",
+      "kind": "player",
+      "team": "away",
+      "label": "D2"
+    },
+    {
+      "id": "defensor-3",
+      "kind": "player",
+      "team": "away",
+      "label": "D3"
+    }
+  ],
+  "cones": [
+    {
+      "id": "cono-salida",
+      "x": 18,
+      "y": 50
+    },
+    {
+      "id": "cono-banda-derecha",
+      "x": 40,
+      "y": 5
+    },
+    {
+      "id": "cono-banda-izquierda",
+      "x": 40,
+      "y": 95
+    }
+  ],
+  "phases": [
+    {
+      "id": "salida",
+      "order": 1,
+      "title": "Salida desde portero",
+      "explanation": "El portero inicia la salida en 3-1 y el cierre ofrece la primera línea de pase.",
+      "positions": [
+        {
+          "tokenId": "por-local",
+          "x": 8,
+          "y": 50
+        },
+        {
+          "tokenId": "cierre",
+          "x": 25,
+          "y": 50
+        },
+        {
+          "tokenId": "ala-derecha",
+          "x": 35,
+          "y": 20
+        },
+        {
+          "tokenId": "ala-izquierda",
+          "x": 35,
+          "y": 80
+        },
+        {
+          "tokenId": "pivot",
+          "x": 48,
+          "y": 50
+        },
+        {
+          "tokenId": "por-rival",
+          "x": 92,
+          "y": 50
+        },
+        {
+          "tokenId": "defensor-1",
+          "x": 62,
+          "y": 35
+        },
+        {
+          "tokenId": "defensor-2",
+          "x": 62,
+          "y": 65
+        },
+        {
+          "tokenId": "defensor-3",
+          "x": 75,
+          "y": 50
+        }
+      ],
+      "ball": {
+        "x": 8,
+        "y": 50
+      },
+      "arrows": [
+        {
+          "id": "pase-portero-cierre",
+          "kind": "pass",
+          "team": "home",
+          "from": {
+            "x": 8,
+            "y": 50
+          },
+          "to": {
+            "x": 25,
+            "y": 50
+          }
+        },
+        {
+          "id": "desmarque-ala-derecha",
+          "kind": "run",
+          "team": "home",
+          "from": {
+            "x": 35,
+            "y": 20
+          },
+          "to": {
+            "x": 46,
+            "y": 14
+          },
+          "curve": -12
+        }
+      ],
+      "labels": [
+        {
+          "id": "etiqueta-salida",
+          "text": "Salida en 3-1",
+          "x": 20,
+          "y": 8
+        }
+      ]
+    },
+    {
+      "id": "carril-derecho",
+      "order": 2,
+      "title": "Pase al carril derecho",
+      "explanation": "El cierre conecta con el ala derecha mientras la defensa rival ajusta la presión.",
+      "positions": [
+        {
+          "tokenId": "por-local",
+          "x": 10,
+          "y": 50
+        },
+        {
+          "tokenId": "cierre",
+          "x": 30,
+          "y": 55
+        },
+        {
+          "tokenId": "ala-derecha",
+          "x": 45,
+          "y": 18
+        },
+        {
+          "tokenId": "ala-izquierda",
+          "x": 38,
+          "y": 82
+        },
+        {
+          "tokenId": "pivot",
+          "x": 52,
+          "y": 52
+        },
+        {
+          "tokenId": "por-rival",
+          "x": 90,
+          "y": 50
+        },
+        {
+          "tokenId": "defensor-1",
+          "x": 55,
+          "y": 30
+        },
+        {
+          "tokenId": "defensor-2",
+          "x": 65,
+          "y": 70
+        },
+        {
+          "tokenId": "defensor-3",
+          "x": 72,
+          "y": 45
+        }
+      ],
+      "ball": {
+        "x": 30,
+        "y": 55
+      },
+      "arrows": [
+        {
+          "id": "pase-cierre-ala",
+          "kind": "pass",
+          "team": "home",
+          "from": {
+            "x": 30,
+            "y": 55
+          },
+          "to": {
+            "x": 45,
+            "y": 18
+          },
+          "curve": -18
+        },
+        {
+          "id": "presion-defensor",
+          "kind": "press",
+          "team": "away",
+          "from": {
+            "x": 55,
+            "y": 30
+          },
+          "to": {
+            "x": 47,
+            "y": 20
+          },
+          "curve": 8
+        }
+      ],
+      "labels": [
+        {
+          "id": "etiqueta-presion",
+          "text": "Presión al carril derecho",
+          "x": 55,
+          "y": 6,
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "cambio-orientacion",
+      "order": 3,
+      "title": "Cambio de orientación",
+      "explanation": "El balón cambia de orientación para liberar al ala izquierda en el último carril.",
+      "positions": [
+        {
+          "tokenId": "por-local",
+          "x": 12,
+          "y": 50
+        },
+        {
+          "tokenId": "cierre",
+          "x": 32,
+          "y": 50
+        },
+        {
+          "tokenId": "ala-derecha",
+          "x": 60,
+          "y": 15
+        },
+        {
+          "tokenId": "ala-izquierda",
+          "x": 70,
+          "y": 85
+        },
+        {
+          "tokenId": "pivot",
+          "x": 78,
+          "y": 50
+        },
+        {
+          "tokenId": "por-rival",
+          "x": 94,
+          "y": 50
+        },
+        {
+          "tokenId": "defensor-1",
+          "x": 68,
+          "y": 28
+        },
+        {
+          "tokenId": "defensor-2",
+          "x": 72,
+          "y": 68
+        },
+        {
+          "tokenId": "defensor-3",
+          "x": 85,
+          "y": 50
+        }
+      ],
+      "ball": {
+        "x": 70,
+        "y": 85
+      },
+      "arrows": [
+        {
+          "id": "cambio-orientacion",
+          "kind": "pass",
+          "team": "home",
+          "from": {
+            "x": 60,
+            "y": 15
+          },
+          "to": {
+            "x": 70,
+            "y": 85
+          },
+          "curve": 24
+        },
+        {
+          "id": "ruptura-pivot",
+          "kind": "run",
+          "team": "home",
+          "from": {
+            "x": 78,
+            "y": 50
+          },
+          "to": {
+            "x": 88,
+            "y": 46
+          },
+          "curve": -6
+        }
+      ],
+      "labels": [
+        {
+          "id": "etiqueta-cambio",
+          "text": "Cambio de orientación",
+          "x": 68,
+          "y": 94,
+          "align": "right"
+        }
+      ]
+    }
+  ]
+}

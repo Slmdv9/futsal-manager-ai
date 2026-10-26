@@ -3,15 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `main` at `af588e3` (PR #5 merged)
-- Pull request: none open; `app-navigation-shell` reached `main` through PR #5
+- Current branch: `feat/board-data-schema` (from `main` at `af588e3`)
+- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/board-data-schema`
 - Standard startup path: `./init.sh`
-- Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted.
-- Next ready feature: `board-data-schema`
+- Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, Board Data schema tests via `npm test`, and `expo-doctor`), executed by `./init.sh`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted; `board-data-schema` is implemented and verified, pending independent validation.
+- Next ready feature after validation: `content-model-and-store`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`app-navigation-shell` independent validation: gate, clean typecheck, Android export, four tabs, selected states, locked Mi Club, gallery round trip, Fast Refresh, and full reload on the physical Android device)
+- Last verified at: `2026-10-26` (`board-data-schema`: 12/12 schema tests, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and invalid fixtures report the expected paths)
 
 ## Session Log
 
@@ -113,3 +113,14 @@
 - Files or artifacts updated: `AGENTS.md`, `PROGRESS.md`, `feature_list.json`, `docs/specs/app-navigation-shell.md`.
 - Known risks: the 11 px nav labels remain a deliberate design exception; `Asistente IA` truncation is a follow-up polish item before `mobile-device-verification`; tablet and physical iOS remain unverified.
 - Next best step: create `feat/board-data-schema` from `main` and plan the schema with the feature-spec workflow.
+
+### Session 010
+
+- Date: `2026-10-26`
+- Goal: Plan and implement `board-data-schema`, define Board Data v1.0.0, and validate it with automated tests.
+- Completed: created `docs/specs/board-data-schema.md` and the durable `docs/board-data-schema.md`; added `zod`, `tsx`, and `@types/node`; implemented strict schemas, cross-field validation, and parser helpers; added one valid and four invalid fixtures plus a 12-test suite; added `npm test` to `npm run verify`; marked the schema open question resolved and linked the contract from the domain model.
+- Verification run: `npm test` (12/12 pass), `npm run verify` exit 0 with ESLint, `tsc --noEmit`, schema tests, and `expo-doctor` 20/20, `./init.sh` exit 0, `npx expo export --platform android` (2.9 MB bundle), and a direct parser run over all four invalid fixtures.
+- Evidence captured: valid three-phase fixture parses with defaults; missing position reports `phases.1.positions: Missing position for token "ala-izquierda" in phase 2.`; unknown kind reports `tokens.0.kind: Token kind must be "player" or "keeper".`; unknown version reports `schemaVersion: Board Data schemaVersion must be "1.0.0".`; extra field reports `(root): Unrecognized key: "notes"`; `schemaVersion` is recorded as `1.0.0` in code and docs.
+- Files or artifacts updated: `package.json`, `package-lock.json`, `tsconfig.json`, `src/content/board-data/schema.ts`, `src/content/board-data/index.ts`, `src/content/board-data/board-data.test.ts`, `src/content/board-data/fixtures/*`, `docs/specs/board-data-schema.md`, `docs/board-data-schema.md`, `docs/domain-model.md`, `docs/risks-and-open-questions.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
+- Known risks: `npm audit` keeps 5 pre-existing high-severity transitive advisories with no non-breaking fix; the prototype is 4:3/half-pitch while the contract normalizes to a full 2:1 space, so the renderer must map coordinates deliberately; no device verification applies because there is no UI change.
+- Next best step: independently validate `board-data-schema`, then plan `content-model-and-store` from an updated `main`.

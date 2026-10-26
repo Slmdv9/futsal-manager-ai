@@ -101,14 +101,25 @@
     "depends_on": [
       "bootstrap-app-shell"
     ],
-    "status": "not_started",
+    "status": "passing",
     "verification": [
       "Validate a valid multi-phase Board Data fixture and confirm it passes.",
       "Validate fixtures with a missing phase coordinate and an unknown token type; confirm both fail with a clear error.",
       "Record the schema version in the repository."
     ],
-    "evidence": [],
-    "notes": "Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio."
+    "evidence": [
+      "Spec created at `docs/specs/board-data-schema.md`; durable contract documented in `docs/board-data-schema.md` with `schemaVersion` `1.0.0`.",
+      "Added `zod@4.6.7`, `@types/node@^22`, and `tsx@^4`; `npm test` runs the Board Data suite and `npm run verify` now runs ESLint, `tsc --noEmit`, the schema tests, and `expo-doctor`.",
+      "Implemented strict schemas in `src/content/board-data/schema.ts` for board metadata, tokens, static cones, phases, positions, ball, arrows, and labels, with slug/text/coordinate limits, a literal version, and cross-field refinements.",
+      "Implemented `parseBoardData`, `safeParseBoardData`, `BoardDataValidationError`, and dot-notation issue paths in `src/content/board-data/index.ts`.",
+      "Created a prototype-derived three-phase valid fixture and four invalid fixtures (missing position, unknown token kind, unknown version, unexpected field).",
+      "`npm test`: 12/12 pass, covering valid parsing, defaults, per-phase token completeness, half-pitch data, missing position, unknown kind, unknown version, strict extra field, phase order, unknown token position, and thrown error formatting.",
+      "Missing-position fixture reports `phases.1.positions: Missing position for token \"ala-izquierda\" in phase 2.`; unknown-kind fixture reports `tokens.0.kind: Token kind must be \"player\" or \"keeper\".`; version fixture reports `schemaVersion: Board Data schemaVersion must be \"1.0.0\".`; strict-field fixture reports `(root): Unrecognized key: \"notes\"`.",
+      "`npm run verify` exit 0 with 12/12 schema tests and `expo-doctor` 20/20; `./init.sh` exit 0 and executes the same gate without starting Metro.",
+      "`npx expo export --platform android` succeeds after the dependency and tsconfig changes (2.9 MB bundle).",
+      "No device verification was required because the feature adds no screen or user-visible behavior."
+    ],
+    "notes": "Board Data v1.0.0 uses normalized 0-100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and no MVP migrations. Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio. No persistent E2E harness exists; unit tests are the correct coverage level until the renderer and playback exist."
   },
   {
     "id": "content-model-and-store",

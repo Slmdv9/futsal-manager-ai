@@ -4,7 +4,7 @@
 
 - **Category** — an official RFEF age bracket (Prebenjamín U8, Benjamín U10, Alevín U12, Infantil U14, Cadete U16, Juvenil U19, Senior). Immutable reference data.
 - **Exercise** — a drill with objective, categories, dimensions, players, materials, duration, intensity, coaching cues, and Board Data.
-- **Board Data** — structured, renderable description of an exercise: pitch type/aspect ratio, tokens (players, keepers), cones, arrows, labels, and an ordered list of Phases.
+- **Board Data** — structured, renderable description of an exercise: pitch type/aspect ratio, tokens (players, keepers), cones, arrows, labels, and an ordered list of Phases. Its versioned contract, coordinates, limits, and validation rules live in `docs/board-data-schema.md`; unvalidated Board Data must not be published or rendered.
 - **Phase** — one ordered step with its own token/arrow positions and a short explanation.
 - **Programming** — per-category methodology: formative stage, objectives, macrocycles, microcycles, session structure, and key concepts.
 - **Macrocycle / Microcycle** — nested time periods within a Season.
@@ -53,7 +53,7 @@
 
 - An exercise mapped to several categories (e.g. Infantil and Cadete) must appear under both filters without duplication artifacts.
 - AI output references an exercise that has since been archived — the assistant must not surface non-published content.
-- Board Data references more tokens than the declared player count, or phases with missing positions — the board must degrade gracefully, not crash.
+- Board Data references more tokens than the declared player count, or phases with missing positions — validation rejects missing or unknown token positions before publication; any legacy or corrupted payload that still reaches the board must degrade gracefully, not crash.
 - A variant changes the player count, so the source exercise's Board Data may not transfer directly; the adapter must return consistent Board Data.
 - Non-2:1 or unusual spaces (half court, reduced area) must still render on the board with the correct proportions.
 - Offline/poor connectivity on the pitch: browsing and cached board playback should degrade better than AI features.
