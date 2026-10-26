@@ -2,8 +2,14 @@
 set -euo pipefail
 
 echo "Repository: $(pwd)"
-echo "Harness status: pre-bootstrap"
-echo "Application stack is not initialized yet."
-echo "Blocking decision: stack, Board Data schema, and seed content licensing (see docs/risks-and-open-questions.md)."
-echo "Next step: pick the first ready feature in feature_list.json (bootstrap-app-shell) and perform technical bootstrap."
-echo "Expected future commands: to be recorded here after bootstrap (install, verify, start)."
+
+if [ ! -d node_modules ]; then
+  echo "Dependencies are missing. Run: npm install"
+  exit 1
+fi
+
+echo "Running baseline verification..."
+npm run verify
+
+echo "Startup command: npm start"
+echo "Manual follow-up: run 'npm start' and open the app in Expo Go or a simulator."
