@@ -216,9 +216,9 @@ Cross-field rules: every token has exactly one position per phase; no unknown or
 
 ## Validator Checklist
 
-- [ ] Implementation stays within this feature's scope.
-- [ ] Acceptance scenarios pass.
-- [ ] Verification evidence is present.
-- [ ] Persistent E2E coverage was added/updated when the feature has an observable user/API flow and an E2E harness exists, or the spec explains why it is not needed.
-- [ ] `feature_list.json` and `PROGRESS.md` were updated correctly.
-- [ ] No unrelated product behavior or extra feature work was added.
+- [x] Implementation stays within this feature's scope.
+- [x] Acceptance scenarios pass.
+- [x] Verification evidence is present.
+- [x] Persistent E2E coverage was added/updated when the feature has an observable user/API flow and an E2E harness exists, or the spec explains why it is not needed.
+- [x] `feature_list.json` and `PROGRESS.md` were updated correctly.
+- [x] No unrelated product behavior or extra feature work was added.
