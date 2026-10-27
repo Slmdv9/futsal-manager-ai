@@ -1,5 +1,7 @@
 # Feature Implementation Spec: Define and validate the Board Data schema
 
+> Path note: `modular-hexagonal-architecture` moved the contract to `src/shared/domain/board-data` and the tests/fixtures to `tests/shared/domain/board-data`. Paths below reflect the current tree.
+
 ## Source Feature
 
 - `id`: `board-data-schema`
@@ -87,7 +89,7 @@ Then the schema tests execute as part of `npm run verify` and no dev server star
 - `docs/design/prototype/03-exercise-detail-board/code.html` — phase positions, ball, curved arrows, cones, labels, home/away tokens, and keeper treatment.
 - `DESIGN.md` — board must stay 2:1; tokens are circular with mono labels; renderer owns color and styling.
 - `package.json` — no schema library, test runner, or Node types are installed; `verify` is lint + typecheck + expo-doctor.
-- `src/app/*`, `src/components/*`, `src/theme/*` — no existing content layer or schema module.
+- `src/app/*`, `src/modules/*`, `src/shared/*` — no existing content layer or schema module.
 
 ### Existing Patterns To Follow
 
@@ -106,7 +108,7 @@ Then the schema tests execute as part of `npm run verify` and no dev server star
 ## Technical Approach
 
 1. Add `zod@^4.6.7` as a runtime dependency for strict parsing and future JSON Schema generation, plus `@types/node` and `tsx` as dev dependencies for tests.
-2. Define `BOARD_DATA_SCHEMA_VERSION = '1.0.0'` and a strict Zod schema with cross-field refinements in `src/content/board-data/schema.ts`.
+2. Define `BOARD_DATA_SCHEMA_VERSION = '1.0.0'` and a strict Zod schema with cross-field refinements in `src/shared/domain/board-data/schema.ts`.
 3. Model coordinates as normalized numbers from `0` to `100` on a full 2:1 pitch: `x` runs left goal line to right goal line, `y` runs top touchline to bottom touchline. Half-pitch exercises keep the same full-pitch coordinate space and mark `pitch.format: 'half'`; the renderer decides how to shade the inactive half without changing the 2:1 ratio.
 4. Define token metadata once at board level and require exactly one position for every token in every phase. This guarantees interpolation safety and catches missing phase coordinates.
 5. Keep cones static at board level; keep ball position, arrows, and labels per phase. Arrows carry `kind` and `team` semantics, a start/end point, and a signed perpendicular `curve` offset; the renderer maps them to DESIGN.md colors and dash styles.
@@ -145,14 +147,14 @@ Cross-field rules: every token has exactly one position per phase; no unknown or
 
 - `package.json` — add `zod`, test/verify scripts, and dev dependencies.
 - `package-lock.json` — lock the new dependencies.
-- `src/content/board-data/schema.ts` — create; version, Zod schema, types, refinements.
-- `src/content/board-data/index.ts` — create; parse/safe-parse wrappers and error formatting.
-- `src/content/board-data/board-data.test.ts` — create; valid and invalid fixture tests.
-- `src/content/board-data/fixtures/valid-multi-phase.json` — create; prototype-derived three-phase exercise.
-- `src/content/board-data/fixtures/invalid-missing-position.json` — create; phase 2 omits a token position.
-- `src/content/board-data/fixtures/invalid-unknown-kind.json` — create; token kind is not `player` or `keeper`.
-- `src/content/board-data/fixtures/invalid-unknown-version.json` — create; unsupported `schemaVersion`.
-- `src/content/board-data/fixtures/invalid-strict-field.json` — create; unexpected property.
+- `src/shared/domain/board-data/schema.ts` — create; version, Zod schema, types, refinements.
+- `src/shared/domain/board-data/index.ts` — create; parse/safe-parse wrappers and error formatting.
+- `tests/shared/domain/board-data/board-data.test.ts` — create; valid and invalid fixture tests.
+- `tests/shared/domain/board-data/fixtures/valid-multi-phase.json` — create; prototype-derived three-phase exercise.
+- `tests/shared/domain/board-data/fixtures/invalid-missing-position.json` — create; phase 2 omits a token position.
+- `tests/shared/domain/board-data/fixtures/invalid-unknown-kind.json` — create; token kind is not `player` or `keeper`.
+- `tests/shared/domain/board-data/fixtures/invalid-unknown-version.json` — create; unsupported `schemaVersion`.
+- `tests/shared/domain/board-data/fixtures/invalid-strict-field.json` — create; unexpected property.
 - `docs/board-data-schema.md` — create; durable schema contract and versioning policy.
 - `docs/specs/board-data-schema.md` — this spec.
 - `docs/domain-model.md` — update; link Board Data to the versioned schema.
@@ -183,7 +185,7 @@ Cross-field rules: every token has exactly one position per phase; no unknown or
 
 ## Implementation Tasks
 
-- [x] Install `zod`, `@types/node`, and `tsx`; add `test`/`test:board` scripts and include the schema tests in `verify`.
+- [x] Install `zod`, `@types/node`, and `tsx`; add `test`/`test` scripts and include the schema tests in `verify`.
 - [x] Implement `BOARD_DATA_SCHEMA_VERSION`, strict Zod schema, inferred types, and identifier/text limits.
 - [x] Add cross-field refinements for token completeness, uniqueness, phase order, and arrow endpoints.
 - [x] Implement `parseBoardData`, `safeParseBoardData`, `BoardDataValidationError`, and issue path formatting.

@@ -1,5 +1,7 @@
 # Feature Implementation Spec: Add mobile navigation shell
 
+> Path note: `modular-hexagonal-architecture` moved the tab icon and section placeholder to `src/shared/ui` and made the tab routes thin module wrappers. Paths below reflect the current tree.
+
 ## Source Feature
 
 - `id`: `app-navigation-shell`
@@ -78,15 +80,15 @@ Then all four items sit in one row above the safe area, each item is at least 44
 - `src/app/_layout.tsx` — root stack, font gate, and splash handling.
 - `src/app/index.tsx` — current placeholder home and gallery link.
 - `src/app/design-system.tsx` — existing gallery route that must remain outside the tabs.
-- `src/components/ui/*` — `AppText`, `AppButton`, `Card`, `Chip`, and `AppInput` primitives available for the placeholders.
-- `src/theme/*` — colors, typography, spacing, radius, and elevation tokens.
+- `src/shared/ui/*` — `AppText`, `AppButton`, `Card`, `Chip`, and `AppInput` primitives available for the placeholders.
+- `src/shared/theme/*` — colors, typography, spacing, radius, and elevation tokens.
 - `package.json` — Expo Router 58 and `expo-symbols` are already installed; no icon package is present.
 - `node_modules/expo-symbols` — `SymbolView` supports Material Symbols on Android and SF Symbols on iOS.
 
 ### Existing Patterns To Follow
 
 - Routes live under `src/app` and use Expo Router typed routes.
-- Screens compose `@/components/ui` primitives and `@/theme` tokens; no literal colors or font sizes.
+- Screens compose `@/shared/ui` primitives and `@/shared/theme` tokens; no literal colors or font sizes.
 - Every screen uses `SafeAreaView` from `react-native-safe-area-context`.
 - Spanish user-facing copy, English code identifiers.
 - Single non-blocking verification gate: `npm run verify`, executed by `./init.sh`.
@@ -102,7 +104,7 @@ Then all four items sit in one row above the safe area, each item is at least 44
 
 1. Move the home route into an Expo Router group: `src/app/(tabs)/_layout.tsx` renders `Tabs` and `src/app/(tabs)/index.tsx` becomes the Explorar placeholder. Delete `src/app/index.tsx` so `/` resolves to the tab group.
 2. Configure the tab bar with tokens only: white `surface` background, hairline top border in `outlineVariant`, active tint `primary`, inactive tint `textVariant`, `labelMd` labels, and 22 px icons. Use `useSafeAreaInsets()` so the bar keeps a 64 dp content area plus the bottom inset, and do not rely on platform defaults for height or typography.
-3. Add one small `TabIcon` component under `src/components/navigation` that renders `SymbolView` with `{ ios, android }` names, a `focused` color, an optional cyan AI dot (`secondary`), and an optional lock badge (`outline`). Icons map to the prototype: Explorar `sports_soccer`, Pizarra `draw`, Asistente IA `smart_toy`, Mi Club `shield_person`; iOS equivalents are `soccerball`, `pencil.and.outline`, `brain.head.profile`, `shield.lefthalf.filled`, and `lock.fill` for the badge.
+3. Add one small `TabIcon` component under `src/shared/ui` that renders `SymbolView` with `{ ios, android }` names, a `focused` color, an optional cyan AI dot (`secondary`), and an optional lock badge (`outline`). Icons map to the prototype: Explorar `sports_soccer`, Pizarra `draw`, Asistente IA `smart_toy`, Mi Club `shield_person`; iOS equivalents are `soccerball`, `pencil.and.outline`, `brain.head.profile`, `shield.lefthalf.filled`, and `lock.fill` for the badge.
 4. Add a shared `SectionPlaceholder` component for Explorar, Pizarra, and Asistente IA so the three sections share spacing and status treatment. Mi Club gets its own screen with a `Card`, a `Chip` labelled `SIGUIENTE FASE`, the lock symbol, and Spanish copy that names the later-phase scope without implementing it.
 5. Keep `/design-system` in the root stack, outside `(tabs)`, so the gallery has no tab bar. Preserve the existing `Ver sistema de diseño` action in Explorar for manual design verification.
 6. Set tab options `headerShown: false`, `tabBarHideOnKeyboard: true`, and explicit `tabBarAccessibilityLabel` per section. Do not add a custom tab bar unless the default one cannot match the required tokens and touch size.
@@ -116,9 +118,9 @@ Then all four items sit in one row above the safe area, each item is at least 44
 - `src/app/(tabs)/mi-club.tsx` — create; locked next-phase screen.
 - `src/app/index.tsx` — delete; replaced by the tab group index.
 - `src/app/_layout.tsx` — modify; register `(tabs)` and `design-system` in the root stack.
-- `src/components/navigation/tab-icon.tsx` — create; symbol icon with AI and lock badges.
-- `src/components/navigation/section-placeholder.tsx` — create; shared section layout.
-- `src/components/navigation/index.ts` — create; local exports.
+- `src/shared/ui/tab-icon.tsx` — create; symbol icon with AI and lock badges.
+- `src/shared/ui/section-placeholder.tsx` — create; shared section layout.
+- `src/shared/ui/index.ts` — create; local exports.
 - `docs/specs/app-navigation-shell.md` — this spec.
 - `AGENTS.md`, `PROGRESS.md`, `feature_list.json` — update state, evidence, and next feature.
 
@@ -147,8 +149,8 @@ Then all four items sit in one row above the safe area, each item is at least 44
 
 ## Implementation Tasks
 
-- [x] Create `src/components/navigation/tab-icon.tsx` using `expo-symbols` with iOS/Android names and optional AI/lock badges.
-- [x] Create `src/components/navigation/section-placeholder.tsx` with a Spanish eyebrow, title, description, status chip, and optional children.
+- [x] Create `src/shared/ui/tab-icon.tsx` using `expo-symbols` with iOS/Android names and optional AI/lock badges.
+- [x] Create `src/shared/ui/section-placeholder.tsx` with a Spanish eyebrow, title, description, status chip, and optional children.
 - [x] Create `src/app/(tabs)/_layout.tsx` with four `Tabs.Screen` entries, token-based bar styling, and safe-area sizing.
 - [x] Create `src/app/(tabs)/index.tsx` for Explorar and keep the `Ver sistema de diseño` link.
 - [x] Create `src/app/(tabs)/pizarra.tsx` and `src/app/(tabs)/asistente.tsx` placeholders with distinct Spanish copy.
