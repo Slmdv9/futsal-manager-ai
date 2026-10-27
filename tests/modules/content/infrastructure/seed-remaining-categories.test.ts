@@ -6,6 +6,7 @@ import { getProgramming } from '@/modules/content/application/get-programming';
 import { listExercises } from '@/modules/content/application/list-exercises';
 import { CATEGORY_IDS, type CategoryId } from '@/modules/content/domain/category';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
+import type { SessionPart } from '@/modules/content/domain/session-part';
 import { createBundledContentRepository } from '@/modules/content/infrastructure/bundled-content-repository';
 
 const repository = createBundledContentRepository();
@@ -616,31 +617,55 @@ const EXPECTED_EXERCISE_IDS_BY_CATEGORY: Partial<Record<CategoryId, string[]>> =
     'conduccion-entre-conos',
     'pases-por-parejas',
     'juego-3v3-conos-porteria',
+    'juego-4v4-dos-porterias',
+    'conduccion-y-pase-en-cuadrado',
+    'rondo-libre-3v1',
+    'vuelta-a-la-calma-con-balon',
   ],
   benjamin: [
     'rondo-4v1-dos-toques',
     'pase-y-va-cambio-orientacion',
     'salida-portero-3v2',
+    'juego-posicion-3v3-apoyos',
+    'salida-3v1-desde-portero',
+    'rondo-4v0-control-orientado',
+    'circulacion-suave-y-movilidad',
   ],
   alevin: [
     'conservacion-4v2-carriles',
     'reaccion-tras-perdida-3v2',
     'ataque-3v2-banda',
+    'rondo-5v1-activacion',
+    'pase-y-control-en-movimiento',
+    'conservacion-suave-4v0',
+    'rondo-final-4v1',
   ],
   cadete: [
     'salida-3-1-presion-alta',
     'juego-posicion-4v4-comodines',
     'basculacion-bloque-1-2-1',
+    'rondo-4v2-activacion',
+    'movilidad-y-pases-largos',
+    'conservacion-5v2-baja-intensidad',
+    'estiramientos-guiados-con-balon',
   ],
   juvenil: [
     'salida-4v3-con-portero',
     'transicion-4v3-tras-robo',
     'presion-alta-4v4',
+    'rondo-4v2-con-salida',
+    'activacion-con-duelos-1v1',
+    'conservacion-6v3-baja-intensidad',
+    'rondo-final-y-movilidad',
   ],
   senior: [
     'salida-3-2-cambio-ala',
     'defensa-3-1-presion-cierre',
     'transicion-5v4-carril-central',
+    'rondo-5v2-activacion',
+    'activacion-con-movilidad-y-pases',
+    'conservacion-6v2-baja-intensidad',
+    'vuelta-a-la-calma-y-analisis',
   ],
 };
 
@@ -654,6 +679,62 @@ const LEGACY_EXERCISE_IDS = [
   'ataque-4-0-rotaciones',
   'basculacion-rombo-defensivo',
   'transicion-3v2-tras-robo',
+];
+
+const SESSION_PART_BY_ID: Record<string, SessionPart> = {
+  'salida-3-1-presion-alta': 'main',
+  'circulacion-cierre-ala': 'cool-down',
+  'presion-tras-perdida': 'main',
+  'rondo-4v1-orientacion': 'cool-down',
+  'pase-y-va-carril-central': 'warm-up',
+  'juego-posicion-3-1-pivote': 'warm-up',
+  'ataque-4-0-rotaciones': 'main',
+  'basculacion-rombo-defensivo': 'main',
+  'transicion-3v2-tras-robo': 'main',
+  'conduccion-entre-conos': 'warm-up',
+  'pases-por-parejas': 'warm-up',
+  'juego-3v3-conos-porteria': 'main',
+  'rondo-4v1-dos-toques': 'warm-up',
+  'pase-y-va-cambio-orientacion': 'warm-up',
+  'salida-portero-3v2': 'main',
+  'conservacion-4v2-carriles': 'main',
+  'reaccion-tras-perdida-3v2': 'main',
+  'ataque-3v2-banda': 'main',
+  'juego-posicion-4v4-comodines': 'main',
+  'basculacion-bloque-1-2-1': 'main',
+  'salida-4v3-con-portero': 'main',
+  'transicion-4v3-tras-robo': 'main',
+  'presion-alta-4v4': 'main',
+  'salida-3-2-cambio-ala': 'main',
+  'defensa-3-1-presion-cierre': 'main',
+  'transicion-5v4-carril-central': 'main',
+};
+
+const SESSION_SHAPED_EXERCISE_IDS = [
+  'juego-4v4-dos-porterias',
+  'conduccion-y-pase-en-cuadrado',
+  'rondo-libre-3v1',
+  'vuelta-a-la-calma-con-balon',
+  'juego-posicion-3v3-apoyos',
+  'salida-3v1-desde-portero',
+  'rondo-4v0-control-orientado',
+  'circulacion-suave-y-movilidad',
+  'rondo-5v1-activacion',
+  'pase-y-control-en-movimiento',
+  'conservacion-suave-4v0',
+  'rondo-final-4v1',
+  'rondo-4v2-activacion',
+  'movilidad-y-pases-largos',
+  'conservacion-5v2-baja-intensidad',
+  'estiramientos-guiados-con-balon',
+  'rondo-4v2-con-salida',
+  'activacion-con-duelos-1v1',
+  'conservacion-6v3-baja-intensidad',
+  'rondo-final-y-movilidad',
+  'rondo-5v2-activacion',
+  'activacion-con-movilidad-y-pases',
+  'conservacion-6v2-baja-intensidad',
+  'vuelta-a-la-calma-y-analisis',
 ];
 
 const INSPIRATION_ONLY_DOMAINS = [
@@ -686,17 +767,28 @@ function assertSpanishCopy(label: string, value: string): void {
 describe('Seed for the remaining categories', () => {
   describe('Given the bundled content package', () => {
     describe('When the exercise library is listed', () => {
-      it('then every RFEF category has at least three published exercises', () => {
+      it('then every RFEF category has its planned published exercises', () => {
         for (const categoryId of CATEGORY_IDS) {
           const exercises = listExercises(repository, { categoryId });
+          const expectedCount = categoryId === 'infantil' ? 9 : 7;
 
-          assert.ok(
-            exercises.length >= 3,
-            `Expected ${categoryId} to have at least three exercises.`,
+          assert.equal(
+            exercises.length,
+            expectedCount,
+            `Expected ${categoryId} to have ${expectedCount} exercises.`,
           );
           assert.ok(
             exercises.every((exercise) => exercise.status === 'published'),
             `Expected every ${categoryId} exercise to be published.`,
+          );
+        }
+      });
+
+      it('then every exercise declares a valid session part', () => {
+        for (const exercise of repository.getExercises()) {
+          assert.ok(
+            ['warm-up', 'main', 'cool-down'].includes(exercise.sessionPart),
+            `Expected a valid session part for ${exercise.id}.`,
           );
         }
       });
@@ -712,28 +804,29 @@ describe('Seed for the remaining categories', () => {
         }
       });
 
-      it('then the package holds 26 unique exercises in canonical order', () => {
+      it('then the package holds 50 unique exercises in canonical order', () => {
         const exercises = listExercises(repository);
         const expectedIds = [
           ...LEGACY_EXERCISE_IDS,
           ...NEW_EXERCISE_PLANS.map((plan) => plan.id),
+          ...SESSION_SHAPED_EXERCISE_IDS,
         ];
 
-        assert.equal(exercises.length, 26);
-        assert.equal(new Set(exercises.map((exercise) => exercise.id)).size, 26);
+        assert.equal(exercises.length, 50);
+        assert.equal(new Set(exercises.map((exercise) => exercise.id)).size, 50);
         assert.deepEqual(
           exercises.map((exercise) => exercise.id),
           expectedIds,
         );
       });
 
-      it('then the 17 new exercises are appended in the planned order', () => {
+      it('then the 24 session-shaped exercises are appended in the planned order', () => {
         assert.deepEqual(
           repository
             .getExercises()
-            .slice(9)
+            .slice(26)
             .map((exercise) => exercise.id),
-          NEW_EXERCISE_PLANS.map((plan) => plan.id),
+          SESSION_SHAPED_EXERCISE_IDS,
         );
       });
     });
@@ -755,7 +848,7 @@ describe('Seed for the remaining categories', () => {
       it('then Cadete keeps the legacy crossover exercise first', () => {
         const cadete = listExercises(repository, { categoryId: 'cadete' });
 
-        assert.equal(cadete.length, 3);
+        assert.equal(cadete.length, 7);
         assert.equal(cadete[0].id, 'salida-3-1-presion-alta');
         assert.equal(repository.getExercises()[0].id, 'salida-3-1-presion-alta');
       });
@@ -774,6 +867,7 @@ describe('Seed for the remaining categories', () => {
           assert.equal(exercise.title, plan.title);
           assert.equal(exercise.summary, plan.summary);
           assert.equal(exercise.focus, plan.focus);
+          assert.equal(exercise.sessionPart, SESSION_PART_BY_ID[plan.id]);
           assert.deepEqual(exercise.categoryIds, [plan.category]);
           assert.equal(exercise.objective, plan.objective);
           assert.deepEqual(exercise.players, plan.players);
@@ -979,7 +1073,7 @@ describe('Seed for the remaining categories', () => {
     });
 
     describe('When the seed provenance is audited', () => {
-      it('then all 33 records are published original owned Futsal Manager AI', () => {
+      it('then all 57 records are published original owned Futsal Manager AI', () => {
         const programming = CATEGORY_IDS.flatMap((categoryId) =>
           repository.getProgrammingByCategory(categoryId),
         );
@@ -996,9 +1090,9 @@ describe('Seed for the remaining categories', () => {
           })),
         ];
 
-        assert.equal(repository.getExercises().length, 26);
+        assert.equal(repository.getExercises().length, 50);
         assert.equal(programming.length, 7);
-        assert.equal(records.length, 33);
+        assert.equal(records.length, 57);
 
         for (const record of records) {
           assert.equal(record.status, 'published');
@@ -1035,9 +1129,9 @@ describe('Seed for the remaining categories', () => {
         );
       });
 
-      it('then the package and Board Data versions are unchanged', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.0.0');
-        assert.equal(readBundledPackage().contentVersion, '1.0.0');
+      it('then the package is 1.1.0 and Board Data remains 1.0.0', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
+        assert.equal(readBundledPackage().contentVersion, '1.1.0');
         assert.equal(BOARD_DATA_SCHEMA_VERSION, '1.0.0');
         for (const exercise of repository.getExercises()) {
           assert.equal(exercise.boardData.schemaVersion, '1.0.0');

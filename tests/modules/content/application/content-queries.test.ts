@@ -47,6 +47,7 @@ function makeExercise(
     title: 'Salida 3-1 ante presión alta',
     summary: 'Salida en 3-1 con fijación del cierre.',
     focus: 'Salida de presión',
+    sessionPart: 'main',
     categoryIds,
     objective: 'Superar la primera línea de presión.',
     players: { total: 8, goalkeepers: 2 },

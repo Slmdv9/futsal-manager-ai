@@ -1,6 +1,7 @@
 import type { BoardData } from '@/shared/domain';
 import type { CategoryId } from './category';
 import { isPublishableProvenance, type ContentProvenance } from './provenance';
+import type { SessionPart } from './session-part';
 
 export const EXERCISE_STATUSES = ['draft', 'published', 'archived'] as const;
 
@@ -36,6 +37,7 @@ export type Exercise = {
   title: string;
   summary: string;
   focus: string;
+  sessionPart: SessionPart;
   categoryIds: CategoryId[];
   objective: string;
   players: ExercisePlayers;

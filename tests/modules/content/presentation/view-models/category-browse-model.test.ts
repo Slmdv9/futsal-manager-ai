@@ -5,6 +5,7 @@ import type { CategoryId } from '@/modules/content/domain/category';
 import { getCategoryById } from '@/modules/content/domain/category';
 import type { Exercise, ExerciseStatus } from '@/modules/content/domain/exercise';
 import type { Programming, ProgrammingStatus } from '@/modules/content/domain/programming';
+import type { SessionPart } from '@/modules/content/domain/session-part';
 import type { ContentProvenance } from '@/modules/content/domain/provenance';
 import type { ContentRepository } from '@/modules/content/domain/ports/content-repository';
 import { createBundledContentRepository } from '@/modules/content/infrastructure/bundled-content-repository';
@@ -14,6 +15,8 @@ import {
   formatExerciseCount,
   formatExerciseMeta,
   formatSessionDuration,
+  formatSessionPartLabel,
+  groupExercisesBySessionPart,
 } from '@/modules/content/presentation/view-models/category-browse-model';
 
 const ownedProvenance: ContentProvenance = {
@@ -47,12 +50,14 @@ function makeExercise(
   categoryIds: CategoryId[],
   status: ExerciseStatus,
   provenance: Partial<ContentProvenance> = {},
+  sessionPart: SessionPart = 'main',
 ): Exercise {
   return {
     id,
     title,
     summary: 'Ejercicio de prueba.',
     focus: 'Salida de presión',
+    sessionPart,
     categoryIds,
     objective: 'Superar la primera línea de presión.',
     players: { total: 8, goalkeepers: 2 },
@@ -158,6 +163,28 @@ describe('Category browse view model', () => {
             'transicion-3v2-tras-robo',
           ],
         );
+        assert.deepEqual(
+          model.sessionParts.map((group) => [group.part, group.exercises.length]),
+          [
+            ['warm-up', 2],
+            ['main', 5],
+            ['cool-down', 2],
+          ],
+        );
+        assert.deepEqual(
+          model.sessionParts.map((group) => group.exercises.map((exercise) => exercise.id)),
+          [
+            ['pase-y-va-carril-central', 'juego-posicion-3-1-pivote'],
+            [
+              'salida-3-1-presion-alta',
+              'presion-tras-perdida',
+              'ataque-4-0-rotaciones',
+              'basculacion-rombo-defensivo',
+              'transicion-3v2-tras-robo',
+            ],
+            ['circulacion-cierre-ala', 'rondo-4v1-orientacion'],
+          ],
+        );
       });
     });
   });
@@ -179,6 +206,30 @@ describe('Category browse view model', () => {
             'salida-3-2-cambio-ala',
             'defensa-3-1-presion-cierre',
             'transicion-5v4-carril-central',
+            'rondo-5v2-activacion',
+            'activacion-con-movilidad-y-pases',
+            'conservacion-6v2-baja-intensidad',
+            'vuelta-a-la-calma-y-analisis',
+          ],
+        );
+        assert.deepEqual(
+          model.sessionParts.map((group) => [group.part, group.exercises.length]),
+          [
+            ['warm-up', 2],
+            ['main', 3],
+            ['cool-down', 2],
+          ],
+        );
+        assert.deepEqual(
+          model.sessionParts.map((group) => group.exercises.map((exercise) => exercise.id)),
+          [
+            ['rondo-5v2-activacion', 'activacion-con-movilidad-y-pases'],
+            [
+              'salida-3-2-cambio-ala',
+              'defensa-3-1-presion-cierre',
+              'transicion-5v4-carril-central',
+            ],
+            ['conservacion-6v2-baja-intensidad', 'vuelta-a-la-calma-y-analisis'],
           ],
         );
         assert.ok(
@@ -251,6 +302,58 @@ describe('Category browse view model', () => {
           model.exercises.map((exercise) => exercise.id),
           ['publicado'],
         );
+      });
+    });
+  });
+
+  describe('Given exercises with different session parts', () => {
+    describe('When they are grouped by session part', () => {
+      it('then it always returns the three groups in fixed order and preserves input order', () => {
+        const exercises = [
+          makeExercise('calentamiento-2', 'Calentamiento 2', ['infantil'], 'published', {}, 'warm-up'),
+          makeExercise('principal-1', 'Principal 1', ['infantil'], 'published', {}, 'main'),
+          makeExercise('calentamiento-1', 'Calentamiento 1', ['infantil'], 'published', {}, 'warm-up'),
+          makeExercise('vuelta-1', 'Vuelta 1', ['infantil'], 'published', {}, 'cool-down'),
+        ];
+
+        const groups = groupExercisesBySessionPart(exercises);
+
+        assert.deepEqual(
+          groups.map((group) => group.part),
+          ['warm-up', 'main', 'cool-down'],
+        );
+        assert.deepEqual(
+          groups.map((group) => group.label),
+          ['Calentamiento', 'Parte general', 'Vuelta a la calma'],
+        );
+        assert.deepEqual(
+          groups.map((group) => group.exercises.map((exercise) => exercise.id)),
+          [
+            ['calentamiento-2', 'calentamiento-1'],
+            ['principal-1'],
+            ['vuelta-1'],
+          ],
+        );
+      });
+
+      it('then an empty session part stays present with an empty list', () => {
+        const groups = groupExercisesBySessionPart([
+          makeExercise('principal-1', 'Principal 1', ['infantil'], 'published', {}, 'main'),
+        ]);
+
+        assert.deepEqual(
+          groups.map((group) => group.part),
+          ['warm-up', 'main', 'cool-down'],
+        );
+        assert.deepEqual(groups[0].exercises, []);
+        assert.equal(groups[1].exercises[0]?.id, 'principal-1');
+        assert.deepEqual(groups[2].exercises, []);
+      });
+
+      it('then the Spanish labels are pinned', () => {
+        assert.equal(formatSessionPartLabel('warm-up'), 'Calentamiento');
+        assert.equal(formatSessionPartLabel('main'), 'Parte general');
+        assert.equal(formatSessionPartLabel('cool-down'), 'Vuelta a la calma');
       });
     });
   });

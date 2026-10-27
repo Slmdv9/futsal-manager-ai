@@ -37,6 +37,10 @@ const requiredPublicApiExports = [
   'formatExerciseMeta',
   'formatSessionDuration',
   'formatExerciseCount',
+  'formatSessionPartLabel',
+  'groupExercisesBySessionPart',
+  'SessionPartGroup',
+  'SESSION_PARTS',
   'selectCategory',
   'INITIAL_CATEGORY_SELECTION',
 ];

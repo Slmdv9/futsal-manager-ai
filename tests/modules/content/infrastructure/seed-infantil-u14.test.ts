@@ -66,7 +66,30 @@ describe('Infantil U14 seed', () => {
           INFANTIL_EXERCISE_IDS,
         );
         assert.equal(new Set(infantilExercises.map((exercise) => exercise.id)).size, 9);
-        assert.equal(listExercises(repository).length, 26);
+        assert.equal(listExercises(repository).length, 50);
+      });
+
+      it('then it groups as two warm-up, five main-part, and two cool-down exercises', () => {
+        const sessionPartIds = (part: string) =>
+          infantilExercises
+            .filter((exercise) => exercise.sessionPart === part)
+            .map((exercise) => exercise.id);
+
+        assert.deepEqual(sessionPartIds('warm-up'), [
+          'pase-y-va-carril-central',
+          'juego-posicion-3-1-pivote',
+        ]);
+        assert.deepEqual(sessionPartIds('main'), [
+          'salida-3-1-presion-alta',
+          'presion-tras-perdida',
+          'ataque-4-0-rotaciones',
+          'basculacion-rombo-defensivo',
+          'transicion-3v2-tras-robo',
+        ]);
+        assert.deepEqual(sessionPartIds('cool-down'), [
+          'circulacion-cierre-ala',
+          'rondo-4v1-orientacion',
+        ]);
       });
 
       it('then every exercise is published and tagged Infantil', () => {
@@ -222,9 +245,9 @@ describe('Infantil U14 seed', () => {
         }
       });
 
-      it('then the package and Board Data versions are unchanged', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.0.0');
-        assert.equal(readBundledPackage().contentVersion, '1.0.0');
+      it('then the package moves to 1.1.0 while Board Data and the Infantil plan stay pinned', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
+        assert.equal(readBundledPackage().contentVersion, '1.1.0');
         assert.equal(BOARD_DATA_SCHEMA_VERSION, '1.0.0');
         for (const exercise of repository.getExercises()) {
           assert.equal(exercise.boardData.schemaVersion, '1.0.0');

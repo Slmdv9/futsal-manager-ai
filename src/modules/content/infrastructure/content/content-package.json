@@ -1,11 +1,12 @@
 {
-  "contentVersion": "1.0.0",
+  "contentVersion": "1.1.0",
   "exercises": [
     {
       "id": "salida-3-1-presion-alta",
       "title": "Salida 3-1 ante presión alta",
       "summary": "Salida en 3-1 con fijación del cierre y cambio de orientación al ala débil.",
       "focus": "Salida de presión",
+      "sessionPart": "main",
       "categoryIds": ["infantil", "cadete"],
       "objective": "Superar la primera línea de presión con control orientado y liberar el carril del ala débil.",
       "players": { "total": 10, "goalkeepers": 2 },
@@ -186,6 +187,7 @@
       "title": "Circulación rápida cierre-ala",
       "summary": "Circulación de balón entre cierre y ala para fijar el par defensivo rival.",
       "focus": "Circulación",
+      "sessionPart": "cool-down",
       "categoryIds": ["infantil"],
       "objective": "Fijar al defensor de punta y encontrar el carril del ala contraria con dos pases.",
       "players": { "total": 8, "goalkeepers": 2 },
@@ -309,6 +311,7 @@
       "title": "Presión tras pérdida",
       "summary": "Reacción inmediata tras pérdida para recuperar el balón en campo rival.",
       "focus": "Defensa",
+      "sessionPart": "main",
       "categoryIds": ["infantil"],
       "objective": "Recuperar el balón en menos de seis segundos cerrando la línea de pase interior.",
       "players": { "total": 10, "goalkeepers": 2 },
@@ -426,6 +429,7 @@
       "title": "Rondo 4v1 con orientación",
       "summary": "Rondo 4v1 en cuadrado para orientar el primer toque hacia el hombre libre y activar la circulación.",
       "focus": "Rondo",
+      "sessionPart": "cool-down",
       "categoryIds": ["infantil"],
       "objective": "Mantener la posesión en superioridad 4v1 orientando cada control hacia el compañero que queda libre.",
       "players": { "total": 6, "goalkeepers": 0 },
@@ -550,6 +554,7 @@
       "title": "Pase y va al carril central",
       "summary": "Pase y va del cierre con devolución al desmarque y liberación del carril central.",
       "focus": "Pase y va",
+      "sessionPart": "warm-up",
       "categoryIds": ["infantil"],
       "objective": "Encadenar pase, desmarque y devolución para liberar el carril central con ventaja posicional.",
       "players": { "total": 8, "goalkeepers": 2 },
@@ -723,6 +728,7 @@
       "title": "Juego de posición 3-1 con pívot",
       "summary": "Juego de posición 3-1 para fijar al par defensivo con el pívot y liberar al ala débil.",
       "focus": "Juego de posición",
+      "sessionPart": "warm-up",
       "categoryIds": ["infantil"],
       "objective": "Sostener la estructura 3-1 fijando el pasillo central antes de cambiar la orientación al ala libre.",
       "players": { "total": 10, "goalkeepers": 2 },
@@ -905,6 +911,7 @@
       "title": "Ataque 4-0 con rotaciones",
       "summary": "Ataque 4-0 con rotación continua para ocupar el carril que deja el receptor y mantener amenaza en ambos lados.",
       "focus": "Ataque 4-0",
+      "sessionPart": "main",
       "categoryIds": ["infantil"],
       "objective": "Mantener el ataque 4-0 activo rotando posiciones después de cada pase sin perder el equilibrio defensivo.",
       "players": { "total": 10, "goalkeepers": 2 },
@@ -1087,6 +1094,7 @@
       "title": "Basculación del rombo defensivo",
       "summary": "Rombo defensivo que bascula con el balón para cerrar el centro y proteger el carril del ala.",
       "focus": "Basculación defensiva",
+      "sessionPart": "main",
       "categoryIds": ["infantil"],
       "objective": "Bascular el rombo defensivo con el balón manteniendo la distancia entre cierre y pívot y cerrando el pase interior.",
       "players": { "total": 10, "goalkeepers": 2 },
@@ -1268,6 +1276,7 @@
       "title": "Transición 3v2 tras robo",
       "summary": "Transición rápida en 3v2 tras recuperar el balón en el carril central para rematar antes de que recomponga la defensa.",
       "focus": "Transición",
+      "sessionPart": "main",
       "categoryIds": ["infantil"],
       "objective": "Convertir el robo en una transición 3v2 vertical, con el balón en el carril central y remate en pocos pases.",
       "players": { "total": 7, "goalkeepers": 1 },
@@ -1393,6 +1402,7 @@
       "title": "Conducción entre conos",
       "summary": "Circuito de conducción con cambios de dirección entre conos, ida y vuelta por parejas.",
       "focus": "Conducción",
+      "sessionPart": "warm-up",
       "categoryIds": [
         "prebenjamin"
       ],
@@ -1715,6 +1725,7 @@
       "title": "Pases por parejas en el cuadrado",
       "summary": "Parejas en los lados del cuadrado se pasan el balón y cambian de lado tras cada entrega.",
       "focus": "Pase",
+      "sessionPart": "warm-up",
       "categoryIds": [
         "prebenjamin"
       ],
@@ -2017,6 +2028,7 @@
       "title": "Juego 3 contra 3 con conos portería",
       "summary": "Partido 3 contra 3 en espacio reducido con dos conos portería por equipo.",
       "focus": "Juego reducido",
+      "sessionPart": "main",
       "categoryIds": [
         "prebenjamin"
       ],
@@ -2287,6 +2299,7 @@
       "title": "Rondo 4 contra 1 a dos toques",
       "summary": "Rondo 4 contra 1 con límite de dos toques donde el defensor entra al recuperar el balón.",
       "focus": "Rondo",
+      "sessionPart": "warm-up",
       "categoryIds": [
         "benjamin"
       ],
@@ -2541,6 +2554,7 @@
       "title": "Pase y va con cambio de orientación",
       "summary": "Pase y va por parejas que cambian de cuadrado tras cada entrega para liberar el carril.",
       "focus": "Pase y va",
+      "sessionPart": "warm-up",
       "categoryIds": [
         "benjamin"
       ],
@@ -2951,6 +2965,7 @@
       "title": "Salida del portero en 3 contra 2",
       "summary": "Salida desde portero con tres jugadores ante la presión de dos rivales en medio campo.",
       "focus": "Salida de balón",
+      "sessionPart": "main",
       "categoryIds": [
         "benjamin"
       ],
@@ -3279,6 +3294,7 @@
       "title": "Conservación 4 contra 2 por carriles",
       "summary": "Conservación 4 contra 2 en un rectángulo de tres carriles con punto extra al cambiar de carril.",
       "focus": "Conservación",
+      "sessionPart": "main",
       "categoryIds": [
         "alevin"
       ],
@@ -3549,6 +3565,7 @@
       "title": "Reacción tras pérdida en 3 contra 2",
       "summary": "Tras la pérdida, tres jugadores presionan al portador y cierran la salida en cinco segundos.",
       "focus": "Presión tras pérdida",
+      "sessionPart": "main",
       "categoryIds": [
         "alevin"
       ],
@@ -3855,6 +3872,7 @@
       "title": "Ataque 3 contra 2 por banda",
       "summary": "Ataque 3 contra 2 por banda con llegada del segundo hombre al área.",
       "focus": "Ataque 3v2",
+      "sessionPart": "main",
       "categoryIds": [
         "alevin"
       ],
@@ -4183,6 +4201,7 @@
       "title": "Juego de posición 4 contra 4 con comodines",
       "summary": "Juego de posición 4 contra 4 con dos comodines que juegan con el equipo en posesión.",
       "focus": "Juego de posición",
+      "sessionPart": "main",
       "categoryIds": [
         "cadete"
       ],
@@ -4594,6 +4613,7 @@
       "title": "Basculación del bloque 1-2-1",
       "summary": "Bloque 1-2-1 que bascula con el balón y cierra el pasillo central ante el cambio de orientación.",
       "focus": "Bloque defensivo",
+      "sessionPart": "main",
       "categoryIds": [
         "cadete"
       ],
@@ -5005,6 +5025,7 @@
       "title": "Salida de presión 4 más portero contra 3",
       "summary": "Salida en 4 con portero ante la presión de tres rivales que defienden la primera línea.",
       "focus": "Salida de presión",
+      "sessionPart": "main",
       "categoryIds": [
         "juvenil"
       ],
@@ -5396,6 +5417,7 @@
       "title": "Transición 4 contra 3 tras robo",
       "summary": "Tras el robo en medio campo, cuatro jugadores atacan en transición contra tres defensores.",
       "focus": "Transición",
+      "sessionPart": "main",
       "categoryIds": [
         "juvenil"
       ],
@@ -5661,6 +5683,7 @@
       "title": "Presión alta 4 contra 4",
       "summary": "Presión alta coordinada en 4 contra 4 con referencia al pasillo y salto del hombre del balón.",
       "focus": "Presión alta",
+      "sessionPart": "main",
       "categoryIds": [
         "juvenil"
       ],
@@ -6072,6 +6095,7 @@
       "title": "Salida 3-2 con cambio de ala",
       "summary": "Salida 3-2 que fija la presión por un carril y cambia de ala para progresar.",
       "focus": "Salida de presión",
+      "sessionPart": "main",
       "categoryIds": [
         "senior"
       ],
@@ -6484,6 +6508,7 @@
       "title": "Defensa 3-1 en zona con presión al cierre",
       "summary": "Defensa 3-1 en zona que presiona al cierre rival y cierra el carril central.",
       "focus": "Defensa en zona",
+      "sessionPart": "main",
       "categoryIds": [
         "senior"
       ],
@@ -6895,6 +6920,7 @@
       "title": "Transición 5 contra 4 por el carril central",
       "summary": "Transición de cinco jugadores por el carril central tras recuperar el balón en campo propio.",
       "focus": "Transición",
+      "sessionPart": "main",
       "categoryIds": [
         "senior"
       ],
@@ -7199,6 +7225,3155 @@
         "sourceName": "Futsal Manager AI",
         "licenseStatus": "owned"
       }
+    },
+    {
+      "id": "juego-4v4-dos-porterias",
+      "title": "Juego 4 contra 4 en dos porterías",
+      "summary": "Partido 4 contra 4 con dos porterías para buscar el gol tras circular el balón por todo el cuadrado.",
+      "focus": "Juego reducido",
+      "sessionPart": "main",
+      "categoryIds": ["prebenjamin"],
+      "objective": "Ocupar los espacios libres y finalizar en la portería contraria con pase o conducción.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de juego", "widthM": 20, "lengthM": 20 },
+      "durationMinutes": 10,
+      "intensity": { "level": "medium", "percent": 60 },
+      "workStructure": "Bloques de 3 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Gol tras circular",
+          "detail": "El gol solo vale si el equipo ha pasado el balón por los dos carriles antes de finalizar."
+        },
+        {
+          "rule": "Sin contacto",
+          "detail": "No se permite el contacto para proteger el balón; el defensor debe robar con el pie."
+        }
+      ],
+      "coachingCues": [
+        "Ocupar la anchura del cuadrado para abrir líneas de pase.",
+        "Conducir hacia el espacio libre cuando la presión llega al carril del balón.",
+        "Finalizar con el interior del pie y el cuerpo orientado a la portería."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "local-1", "kind": "player", "team": "home", "label": "L1" },
+          { "id": "local-2", "kind": "player", "team": "home", "label": "L2" },
+          { "id": "local-3", "kind": "player", "team": "home", "label": "L3" },
+          { "id": "local-4", "kind": "player", "team": "home", "label": "L4" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" },
+          { "id": "rival-3", "kind": "player", "team": "away", "label": "R3" },
+          { "id": "rival-4", "kind": "player", "team": "away", "label": "R4" }
+        ],
+        "cones": [
+          { "id": "porteria-oeste-arriba", "x": 18, "y": 44 },
+          { "id": "porteria-oeste-abajo", "x": 18, "y": 56 },
+          { "id": "porteria-este-arriba", "x": 82, "y": 44 },
+          { "id": "porteria-este-abajo", "x": 82, "y": 56 }
+        ],
+        "phases": [
+          {
+            "id": "circulacion",
+            "order": 1,
+            "title": "Circulación y apoyos",
+            "explanation": "El equipo con balón circula por el cuadrado mientras los rivales ajustan sus apoyos.",
+            "positions": [
+              { "tokenId": "local-1", "x": 28, "y": 42 },
+              { "tokenId": "local-2", "x": 28, "y": 58 },
+              { "tokenId": "local-3", "x": 40, "y": 50 },
+              { "tokenId": "local-4", "x": 48, "y": 34 },
+              { "tokenId": "rival-1", "x": 58, "y": 42 },
+              { "tokenId": "rival-2", "x": 58, "y": 58 },
+              { "tokenId": "rival-3", "x": 68, "y": 50 },
+              { "tokenId": "rival-4", "x": 50, "y": 66 }
+            ],
+            "ball": { "x": 40, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-interior",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 40, "y": 50 },
+                "to": { "x": 28, "y": 42 }
+              },
+              {
+                "id": "pase-banda",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 28, "y": 42 },
+                "to": { "x": 48, "y": 34 }
+              },
+              {
+                "id": "presion-rival",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 58, "y": 42 },
+                "to": { "x": 48, "y": 40 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "finalizacion",
+            "order": 2,
+            "title": "Finalización en portería",
+            "explanation": "El balón llega al carril libre y el jugador finaliza en la portería contraria.",
+            "positions": [
+              { "tokenId": "local-1", "x": 36, "y": 46 },
+              { "tokenId": "local-2", "x": 50, "y": 64 },
+              { "tokenId": "local-3", "x": 60, "y": 50 },
+              { "tokenId": "local-4", "x": 68, "y": 40 },
+              { "tokenId": "rival-1", "x": 50, "y": 44 },
+              { "tokenId": "rival-2", "x": 62, "y": 60 },
+              { "tokenId": "rival-3", "x": 72, "y": 34 },
+              { "tokenId": "rival-4", "x": 56, "y": 70 }
+            ],
+            "ball": { "x": 68, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-ultimo",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 60, "y": 50 },
+                "to": { "x": 68, "y": 40 }
+              },
+              {
+                "id": "conduccion-gol",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 68, "y": 40 },
+                "to": { "x": 78, "y": 44 }
+              },
+              {
+                "id": "presion-final",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 72, "y": 34 },
+                "to": { "x": 70, "y": 38 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "conduccion-y-pase-en-cuadrado",
+      "title": "Conducción y pase en el cuadrado",
+      "summary": "Conducción por el cuadrado con entrega al compañero libre y cambio de sentido en la recepción.",
+      "focus": "Conducción y pase",
+      "sessionPart": "main",
+      "categoryIds": ["prebenjamin"],
+      "objective": "Conducir con la cabeza levantada y entregar el balón al compañero mejor perfilado.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de trabajo", "widthM": 15, "lengthM": 15 },
+      "durationMinutes": 10,
+      "intensity": { "level": "low", "percent": 50 },
+      "workStructure": "Bloques de 3 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Cambio de sentido",
+          "detail": "Cada jugador debe cambiar de sentido en la recepción antes de entregar el balón."
+        },
+        {
+          "rule": "Dos toques por recepción",
+          "detail": "La recepción y la conducción se resuelven con un máximo de dos toques."
+        }
+      ],
+      "coachingCues": [
+        "Levantar la cabeza antes de conducir para localizar al compañero libre.",
+        "Usar las dos piernas para cambiar de dirección sin frenar el balón.",
+        "Entregar al pie más alejado del defensor imaginario."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [
+          { "id": "cuadrado-arriba-izquierda", "x": 34, "y": 34 },
+          { "id": "cuadrado-arriba-derecha", "x": 66, "y": 34 },
+          { "id": "cuadrado-abajo-izquierda", "x": 34, "y": 66 },
+          { "id": "cuadrado-abajo-derecha", "x": 66, "y": 66 }
+        ],
+        "phases": [
+          {
+            "id": "conduccion-entrega",
+            "order": 1,
+            "title": "Conducción y entrega",
+            "explanation": "Cada jugador conduce por el cuadrado y entrega el balón al compañero que aparece libre.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 40, "y": 40 },
+              { "tokenId": "jugador-2", "x": 60, "y": 40 },
+              { "tokenId": "jugador-3", "x": 60, "y": 60 },
+              { "tokenId": "jugador-4", "x": 40, "y": 60 },
+              { "tokenId": "jugador-5", "x": 50, "y": 32 },
+              { "tokenId": "jugador-6", "x": 68, "y": 50 },
+              { "tokenId": "jugador-7", "x": 50, "y": 68 },
+              { "tokenId": "jugador-8", "x": 32, "y": 50 }
+            ],
+            "ball": { "x": 40, "y": 40 },
+            "arrows": [
+              {
+                "id": "conduccion-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 40, "y": 40 },
+                "to": { "x": 50, "y": 32 }
+              },
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 60, "y": 40 }
+              },
+              {
+                "id": "conduccion-2",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 60, "y": 40 },
+                "to": { "x": 68, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "recepcion-cambio",
+            "order": 2,
+            "title": "Recepción y cambio de sentido",
+            "explanation": "El receptor controla el balón y cambia de sentido hacia el compañero del lado contrario.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 36, "y": 50 },
+              { "tokenId": "jugador-2", "x": 50, "y": 36 },
+              { "tokenId": "jugador-3", "x": 64, "y": 50 },
+              { "tokenId": "jugador-4", "x": 50, "y": 64 },
+              { "tokenId": "jugador-5", "x": 43, "y": 43 },
+              { "tokenId": "jugador-6", "x": 57, "y": 43 },
+              { "tokenId": "jugador-7", "x": 57, "y": 57 },
+              { "tokenId": "jugador-8", "x": 43, "y": 57 }
+            ],
+            "ball": { "x": 50, "y": 36 },
+            "arrows": [
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 36 },
+                "to": { "x": 57, "y": 43 }
+              },
+              {
+                "id": "conduccion-3",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 57, "y": 43 },
+                "to": { "x": 64, "y": 50 }
+              },
+              {
+                "id": "cambio-sentido",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 64, "y": 50 },
+                "to": { "x": 50, "y": 64 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-libre-3v1",
+      "title": "Rondo libre 3 contra 1",
+      "summary": "Rondo tranquilo de tres contra uno para cerrar la sesión con el balón en el pie.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["prebenjamin"],
+      "objective": "Mantener el balón sin prisa y terminar la sesión con sensaciones positivas.",
+      "players": { "total": 4, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 8, "lengthM": 8 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 35 },
+      "workStructure": "Rondos de 60 segundos x 4 series",
+      "constraints": [
+        {
+          "rule": "Máximo tres toques",
+          "detail": "Cada jugador puede dar como máximo tres toques antes de pasar."
+        },
+        {
+          "rule": "Defensor activo",
+          "detail": "El defensor entra al rondo cuando recupera el balón y el jugador que lo pierde ocupa su lugar."
+        }
+      ],
+      "coachingCues": [
+        "Pasar con el interior del pie y precisión al compañero libre.",
+        "Moverse después de cada pase para ofrecer una nueva línea.",
+        "Terminar el rondo con respiración tranquila y el balón controlado."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 30, "y": 30 },
+          { "id": "rondo-arriba-derecha", "x": 70, "y": 30 },
+          { "id": "rondo-abajo-izquierda", "x": 30, "y": 70 },
+          { "id": "rondo-abajo-derecha", "x": 70, "y": 70 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-suave",
+            "order": 1,
+            "title": "Rondo suave",
+            "explanation": "Los tres jugadores mueven el balón con calma alrededor del defensor.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 36, "y": 50 },
+              { "tokenId": "jugador-2", "x": 50, "y": 36 },
+              { "tokenId": "jugador-3", "x": 64, "y": 50 },
+              { "tokenId": "defensor-1", "x": 50, "y": 50 }
+            ],
+            "ball": { "x": 36, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 36, "y": 50 },
+                "to": { "x": 50, "y": 36 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 50 },
+                "to": { "x": 44, "y": 46 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-defensor",
+            "order": 2,
+            "title": "Cambio de defensor",
+            "explanation": "El defensor cambia de posición y el rondo continúa hacia el lado libre.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 64 },
+              { "tokenId": "jugador-2", "x": 64, "y": 50 },
+              { "tokenId": "jugador-3", "x": 50, "y": 36 },
+              { "tokenId": "defensor-1", "x": 50, "y": 50 }
+            ],
+            "ball": { "x": 50, "y": 64 },
+            "arrows": [
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 64 },
+                "to": { "x": 64, "y": 50 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 50 },
+                "to": { "x": 46, "y": 56 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "vuelta-a-la-calma-con-balon",
+      "title": "Vuelta a la calma con balón",
+      "summary": "Círculo de pases lentos y movilidad suave para bajar el ritmo al final del entrenamiento.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["prebenjamin"],
+      "objective": "Recuperar la calma con pases controlados y movilidad de las articulaciones.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Círculo de cierre", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 25 },
+      "workStructure": "Bloques de 2 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Pases lentos",
+          "detail": "Todos los pases se ejecutan a ritmo lento y con el balón raso."
+        },
+        {
+          "rule": "Movilidad guiada",
+          "detail": "Cada dos pases se realiza una movilidad articular distinta indicada por el entrenador."
+        }
+      ],
+      "coachingCues": [
+        "Acompañar la respiración con el ritmo de los pases.",
+        "Mantener el balón cerca del pie en todo momento.",
+        "Relajar hombros y cuello mientras se recibe."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "pases-en-circulo",
+            "order": 1,
+            "title": "Pases en círculo",
+            "explanation": "El grupo se pasa el balón en círculo a ritmo lento mientras respira de forma pausada.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 32 },
+              { "tokenId": "jugador-2", "x": 63, "y": 37 },
+              { "tokenId": "jugador-3", "x": 68, "y": 50 },
+              { "tokenId": "jugador-4", "x": 63, "y": 63 },
+              { "tokenId": "jugador-5", "x": 50, "y": 68 },
+              { "tokenId": "jugador-6", "x": 37, "y": 63 },
+              { "tokenId": "jugador-7", "x": 32, "y": 50 },
+              { "tokenId": "jugador-8", "x": 37, "y": 37 }
+            ],
+            "ball": { "x": 50, "y": 32 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 63, "y": 37 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 63, "y": 37 },
+                "to": { "x": 68, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "movilidad",
+            "order": 2,
+            "title": "Movilidad y respiración",
+            "explanation": "El círculo se cierra y cada jugador añade una movilidad de tobillo y cadera tras el pase.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 37 },
+              { "tokenId": "jugador-2", "x": 59, "y": 41 },
+              { "tokenId": "jugador-3", "x": 63, "y": 50 },
+              { "tokenId": "jugador-4", "x": 59, "y": 59 },
+              { "tokenId": "jugador-5", "x": 50, "y": 63 },
+              { "tokenId": "jugador-6", "x": 41, "y": 59 },
+              { "tokenId": "jugador-7", "x": 37, "y": 50 },
+              { "tokenId": "jugador-8", "x": 41, "y": 41 }
+            ],
+            "ball": { "x": 63, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 63, "y": 50 },
+                "to": { "x": 59, "y": 59 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 59, "y": 59 },
+                "to": { "x": 50, "y": 63 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "juego-posicion-3v3-apoyos",
+      "title": "Juego de posición 3 contra 3 con apoyos",
+      "summary": "Juego de posición 3 contra 3 con dos apoyos por fuera que sostienen la posesión.",
+      "focus": "Juego de posición",
+      "sessionPart": "main",
+      "categoryIds": ["benjamin"],
+      "objective": "Conservar el balón con apoyos exteriores y cambiar de orientación cuando el centro se cierra.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Rectángulo de juego", "widthM": 20, "lengthM": 15 },
+      "durationMinutes": 12,
+      "intensity": { "level": "medium", "percent": 65 },
+      "workStructure": "Bloques de 4 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Apoyos exteriores",
+          "detail": "Los dos apoyos juegan siempre por fuera del rectángulo y no pueden entrar a defender."
+        },
+        {
+          "rule": "Cambio de orientación",
+          "detail": "El equipo suma un punto extra cuando cambia el balón de un apoyo al otro."
+        }
+      ],
+      "coachingCues": [
+        "Mirar primero al apoyo exterior antes de conducir hacia el centro.",
+        "Ocupar los tres carriles para dar una línea de pase al portador.",
+        "Cambiar de orientación cuando el rival cierra el pasillo central."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "local-1", "kind": "player", "team": "home", "label": "L1" },
+          { "id": "local-2", "kind": "player", "team": "home", "label": "L2" },
+          { "id": "local-3", "kind": "player", "team": "home", "label": "L3" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" },
+          { "id": "rival-3", "kind": "player", "team": "away", "label": "R3" },
+          { "id": "apoyo-1", "kind": "player", "team": "home", "label": "AP1" },
+          { "id": "apoyo-2", "kind": "player", "team": "home", "label": "AP2" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "posesion-apoyos",
+            "order": 1,
+            "title": "Posesión con apoyos",
+            "explanation": "El equipo con balón usa los dos apoyos exteriores para conservar la posesión.",
+            "positions": [
+              { "tokenId": "local-1", "x": 32, "y": 40 },
+              { "tokenId": "local-2", "x": 40, "y": 60 },
+              { "tokenId": "local-3", "x": 52, "y": 50 },
+              { "tokenId": "rival-1", "x": 44, "y": 38 },
+              { "tokenId": "rival-2", "x": 44, "y": 62 },
+              { "tokenId": "rival-3", "x": 60, "y": 50 },
+              { "tokenId": "apoyo-1", "x": 24, "y": 50 },
+              { "tokenId": "apoyo-2", "x": 70, "y": 50 }
+            ],
+            "ball": { "x": 32, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-apoyo",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 32, "y": 40 },
+                "to": { "x": 24, "y": 50 }
+              },
+              {
+                "id": "pase-interior",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 24, "y": 50 },
+                "to": { "x": 40, "y": 60 }
+              },
+              {
+                "id": "presion-central",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 60, "y": 50 },
+                "to": { "x": 56, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 2,
+            "title": "Cambio de orientación",
+            "explanation": "El balón cruza el rectángulo para encontrar al apoyo del lado contrario.",
+            "positions": [
+              { "tokenId": "local-1", "x": 62, "y": 44 },
+              { "tokenId": "local-2", "x": 70, "y": 60 },
+              { "tokenId": "local-3", "x": 60, "y": 56 },
+              { "tokenId": "rival-1", "x": 54, "y": 38 },
+              { "tokenId": "rival-2", "x": 52, "y": 64 },
+              { "tokenId": "rival-3", "x": 46, "y": 50 },
+              { "tokenId": "apoyo-1", "x": 78, "y": 52 },
+              { "tokenId": "apoyo-2", "x": 20, "y": 48 }
+            ],
+            "ball": { "x": 70, "y": 60 },
+            "arrows": [
+              {
+                "id": "pase-apoyo-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 70, "y": 60 },
+                "to": { "x": 78, "y": 52 }
+              },
+              {
+                "id": "cambio-lado",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 78, "y": 52 },
+                "to": { "x": 62, "y": 44 }
+              },
+              {
+                "id": "presion-lado",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 46, "y": 50 },
+                "to": { "x": 56, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "progresion",
+            "order": 3,
+            "title": "Progresión al espacio libre",
+            "explanation": "El apoyo devuelve el balón al carril libre para progresar hacia la zona de finalización.",
+            "positions": [
+              { "tokenId": "local-1", "x": 66, "y": 42 },
+              { "tokenId": "local-2", "x": 74, "y": 54 },
+              { "tokenId": "local-3", "x": 72, "y": 64 },
+              { "tokenId": "rival-1", "x": 60, "y": 38 },
+              { "tokenId": "rival-2", "x": 58, "y": 62 },
+              { "tokenId": "rival-3", "x": 52, "y": 50 },
+              { "tokenId": "apoyo-1", "x": 80, "y": 44 },
+              { "tokenId": "apoyo-2", "x": 24, "y": 52 }
+            ],
+            "ball": { "x": 74, "y": 54 },
+            "arrows": [
+              {
+                "id": "pase-progresion",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 74, "y": 54 },
+                "to": { "x": 80, "y": 44 }
+              },
+              {
+                "id": "conduccion-libre",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 80, "y": 44 },
+                "to": { "x": 88, "y": 40 }
+              },
+              {
+                "id": "presion-final",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 58, "y": 62 },
+                "to": { "x": 68, "y": 60 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "salida-3v1-desde-portero",
+      "title": "Salida 3 contra 1 desde portero",
+      "summary": "Salida desde portero con tres jugadores ante la presión de un rival en medio campo.",
+      "focus": "Salida de balón",
+      "sessionPart": "main",
+      "categoryIds": ["benjamin"],
+      "objective": "Superar al defensor con el pase al hombre libre y ocupar el carril de progresión.",
+      "players": { "total": 4, "goalkeepers": 1 },
+      "space": { "label": "Medio campo", "widthM": 20, "lengthM": 20 },
+      "durationMinutes": 10,
+      "intensity": { "level": "medium", "percent": 60 },
+      "workStructure": "Bloques de 3 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Salida obligatoria por el portero",
+          "detail": "Cada posesión empieza con el portero y se resuelve antes de cinco segundos."
+        },
+        {
+          "rule": "Progresión por banda",
+          "detail": "El equipo solo puede progresar por el carril exterior libre."
+        }
+      ],
+      "coachingCues": [
+        "El portero elige el pase al hombre libre con el cuerpo orientado.",
+        "El cierre ofrece una línea de pase corta y luego acompaña la acción.",
+        "El ala ocupa la banda y recibe perfilado hacia el campo contrario."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "salida-portero",
+            "order": 1,
+            "title": "Portero con balón",
+            "explanation": "El portero inicia la salida y el cierre se ofrece como primer apoyo ante el defensor.",
+            "positions": [
+              { "tokenId": "por-local", "x": 24, "y": 50 },
+              { "tokenId": "cierre", "x": 38, "y": 42 },
+              { "tokenId": "ala-derecha", "x": 40, "y": 64 },
+              { "tokenId": "defensor-1", "x": 54, "y": 52 }
+            ],
+            "ball": { "x": 24, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-portero",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 24, "y": 50 },
+                "to": { "x": 38, "y": 42 }
+              },
+              {
+                "id": "presion-defensor",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 54, "y": 52 },
+                "to": { "x": 44, "y": 46 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "apoyo-cierre",
+            "order": 2,
+            "title": "Apoyo del cierre",
+            "explanation": "El cierre recibe y gira hacia el ala derecha mientras el defensor ajusta la presión.",
+            "positions": [
+              { "tokenId": "por-local", "x": 26, "y": 50 },
+              { "tokenId": "cierre", "x": 44, "y": 44 },
+              { "tokenId": "ala-derecha", "x": 58, "y": 62 },
+              { "tokenId": "defensor-1", "x": 50, "y": 50 }
+            ],
+            "ball": { "x": 44, "y": 44 },
+            "arrows": [
+              {
+                "id": "pase-cierre-ala",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 44, "y": 44 },
+                "to": { "x": 58, "y": 62 }
+              },
+              {
+                "id": "conduccion-ala",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 58, "y": 62 },
+                "to": { "x": 66, "y": 66 }
+              },
+              {
+                "id": "presion-segunda",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 50 },
+                "to": { "x": 52, "y": 48 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "progresion-banda",
+            "order": 3,
+            "title": "Progresión por banda",
+            "explanation": "El ala conduce por la banda y el equipo supera la primera línea rival.",
+            "positions": [
+              { "tokenId": "por-local", "x": 28, "y": 50 },
+              { "tokenId": "cierre", "x": 48, "y": 42 },
+              { "tokenId": "ala-derecha", "x": 70, "y": 58 },
+              { "tokenId": "defensor-1", "x": 58, "y": 50 }
+            ],
+            "ball": { "x": 70, "y": 58 },
+            "arrows": [
+              {
+                "id": "pase-progresion",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 48, "y": 42 },
+                "to": { "x": 70, "y": 58 }
+              },
+              {
+                "id": "conduccion-final",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 70, "y": 58 },
+                "to": { "x": 80, "y": 54 }
+              },
+              {
+                "id": "presion-final",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 58, "y": 50 },
+                "to": { "x": 64, "y": 54 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-4v0-control-orientado",
+      "title": "Rondo 4 contra 0 con control orientado",
+      "summary": "Rondo sin defensor para cerrar la sesión con control orientado y pases cómodos.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["benjamin"],
+      "objective": "Terminar con el balón controlado y el cuerpo orientado hacia el compañero.",
+      "players": { "total": 4, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 8, "lengthM": 8 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 35 },
+      "workStructure": "Rondos de 60 segundos x 4 series",
+      "constraints": [
+        {
+          "rule": "Control orientado",
+          "detail": "El primer toque debe orientar el cuerpo hacia el compañero que recibe."
+        },
+        {
+          "rule": "Pase raso",
+          "detail": "Todos los pases se ejecutan con el interior del pie y a ras de suelo."
+        }
+      ],
+      "coachingCues": [
+        "Recibir con el pie más alejado del balón para abrir el cuerpo.",
+        "Acompañar el pase con un paso hacia el compañero.",
+        "Terminar el rondo con respiración tranquila y el balón controlado."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 34, "y": 34 },
+          { "id": "rondo-arriba-derecha", "x": 66, "y": 34 },
+          { "id": "rondo-abajo-izquierda", "x": 34, "y": 66 },
+          { "id": "rondo-abajo-derecha", "x": 66, "y": 66 }
+        ],
+        "phases": [
+          {
+            "id": "control-orientado",
+            "order": 1,
+            "title": "Control orientado",
+            "explanation": "Los cuatro jugadores controlan el balón con el cuerpo orientado al compañero.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 38, "y": 40 },
+              { "tokenId": "jugador-2", "x": 60, "y": 40 },
+              { "tokenId": "jugador-3", "x": 60, "y": 60 },
+              { "tokenId": "jugador-4", "x": 40, "y": 60 }
+            ],
+            "ball": { "x": 38, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 38, "y": 40 },
+                "to": { "x": 60, "y": 40 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 60, "y": 40 },
+                "to": { "x": 60, "y": 60 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "pase-companero",
+            "order": 2,
+            "title": "Pase al compañero libre",
+            "explanation": "El balón sigue el cuadrado y cada receptor entrega al compañero libre.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 40, "y": 60 },
+              { "tokenId": "jugador-2", "x": 38, "y": 40 },
+              { "tokenId": "jugador-3", "x": 60, "y": 40 },
+              { "tokenId": "jugador-4", "x": 60, "y": 60 }
+            ],
+            "ball": { "x": 60, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 60, "y": 40 },
+                "to": { "x": 60, "y": 60 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 60, "y": 60 },
+                "to": { "x": 40, "y": 60 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "circulacion-suave-y-movilidad",
+      "title": "Circulación suave y movilidad",
+      "summary": "Circulación lenta entre compañeros combinada con movilidad de tobillo, rodilla y cadera.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["benjamin"],
+      "objective": "Bajar la intensidad con circulación tranquila y movilidad articular guiada.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Círculo de cierre", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 30 },
+      "workStructure": "Bloques de 2 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Ritmo bajo",
+          "detail": "Los pases se ejecutan a ritmo lento y sin conducciones largas."
+        },
+        {
+          "rule": "Movilidad entre pases",
+          "detail": "Después de cada pase se realiza una movilidad de tobillo, rodilla o cadera."
+        }
+      ],
+      "coachingCues": [
+        "Mantener la espalda erguida durante la movilidad.",
+        "Recibir siempre con las dos piernas activas.",
+        "Cerrar la serie con una respiración profunda."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "circulacion-lenta",
+            "order": 1,
+            "title": "Circulación lenta",
+            "explanation": "El grupo hace circular el balón en un círculo amplio mientras activa tobillos y rodillas.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 32 },
+              { "tokenId": "jugador-2", "x": 63, "y": 37 },
+              { "tokenId": "jugador-3", "x": 68, "y": 50 },
+              { "tokenId": "jugador-4", "x": 63, "y": 63 },
+              { "tokenId": "jugador-5", "x": 50, "y": 68 },
+              { "tokenId": "jugador-6", "x": 37, "y": 63 },
+              { "tokenId": "jugador-7", "x": 32, "y": 50 },
+              { "tokenId": "jugador-8", "x": 37, "y": 37 }
+            ],
+            "ball": { "x": 50, "y": 32 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 63, "y": 37 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 63, "y": 37 },
+                "to": { "x": 68, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "movilidad-articular",
+            "order": 2,
+            "title": "Movilidad articular",
+            "explanation": "El círculo se reduce y el grupo intercala movilidad de cadera entre pases.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 37 },
+              { "tokenId": "jugador-2", "x": 59, "y": 41 },
+              { "tokenId": "jugador-3", "x": 63, "y": 50 },
+              { "tokenId": "jugador-4", "x": 59, "y": 59 },
+              { "tokenId": "jugador-5", "x": 50, "y": 63 },
+              { "tokenId": "jugador-6", "x": 41, "y": 59 },
+              { "tokenId": "jugador-7", "x": 37, "y": 50 },
+              { "tokenId": "jugador-8", "x": 41, "y": 41 }
+            ],
+            "ball": { "x": 59, "y": 59 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 59, "y": 59 },
+                "to": { "x": 50, "y": 63 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 63 },
+                "to": { "x": 41, "y": 59 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-5v1-activacion",
+      "title": "Rondo 5 contra 1 de activación",
+      "summary": "Rondo de activación con cinco jugadores por fuera y un defensor que entra al recuperar.",
+      "focus": "Rondo",
+      "sessionPart": "warm-up",
+      "categoryIds": ["alevin"],
+      "objective": "Activar el pase y el control orientado con superioridad y ritmo creciente.",
+      "players": { "total": 6, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 8,
+      "intensity": { "level": "low", "percent": 45 },
+      "workStructure": "Rondos de 90 segundos x 4 series",
+      "constraints": [
+        {
+          "rule": "Dos toques",
+          "detail": "Cada jugador dispone de dos toques para controlar y pasar."
+        },
+        {
+          "rule": "Cambio de defensor",
+          "detail": "El defensor que recupera el balón continúa dentro y el jugador que lo pierde pasa a defender."
+        }
+      ],
+      "coachingCues": [
+        "Recibir perfilado hacia el lado contrario de la presión.",
+        "Acompañar el pase con movimiento para abrir una nueva línea.",
+        "Aumentar el ritmo de forma progresiva sin perder el control."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 24, "y": 24 },
+          { "id": "rondo-arriba-derecha", "x": 76, "y": 24 },
+          { "id": "rondo-abajo-izquierda", "x": 24, "y": 76 },
+          { "id": "rondo-abajo-derecha", "x": 76, "y": 76 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-activacion",
+            "order": 1,
+            "title": "Rondo de activación",
+            "explanation": "Cinco jugadores activan el pase alrededor de un defensor que ajusta su posición.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 28 },
+              { "tokenId": "jugador-2", "x": 68, "y": 38 },
+              { "tokenId": "jugador-3", "x": 64, "y": 64 },
+              { "tokenId": "jugador-4", "x": 36, "y": 64 },
+              { "tokenId": "jugador-5", "x": 32, "y": 38 },
+              { "tokenId": "defensor-1", "x": 50, "y": 48 }
+            ],
+            "ball": { "x": 50, "y": 28 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 28 },
+                "to": { "x": 68, "y": 38 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 68, "y": 38 },
+                "to": { "x": 64, "y": 64 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 48 },
+                "to": { "x": 58, "y": 42 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "presion-defensor",
+            "order": 2,
+            "title": "Presión del defensor",
+            "explanation": "El defensor presiona el carril del balón y el grupo cambia de orientación.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 32, "y": 40 },
+              { "tokenId": "jugador-2", "x": 50, "y": 28 },
+              { "tokenId": "jugador-3", "x": 68, "y": 40 },
+              { "tokenId": "jugador-4", "x": 64, "y": 64 },
+              { "tokenId": "jugador-5", "x": 36, "y": 64 },
+              { "tokenId": "defensor-1", "x": 52, "y": 52 }
+            ],
+            "ball": { "x": 68, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 68, "y": 40 },
+                "to": { "x": 64, "y": 64 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 64, "y": 64 },
+                "to": { "x": 36, "y": 64 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 52, "y": 52 },
+                "to": { "x": 62, "y": 46 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "pase-y-control-en-movimiento",
+      "title": "Pase y control en movimiento",
+      "summary": "Pases entre dos cuadrados con control en movimiento y cambio de cuadrado tras la entrega.",
+      "focus": "Pase",
+      "sessionPart": "warm-up",
+      "categoryIds": ["alevin"],
+      "objective": "Recibir en movimiento y orientar el primer toque hacia el espacio libre.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Doble cuadrado", "widthM": 20, "lengthM": 20 },
+      "durationMinutes": 10,
+      "intensity": { "level": "medium", "percent": 55 },
+      "workStructure": "Bloques de 3 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Cambio de cuadrado",
+          "detail": "Tras cada pase el jugador cambia al cuadrado contrario."
+        },
+        {
+          "rule": "Control en movimiento",
+          "detail": "El control se realiza en carrera y nunca con el balón parado."
+        }
+      ],
+      "coachingCues": [
+        "Pedir el balón con el cuerpo orientado al espacio libre.",
+        "Controlar con el pie más alejado del defensor imaginario.",
+        "Ocupar el hueco que deja el compañero tras el cambio de cuadrado."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "pase-control",
+            "order": 1,
+            "title": "Pase y control",
+            "explanation": "Las parejas de cada cuadrado se pasan el balón mientras el resto se mueve al espacio.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 24, "y": 38 },
+              { "tokenId": "jugador-2", "x": 40, "y": 38 },
+              { "tokenId": "jugador-3", "x": 40, "y": 58 },
+              { "tokenId": "jugador-4", "x": 24, "y": 58 },
+              { "tokenId": "jugador-5", "x": 60, "y": 38 },
+              { "tokenId": "jugador-6", "x": 76, "y": 38 },
+              { "tokenId": "jugador-7", "x": 76, "y": 58 },
+              { "tokenId": "jugador-8", "x": 60, "y": 58 }
+            ],
+            "ball": { "x": 24, "y": 38 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 24, "y": 38 },
+                "to": { "x": 40, "y": 38 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 60, "y": 38 },
+                "to": { "x": 76, "y": 38 }
+              },
+              {
+                "id": "cambio-cuadrado",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 40, "y": 38 },
+                "to": { "x": 56, "y": 38 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "movimiento-espacio",
+            "order": 2,
+            "title": "Movimiento al espacio libre",
+            "explanation": "El balón cambia de cuadrado y los jugadores ocupan el espacio que queda libre.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 36, "y": 42 },
+              { "tokenId": "jugador-2", "x": 48, "y": 36 },
+              { "tokenId": "jugador-3", "x": 48, "y": 54 },
+              { "tokenId": "jugador-4", "x": 36, "y": 60 },
+              { "tokenId": "jugador-5", "x": 52, "y": 42 },
+              { "tokenId": "jugador-6", "x": 64, "y": 36 },
+              { "tokenId": "jugador-7", "x": 64, "y": 54 },
+              { "tokenId": "jugador-8", "x": 52, "y": 60 }
+            ],
+            "ball": { "x": 52, "y": 42 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 52, "y": 42 },
+                "to": { "x": 64, "y": 36 }
+              },
+              {
+                "id": "movimiento-libre",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 64, "y": 36 },
+                "to": { "x": 64, "y": 54 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 36, "y": 60 },
+                "to": { "x": 36, "y": 42 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "conservacion-suave-4v0",
+      "title": "Conservación suave 4 contra 0",
+      "summary": "Conservación sin oposición para cerrar el entrenamiento con pases tranquilos y cambios de orientación.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["alevin"],
+      "objective": "Terminar la sesión conservando el balón a ritmo bajo y con apoyos claros.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Rectángulo de cierre", "widthM": 15, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 30 },
+      "workStructure": "Bloques de 2 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Sin oposición",
+          "detail": "Los dos grupos conservan el balón sin defensor y a ritmo lento."
+        },
+        {
+          "rule": "Cambio de orientación",
+          "detail": "Cada cuatro pases el balón cambia de lado del rectángulo."
+        }
+      ],
+      "coachingCues": [
+        "Mantener los apoyos amplios para tener siempre dos líneas de pase.",
+        "Controlar el balón con la planta del pie antes de entregar.",
+        "Acompañar la respiración con el ritmo de la conservación."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "conservacion-tranquila",
+            "order": 1,
+            "title": "Conservación tranquila",
+            "explanation": "Los dos grupos de cuatro conservan el balón con pases cómodos y apoyos amplios.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 26, "y": 42 },
+              { "tokenId": "jugador-2", "x": 38, "y": 40 },
+              { "tokenId": "jugador-3", "x": 38, "y": 58 },
+              { "tokenId": "jugador-4", "x": 26, "y": 56 },
+              { "tokenId": "jugador-5", "x": 62, "y": 42 },
+              { "tokenId": "jugador-6", "x": 74, "y": 40 },
+              { "tokenId": "jugador-7", "x": 74, "y": 58 },
+              { "tokenId": "jugador-8", "x": 62, "y": 56 }
+            ],
+            "ball": { "x": 26, "y": 42 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 42 },
+                "to": { "x": 38, "y": 40 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 62, "y": 42 },
+                "to": { "x": 74, "y": 40 }
+              },
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 38, "y": 58 },
+                "to": { "x": 26, "y": 56 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 2,
+            "title": "Cambio de orientación suave",
+            "explanation": "El balón cruza el rectángulo y el grupo cambia de lado sin perder el ritmo lento.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 34, "y": 50 },
+              { "tokenId": "jugador-2", "x": 46, "y": 42 },
+              { "tokenId": "jugador-3", "x": 46, "y": 58 },
+              { "tokenId": "jugador-4", "x": 34, "y": 58 },
+              { "tokenId": "jugador-5", "x": 54, "y": 50 },
+              { "tokenId": "jugador-6", "x": 66, "y": 42 },
+              { "tokenId": "jugador-7", "x": 66, "y": 58 },
+              { "tokenId": "jugador-8", "x": 54, "y": 58 }
+            ],
+            "ball": { "x": 34, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 34, "y": 50 },
+                "to": { "x": 46, "y": 42 }
+              },
+              {
+                "id": "pase-5",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 46, "y": 42 },
+                "to": { "x": 54, "y": 50 }
+              },
+              {
+                "id": "pase-6",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 66, "y": 42 },
+                "to": { "x": 66, "y": 58 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-final-4v1",
+      "title": "Rondo final 4 contra 1",
+      "summary": "Rondo final de cuatro contra uno con ritmo bajo y cierre con estiramientos.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["alevin"],
+      "objective": "Cerrar la sesión con el balón en el pie y el grupo conectado.",
+      "players": { "total": 5, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 35 },
+      "workStructure": "Rondos de 60 segundos x 4 series",
+      "constraints": [
+        {
+          "rule": "Ritmo bajo",
+          "detail": "El rondo se juega a ritmo lento y sin presión intensa."
+        },
+        {
+          "rule": "Cierre con estiramiento",
+          "detail": "Tras cada serie el grupo realiza un estiramiento corto de piernas."
+        }
+      ],
+      "coachingCues": [
+        "Pasar con precisión y acompañar el movimiento.",
+        "Mantener el balón en el pie sin acelerar la acción.",
+        "Terminar con una respiración profunda y el grupo unido."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 34, "y": 34 },
+          { "id": "rondo-arriba-derecha", "x": 66, "y": 34 },
+          { "id": "rondo-abajo-izquierda", "x": 34, "y": 66 },
+          { "id": "rondo-abajo-derecha", "x": 66, "y": 66 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-final",
+            "order": 1,
+            "title": "Rondo final",
+            "explanation": "Cuatro jugadores cierran la sesión moviendo el balón con calma alrededor del defensor.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 32, "y": 50 },
+              { "tokenId": "jugador-2", "x": 50, "y": 32 },
+              { "tokenId": "jugador-3", "x": 68, "y": 50 },
+              { "tokenId": "jugador-4", "x": 50, "y": 68 },
+              { "tokenId": "defensor-1", "x": 50, "y": 50 }
+            ],
+            "ball": { "x": 32, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 32, "y": 50 },
+                "to": { "x": 50, "y": 32 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 68, "y": 50 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 50 },
+                "to": { "x": 42, "y": 44 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cierre-estiramiento",
+            "order": 2,
+            "title": "Cierre y estiramiento",
+            "explanation": "El grupo cambia de posición y cierra el rondo con un estiramiento suave.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 36 },
+              { "tokenId": "jugador-2", "x": 64, "y": 50 },
+              { "tokenId": "jugador-3", "x": 50, "y": 64 },
+              { "tokenId": "jugador-4", "x": 36, "y": 50 },
+              { "tokenId": "defensor-1", "x": 50, "y": 50 }
+            ],
+            "ball": { "x": 50, "y": 36 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 36 },
+                "to": { "x": 64, "y": 50 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 64, "y": 50 },
+                "to": { "x": 50, "y": 64 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 50 },
+                "to": { "x": 46, "y": 46 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-4v2-activacion",
+      "title": "Rondo 4 contra 2 de activación",
+      "summary": "Rondo de activación con cuatro jugadores por fuera y dos defensores que presionan juntos.",
+      "focus": "Rondo",
+      "sessionPart": "warm-up",
+      "categoryIds": ["cadete"],
+      "objective": "Activar la circulación con dos toques y el cambio de orientación ante dos defensores.",
+      "players": { "total": 6, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 12, "lengthM": 12 },
+      "durationMinutes": 10,
+      "intensity": { "level": "low", "percent": 50 },
+      "workStructure": "Rondos de 90 segundos x 5 series",
+      "constraints": [
+        {
+          "rule": "Dos toques",
+          "detail": "Cada jugador controla y pasa en un máximo de dos toques."
+        },
+        {
+          "rule": "Presión coordinada",
+          "detail": "Los dos defensores deben presionar juntos el mismo lado del cuadrado."
+        }
+      ],
+      "coachingCues": [
+        "Recibir con el cuerpo abierto para cambiar de orientación.",
+        "Buscar al compañero libre cuando los defensores se juntan.",
+        "Aumentar el ritmo sin perder la precisión del pase."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 22, "y": 22 },
+          { "id": "rondo-arriba-derecha", "x": 78, "y": 22 },
+          { "id": "rondo-abajo-izquierda", "x": 22, "y": 78 },
+          { "id": "rondo-abajo-derecha", "x": 78, "y": 78 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-dos-defensores",
+            "order": 1,
+            "title": "Rondo con dos defensores",
+            "explanation": "Cuatro jugadores circulan el balón mientras dos defensores presionan juntos.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 30, "y": 50 },
+              { "tokenId": "jugador-2", "x": 50, "y": 30 },
+              { "tokenId": "jugador-3", "x": 70, "y": 50 },
+              { "tokenId": "jugador-4", "x": 50, "y": 70 },
+              { "tokenId": "defensor-1", "x": 44, "y": 44 },
+              { "tokenId": "defensor-2", "x": 56, "y": 56 }
+            ],
+            "ball": { "x": 30, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 50 },
+                "to": { "x": 50, "y": 30 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 30 },
+                "to": { "x": 70, "y": 50 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 44, "y": 44 },
+                "to": { "x": 44, "y": 48 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 2,
+            "title": "Cambio de orientación",
+            "explanation": "El balón cambia de lado y los defensores reajustan su presión.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 34, "y": 44 },
+              { "tokenId": "jugador-2", "x": 54, "y": 30 },
+              { "tokenId": "jugador-3", "x": 68, "y": 52 },
+              { "tokenId": "jugador-4", "x": 48, "y": 68 },
+              { "tokenId": "defensor-1", "x": 46, "y": 44 },
+              { "tokenId": "defensor-2", "x": 56, "y": 54 }
+            ],
+            "ball": { "x": 54, "y": 30 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 54, "y": 30 },
+                "to": { "x": 68, "y": 52 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 68, "y": 52 },
+                "to": { "x": 48, "y": 68 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 44, "y": 44 },
+                "to": { "x": 52, "y": 38 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "movilidad-y-pases-largos",
+      "title": "Movilidad y pases largos",
+      "summary": "Activación con movilidad articular y pases largos entre parejas a lo ancho de la pista.",
+      "focus": "Activación",
+      "sessionPart": "warm-up",
+      "categoryIds": ["cadete"],
+      "objective": "Preparar tobillos, cadera y hombro mientras se ajusta la precisión del pase largo.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Franja de activación", "widthM": 20, "lengthM": 10 },
+      "durationMinutes": 8,
+      "intensity": { "level": "low", "percent": 45 },
+      "workStructure": "Bloques de 2 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Movilidad previa",
+          "detail": "Antes de cada pase largo la pareja realiza la movilidad indicada."
+        },
+        {
+          "rule": "Pase con el interior",
+          "detail": "El pase largo se ejecuta con el interior del pie y con el balón raso."
+        }
+      ],
+      "coachingCues": [
+        "Preparar el tobillo antes de golpear el balón.",
+        "Acompañar el pase con la cadera y el hombro.",
+        "Controlar el balón con la planta antes de devolverlo."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "movilidad",
+            "order": 1,
+            "title": "Movilidad articular",
+            "explanation": "Las parejas activan tobillo, cadera y hombro antes de empezar los pases largos.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 26, "y": 36 },
+              { "tokenId": "jugador-2", "x": 26, "y": 64 },
+              { "tokenId": "jugador-3", "x": 42, "y": 36 },
+              { "tokenId": "jugador-4", "x": 42, "y": 64 },
+              { "tokenId": "jugador-5", "x": 58, "y": 36 },
+              { "tokenId": "jugador-6", "x": 58, "y": 64 },
+              { "tokenId": "jugador-7", "x": 74, "y": 36 },
+              { "tokenId": "jugador-8", "x": 74, "y": 64 }
+            ],
+            "ball": { "x": 26, "y": 36 },
+            "arrows": [
+              {
+                "id": "movilidad-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 26, "y": 36 },
+                "to": { "x": 26, "y": 44 }
+              },
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 44 },
+                "to": { "x": 26, "y": 56 }
+              },
+              {
+                "id": "movilidad-2",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 26, "y": 64 },
+                "to": { "x": 26, "y": 56 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "pase-largo",
+            "order": 2,
+            "title": "Pase largo y control",
+            "explanation": "Las parejas ajustan el pase largo y controlan el balón con la planta del pie.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 30, "y": 40 },
+              { "tokenId": "jugador-2", "x": 30, "y": 60 },
+              { "tokenId": "jugador-3", "x": 46, "y": 40 },
+              { "tokenId": "jugador-4", "x": 46, "y": 60 },
+              { "tokenId": "jugador-5", "x": 62, "y": 40 },
+              { "tokenId": "jugador-6", "x": 62, "y": 60 },
+              { "tokenId": "jugador-7", "x": 78, "y": 40 },
+              { "tokenId": "jugador-8", "x": 78, "y": 60 }
+            ],
+            "ball": { "x": 30, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-largo-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 40 },
+                "to": { "x": 46, "y": 60 }
+              },
+              {
+                "id": "pase-largo-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 46, "y": 40 },
+                "to": { "x": 62, "y": 60 }
+              },
+              {
+                "id": "control-largo",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 62, "y": 40 },
+                "to": { "x": 62, "y": 60 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "conservacion-5v2-baja-intensidad",
+      "title": "Conservación 5 contra 2 a baja intensidad",
+      "summary": "Conservación tranquila en superioridad para cerrar la sesión con el balón controlado.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["cadete"],
+      "objective": "Bajar el ritmo conservando el balón y manteniendo los apoyos del 5 contra 2.",
+      "players": { "total": 7, "goalkeepers": 0 },
+      "space": { "label": "Rectángulo de cierre", "widthM": 20, "lengthM": 15 },
+      "durationMinutes": 8,
+      "intensity": { "level": "low", "percent": 40 },
+      "workStructure": "Bloques de 3 minutos x 2 series",
+      "constraints": [
+        {
+          "rule": "Ritmo bajo",
+          "detail": "La conservación se juega sin acelerar y con pases de seguridad."
+        },
+        {
+          "rule": "Apoyos constantes",
+          "detail": "El equipo debe mantener siempre un apoyo por delante y otro por detrás del balón."
+        }
+      ],
+      "coachingCues": [
+        "Mantener el balón cerca del pie y la cabeza levantada.",
+        "Ocupar los apoyos laterales para no quedar en inferioridad.",
+        "Cambiar de lado con un pase raso y seguro."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "local-1", "kind": "player", "team": "home", "label": "L1" },
+          { "id": "local-2", "kind": "player", "team": "home", "label": "L2" },
+          { "id": "local-3", "kind": "player", "team": "home", "label": "L3" },
+          { "id": "local-4", "kind": "player", "team": "home", "label": "L4" },
+          { "id": "local-5", "kind": "player", "team": "home", "label": "L5" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "conservacion-tranquila",
+            "order": 1,
+            "title": "Conservación sin presión",
+            "explanation": "Cinco jugadores conservan el balón a ritmo bajo ante dos defensores que ajustan su posición.",
+            "positions": [
+              { "tokenId": "local-1", "x": 26, "y": 40 },
+              { "tokenId": "local-2", "x": 40, "y": 32 },
+              { "tokenId": "local-3", "x": 54, "y": 42 },
+              { "tokenId": "local-4", "x": 44, "y": 60 },
+              { "tokenId": "local-5", "x": 28, "y": 58 },
+              { "tokenId": "rival-1", "x": 42, "y": 46 },
+              { "tokenId": "rival-2", "x": 50, "y": 54 }
+            ],
+            "ball": { "x": 26, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 40 },
+                "to": { "x": 40, "y": 32 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 40, "y": 32 },
+                "to": { "x": 54, "y": 42 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 42, "y": 46 },
+                "to": { "x": 44, "y": 38 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-lado",
+            "order": 2,
+            "title": "Cambio de lado",
+            "explanation": "El balón cambia de lado del rectángulo y los apoyos acompañan la nueva orientación.",
+            "positions": [
+              { "tokenId": "local-1", "x": 68, "y": 44 },
+              { "tokenId": "local-2", "x": 56, "y": 34 },
+              { "tokenId": "local-3", "x": 42, "y": 40 },
+              { "tokenId": "local-4", "x": 52, "y": 60 },
+              { "tokenId": "local-5", "x": 70, "y": 58 },
+              { "tokenId": "rival-1", "x": 50, "y": 46 },
+              { "tokenId": "rival-2", "x": 58, "y": 52 }
+            ],
+            "ball": { "x": 68, "y": 44 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 68, "y": 44 },
+                "to": { "x": 70, "y": 58 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 70, "y": 58 },
+                "to": { "x": 52, "y": 60 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 58, "y": 52 },
+                "to": { "x": 62, "y": 50 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "estiramientos-guiados-con-balon",
+      "title": "Estiramientos guiados con balón",
+      "summary": "Estiramientos guiados con el balón en el pie para cerrar la sesión y recuperar la calma.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["cadete"],
+      "objective": "Relajar piernas y tronco con estiramientos suaves y respiración controlada.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Círculo de cierre", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 20 },
+      "workStructure": "Bloques de 2 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Estiramiento suave",
+          "detail": "Cada estiramiento se mantiene durante veinte segundos sin rebotes."
+        },
+        {
+          "rule": "Balón en el pie",
+          "detail": "El balón permanece apoyado en el pie durante toda la movilidad."
+        }
+      ],
+      "coachingCues": [
+        "Respirar de forma pausada mientras se mantiene el estiramiento.",
+        "Relajar los hombros y mantener la espalda erguida.",
+        "No forzar la articulación en ningún momento."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "estiramiento-balon",
+            "order": 1,
+            "title": "Estiramiento con balón",
+            "explanation": "El grupo estira piernas y tronco con el balón apoyado en el pie.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 32 },
+              { "tokenId": "jugador-2", "x": 63, "y": 37 },
+              { "tokenId": "jugador-3", "x": 68, "y": 50 },
+              { "tokenId": "jugador-4", "x": 63, "y": 63 },
+              { "tokenId": "jugador-5", "x": 50, "y": 68 },
+              { "tokenId": "jugador-6", "x": 37, "y": 63 },
+              { "tokenId": "jugador-7", "x": 32, "y": 50 },
+              { "tokenId": "jugador-8", "x": 37, "y": 37 }
+            ],
+            "ball": { "x": 50, "y": 32 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 63, "y": 37 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 63, "y": 37 },
+                "to": { "x": 68, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "respiracion-cierre",
+            "order": 2,
+            "title": "Respiración y cierre",
+            "explanation": "El círculo se cierra y el grupo combina respiración profunda con movilidad suave.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 37 },
+              { "tokenId": "jugador-2", "x": 59, "y": 41 },
+              { "tokenId": "jugador-3", "x": 63, "y": 50 },
+              { "tokenId": "jugador-4", "x": 59, "y": 59 },
+              { "tokenId": "jugador-5", "x": 50, "y": 63 },
+              { "tokenId": "jugador-6", "x": 41, "y": 59 },
+              { "tokenId": "jugador-7", "x": 37, "y": 50 },
+              { "tokenId": "jugador-8", "x": 41, "y": 41 }
+            ],
+            "ball": { "x": 50, "y": 63 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 63 },
+                "to": { "x": 41, "y": 59 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 41, "y": 59 },
+                "to": { "x": 37, "y": 50 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-4v2-con-salida",
+      "title": "Rondo 4 contra 2 con salida",
+      "summary": "Rondo de activación que termina en salida al espacio libre cuando se supera a los dos defensores.",
+      "focus": "Rondo",
+      "sessionPart": "warm-up",
+      "categoryIds": ["juvenil"],
+      "objective": "Activar la circulación con dos toques y reconocer el momento de salir del cuadrado.",
+      "players": { "total": 6, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 12, "lengthM": 12 },
+      "durationMinutes": 10,
+      "intensity": { "level": "low", "percent": 50 },
+      "workStructure": "Rondos de 90 segundos x 5 series",
+      "constraints": [
+        {
+          "rule": "Salida tras superar",
+          "detail": "El balón solo puede salir del cuadrado cuando se ha superado a los dos defensores."
+        },
+        {
+          "rule": "Dos toques",
+          "detail": "Cada jugador controla y pasa en un máximo de dos toques."
+        }
+      ],
+      "coachingCues": [
+        "Reconocer el momento en que los defensores quedan superados.",
+        "Salir con el primer toque hacia el espacio libre.",
+        "Acompañar la salida con un desmarque de apoyo."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 22, "y": 22 },
+          { "id": "rondo-arriba-derecha", "x": 78, "y": 22 },
+          { "id": "rondo-abajo-izquierda", "x": 22, "y": 78 },
+          { "id": "rondo-abajo-derecha", "x": 78, "y": 78 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-activacion",
+            "order": 1,
+            "title": "Rondo de activación",
+            "explanation": "Cuatro jugadores activan la circulación ante dos defensores que presionan juntos.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 30, "y": 50 },
+              { "tokenId": "jugador-2", "x": 50, "y": 30 },
+              { "tokenId": "jugador-3", "x": 70, "y": 50 },
+              { "tokenId": "jugador-4", "x": 50, "y": 70 },
+              { "tokenId": "defensor-1", "x": 44, "y": 44 },
+              { "tokenId": "defensor-2", "x": 56, "y": 56 }
+            ],
+            "ball": { "x": 30, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 50 },
+                "to": { "x": 50, "y": 30 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 30 },
+                "to": { "x": 70, "y": 50 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 44, "y": 44 },
+                "to": { "x": 44, "y": 46 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "salida-cuadrado",
+            "order": 2,
+            "title": "Salida del cuadrado",
+            "explanation": "El balón sale del cuadrado cuando los dos defensores quedan superados.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 34, "y": 46 },
+              { "tokenId": "jugador-2", "x": 56, "y": 34 },
+              { "tokenId": "jugador-3", "x": 72, "y": 50 },
+              { "tokenId": "jugador-4", "x": 54, "y": 68 },
+              { "tokenId": "defensor-1", "x": 48, "y": 44 },
+              { "tokenId": "defensor-2", "x": 58, "y": 56 }
+            ],
+            "ball": { "x": 56, "y": 34 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 56, "y": 34 },
+                "to": { "x": 72, "y": 50 }
+              },
+              {
+                "id": "salida-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 72, "y": 50 },
+                "to": { "x": 80, "y": 54 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 58, "y": 56 },
+                "to": { "x": 64, "y": 44 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "progresion-espacio",
+            "order": 3,
+            "title": "Progresión al espacio libre",
+            "explanation": "El jugador que recibe fuera del cuadrado conduce hacia el espacio libre.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 38, "y": 46 },
+              { "tokenId": "jugador-2", "x": 62, "y": 38 },
+              { "tokenId": "jugador-3", "x": 82, "y": 54 },
+              { "tokenId": "jugador-4", "x": 58, "y": 66 },
+              { "tokenId": "defensor-1", "x": 52, "y": 44 },
+              { "tokenId": "defensor-2", "x": 64, "y": 54 }
+            ],
+            "ball": { "x": 82, "y": 54 },
+            "arrows": [
+              {
+                "id": "conduccion-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 82, "y": 54 },
+                "to": { "x": 90, "y": 58 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 62, "y": 38 },
+                "to": { "x": 82, "y": 54 }
+              },
+              {
+                "id": "presion-3",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 64, "y": 54 },
+                "to": { "x": 70, "y": 58 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "activacion-con-duelos-1v1",
+      "title": "Activación con duelos 1 contra 1",
+      "summary": "Duelos 1 contra 1 en franjas cortas para activar el cuerpo y la conducción a la línea.",
+      "focus": "Activación",
+      "sessionPart": "warm-up",
+      "categoryIds": ["juvenil"],
+      "objective": "Activar el cuerpo con duelos cortos y ganar la línea de conducción con el primer apoyo.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Franja de duelos", "widthM": 20, "lengthM": 15 },
+      "durationMinutes": 10,
+      "intensity": { "level": "medium", "percent": 60 },
+      "workStructure": "Series de 45 segundos x 6 repeticiones",
+      "constraints": [
+        {
+          "rule": "Duelo sin contacto",
+          "detail": "El defensor debe robar el balón con el pie y sin contacto físico."
+        },
+        {
+          "rule": "Línea de conducción",
+          "detail": "El atacante gana el duelo cuando supera la línea marcada por los conos."
+        }
+      ],
+      "coachingCues": [
+        "Ganar la primera línea con el primer apoyo.",
+        "Proteger el balón con el cuerpo antes de conducir.",
+        "Acelerar en el último paso para superar al defensor."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "local-1", "kind": "player", "team": "home", "label": "L1" },
+          { "id": "local-2", "kind": "player", "team": "home", "label": "L2" },
+          { "id": "local-3", "kind": "player", "team": "home", "label": "L3" },
+          { "id": "local-4", "kind": "player", "team": "home", "label": "L4" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" },
+          { "id": "rival-3", "kind": "player", "team": "away", "label": "R3" },
+          { "id": "rival-4", "kind": "player", "team": "away", "label": "R4" }
+        ],
+        "cones": [
+          { "id": "linea-1", "x": 58, "y": 24 },
+          { "id": "linea-2", "x": 58, "y": 40 },
+          { "id": "linea-3", "x": 58, "y": 56 },
+          { "id": "linea-4", "x": 58, "y": 72 }
+        ],
+        "phases": [
+          {
+            "id": "duelo-balon",
+            "order": 1,
+            "title": "Duelo por el balón",
+            "explanation": "Cada pareja disputa un duelo corto por el balón en su franja de trabajo.",
+            "positions": [
+              { "tokenId": "local-1", "x": 28, "y": 30 },
+              { "tokenId": "local-2", "x": 28, "y": 46 },
+              { "tokenId": "local-3", "x": 28, "y": 62 },
+              { "tokenId": "local-4", "x": 28, "y": 78 },
+              { "tokenId": "rival-1", "x": 34, "y": 30 },
+              { "tokenId": "rival-2", "x": 34, "y": 46 },
+              { "tokenId": "rival-3", "x": 34, "y": 62 },
+              { "tokenId": "rival-4", "x": 34, "y": 78 }
+            ],
+            "ball": { "x": 28, "y": 30 },
+            "arrows": [
+              {
+                "id": "duelo-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 28, "y": 30 },
+                "to": { "x": 40, "y": 30 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 34, "y": 30 },
+                "to": { "x": 38, "y": 30 }
+              },
+              {
+                "id": "duelo-2",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 28, "y": 46 },
+                "to": { "x": 40, "y": 46 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "conduccion-linea",
+            "order": 2,
+            "title": "Conducción a la línea",
+            "explanation": "El atacante conduce el balón hasta la línea marcada mientras el defensor persigue.",
+            "positions": [
+              { "tokenId": "local-1", "x": 44, "y": 30 },
+              { "tokenId": "local-2", "x": 44, "y": 46 },
+              { "tokenId": "local-3", "x": 44, "y": 62 },
+              { "tokenId": "local-4", "x": 44, "y": 78 },
+              { "tokenId": "rival-1", "x": 40, "y": 30 },
+              { "tokenId": "rival-2", "x": 40, "y": 46 },
+              { "tokenId": "rival-3", "x": 40, "y": 62 },
+              { "tokenId": "rival-4", "x": 40, "y": 78 }
+            ],
+            "ball": { "x": 44, "y": 30 },
+            "arrows": [
+              {
+                "id": "conduccion-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 44, "y": 30 },
+                "to": { "x": 60, "y": 30 }
+              },
+              {
+                "id": "conduccion-2",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 44, "y": 46 },
+                "to": { "x": 60, "y": 46 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 40, "y": 46 },
+                "to": { "x": 48, "y": 46 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "conservacion-6v3-baja-intensidad",
+      "title": "Conservación 6 contra 3 a baja intensidad",
+      "summary": "Conservación en superioridad a ritmo bajo para cerrar la sesión con el grupo junto.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["juvenil"],
+      "objective": "Bajar la intensidad conservando el balón y cambiando de orientación sin riesgo.",
+      "players": { "total": 9, "goalkeepers": 0 },
+      "space": { "label": "Rectángulo de cierre", "widthM": 20, "lengthM": 15 },
+      "durationMinutes": 8,
+      "intensity": { "level": "low", "percent": 40 },
+      "workStructure": "Bloques de 3 minutos x 2 series",
+      "constraints": [
+        {
+          "rule": "Sin presión alta",
+          "detail": "Los defensores no pueden presionar por encima de la línea media del rectángulo."
+        },
+        {
+          "rule": "Pases seguros",
+          "detail": "El balón se mueve siempre a ras de suelo y con pases de seguridad."
+        }
+      ],
+      "coachingCues": [
+        "Mantener el balón en el lado contrario a la presión.",
+        "Ocupar los apoyos amplios para conservar la posesión.",
+        "Cambiar de orientación sin arriesgar el pase."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "local-1", "kind": "player", "team": "home", "label": "L1" },
+          { "id": "local-2", "kind": "player", "team": "home", "label": "L2" },
+          { "id": "local-3", "kind": "player", "team": "home", "label": "L3" },
+          { "id": "local-4", "kind": "player", "team": "home", "label": "L4" },
+          { "id": "local-5", "kind": "player", "team": "home", "label": "L5" },
+          { "id": "local-6", "kind": "player", "team": "home", "label": "L6" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" },
+          { "id": "rival-3", "kind": "player", "team": "away", "label": "R3" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "conservacion-tranquila",
+            "order": 1,
+            "title": "Conservación tranquila",
+            "explanation": "Seis jugadores conservan el balón a ritmo bajo ante tres defensores que esperan.",
+            "positions": [
+              { "tokenId": "local-1", "x": 26, "y": 40 },
+              { "tokenId": "local-2", "x": 38, "y": 30 },
+              { "tokenId": "local-3", "x": 54, "y": 32 },
+              { "tokenId": "local-4", "x": 62, "y": 46 },
+              { "tokenId": "local-5", "x": 50, "y": 62 },
+              { "tokenId": "local-6", "x": 28, "y": 58 },
+              { "tokenId": "rival-1", "x": 42, "y": 44 },
+              { "tokenId": "rival-2", "x": 52, "y": 50 },
+              { "tokenId": "rival-3", "x": 46, "y": 60 }
+            ],
+            "ball": { "x": 26, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 40 },
+                "to": { "x": 38, "y": 30 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 38, "y": 30 },
+                "to": { "x": 54, "y": 32 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 42, "y": 44 },
+                "to": { "x": 44, "y": 36 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 2,
+            "title": "Cambio de orientación",
+            "explanation": "El balón cruza el rectángulo y el equipo cambia de orientación a ritmo bajo.",
+            "positions": [
+              { "tokenId": "local-1", "x": 70, "y": 44 },
+              { "tokenId": "local-2", "x": 60, "y": 32 },
+              { "tokenId": "local-3", "x": 44, "y": 34 },
+              { "tokenId": "local-4", "x": 34, "y": 48 },
+              { "tokenId": "local-5", "x": 46, "y": 62 },
+              { "tokenId": "local-6", "x": 68, "y": 58 },
+              { "tokenId": "rival-1", "x": 50, "y": 42 },
+              { "tokenId": "rival-2", "x": 54, "y": 54 },
+              { "tokenId": "rival-3", "x": 60, "y": 46 }
+            ],
+            "ball": { "x": 70, "y": 44 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 70, "y": 44 },
+                "to": { "x": 68, "y": 58 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 68, "y": 58 },
+                "to": { "x": 46, "y": 62 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 54, "y": 54 },
+                "to": { "x": 60, "y": 50 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-final-y-movilidad",
+      "title": "Rondo final y movilidad",
+      "summary": "Rondo final de baja intensidad combinado con movilidad y respiración para cerrar la sesión.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["juvenil"],
+      "objective": "Cerrar con el balón en el pie y recuperar la movilidad de tobillo y cadera.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Círculo de cierre", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 25 },
+      "workStructure": "Bloques de 2 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Ritmo bajo",
+          "detail": "El rondo se juega a ritmo lento y sin defensores."
+        },
+        {
+          "rule": "Movilidad al cerrar",
+          "detail": "La última serie se dedica a movilidad de tobillo y cadera."
+        }
+      ],
+      "coachingCues": [
+        "Controlar el balón con la planta del pie.",
+        "Acompañar cada pase con una respiración pausada.",
+        "Cerrar con movilidad suave y el grupo conectado."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "rondo-final",
+            "order": 1,
+            "title": "Rondo final",
+            "explanation": "El grupo mueve el balón en círculo a ritmo bajo para cerrar la sesión.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 32 },
+              { "tokenId": "jugador-2", "x": 63, "y": 37 },
+              { "tokenId": "jugador-3", "x": 68, "y": 50 },
+              { "tokenId": "jugador-4", "x": 63, "y": 63 },
+              { "tokenId": "jugador-5", "x": 50, "y": 68 },
+              { "tokenId": "jugador-6", "x": 37, "y": 63 },
+              { "tokenId": "jugador-7", "x": 32, "y": 50 },
+              { "tokenId": "jugador-8", "x": 37, "y": 37 }
+            ],
+            "ball": { "x": 50, "y": 32 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 63, "y": 37 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 63, "y": 37 },
+                "to": { "x": 68, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "movilidad-respiracion",
+            "order": 2,
+            "title": "Movilidad y respiración",
+            "explanation": "El círculo se cierra y el grupo combina movilidad de tobillo y cadera con respiración.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 37 },
+              { "tokenId": "jugador-2", "x": 59, "y": 41 },
+              { "tokenId": "jugador-3", "x": 63, "y": 50 },
+              { "tokenId": "jugador-4", "x": 59, "y": 59 },
+              { "tokenId": "jugador-5", "x": 50, "y": 63 },
+              { "tokenId": "jugador-6", "x": 41, "y": 59 },
+              { "tokenId": "jugador-7", "x": 37, "y": 50 },
+              { "tokenId": "jugador-8", "x": 41, "y": 41 }
+            ],
+            "ball": { "x": 59, "y": 59 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 59, "y": 59 },
+                "to": { "x": 50, "y": 63 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 63 },
+                "to": { "x": 41, "y": 59 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "rondo-5v2-activacion",
+      "title": "Rondo 5 contra 2 de activación",
+      "summary": "Rondo de activación con cinco por fuera y dos defensores que ajustan la presión.",
+      "focus": "Rondo",
+      "sessionPart": "warm-up",
+      "categoryIds": ["senior"],
+      "objective": "Activar la circulación con dos toques y el cambio de orientación bajo presión.",
+      "players": { "total": 7, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 14, "lengthM": 14 },
+      "durationMinutes": 10,
+      "intensity": { "level": "low", "percent": 50 },
+      "workStructure": "Rondos de 90 segundos x 5 series",
+      "constraints": [
+        {
+          "rule": "Dos toques",
+          "detail": "Cada jugador controla y pasa en un máximo de dos toques."
+        },
+        {
+          "rule": "Presión de los dos defensores",
+          "detail": "Los dos defensores presionan juntos y cambian de lado al mismo tiempo."
+        }
+      ],
+      "coachingCues": [
+        "Recibir con el cuerpo orientado al lado libre.",
+        "Fijar a un defensor antes de cambiar de orientación.",
+        "Salir al espacio libre cuando el cuadrado queda superado."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" }
+        ],
+        "cones": [
+          { "id": "rondo-arriba-izquierda", "x": 20, "y": 20 },
+          { "id": "rondo-arriba-derecha", "x": 80, "y": 20 },
+          { "id": "rondo-abajo-izquierda", "x": 20, "y": 80 },
+          { "id": "rondo-abajo-derecha", "x": 80, "y": 80 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-defensores",
+            "order": 1,
+            "title": "Rondo con dos defensores",
+            "explanation": "Cinco jugadores activan la circulación ante dos defensores que presionan juntos.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 26 },
+              { "tokenId": "jugador-2", "x": 72, "y": 38 },
+              { "tokenId": "jugador-3", "x": 66, "y": 66 },
+              { "tokenId": "jugador-4", "x": 36, "y": 66 },
+              { "tokenId": "jugador-5", "x": 28, "y": 38 },
+              { "tokenId": "defensor-1", "x": 46, "y": 46 },
+              { "tokenId": "defensor-2", "x": 56, "y": 54 }
+            ],
+            "ball": { "x": 50, "y": 26 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 26 },
+                "to": { "x": 72, "y": 38 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 72, "y": 38 },
+                "to": { "x": 66, "y": 66 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 46, "y": 46 },
+                "to": { "x": 58, "y": 40 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 2,
+            "title": "Cambio de orientación",
+            "explanation": "El balón cambia de lado y los defensores reajustan la presión.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 30, "y": 42 },
+              { "tokenId": "jugador-2", "x": 50, "y": 26 },
+              { "tokenId": "jugador-3", "x": 70, "y": 44 },
+              { "tokenId": "jugador-4", "x": 64, "y": 66 },
+              { "tokenId": "jugador-5", "x": 36, "y": 66 },
+              { "tokenId": "defensor-1", "x": 48, "y": 44 },
+              { "tokenId": "defensor-2", "x": 56, "y": 54 }
+            ],
+            "ball": { "x": 70, "y": 44 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 70, "y": 44 },
+                "to": { "x": 64, "y": 66 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 64, "y": 66 },
+                "to": { "x": 36, "y": 64 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 56, "y": 54 },
+                "to": { "x": 48, "y": 44 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "salida-espacio",
+            "order": 3,
+            "title": "Salida al espacio libre",
+            "explanation": "El equipo sale del cuadrado hacia el espacio libre tras superar la presión.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 34, "y": 44 },
+              { "tokenId": "jugador-2", "x": 52, "y": 32 },
+              { "tokenId": "jugador-3", "x": 76, "y": 44 },
+              { "tokenId": "jugador-4", "x": 68, "y": 64 },
+              { "tokenId": "jugador-5", "x": 46, "y": 68 },
+              { "tokenId": "defensor-1", "x": 54, "y": 46 },
+              { "tokenId": "defensor-2", "x": 62, "y": 54 }
+            ],
+            "ball": { "x": 76, "y": 44 },
+            "arrows": [
+              {
+                "id": "pase-5",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 52, "y": 32 },
+                "to": { "x": 76, "y": 44 }
+              },
+              {
+                "id": "salida-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 76, "y": 44 },
+                "to": { "x": 86, "y": 50 }
+              },
+              {
+                "id": "presion-3",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 62, "y": 54 },
+                "to": { "x": 70, "y": 58 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "activacion-con-movilidad-y-pases",
+      "title": "Activación con movilidad y pases",
+      "summary": "Activación articular combinada con pases y control orientado a ritmo progresivo.",
+      "focus": "Activación",
+      "sessionPart": "warm-up",
+      "categoryIds": ["senior"],
+      "objective": "Preparar el cuerpo y ajustar el control orientado antes de la parte general.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Franja de activación", "widthM": 20, "lengthM": 15 },
+      "durationMinutes": 10,
+      "intensity": { "level": "low", "percent": 45 },
+      "workStructure": "Bloques de 2 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Movilidad inicial",
+          "detail": "Cada bloque empieza con movilidad articular guiada."
+        },
+        {
+          "rule": "Control orientado",
+          "detail": "El primer toque debe orientar el cuerpo hacia el compañero."
+        }
+      ],
+      "coachingCues": [
+        "Activar tobillos y cadera antes de golpear el balón.",
+        "Recibir con el pie más alejado del balón.",
+        "Aumentar el ritmo de forma progresiva."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "movilidad",
+            "order": 1,
+            "title": "Movilidad articular",
+            "explanation": "El grupo activa tobillos, rodillas y cadera en dos líneas antes de empezar los pases.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 26, "y": 40 },
+              { "tokenId": "jugador-2", "x": 40, "y": 40 },
+              { "tokenId": "jugador-3", "x": 54, "y": 40 },
+              { "tokenId": "jugador-4", "x": 68, "y": 40 },
+              { "tokenId": "jugador-5", "x": 26, "y": 60 },
+              { "tokenId": "jugador-6", "x": 40, "y": 60 },
+              { "tokenId": "jugador-7", "x": 54, "y": 60 },
+              { "tokenId": "jugador-8", "x": 68, "y": 60 }
+            ],
+            "ball": { "x": 26, "y": 40 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 40 },
+                "to": { "x": 40, "y": 40 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 60 },
+                "to": { "x": 40, "y": 60 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "pases-control",
+            "order": 2,
+            "title": "Pases y control orientado",
+            "explanation": "El grupo combina pases diagonales y control orientado con el cuerpo abierto.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 30, "y": 36 },
+              { "tokenId": "jugador-2", "x": 44, "y": 44 },
+              { "tokenId": "jugador-3", "x": 58, "y": 36 },
+              { "tokenId": "jugador-4", "x": 72, "y": 44 },
+              { "tokenId": "jugador-5", "x": 30, "y": 64 },
+              { "tokenId": "jugador-6", "x": 44, "y": 56 },
+              { "tokenId": "jugador-7", "x": 58, "y": 64 },
+              { "tokenId": "jugador-8", "x": 72, "y": 56 }
+            ],
+            "ball": { "x": 30, "y": 36 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 36 },
+                "to": { "x": 44, "y": 56 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 44, "y": 56 },
+                "to": { "x": 58, "y": 36 }
+              },
+              {
+                "id": "control-1",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 58, "y": 36 },
+                "to": { "x": 72, "y": 44 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "conservacion-6v2-baja-intensidad",
+      "title": "Conservación 6 contra 2 a baja intensidad",
+      "summary": "Conservación sin presión alta para cerrar la sesión con pases seguros y cambios de lado.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["senior"],
+      "objective": "Recuperar la calma conservando el balón a ritmo bajo y con apoyos amplios.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Rectángulo de cierre", "widthM": 20, "lengthM": 15 },
+      "durationMinutes": 8,
+      "intensity": { "level": "low", "percent": 40 },
+      "workStructure": "Bloques de 3 minutos x 2 series",
+      "constraints": [
+        {
+          "rule": "Sin presión alta",
+          "detail": "Los dos defensores esperan en la zona central y no presionan por encima de la línea media."
+        },
+        {
+          "rule": "Pases seguros",
+          "detail": "El balón se mueve a ras de suelo y con pases de seguridad."
+        }
+      ],
+      "coachingCues": [
+        "Mantener los apoyos amplios para conservar el balón.",
+        "Cambiar de lado cuando el centro se cierra.",
+        "Acompañar la conservación con respiración tranquila."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "local-1", "kind": "player", "team": "home", "label": "L1" },
+          { "id": "local-2", "kind": "player", "team": "home", "label": "L2" },
+          { "id": "local-3", "kind": "player", "team": "home", "label": "L3" },
+          { "id": "local-4", "kind": "player", "team": "home", "label": "L4" },
+          { "id": "local-5", "kind": "player", "team": "home", "label": "L5" },
+          { "id": "local-6", "kind": "player", "team": "home", "label": "L6" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "conservacion-sin-presion",
+            "order": 1,
+            "title": "Conservación sin presión",
+            "explanation": "Seis jugadores conservan el balón con apoyos amplios ante dos defensores que esperan.",
+            "positions": [
+              { "tokenId": "local-1", "x": 26, "y": 42 },
+              { "tokenId": "local-2", "x": 38, "y": 32 },
+              { "tokenId": "local-3", "x": 54, "y": 34 },
+              { "tokenId": "local-4", "x": 62, "y": 50 },
+              { "tokenId": "local-5", "x": 48, "y": 62 },
+              { "tokenId": "local-6", "x": 30, "y": 58 },
+              { "tokenId": "rival-1", "x": 44, "y": 46 },
+              { "tokenId": "rival-2", "x": 54, "y": 52 }
+            ],
+            "ball": { "x": 26, "y": 42 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 26, "y": 42 },
+                "to": { "x": 38, "y": 32 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 38, "y": 32 },
+                "to": { "x": 54, "y": 34 }
+              },
+              {
+                "id": "presion-1",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 44, "y": 46 },
+                "to": { "x": 42, "y": 38 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "cambio-lado",
+            "order": 2,
+            "title": "Cambio de lado",
+            "explanation": "El balón cruza el rectángulo y el equipo cambia de lado con pases seguros.",
+            "positions": [
+              { "tokenId": "local-1", "x": 70, "y": 48 },
+              { "tokenId": "local-2", "x": 58, "y": 34 },
+              { "tokenId": "local-3", "x": 42, "y": 38 },
+              { "tokenId": "local-4", "x": 34, "y": 52 },
+              { "tokenId": "local-5", "x": 50, "y": 64 },
+              { "tokenId": "local-6", "x": 68, "y": 60 },
+              { "tokenId": "rival-1", "x": 50, "y": 46 },
+              { "tokenId": "rival-2", "x": 58, "y": 56 }
+            ],
+            "ball": { "x": 70, "y": 48 },
+            "arrows": [
+              {
+                "id": "pase-3",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 70, "y": 48 },
+                "to": { "x": 68, "y": 60 }
+              },
+              {
+                "id": "pase-4",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 68, "y": 60 },
+                "to": { "x": 50, "y": 64 }
+              },
+              {
+                "id": "presion-2",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 58, "y": 56 },
+                "to": { "x": 62, "y": 54 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
+    },
+    {
+      "id": "vuelta-a-la-calma-y-analisis",
+      "title": "Vuelta a la calma y análisis",
+      "summary": "Estiramientos guiados y charla breve de análisis para cerrar la sesión en grupo.",
+      "focus": "Vuelta a la calma",
+      "sessionPart": "cool-down",
+      "categoryIds": ["senior"],
+      "objective": "Relajar el cuerpo y fijar dos ideas del entrenamiento con una charla corta.",
+      "players": { "total": 8, "goalkeepers": 0 },
+      "space": { "label": "Círculo de cierre", "widthM": 10, "lengthM": 10 },
+      "durationMinutes": 6,
+      "intensity": { "level": "low", "percent": 20 },
+      "workStructure": "Bloques de 2 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Estiramiento guiado",
+          "detail": "Cada estiramiento se mantiene veinte segundos y se acompaña con respiración."
+        },
+        {
+          "rule": "Charla breve",
+          "detail": "El análisis final se limita a dos ideas concretas del entrenamiento."
+        }
+      ],
+      "coachingCues": [
+        "Respirar de forma pausada durante el estiramiento.",
+        "Escuchar las dos ideas del análisis sin interrumpir.",
+        "Cerrar la sesión con el grupo unido y el material recogido."
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "jugador-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "jugador-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "jugador-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "jugador-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "jugador-5", "kind": "player", "team": "home", "label": "J5" },
+          { "id": "jugador-6", "kind": "player", "team": "home", "label": "J6" },
+          { "id": "jugador-7", "kind": "player", "team": "home", "label": "J7" },
+          { "id": "jugador-8", "kind": "player", "team": "home", "label": "J8" }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "estiramiento-guiado",
+            "order": 1,
+            "title": "Estiramiento guiado",
+            "explanation": "El grupo estira piernas y tronco en círculo con respiración pausada.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 32 },
+              { "tokenId": "jugador-2", "x": 63, "y": 37 },
+              { "tokenId": "jugador-3", "x": 68, "y": 50 },
+              { "tokenId": "jugador-4", "x": 63, "y": 63 },
+              { "tokenId": "jugador-5", "x": 50, "y": 68 },
+              { "tokenId": "jugador-6", "x": 37, "y": 63 },
+              { "tokenId": "jugador-7", "x": 32, "y": 50 },
+              { "tokenId": "jugador-8", "x": 37, "y": 37 }
+            ],
+            "ball": { "x": 50, "y": 32 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 32 },
+                "to": { "x": 63, "y": 37 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 63, "y": 37 },
+                "to": { "x": 68, "y": 50 }
+              }
+            ],
+            "labels": []
+          },
+          {
+            "id": "analisis-cierre",
+            "order": 2,
+            "title": "Análisis y cierre",
+            "explanation": "El grupo se junta para fijar dos ideas del entrenamiento y cerrar la sesión.",
+            "positions": [
+              { "tokenId": "jugador-1", "x": 50, "y": 38 },
+              { "tokenId": "jugador-2", "x": 58, "y": 42 },
+              { "tokenId": "jugador-3", "x": 62, "y": 50 },
+              { "tokenId": "jugador-4", "x": 58, "y": 58 },
+              { "tokenId": "jugador-5", "x": 50, "y": 62 },
+              { "tokenId": "jugador-6", "x": 42, "y": 58 },
+              { "tokenId": "jugador-7", "x": 38, "y": 50 },
+              { "tokenId": "jugador-8", "x": 42, "y": 42 }
+            ],
+            "ball": { "x": 50, "y": 62 },
+            "arrows": [
+              {
+                "id": "pase-1",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 50, "y": 62 },
+                "to": { "x": 42, "y": 58 }
+              },
+              {
+                "id": "pase-2",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 42, "y": 58 },
+                "to": { "x": 38, "y": 50 }
+              }
+            ],
+            "labels": []
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": { "kind": "original", "sourceName": "Futsal Manager AI", "licenseStatus": "owned" }
     }
   ],
   "programming": [

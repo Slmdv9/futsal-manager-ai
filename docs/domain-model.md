@@ -3,11 +3,11 @@
 ## Core Concepts
 
 - **Category** — an official RFEF age bracket (Prebenjamín U8, Benjamín U10, Alevín U12, Infantil U14, Cadete U16, Juvenil U19, Senior). Immutable reference data.
-- **Exercise** — a drill with `title`, `summary`, `focus`, `objective`, `categoryIds`, `players` (total plus goalkeepers), `space` (label, `widthM`, `lengthM`), `durationMinutes`, `intensity` (level plus optional percent), `workStructure`, `constraints`, `coachingCues`, and Board Data.
+- **Exercise** — a drill with `title`, `summary`, `focus`, `sessionPart` (warm-up, main part, or cool-down), `objective`, `categoryIds`, `players` (total plus goalkeepers), `space` (label, `widthM`, `lengthM`), `durationMinutes`, `intensity` (level plus optional percent), `workStructure`, `constraints`, `coachingCues`, and Board Data.
 - **Board Data** — structured, renderable description of an exercise: pitch type/aspect ratio, tokens (players, keepers), cones, arrows, labels, and an ordered list of Phases. Its versioned contract, coordinates, limits, and validation rules live in `docs/board-data-schema.md`; unvalidated Board Data must not be published or rendered.
 - **Phase** — one ordered step with its own token/arrow positions and a short explanation.
 - **Programming** — per-category methodology: `formativeStage`, `focus`, `playModel`, `sessionDurationMinutes`, `keyConcepts`, `objectives`, `sessionStructure` (warm-up, main, cool-down), and nested Macrocycle/Microcycle entries.
-- **Content package** — one versioned JSON package (`contentVersion` `1.0.0`) holding every Exercise and Programming record, validated once on load and read through the `content` use cases; only `published` records are readable. Its contract and invariants live in `docs/content-model.md`.
+- **Content package** — one versioned JSON package (`contentVersion` `1.1.0`) holding every Exercise and Programming record, validated once on load and read through the `content` use cases; only `published` records are readable. Its contract and invariants live in `docs/content-model.md`.
 - **Macrocycle / Microcycle** — nested time periods within a Season.
 - **Session** — an objective plus an ordered set of exercises (warm-up, main part, cool-down). Can be authored or AI-generated.
 - **AI Session Generator / AI Variant Adapter / Tactical Assistant** — AI capabilities grounded on the Exercise Library and Programming.

@@ -10,6 +10,7 @@ The durable contract for curated content: Category reference data, Exercise, Pro
 | --- | --- |
 | Category reference data | `src/modules/content/domain/category.ts` |
 | Exercise entity | `src/modules/content/domain/exercise.ts` |
+| Session part vocabulary | `src/modules/content/domain/session-part.ts` |
 | Programming entity | `src/modules/content/domain/programming.ts` |
 | Provenance | `src/modules/content/domain/provenance.ts` |
 | Package contract, schema, parser | `src/modules/content/domain/content-package.ts` |
@@ -51,6 +52,7 @@ An Exercise is the atomic library unit: one drill with one Board Data payload.
 | `title` | text ≤ 90 | Spanish |
 | `summary` | text ≤ 240 | Spanish |
 | `focus` | text ≤ 60 | e.g. `Salida de presión`, `Defensa` |
+| `sessionPart` | `'warm-up' \| 'main' \| 'cool-down'` | required; never inferred from `focus` |
 | `categoryIds` | `CategoryId[]` | 1–3 entries, unique, all known |
 | `objective` | text ≤ 300 | Spanish |
 | `players` | `{ total: 2–30; goalkeepers: 0–4 }` | `total >= goalkeepers` |
@@ -113,17 +115,18 @@ Attribution display belongs to `exercise-detail-screen`; the licence gate only m
 
 ```json
 {
-  "contentVersion": "1.0.0",
+  "contentVersion": "1.1.0",
   "exercises": [],
   "programming": []
 }
 ```
 
 - `CONTENT_PACKAGE_VERSION` (`src/modules/content/domain/content-package.ts`) must equal the JSON `contentVersion`. Any other version fails validation. Additive changes bump the constant and the JSON together; breaking changes need a migration decision first.
-- `Programming.version` is the plan version of that single record, not the package version. `infantil-u14-base` moved to `1.1.0` when its season plan grew to three macrocycles while `contentVersion` stayed `1.0.0`.
+- `contentVersion` is `1.1.0` since `Exercise` gained the required `sessionPart` field. Board Data stays `1.0.0`.
+- `Programming.version` is the plan version of that single record, not the package version. `infantil-u14-base` is `1.1.0` because its season plan grew to three macrocycles; the six other base records are `1.0.0`.
 - Unknown keys are rejected at every level.
 - The package is imported once, parsed once, and indexed by the bundled adapter.
-- Current seed scope: 26 original exercises and 7 published Programming records covering all seven RFEF categories. Package order is part of the contract and append-only: the first nine exercises are the Infantil U14 slice in its original sequence (index 0 is `salida-3-1-presion-alta`, tagged `infantil` + `cadete`), followed by three exercises per remaining category in `CATEGORY_IDS` order — Prebenjamín, Benjamín, Alevín, Cadete (two new), Juvenil, Senior. Programming holds `infantil-u14-base` (version `1.1.0`) first, then `prebenjamin-u8-base`, `benjamin-u10-base`, `alevin-u12-base`, `cadete-u16-base`, `juvenil-u19-base`, and `senior-base`, each at version `1.0.0`. Seed tests assert the exact 26 exercise ids in package order and the seven Programming ids in `CATEGORY_IDS` order.
+- Current seed scope: 50 original exercises and 7 published Programming records, 57 audited records in total. Each non-Infantil category has seven exercises split 2 warm-up / 3 main / 2 cool-down; Infantil keeps its original nine exercises split 2 warm-up / 5 main / 2 cool-down. Package order is part of the contract and append-only: exercises 0–25 keep their original sequence (index 0 is `salida-3-1-presion-alta`, tagged `infantil` + `cadete`), then indices 26–49 append four exercises per category in `CATEGORY_IDS` order — Prebenjamín, Benjamín, Alevín, Cadete, Juvenil, Senior. Programming holds `infantil-u14-base` (version `1.1.0`) first, then `prebenjamin-u8-base`, `benjamin-u10-base`, `alevin-u12-base`, `cadete-u16-base`, `juvenil-u19-base`, and `senior-base`, each at version `1.0.0`. Seed tests assert the exact 50 exercise ids in package order and the seven Programming ids in `CATEGORY_IDS` order.
 
 ## Invariants And Validation
 
@@ -136,10 +139,12 @@ Attribution display belongs to `exercise-detail-screen`; the licence gate only m
 5. `players.total >= players.goalkeepers`.
 6. Licensing: a published record needs `owned` or `permitted`; published `permitted`/`cmd-mora` content needs `attribution`; every record's `kind` must allow its `licenseStatus` (see `docs/content-licensing.md`).
 7. At most one `published` Programming record per `categoryId`.
-8. Every Exercise `boardData` passes `parseBoardData`; Board Data issues are re-prefixed under `exercises.<i>.boardData.`.
+8. Every Exercise has a `sessionPart` of `warm-up`, `main`, or `cool-down`; a missing value reports `exercises.<i>.sessionPart`, and an unknown value fails with the three allowed values.
+9. Every Exercise `boardData` passes `parseBoardData`; Board Data issues are re-prefixed under `exercises.<i>.boardData.`.
 
 Issues use dot paths like Board Data issues, for example:
 
+- `exercises.26.sessionPart` — missing or unsupported session part.
 - `exercises.1.categoryIds.0` — unknown category id on the second exercise.
 - `exercises.1.id` — duplicate exercise id.
 - `exercises.1.categoryIds` — empty category list.
@@ -171,7 +176,7 @@ A two-category exercise appears once under each category because the filter read
 
 `createBundledContentRepository()` is the infrastructure factory: it imports the JSON as `unknown`, parses it once, indexes exercises by id and Programming by category, and returns the cached repository. Route and other-module code must reach content through `@/modules/content`.
 
-Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → `buildCategoryBrowseModel` → `listExercises`/`getProgramming` → `ContentRepository` → bundled adapter → shared `parseBoardData`.
+Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → `buildCategoryBrowseModel` → `listExercises`/`getProgramming` → `ContentRepository` → bundled adapter → shared `parseBoardData`. The browse model groups the same `listExercises` result with `groupExercisesBySessionPart` into the fixed `warm-up` → `main` → `cool-down` order, preserving package order inside each group; grouping is presentation-only and adds no repository call.
 
 `ExploreScreen` is the first read-layer consumer. It renders the seven RFEF chips, the selected Programming summary, and the filtered Exercise Library; the pure view model calls only `listExercises` and `getProgramming`, so visibility and deduplication stay in the read layer. The selected category is **session-only UI state** owned by `content/presentation` (mounted once in `src/app/_layout.tsx`): it survives tab and `/design-system` navigation, is never written to device storage, and resets on app restart. There is no "all categories" state and no default category.
 
@@ -190,5 +195,6 @@ Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `Ex
 - The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
-- Every category now has at least three exercises plus one Programming record, but Infantil U14 stays the only deep slice: the other six have exactly three representative exercises each until a later content-authoring feature deepens them.
+- Every category now has a session-shaped library: six categories at seven exercises (2/3/2) and Infantil U14 at nine (2/5/2). The Infantil assignment places two extra drills in the main part and keeps the two cool-down drills; it is flagged for coach review in `docs/risks-and-open-questions.md`.
+- Exercise cards show no board preview yet; `exercise-preview-board-thumbnail` waits on `tactics-board-renderer`.
 - Board Data is authored but not rendered yet; legibility, 2:1 fidelity, and phase playback belong to the board features.

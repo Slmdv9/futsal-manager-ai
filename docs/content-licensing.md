@@ -69,14 +69,14 @@ Record every source the library draws on. Update this table before adding materi
 
 | Source | Kind | License status | May ship? | Notes |
 | --- | --- | --- | --- | --- |
-| Futsal Manager AI (in-house authorship) | `original` | `owned` | yes | Current seed: 26 exercises plus seven Programming records, one per RFEF category. |
+| Futsal Manager AI (in-house authorship) | `original` | `owned` | yes | Current seed: 50 exercises plus seven Programming records, one per RFEF category. |
 | CMD Mora season programme (club presentation) | `cmd-mora` | `permitted` | yes, with attribution, once written permission is recorded | Attribution names CMD Mora. Not seeded yet; `pending` until the permission is documented. |
 | `adrimartinofutsal.es.tl` | `reference` | `reference-only` | no | Inspiration for exercise ideas and category mapping only. |
 | `futsalcoach.es` | `reference` | `reference-only` | no | Inspiration only. |
 | `keepmove.net` | `reference` | `reference-only` | no | Inspiration only. |
 | `ejerciciosdefutbolsala.com` | `reference` | `reference-only` | no | Inspiration only. |
 
-The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.ts`) audits all 33 seeded records — 26 exercises plus seven Programming records — at their canonical ids and asserts that no record is `reference`, that every record is `original` / `owned` / `Futsal Manager AI`, that no record carries `attribution`, and that no `sourceName` names one of the four inspiration-only domains. Keep that list in sync when the seed grows or a new source is considered.
+The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.ts`) audits all 57 seeded records — 50 exercises plus seven Programming records — at their canonical ids and asserts that no record is `reference`, that every record is `original` / `owned` / `Futsal Manager AI`, that no record carries `attribution`, and that no `sourceName` names one of the four inspiration-only domains. Keep that list in sync when the seed grows or a new source is considered.
 
 ## Author Checklist
 

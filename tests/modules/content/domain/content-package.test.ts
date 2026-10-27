@@ -20,6 +20,7 @@ type MutableExercise = {
   id: string;
   categoryIds: string[];
   players: { total: number; goalkeepers: number };
+  sessionPart?: string;
   status: string;
   provenance?: MutableProvenance;
   boardData: { phases: { positions: { tokenId: string; x: number; y: number }[] }[] };
@@ -63,8 +64,8 @@ function findIssue(
 describe('Content package validation', () => {
   describe('Given the supported content package version', () => {
     describe('When the contract constant is read', () => {
-      it('then it records content package version 1.0.0', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.0.0');
+      it('then it records content package version 1.1.0', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
       });
     });
   });
@@ -84,8 +85,51 @@ describe('Content package validation', () => {
           ['infantil-u14-base', 'cadete-u16-base'],
         );
         assert.deepEqual(contentPackage.exercises[1].categoryIds, ['infantil', 'cadete']);
+        assert.equal(contentPackage.exercises[0].sessionPart, 'main');
+        assert.equal(contentPackage.exercises[1].sessionPart, 'cool-down');
         assert.equal(contentPackage.exercises[0].boardData.schemaVersion, '1.0.0');
         assert.equal(contentPackage.exercises[0].boardData.phases.length, 2);
+      });
+    });
+  });
+
+  describe('Given an exercise without a session part', () => {
+    describe('When the package is parsed', () => {
+      it('fails with a dot path naming exercises.0.sessionPart', () => {
+        const contentPackage = cloneValidPackage();
+        delete contentPackage.exercises[0].sessionPart;
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.0.sessionPart');
+
+        assert.ok(issue, `Expected exercises.0.sessionPart in ${issuePaths(result.issues)}`);
+      });
+    });
+  });
+
+  describe('Given an exercise with an unknown session part', () => {
+    describe('When the package is parsed', () => {
+      it('fails with the three allowed values in the message', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[0].sessionPart = 'activation';
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.0.sessionPart');
+
+        assert.ok(issue, `Expected exercises.0.sessionPart in ${issuePaths(result.issues)}`);
+        assert.match(issue.message, /"warm-up", "main", or "cool-down"/);
       });
     });
   });
@@ -554,7 +598,24 @@ describe('Content package validation', () => {
         const issue = findIssue(result.issues, 'contentVersion');
 
         assert.ok(issue, `Expected contentVersion in ${issuePaths(result.issues)}`);
-        assert.match(issue.message, /contentVersion must be "1\.0\.0"/);
+        assert.match(issue.message, /contentVersion must be "1\.1\.0"/);
+      });
+
+      it('rejects the previous 1.0.0 package version', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.contentVersion = '1.0.0';
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'contentVersion');
+
+        assert.ok(issue, `Expected contentVersion in ${issuePaths(result.issues)}`);
+        assert.match(issue.message, /contentVersion must be "1\.1\.0"/);
       });
     });
   });

@@ -39,8 +39,8 @@ const seededRecords = [
 describe('Seeded content provenance audit', () => {
   describe('Given the bundled content package', () => {
     describe('When every seeded record is audited', () => {
-      it('then the audit sees all 26 seeded exercises and the seven Programming records', () => {
-        assert.equal(repository.getExercises().length, 26);
+      it('then the audit sees all 50 seeded exercises and the seven Programming records', () => {
+        assert.equal(repository.getExercises().length, 50);
         assert.equal(seededProgramming.length, 7);
         assert.deepEqual(
           seededRecords.map((record) => record.id),
@@ -71,6 +71,30 @@ describe('Seeded content provenance audit', () => {
             'salida-3-2-cambio-ala',
             'defensa-3-1-presion-cierre',
             'transicion-5v4-carril-central',
+            'juego-4v4-dos-porterias',
+            'conduccion-y-pase-en-cuadrado',
+            'rondo-libre-3v1',
+            'vuelta-a-la-calma-con-balon',
+            'juego-posicion-3v3-apoyos',
+            'salida-3v1-desde-portero',
+            'rondo-4v0-control-orientado',
+            'circulacion-suave-y-movilidad',
+            'rondo-5v1-activacion',
+            'pase-y-control-en-movimiento',
+            'conservacion-suave-4v0',
+            'rondo-final-4v1',
+            'rondo-4v2-activacion',
+            'movilidad-y-pases-largos',
+            'conservacion-5v2-baja-intensidad',
+            'estiramientos-guiados-con-balon',
+            'rondo-4v2-con-salida',
+            'activacion-con-duelos-1v1',
+            'conservacion-6v3-baja-intensidad',
+            'rondo-final-y-movilidad',
+            'rondo-5v2-activacion',
+            'activacion-con-movilidad-y-pases',
+            'conservacion-6v2-baja-intensidad',
+            'vuelta-a-la-calma-y-analisis',
             'prebenjamin-u8-base',
             'benjamin-u10-base',
             'alevin-u12-base',
@@ -80,6 +104,16 @@ describe('Seeded content provenance audit', () => {
             'senior-base',
           ],
         );
+        assert.equal(seededRecords.length, 57);
+      });
+
+      it('then every exercise carries one of the three allowed session parts', () => {
+        for (const exercise of repository.getExercises()) {
+          assert.ok(
+            ['warm-up', 'main', 'cool-down'].includes(exercise.sessionPart),
+            `Expected a known session part for ${exercise.id}.`,
+          );
+        }
       });
 
       it('then every record states a known kind, a source name, and a known license status', () => {

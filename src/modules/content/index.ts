@@ -14,7 +14,10 @@ export {
   formatExerciseCount,
   formatExerciseMeta,
   formatSessionDuration,
+  formatSessionPartLabel,
+  groupExercisesBySessionPart,
   type CategoryBrowseModel,
+  type SessionPartGroup,
 } from './presentation/view-models/category-browse-model';
 
 export {
@@ -50,6 +53,10 @@ export {
   type ExerciseStatus,
 } from './domain/exercise';
 export {
+  SESSION_PARTS,
+  type SessionPart,
+} from './domain/session-part';
+export {
   PROGRAMMING_LIMITS,
   PROGRAMMING_STATUSES,
   isPublishableProgramming,
@@ -58,7 +65,6 @@ export {
   type Microcycle,
   type Programming,
   type ProgrammingStatus,
-  type SessionPart,
   type SessionStructureEntry,
 } from './domain/programming';
 export {

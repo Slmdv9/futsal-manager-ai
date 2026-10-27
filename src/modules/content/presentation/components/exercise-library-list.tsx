@@ -1,42 +1,62 @@
 import { StyleSheet, View } from 'react-native';
 import { AppText, Card } from '@/shared/ui';
 import { spacing } from '@/shared/theme';
-import type { Exercise } from '../../domain/exercise';
 import {
   formatExerciseCount,
   formatExerciseMeta,
+  type SessionPartGroup,
 } from '../view-models/category-browse-model';
 
 type ExerciseLibraryListProps = {
-  exercises: readonly Exercise[];
+  groups: readonly SessionPartGroup[];
 };
 
-export function ExerciseLibraryList({ exercises }: ExerciseLibraryListProps) {
+export function ExerciseLibraryList({ groups }: ExerciseLibraryListProps) {
+  const total = groups.reduce((count, group) => count + group.exercises.length, 0);
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <AppText variant="headlineSm">Biblioteca de ejercicios</AppText>
         <AppText variant="labelMd" color="textVariant">
-          {formatExerciseCount(exercises.length)}
+          {formatExerciseCount(total)}
         </AppText>
       </View>
-      {exercises.length === 0 ? (
+      {total === 0 ? (
         <AppText variant="bodyMd" color="textVariant">
           Todavía no hay ejercicios para esta categoría.
         </AppText>
       ) : (
-        exercises.map((exercise) => (
-          <Card key={exercise.id}>
-            <View style={styles.cardContent}>
-              <AppText variant="headlineSm">{exercise.title}</AppText>
-              <AppText variant="bodyMd" color="textVariant">
-                {exercise.summary}
+        groups.map((group) => (
+          <View key={group.part} style={styles.group}>
+            <View style={styles.groupHeader}>
+              <AppText variant="labelLg" color="primary">
+                {group.label.toUpperCase()}
               </AppText>
               <AppText variant="labelMd" color="textVariant">
-                {formatExerciseMeta(exercise)}
+                {formatExerciseCount(group.exercises.length)}
               </AppText>
             </View>
-          </Card>
+            {group.exercises.length === 0 ? (
+              <AppText variant="bodyMd" color="textVariant">
+                Sin ejercicios en este tramo.
+              </AppText>
+            ) : (
+              group.exercises.map((exercise) => (
+                <Card key={exercise.id}>
+                  <View style={styles.cardContent}>
+                    <AppText variant="headlineSm">{exercise.title}</AppText>
+                    <AppText variant="bodyMd" color="textVariant">
+                      {exercise.summary}
+                    </AppText>
+                    <AppText variant="labelMd" color="textVariant">
+                      {formatExerciseMeta(exercise)}
+                    </AppText>
+                  </View>
+                </Card>
+              ))
+            )}
+          </View>
         ))
       )}
     </View>
@@ -48,6 +68,15 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+  },
+  group: {
+    gap: spacing.sm,
+  },
+  groupHeader: {
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'space-between',

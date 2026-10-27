@@ -4,11 +4,19 @@ import type { Category } from '../../domain/category';
 import type { Exercise, ExerciseIntensityLevel } from '../../domain/exercise';
 import type { ContentRepository } from '../../domain/ports/content-repository';
 import type { Programming } from '../../domain/programming';
+import { SESSION_PARTS, type SessionPart } from '../../domain/session-part';
+
+export type SessionPartGroup = {
+  part: SessionPart;
+  label: string;
+  exercises: Exercise[];
+};
 
 export type CategoryBrowseModel = {
   category: Category;
   programming: Programming | null;
   exercises: Exercise[];
+  sessionParts: SessionPartGroup[];
 };
 
 const INTENSITY_LABELS: Record<ExerciseIntensityLevel, string> = {
@@ -17,15 +25,38 @@ const INTENSITY_LABELS: Record<ExerciseIntensityLevel, string> = {
   high: 'Alta',
 };
 
+const SESSION_PART_LABELS: Record<SessionPart, string> = {
+  'warm-up': 'Calentamiento',
+  main: 'Parte general',
+  'cool-down': 'Vuelta a la calma',
+};
+
 export function buildCategoryBrowseModel(
   repository: ContentRepository,
   category: Category,
 ): CategoryBrowseModel {
+  const exercises = listExercises(repository, { categoryId: category.id });
+
   return {
     category,
     programming: getProgramming(repository, category.id),
-    exercises: listExercises(repository, { categoryId: category.id }),
+    exercises,
+    sessionParts: groupExercisesBySessionPart(exercises),
   };
+}
+
+export function groupExercisesBySessionPart(
+  exercises: readonly Exercise[],
+): SessionPartGroup[] {
+  return SESSION_PARTS.map((part) => ({
+    part,
+    label: formatSessionPartLabel(part),
+    exercises: exercises.filter((exercise) => exercise.sessionPart === part),
+  }));
+}
+
+export function formatSessionPartLabel(part: SessionPart): string {
+  return SESSION_PART_LABELS[part];
 }
 
 export function formatCategoryLabel(category: Category): string {

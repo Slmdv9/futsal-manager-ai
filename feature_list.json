@@ -338,6 +338,37 @@
     "notes": "Independent validator acceptance: `accept`. Implemented and self-verified, ready for independent validation. Data-only feature: 17 exercises + 6 Programming records appended to the bundled package, mirrored content tests, and the named docs. No schema, port, use case, UI, board, AI, licence, dependency or version change; `contentVersion`/`CONTENT_PACKAGE_VERSION` stay `1.0.0` and `infantil-u14-base` stays `1.1.0`."
   },
   {
+    "id": "seed-session-structure",
+    "area": "content",
+    "title": "Seed seven exercises per category by session part",
+    "user_visible_behavior": "Each category shows a session-shaped library grouped as two warm-up drills, a main part, and two cool-down drills: seven exercises for the six non-Infantil categories and Infantil's existing nine.",
+    "depends_on": [
+      "seed-remaining-categories",
+      "category-filter"
+    ],
+    "status": "accepted",
+    "verification": [
+      "Select a non-Infantil category and confirm the library shows 2 warm-up, 3 main-part, and 2 cool-down exercises.",
+      "Confirm Infantil U14 keeps its nine exercises and that each one carries a session part.",
+      "Run content validation and confirm every Board Data still parses and the package contract version is 1.1.0."
+    ],
+    "evidence": [
+      "Contract: added `src/modules/content/domain/session-part.ts` (`SESSION_PARTS`, `SessionPart`), made `Exercise.sessionPart` required after `focus`, made `programming.ts` re-export the shared type, and added the parser enum with the pinned message `Exercise sessionPart must be \"warm-up\", \"main\", or \"cool-down\".` plus `CONTENT_PACKAGE_VERSION` `1.1.0`. The public API exports `SESSION_PARTS`, `SessionPart`, `groupExercisesBySessionPart`, `formatSessionPartLabel`, and `SessionPartGroup`.",
+      "Package: `content-package.json` now holds 50 exercises and 7 Programming records at `contentVersion` `1.1.0`; the 26 legacy records are byte-identical to `HEAD` after removing the inserted `sessionPart` (ids, titles, categories, all Board Data, and all 7 Programming records equal); package order is unchanged and the 24 appended records occupy indices 26-49 in the spec order (8 warm-up / 4 main / 12 cool-down). Per-category totals are 7/7/7/9/7/7/7.",
+      "`npm test`: 255/255 tests pass across 173 suites, up from the 184/184 across 160 baseline. The new `seed-session-structure.test.ts` covers the 50/57 record audit, every valid `sessionPart`, the pinned grouped ids for all seven categories (2/3/2 and Infantil 2/5/2), the Infantil and Cadete crossover order, all 24 seed-plan metadata/copy/constraint/cue/provenance rows, one test that re-parses all 50 exercises' boards, 24 per-plan tests asserting token/keeper/position/arrow coherence for the new records, the three versions, and the forbidden-stage scan. `content-package.test.ts` adds the missing/unknown `sessionPart` and `1.0.0` rejection cases; `category-browse-model.test.ts` adds fixed group order, empty-group, Spanish-label, and pinned grouped-model assertions.",
+      "`npm run lint` exit 0 and `npm run typecheck` exit 0. `npm run verify` exits 0 with `expo-doctor` 20/20 and 255/255 tests across 173 suites; `./init.sh` exits 0 for the same gate and never starts Metro. The four Expo SDK patch drifts `expo-doctor` had flagged were repaired out of feature scope in `f29da17` (`@expo/ui` 58.0.24, `expo` 58.0.20, `expo-router` 58.0.27, `expo-web-browser` 58.0.7); `package.json` was otherwise untouched by this feature.",
+      "Standalone parse: `PASS 1.1.0 50 7`. Probes on an in-memory clone: deleting `exercises[26].sessionPart` -> `exercises.26.sessionPart: Exercise sessionPart must be \"warm-up\", \"main\", or \"cool-down\".`; setting it to `activation` -> the same path and message; setting `contentVersion` to `1.0.0` -> `contentVersion: Content package contentVersion must be \"1.1.0\".`. The untouched package parses.",
+      "Read-layer smoke: `listExercises` returns 7/7/7/9/7/7/7 for Prebenjamín/Benjamín/Alevín/Infantil/Cadete/Juvenil/Senior, `groupExercisesBySessionPart` returns 2/3/2 for the six and 2/5/2 for Infantil, Programming resolves `prebenjamin-u8-base@1.0.0`, `benjamin-u10-base@1.0.0`, `alevin-u12-base@1.0.0`, `infantil-u14-base@1.1.0`, `cadete-u16-base@1.0.0`, `juvenil-u19-base@1.0.0`, `senior-base@1.0.0`, and the union holds 50 unique exercises. Pinned order matches the spec for every group, including Infantil's cool-down, where the smoke returns `circulacion-cierre-ala, rondo-4v1-orientacion`: that is package order (indices 1 and 3), as Scenarios 2 and 9 require. The spec's ordering table now lists that row in package order instead of the earlier ascending-load listing.",
+      "`npx expo export --platform android` exit 0 with a 3,774,797-byte Hermes bundle. All 24 new ids were found in the bundle; `Calentamiento`, `Parte general`, `Vuelta a la calma`, `Sin ejercicios en este tramo.`, and `Biblioteca de ejercicios` were found as ASCII/latin1 strings, and accented copy such as `Juego 4 contra 4 en dos porterías` and `Rondo 5 contra 2 de activación` was found by a UTF-16LE scan.",
+      "Device smoke on Samsung Galaxy M13 (`SM-M135F`, Android 14, Expo Go 58.0.5, `adb reverse tcp:8081 tcp:8081`): Infantil rendered `9 ejercicios` with `CALENTAMIENTO` 2, `PARTE GENERAL` 5, and `VUELTA A LA CALMA` 2 and all nine titles; Senior rendered 2/3/2 with `Rondo 5 contra 2 de activación`, `Activación con movilidad y pases`, `Salida 3-2 con cambio de ala`, `Defensa 3-1 en zona con presión al cierre`, `Transición 5 contra 4 por el carril central`, `Conservación 6 contra 2 a baja intensidad`, and `Vuelta a la calma y análisis`; Cadete rendered 2/3/2 with `Salida 3-1 ante presión alta` first in `PARTE GENERAL`; no duplicate appeared inside one list.",
+      "Device regression checks: a force-stop/relaunch reset Explorar to `Elige una categoría`; Pizarra, Asistente IA, Mi Club, and `/design-system` kept their accepted copy and layout; at 320 dp width and `font_scale 1.3` the three headings, counts, and cards stayed readable (device density and font scale restored afterwards); `adb logcat -d -t 600` had no React Native error/exception or fatal lines.",
+      "Scope: `git diff --stat` covers only `content` domain/infrastructure/presentation/public API, the bundled package, mirrored tests, and the named docs/spec. `src/app/**`, `src/shared/**`, `src/modules/{board,ai,club}/**`, ports/use cases, `eslint.config.js`, `init.sh`, Board Data `1.0.0`, and `infantil-u14-base` `1.1.0` are unchanged by this feature; the only `package.json` change on the branch is the out-of-scope `f29da17` dependency alignment, which leaves the feature's own surface untouched. The deferred `exercise-preview-board-thumbnail` request was not implemented.",
+      "No persistent E2E harness or React Native component-test runner exists; the pure view-model tests, the real-package seed contract, the Android export, and the scripted device smoke are the coverage. Remaining risks: the Infantil 2/5/2 assignment is a coach-review judgement; hand-authored small-space geometry is parser-valid but not visually reviewed until `tactics-board-renderer`; the four Expo SDK patch drifts were repaired out of feature scope in `f29da17` and the gate is green.",
+      "Independent validator acceptance: verdict `accept` after a doc-only repair. The validator reran `npm run verify` (exit 0, expo-doctor 20/20, 255/255 tests across 173 suites), the `sessionPart`/version probes, the 50/57 record audit, the 24-row seed-table and Spanish-copy audit, legacy byte-identity against `HEAD` (26 records unchanged except the added field), the grouped order for all seven categories, and a full `SM-M135F` smoke (Infantil 2/5/2, Senior 2/3/2, Cadete crossover first, relaunch reset, clean `logcat`). Scenarios 1-11 pass. Non-blocking: test-volume overshoot (255 vs the soft 202-208 budget), 320 dp/1.3 scale and iOS/tablet unverified by the validator, and the stale 8081 Metro was restarted."
+    ],
+    "notes": "Independent validator acceptance: `accept`. Implemented and self-verified, ready for independent validation (status `passing`). Adds the required `sessionPart` contract, moves the package to `1.1.0`, appends 24 exercises, and groups the Explorar library under Spanish session-part headings. No Board Data, AI, quota, board-rendering, route, dependency, or lint-config change. No commit was created in this session."
+  },
+  {
     "id": "category-filter",
     "area": "browse",
     "title": "Filter exercises and programming by category",
@@ -441,6 +472,24 @@
     ],
     "evidence": [],
     "notes": "The board is a renderer and must not invent content. Player tokens are circular with mono shirt numbers."
+  },
+  {
+    "id": "exercise-preview-board-thumbnail",
+    "area": "browse",
+    "title": "Show a board preview thumbnail in exercise cards",
+    "user_visible_behavior": "Each exercise preview shows an orientative board drawing so a coach can see the players and material layout before opening the drill.",
+    "depends_on": [
+      "tactics-board-renderer",
+      "category-filter"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Confirm every exercise card in the library renders a board thumbnail that matches its Board Data.",
+      "Confirm the thumbnail preserves the 2:1 pitch proportion at small sizes and stays legible on a phone.",
+      "Confirm the full board view and the thumbnail render the same tokens, cones and arrows."
+    ],
+    "evidence": [],
+    "notes": "Requested by the user (a coach) on 2026-10-27 while reviewing Explorar: show each drill's drawing in the list. Depends on the renderer being extracted as a reusable component; no AI involvement. Deferred behind the seed work."
   },
   {
     "id": "board-phase-playback",

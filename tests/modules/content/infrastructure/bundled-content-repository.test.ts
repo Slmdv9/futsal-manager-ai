@@ -5,6 +5,7 @@ import { getExercise } from '@/modules/content/application/get-exercise';
 import { getProgramming } from '@/modules/content/application/get-programming';
 import { listExercises } from '@/modules/content/application/list-exercises';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
+import { CATEGORY_IDS } from '@/modules/content/domain/category';
 import { createBundledContentRepository } from '@/modules/content/infrastructure/bundled-content-repository';
 
 const repository = createBundledContentRepository();
@@ -13,13 +14,13 @@ describe('Bundled content repository', () => {
   describe('Given the bundled content package', () => {
     describe('When the repository is created', () => {
       it('then the package version is the supported one', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.0.0');
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
       });
 
       it('then it exposes the seeded published exercises', () => {
         const exercises = listExercises(repository);
 
-        assert.ok(exercises.length >= 26);
+        assert.ok(exercises.length >= 50);
         assert.deepEqual(
           exercises.map((exercise) => exercise.id),
           [
@@ -49,15 +50,62 @@ describe('Bundled content repository', () => {
             'salida-3-2-cambio-ala',
             'defensa-3-1-presion-cierre',
             'transicion-5v4-carril-central',
+            'juego-4v4-dos-porterias',
+            'conduccion-y-pase-en-cuadrado',
+            'rondo-libre-3v1',
+            'vuelta-a-la-calma-con-balon',
+            'juego-posicion-3v3-apoyos',
+            'salida-3v1-desde-portero',
+            'rondo-4v0-control-orientado',
+            'circulacion-suave-y-movilidad',
+            'rondo-5v1-activacion',
+            'pase-y-control-en-movimiento',
+            'conservacion-suave-4v0',
+            'rondo-final-4v1',
+            'rondo-4v2-activacion',
+            'movilidad-y-pases-largos',
+            'conservacion-5v2-baja-intensidad',
+            'estiramientos-guiados-con-balon',
+            'rondo-4v2-con-salida',
+            'activacion-con-duelos-1v1',
+            'conservacion-6v3-baja-intensidad',
+            'rondo-final-y-movilidad',
+            'rondo-5v2-activacion',
+            'activacion-con-movilidad-y-pases',
+            'conservacion-6v2-baja-intensidad',
+            'vuelta-a-la-calma-y-analisis',
           ],
         );
+        assert.equal(exercises.length, 50);
         assert.ok(exercises.every((exercise) => exercise.status === 'published'));
+      });
+
+      it('then every RFEF category exposes its planned exercise count', () => {
+        const expectedCounts = {
+          prebenjamin: 7,
+          benjamin: 7,
+          alevin: 7,
+          infantil: 9,
+          cadete: 7,
+          juvenil: 7,
+          senior: 7,
+        } as const;
+
+        for (const categoryId of CATEGORY_IDS) {
+          const exercises = listExercises(repository, { categoryId });
+
+          assert.equal(
+            exercises.length,
+            expectedCounts[categoryId],
+            `Expected ${categoryId} to expose its planned count.`,
+          );
+        }
       });
 
       it('then every seeded exercise carries Board Data valid at 1.0.0', () => {
         const exercises = repository.getExercises();
 
-        assert.ok(exercises.length >= 26);
+        assert.ok(exercises.length >= 50);
         for (const exercise of exercises) {
           assert.equal(exercise.boardData.schemaVersion, BOARD_DATA_SCHEMA_VERSION);
 
@@ -89,6 +137,10 @@ describe('Bundled content repository', () => {
             'salida-3-1-presion-alta',
             'juego-posicion-4v4-comodines',
             'basculacion-bloque-1-2-1',
+            'rondo-4v2-activacion',
+            'movilidad-y-pases-largos',
+            'conservacion-5v2-baja-intensidad',
+            'estiramientos-guiados-con-balon',
           ],
         );
         assert.equal(new Set(infantil.map((exercise) => exercise.id)).size, infantil.length);

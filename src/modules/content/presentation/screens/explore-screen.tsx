@@ -39,7 +39,7 @@ export function ExploreScreen({ repository }: ExploreScreenProps) {
               category={browseModel.category}
               programming={browseModel.programming}
             />
-            <ExerciseLibraryList exercises={browseModel.exercises} />
+            <ExerciseLibraryList groups={browseModel.sessionParts} />
           </>
         ) : (
           <View style={styles.prompt}>

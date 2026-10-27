@@ -8,6 +8,7 @@ import {
   PROGRAMMING_STATUSES,
   type Programming,
 } from './programming';
+import { SESSION_PARTS } from './session-part';
 import {
   CONTENT_LICENSE_STATUSES,
   CONTENT_PROVENANCE_KINDS,
@@ -21,7 +22,7 @@ import {
   type ContentProvenanceKind,
 } from './provenance';
 
-export const CONTENT_PACKAGE_VERSION = '1.0.0' as const;
+export const CONTENT_PACKAGE_VERSION = '1.1.0' as const;
 
 export const CONTENT_PACKAGE_ROOT_ISSUE_PATH = '(root)';
 
@@ -165,6 +166,9 @@ const exerciseSchema = z.strictObject({
   title: textSchema(90),
   summary: textSchema(240),
   focus: textSchema(60),
+  sessionPart: z.enum(SESSION_PARTS, {
+    error: 'Exercise sessionPart must be "warm-up", "main", or "cool-down".',
+  }),
   categoryIds: z.array(categoryIdSchema).min(1).max(EXERCISE_LIMITS.maxCategoryIds),
   objective: textSchema(300),
   players: playersSchema,
@@ -187,7 +191,7 @@ const exerciseSchema = z.strictObject({
 });
 
 const sessionStructureSchema = z.strictObject({
-  part: z.enum(['warm-up', 'main', 'cool-down']),
+  part: z.enum(SESSION_PARTS),
   title: textSchema(90),
   description: textSchema(300),
 });

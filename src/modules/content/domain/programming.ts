@@ -1,11 +1,12 @@
 import type { CategoryId } from './category';
 import { isPublishableProvenance, type ContentProvenance } from './provenance';
+import type { SessionPart } from './session-part';
+
+export type { SessionPart } from './session-part';
 
 export const PROGRAMMING_STATUSES = ['draft', 'published'] as const;
 
 export type ProgrammingStatus = (typeof PROGRAMMING_STATUSES)[number];
-
-export type SessionPart = 'warm-up' | 'main' | 'cool-down';
 
 export type SessionStructureEntry = {
   part: SessionPart;
