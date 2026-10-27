@@ -1,8 +1,8 @@
 import { Tabs } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { TabIcon } from '@/components/navigation';
-import { colors, spacing, typography } from '@/theme';
+import { TabIcon } from '@/shared/ui';
+import { colors, spacing, typography } from '@/shared/theme';
 
 const TAB_CONTENT_HEIGHT = 64;
 

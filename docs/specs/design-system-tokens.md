@@ -1,5 +1,7 @@
 # Feature Implementation Spec: Design tokens and base UI primitives
 
+> Path note: `modular-hexagonal-architecture` moved `src/theme` to `src/shared/theme` and `src/components/ui` to `src/shared/ui`. Paths below reflect the current tree.
+
 ## Source Feature
 
 - `id`: `design-system-tokens`
@@ -109,7 +111,7 @@ Then ESLint, `tsc --noEmit`, and `expo-doctor` pass without warnings introduced 
 
 ### Token layer
 
-Create `src/theme/`:
+Create `src/shared/theme/`:
 
 - `colors.ts` — semantic palette mapped from `DESIGN.md` plus the prototype front matter roles needed by primitives (surfaces, on-colors, fixed chip surfaces). No new hues.
 - `typography.ts` — the documented scale, including mobile display/headline variants. Each entry carries `fontFamily` from the loaded font asset key, `fontSize`, `lineHeight`, `fontWeight`, and `letterSpacing` where documented.
@@ -123,7 +125,7 @@ Use `expo-google-fonts` packages installed with `npx expo install` so versions m
 
 ### Primitive layer
 
-Create `src/components/ui/`:
+Create `src/shared/ui/`:
 
 - `text.tsx` — `AppText` with `variant`, `color`, `align`, and style overrides; default `bodyMd`.
 - `button.tsx` — `AppButton` with `variant` (`primary`, `ai`, `secondary`, `disabled`), minimum 44px height, pressed feedback, accessibility role/state, and optional `fullWidth`.
@@ -159,19 +161,19 @@ Replace hardcoded styles in `src/app/index.tsx` with tokens and primitives, keep
 ## Expected File Changes
 
 - `package.json`, `package-lock.json` — add the three Expo-compatible Google Font packages.
-- `src/theme/colors.ts` — new.
-- `src/theme/typography.ts` — new.
-- `src/theme/spacing.ts` — new.
-- `src/theme/radius.ts` — new.
-- `src/theme/elevation.ts` — new.
-- `src/theme/fonts.ts` — new.
-- `src/theme/index.ts` — new.
-- `src/components/ui/text.tsx` — new.
-- `src/components/ui/button.tsx` — new.
-- `src/components/ui/card.tsx` — new.
-- `src/components/ui/chip.tsx` — new.
-- `src/components/ui/input.tsx` — new.
-- `src/components/ui/index.ts` — new.
+- `src/shared/theme/colors.ts` — new.
+- `src/shared/theme/typography.ts` — new.
+- `src/shared/theme/spacing.ts` — new.
+- `src/shared/theme/radius.ts` — new.
+- `src/shared/theme/elevation.ts` — new.
+- `src/shared/theme/fonts.ts` — new.
+- `src/shared/theme/index.ts` — new.
+- `src/shared/ui/text.tsx` — new.
+- `src/shared/ui/button.tsx` — new.
+- `src/shared/ui/card.tsx` — new.
+- `src/shared/ui/chip.tsx` — new.
+- `src/shared/ui/input.tsx` — new.
+- `src/shared/ui/index.ts` — new.
 - `src/app/_layout.tsx` — modify; font gate.
 - `src/app/index.tsx` — modify; tokens and primitives.
 - `src/app/design-system.tsx` — new gallery route.
@@ -214,7 +216,7 @@ Component states:
 
 ## Durable Documentation Impact
 
-- `ARCHITECTURE.md`: not needed — the token/primitive layout is discoverable in `src/theme` and `src/components/ui`.
+- `ARCHITECTURE.md`: not needed — the token/primitive layout is discoverable in `src/shared/theme` and `src/shared/ui`.
 - `CONSTRAINTS.md`: not needed — no new durable rule; `AGENTS.md` already forbids inventing colors and fonts.
 - `AGENTS.md`: update only Project Status to note the design system is implemented.
 - Other docs: `PROGRESS.md` and `feature_list.json` evidence.
@@ -222,7 +224,7 @@ Component states:
 ## Implementation Plan
 
 1. Install the three Expo-compatible Google Font packages and confirm the lockfile updates.
-2. Add the `src/theme` modules and font hook with the documented values.
+2. Add the `src/shared/theme` modules and font hook with the documented values.
 3. Add the five primitives and barrel exports.
 4. Gate the root layout on font loading.
 5. Build the `/design-system` gallery with every token group and component state.
@@ -247,7 +249,7 @@ Component states:
 
 - `npm run verify` — ESLint, `tsc --noEmit`, `expo-doctor` pass.
 - `./init.sh` — exit 0 and prints the start command.
-- Static scan: `rg '#[0-9a-fA-F]{6}' src/components src/app` shows no hex values outside `src/theme` (except documentation text if any).
+- Static scan: `rg '#[0-9a-fA-F]{6}' src/shared/ui src/app` shows no hex values outside `src/shared/theme` (except documentation text if any).
 - Manual on device: open `/design-system`, confirm fonts, palette, type scale, spacing, radii, buttons, cards, chips, and input states against `DESIGN.md`; type into the focused input; trigger Fast Refresh and a full reload to confirm fonts reload cleanly.
 - Gallery route is not covered by automated tests; no test harness exists yet, and this feature is static. The first feature with dynamic behavior must add focused coverage.
 

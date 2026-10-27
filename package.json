@@ -37,6 +37,7 @@
     "eslint": "^9.39.5",
     "eslint-config-expo": "~58.0.4",
     "eslint-import-resolver-typescript": "^3.10.1",
+    "eslint-plugin-boundaries": "^7.3.0",
     "tsx": "^4.23.15",
     "typescript": "~6.0.3"
   },
@@ -46,8 +47,8 @@
     "ios": "expo run:ios",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
-    "test": "npm run test:board",
-    "test:board": "tsx --test src/content/board-data/board-data.test.ts",
+    "test": "node --import tsx --test \"tests/**/*.test.ts\"",
+    "test:watch": "node --import tsx --test --watch \"tests/**/*.test.ts\"",
     "verify": "npm run lint && npm run typecheck && npm test && npx expo-doctor"
   },
   "private": true

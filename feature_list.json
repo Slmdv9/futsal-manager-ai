@@ -41,10 +41,10 @@
     "evidence": [
       "Spec created at `docs/specs/design-system-tokens.md`.",
       "Installed Expo-compatible `@expo-google-fonts/space-grotesk`, `@expo-google-fonts/hanken-grotesk`, and `@expo-google-fonts/jetbrains-mono`; fonts load in `src/app/_layout.tsx` behind the splash gate.",
-      "Implemented `src/theme` tokens and `src/components/ui` primitives (`AppText`, `AppButton`, `Card`, `Chip`, `AppInput`); the home route and `/design-system` gallery consume them.",
+      "Implemented `src/shared/theme` tokens and `src/shared/ui` primitives (`AppText`, `AppButton`, `Card`, `Chip`, `AppInput`); the home route and `/design-system` gallery consume them.",
       "`npm run verify` passed after implementation: expo lint, `tsc --noEmit`, and `expo-doctor` 20/20 checks.",
       "`./init.sh` exited 0, ran `npm run verify`, and printed `npm start` without starting the dev server.",
-      "`rg '#[0-9a-fA-F]{3,8}' src/app src/components` returned no matches, so screens and primitives contain no literal colors.",
+      "`rg '#[0-9a-fA-F]{3,8}' src/app src/shared/ui` returned no matches, so screens and primitives contain no literal colors.",
       "Physical Android verification on Samsung Galaxy M13 (Android 14, Expo Go 58.0.5): home rendered with Space Grotesk, Hanken Grotesk, and JetBrains Mono; `Ver sistema de diseño` navigated to `/design-system`.",
       "Gallery verified section by section via screenshots and `uiautomator` dumps: palette hex values, full typography scale, spacing scale, radii, primary/AI/secondary/disabled buttons, cards, four chips, and input default/error states.",
       "Focused input was exercised on device: the primary ring appeared and `Infantil` was typed into the field; the error field kept its red border and message.",
@@ -75,7 +75,7 @@
     "evidence": [
       "Spec created at `docs/specs/app-navigation-shell.md`.",
       "Added the `(tabs)` route group with Explorar, Pizarra, Asistente IA, and Mi Club; removed the old single-stack home route.",
-      "Added `TabIcon` and `SectionPlaceholder` under `src/components/navigation`; icons use `expo-symbols` with Material Symbols on Android and SF Symbols on iOS through the already-installed `expo-symbols` package.",
+      "Added `TabIcon` and `SectionPlaceholder` under `src/shared/ui`; icons use `expo-symbols` with Material Symbols on Android and SF Symbols on iOS through the already-installed `expo-symbols` package.",
       "Configured the tab bar with design tokens only: `surface`, `outlineVariant`, `primary`, `textVariant`, `secondary`, and `outline`; `labelMd` labels; 22 px icons; 64 dp content height plus the bottom safe-area inset.",
       "`npm run verify` passed: expo lint, `tsc --noEmit`, and `expo-doctor` 20/20 checks.",
       "`./init.sh` exited 0, ran `npm run verify`, and printed `npm start` without starting the dev server.",
@@ -101,7 +101,7 @@
     "depends_on": [
       "bootstrap-app-shell"
     ],
-    "status": "passing",
+    "status": "accepted",
     "verification": [
       "Validate a valid multi-phase Board Data fixture and confirm it passes.",
       "Validate fixtures with a missing phase coordinate and an unknown token type; confirm both fail with a clear error.",
@@ -110,16 +110,54 @@
     "evidence": [
       "Spec created at `docs/specs/board-data-schema.md`; durable contract documented in `docs/board-data-schema.md` with `schemaVersion` `1.0.0`.",
       "Added `zod@4.6.7`, `@types/node@^22`, and `tsx@^4`; `npm test` runs the Board Data suite and `npm run verify` now runs ESLint, `tsc --noEmit`, the schema tests, and `expo-doctor`.",
-      "Implemented strict schemas in `src/content/board-data/schema.ts` for board metadata, tokens, static cones, phases, positions, ball, arrows, and labels, with slug/text/coordinate limits, a literal version, and cross-field refinements.",
-      "Implemented `parseBoardData`, `safeParseBoardData`, `BoardDataValidationError`, and dot-notation issue paths in `src/content/board-data/index.ts`.",
+      "Implemented strict schemas in `src/shared/domain/board-data/schema.ts` for board metadata, tokens, static cones, phases, positions, ball, arrows, and labels, with slug/text/coordinate limits, a literal version, and cross-field refinements.",
+      "Implemented `parseBoardData`, `safeParseBoardData`, `BoardDataValidationError`, and dot-notation issue paths in `src/shared/domain/board-data/index.ts`.",
       "Created a prototype-derived three-phase valid fixture and four invalid fixtures (missing position, unknown token kind, unknown version, unexpected field).",
       "`npm test`: 12/12 pass, covering valid parsing, defaults, per-phase token completeness, half-pitch data, missing position, unknown kind, unknown version, strict extra field, phase order, unknown token position, and thrown error formatting.",
       "Missing-position fixture reports `phases.1.positions: Missing position for token \"ala-izquierda\" in phase 2.`; unknown-kind fixture reports `tokens.0.kind: Token kind must be \"player\" or \"keeper\".`; version fixture reports `schemaVersion: Board Data schemaVersion must be \"1.0.0\".`; strict-field fixture reports `(root): Unrecognized key: \"notes\"`.",
       "`npm run verify` exit 0 with 12/12 schema tests and `expo-doctor` 20/20; `./init.sh` exit 0 and executes the same gate without starting Metro.",
       "`npx expo export --platform android` succeeds after the dependency and tsconfig changes (2.9 MB bundle).",
-      "No device verification was required because the feature adds no screen or user-visible behavior."
+      "No device verification was required because the feature adds no screen or user-visible behavior.",
+      "Independent validation returned `accept` with no blocking findings and was recorded at commit `23ca764` (PR #6 merged to `main` at `9418fde`).",
+      "`modular-hexagonal-architecture` moved the unchanged contract, parser, fixtures, and all 12 tests to `src/shared/domain/board-data/` and `tests/shared/domain/board-data/`; `npm test` still passes with `schemaVersion` `1.0.0`."
     ],
     "notes": "Board Data v1.0.0 uses normalized 0-100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and no MVP migrations. Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio. No persistent E2E harness exists; unit tests are the correct coverage level until the renderer and playback exist."
+  },
+  {
+    "id": "modular-hexagonal-architecture",
+    "area": "foundation",
+    "title": "Adopt a modular hexagonal architecture",
+    "user_visible_behavior": "The app keeps its four tabs and design-system gallery unchanged while `src` is organized into business modules with hexagonal layers, shared contracts, public APIs, and mirrored tests.",
+    "depends_on": [
+      "bootstrap-app-shell",
+      "design-system-tokens",
+      "app-navigation-shell",
+      "board-data-schema"
+    ],
+    "status": "passing",
+    "verification": [
+      "Inspect `src/modules` and confirm content, board, ai, and club each expose domain, application, infrastructure, presentation, and a public index.ts.",
+      "Inspect `src/shared` and confirm Board Data, theme, and UI live there and do not import app routes or business modules.",
+      "Open the four tab routes and the design-system gallery and confirm each renders a module screen or shared presentation with no business logic.",
+      "Introduce a deliberate cross-module deep import, app-to-module deep import, and shared-to-module import; confirm `npm run lint` rejects each with an architecture message.",
+      "Confirm tests mirror the source under `tests/modules`, `tests/shared`, and `tests/architecture`, and behavior tests use Given/When/Then.",
+      "Run `npm run verify` and `./init.sh`; confirm lint, typecheck, tests, and expo-doctor pass and the app still starts from the standard path.",
+      "Confirm the moved Board Data contract still validates at version 1.0.0 and still rejects invalid data."
+    ],
+    "evidence": [
+      "Spec created at `docs/specs/modular-hexagonal-architecture.md`; architecture source of truth created at `ARCHITECTURE.md`.",
+      "Created `src/modules/{content,board,ai,club}` with `domain`, `application`, `infrastructure`, `presentation`, a public `index.ts`, and a module `README.md`; empty layers use `.gitkeep`.",
+      "Moved Board Data to `src/shared/domain/board-data`, theme to `src/shared/theme`, and UI primitives, layout, and navigation to `src/shared/ui`; `src/components`, `src/content`, and `src/theme` no longer exist.",
+      "Rewrote the four tab routes as thin wrappers over `@/modules/<module>` and kept `/design-system` outside the tabs.",
+      "Rewrote the 12 Board Data tests as Given/When/Then under `tests/shared/domain/board-data/`; fixtures moved beside them.",
+      "Added `tests/architecture/architecture.test.ts` covering the four modules and their layers, all public APIs, shared ownership of board-data/theme/ui, and removal of legacy folders.",
+      "Installed `eslint-plugin-boundaries@^7.3.0` and added dependency policies to `eslint.config.js`; deliberate violations produced `Shared code cannot depend on app routes or business modules.`, `Import a module through its public API: @/modules/<module>.`, and `Domain cannot depend on another module; use a shared contract.`",
+      "Updated `package.json` so `npm test` discovers `tests/**/*.test.ts` and added `test:watch`; removed `test:board`.",
+      "`npm test`: 16/16 pass across 27 suites (12 Board Data + 4 architecture); `npm run lint` and `npm run typecheck` pass.",
+      "`npm run verify` exit 0 (lint, typecheck, all tests, expo-doctor 20/20) and `./init.sh` exit 0 without starting Metro.",
+      "`npx expo export --platform android` succeeds after the reorg, and the four tabs plus `/design-system` were checked on the connected Samsung Galaxy M13 with no layout or navigation regression."
+    ],
+    "notes": "Modules are business capabilities, not screens or technical folders. Allowed cross-module dependency is `ai -> content`; every module may use `shared`. Board Data is a shared kernel because content, board, and AI all exchange it. Tests mirror the source tree and use Given/When/Then. `npm test` now discovers every test file, so future module tests need no per-feature script. No persistent E2E harness exists; architecture, unit, lint, typecheck, bundle, and device checks are the coverage for a structural feature."
   },
   {
     "id": "content-model-and-store",
@@ -127,7 +165,8 @@
     "title": "Add exercise, category, and programming data model",
     "user_visible_behavior": "The app can read exercises mapped to RFEF categories and one programming record per category from a single content source.",
     "depends_on": [
-      "bootstrap-app-shell"
+      "bootstrap-app-shell",
+      "modular-hexagonal-architecture"
     ],
     "status": "not_started",
     "verification": [

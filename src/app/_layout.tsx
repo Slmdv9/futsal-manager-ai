@@ -3,8 +3,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { AppText } from '@/components/ui';
-import { colors, spacing, useAppFonts } from '@/theme';
+import { AppText } from '@/shared/ui';
+import { colors, spacing, useAppFonts } from '@/shared/theme';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 

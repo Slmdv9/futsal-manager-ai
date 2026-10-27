@@ -2,7 +2,7 @@ import { Link } from 'expo-router';
 import type { ReactNode } from 'react';
 import { ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AppButton, AppInput, AppText, Card, Chip, type ChipVariant } from '@/components/ui';
+import { AppButton, AppInput, AppText, Card, Chip, type ChipVariant } from '@/shared/ui';
 import {
   colors,
   radius,
@@ -12,7 +12,7 @@ import {
   type RadiusToken,
   type SpacingToken,
   type TypographyVariant,
-} from '@/theme';
+} from '@/shared/theme';
 
 const palette = Object.entries(colors) as [ColorToken, string][];
 const typeVariants = Object.keys(typography) as TypographyVariant[];

@@ -3,9 +3,10 @@
 Versioned, renderable contract for an exercise's tactics board. Board Data is authored or AI-generated, validated with `parseBoardData`, and drawn by the Tactics Board. The board is a renderer: it never invents tokens, positions, arrows, or labels.
 
 - Current version: **`1.0.0`** (`BOARD_DATA_SCHEMA_VERSION`).
-- Implementation: `src/content/board-data/schema.ts` (contract) and `src/content/board-data/index.ts` (validation API).
-- Fixtures: `src/content/board-data/fixtures/`.
-- Tests: `src/content/board-data/board-data.test.ts`.
+- Implementation: `src/shared/domain/board-data/schema.ts` (contract) and `src/shared/domain/board-data/index.ts` (validation API).
+- Fixtures: `tests/shared/domain/board-data/fixtures/`.
+- Tests: `tests/shared/domain/board-data/board-data.test.ts`.
+- Module ownership: Board Data is a shared kernel in `src/shared/domain/board-data` because the `content`, `board`, and `ai` modules all exchange it. See `ARCHITECTURE.md`.
 
 ## Coordinate System
 
