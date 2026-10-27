@@ -154,9 +154,9 @@ Owns the Exercise Library, Category reference data, Programming, the content rea
 - `domain`: the seven frozen RFEF `Category` brackets (`category.ts`), `Exercise`, `Programming`, `ContentProvenance` with the licence policy helpers (`isPublishableProvenance`, `requiresAttribution`, `isLicenseStatusAllowedForKind`), the strict `content-package.ts` contract with `parseContentPackage`/`safeParseContentPackage` and `ContentValidationError`, and the `ContentRepository` port in `domain/ports`.
 - `application`: publishable-only read use cases — `listCategories`, `listExercises` (optional category filter, deduplicated), `getExercise`, `getProgramming` (single publishable record or `null`). Visibility uses `isPublishableExercise`/`isPublishableProgramming`, so published but unlicensed records are filtered even from a non-bundled repository.
 - `infrastructure`: `content/content-package.json`, the single versioned content package (`contentVersion` `1.0.0`), and `bundled-content-repository.ts`, which imports the JSON as `unknown`, parses it once through `domain/content-package.ts`, indexes by exercise id and Programming category, and exposes `createBundledContentRepository()`.
-- `presentation`: the Explorar placeholder until `explore-general-screen` lands.
+- `presentation`: the Explorar category browser. `ExploreScreen` receives the `ContentRepository` as a prop, reads the session-scoped `CategorySelectionProvider`/`useCategorySelection`, and composes the prop-driven `CategoryFilterBar`, `ProgrammingSummaryCard`, and `ExerciseLibraryList`. The pure `category-selection.ts` reducer and `category-browse-model.ts` view model hold the selection transitions and the `listExercises`/`getProgramming` formatting; no component filters status or provenance itself. The full prototype Explorar layout belongs to `explore-general-screen`.
 
-The bundled seed holds 26 original exercises and seven Programming records, one per RFEF category: the deep Infantil U14 slice (`salida-3-1-presion-alta` first, `infantil-u14-base` version `1.1.0`) plus three representative exercises and one base Programming record for each of the other six categories. The content contract, invariants, and validation paths are documented in `docs/content-model.md`; the licensing gate, source register, and author checklist in `docs/content-licensing.md`. Attribution display, category filter state, and screens are separate features.
+The bundled seed holds 26 original exercises and seven Programming records, one per RFEF category: the deep Infantil U14 slice (`salida-3-1-presion-alta` first, `infantil-u14-base` version `1.1.0`) plus three representative exercises and one base Programming record for each of the other six categories. The content contract, invariants, and validation paths are documented in `docs/content-model.md`; the licensing gate, source register, and author checklist in `docs/content-licensing.md`. Attribution display and the full prototype Explorar/detail screens are separate features.
 
 ### `board`
 
@@ -174,11 +174,13 @@ Owns the next-phase team, roster, and season surface. The MVP is anonymous, so o
 
 `src/app` is the only place where routing and dependency wiring meet:
 
-- `_layout.tsx` loads fonts, hides the splash screen, and configures the root stack.
+- `_layout.tsx` loads fonts, hides the splash screen, configures the root stack, and mounts `CategorySelectionProvider` from `@/modules/content` once around that stack, so the selected category survives tab switches and `(tabs)` ↔ `/design-system` navigation for the app session.
 - `(tabs)/_layout.tsx` configures the four tabs with `shared/ui` and `shared/theme`.
-- Each route file imports a screen from a module public API and default-exports it. Route files contain no business logic.
+- Each route file imports a screen from a module public API and default-exports a thin wrapper (or the screen itself). Route files contain no business logic.
 - The `/design-system` route is a development gallery. It imports shared UI and theme only.
 - When a module needs an adapter, the composition root (or a small module-level container) creates it and passes it to the screen or a provider. Do not add a dependency-injection framework for the current scale.
+
+The current content wiring pattern is `route → adapter factory → screen prop`: `src/app/(tabs)/index.tsx` creates `createBundledContentRepository()` at module scope and renders `ExploreScreen({ repository })`. Screens in `content/presentation` never import infrastructure; future screens copy this pattern rather than constructing adapters themselves.
 
 Future Expo Router API routes live under `src/app/api/...`. They are server-side infrastructure adapters: they may import module application/domain code and must never import presentation or expose secrets.
 
@@ -270,9 +272,9 @@ The test name should read as a complete rule, not as a function name. Keep the a
 
 ## Data Flows
 
-**Browse an exercise**
+**Browse by category**
 
-`app/(tabs)/index.tsx` -> `content` screen -> `content` use case (`listExercises`/`getExercise`) -> `ContentRepository` port -> `createBundledContentRepository` over `content-package.json` -> shared `parseBoardData`. Use cases return only `published` content.
+`app/(tabs)/index.tsx` -> `createBundledContentRepository` -> `content` `ExploreScreen` -> session `CategorySelectionProvider` -> `content` browse view model -> `listExercises`/`getProgramming` -> `ContentRepository` port -> bundled package -> shared `parseBoardData`. The selection is in-memory only and resets on app restart; use cases return only publishable content.
 
 **Render a board**
 

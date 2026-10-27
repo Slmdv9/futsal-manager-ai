@@ -1,4 +1,21 @@
 export { ExploreScreen } from './presentation/screens/explore-screen';
+export {
+  INITIAL_CATEGORY_SELECTION,
+  selectCategory,
+  type CategorySelection,
+} from './presentation/state/category-selection';
+export {
+  CategorySelectionProvider,
+  useCategorySelection,
+} from './presentation/state/category-selection-provider';
+export {
+  buildCategoryBrowseModel,
+  formatCategoryLabel,
+  formatExerciseCount,
+  formatExerciseMeta,
+  formatSessionDuration,
+  type CategoryBrowseModel,
+} from './presentation/view-models/category-browse-model';
 
 export {
   CATEGORIES,

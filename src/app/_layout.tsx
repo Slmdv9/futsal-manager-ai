@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { CategorySelectionProvider } from '@/modules/content';
 import { AppText } from '@/shared/ui';
 import { colors, spacing, useAppFonts } from '@/shared/theme';
 
@@ -33,10 +34,12 @@ export default function RootLayout() {
 
   return (
     <>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="design-system" />
-      </Stack>
+      <CategorySelectionProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="design-system" />
+        </Stack>
+      </CategorySelectionProvider>
       <StatusBar style="dark" />
     </>
   );

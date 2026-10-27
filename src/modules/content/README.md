@@ -7,13 +7,13 @@ Owns Category reference data, Exercise, Programming, the bundled content package
 - `domain` — active. Seven frozen RFEF `Category` brackets, `Exercise`, `Programming`, `ContentProvenance` plus the licence policy helpers in `provenance.ts` (`PUBLISHABLE_LICENSE_STATUSES`, `isPublishableProvenance`, `requiresAttribution`, `isLicenseStatusAllowedForKind`), the strict `content-package.ts` contract (`CONTENT_PACKAGE_VERSION`, `parseContentPackage`, `safeParseContentPackage`, `ContentValidationError`), and the `ContentRepository` port in `domain/ports`.
 - `application` — active. Publishable-only use cases: `listCategories`, `listExercises`, `getExercise`, `getProgramming`.
 - `infrastructure` — active. `content/content-package.json` plus `bundled-content-repository.ts` (`createBundledContentRepository`), which imports the JSON as `unknown`, parses it once, and indexes it. The bundled seed holds 26 original exercises and seven Programming records (one per RFEF category): `infantil-u14-base` (record version `1.1.0`) is the deep slice and the six other categories carry three representative exercises plus a `1.0.0` base record; `contentVersion` stays `1.0.0`.
-- `presentation` — Explorar placeholder until `explore-general-screen`; exercise detail follows in `exercise-detail-screen`.
+- `presentation` — active. `ExploreScreen({ repository })` renders the Explorar category browser: `CategoryFilterBar` (seven RFEF `FilterChip`s), `ProgrammingSummaryCard`, and `ExerciseLibraryList`. Session-only selection lives in `state/category-selection.ts` (pure reducer) and `state/category-selection-provider.tsx` (`CategorySelectionProvider`, `useCategorySelection`), mounted once in `src/app/_layout.tsx`; `view-models/category-browse-model.ts` builds the filtered model through `listExercises`/`getProgramming` and owns the Spanish formatters. The full prototype layout belongs to `explore-general-screen`, and exercise detail to `exercise-detail-screen`.
 
 ## Public API
 
-`src/modules/content/index.ts`. Other modules and routes must not import this module's internals directly. It exports the categories, package parser and error, entities, port, use cases, the bundled repository factory, and `ExploreScreen`.
+`src/modules/content/index.ts`. Other modules and routes must not import this module's internals directly. It exports the categories, package parser and error, entities, port, use cases, the bundled repository factory, `ExploreScreen`, the session selection state and provider (`INITIAL_CATEGORY_SELECTION`, `selectCategory`, `CategorySelectionProvider`, `useCategorySelection`), and the browse view model plus formatters (`buildCategoryBrowseModel`, `formatCategoryLabel`, `formatExerciseMeta`, `formatSessionDuration`, `formatExerciseCount`).
 
-Browse flow: route → use case → `ContentRepository` → bundled adapter → shared `parseBoardData`.
+Browse flow: route → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → browse view model → use case → `ContentRepository` → bundled adapter → shared `parseBoardData`.
 
 ## Rules
 
@@ -26,4 +26,4 @@ Browse flow: route → use case → `ContentRepository` → bundled adapter → 
 
 ## Tests
 
-Mirror the source path under `tests/modules/content/`. `node:test` cannot load React Native, so node tests import layers directly; `tests/modules/content/index.test.ts` checks the public API surface and the device smoke covers the route that imports it.
+Mirror the source path under `tests/modules/content/`. `node:test` cannot load React Native, so node tests import layers directly; the presentation suites cover the pure selection reducer, the browse view model, and the app composition wiring, while `tests/modules/content/index.test.ts` checks the public API surface and the device smoke covers the rendered route.

@@ -16,6 +16,9 @@ The durable contract for curated content: Category reference data, Exercise, Pro
 | Read port | `src/modules/content/domain/ports/content-repository.ts` |
 | Bundled package | `src/modules/content/infrastructure/content/content-package.json` |
 | Bundled adapter | `src/modules/content/infrastructure/bundled-content-repository.ts` |
+| Category selection state | `src/modules/content/presentation/state` |
+| Browse view model | `src/modules/content/presentation/view-models/category-browse-model.ts` |
+| Category browser screen | `src/modules/content/presentation/screens/explore-screen.tsx` |
 | Public API | `src/modules/content/index.ts` |
 
 Board Data is a shared kernel, not content-owned: `src/shared/domain/board-data` and `docs/board-data-schema.md`.
@@ -168,7 +171,9 @@ A two-category exercise appears once under each category because the filter read
 
 `createBundledContentRepository()` is the infrastructure factory: it imports the JSON as `unknown`, parses it once, indexes exercises by id and Programming by category, and returns the cached repository. Route and other-module code must reach content through `@/modules/content`.
 
-Browse flow: `app/(tabs)/index.tsx` → `content` screen → use case → `ContentRepository` → bundled adapter → shared `parseBoardData`.
+Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → `buildCategoryBrowseModel` → `listExercises`/`getProgramming` → `ContentRepository` → bundled adapter → shared `parseBoardData`.
+
+`ExploreScreen` is the first read-layer consumer. It renders the seven RFEF chips, the selected Programming summary, and the filtered Exercise Library; the pure view model calls only `listExercises` and `getProgramming`, so visibility and deduplication stay in the read layer. The selected category is **session-only UI state** owned by `content/presentation` (mounted once in `src/app/_layout.tsx`): it survives tab and `/design-system` navigation, is never written to device storage, and resets on app restart. There is no "all categories" state and no default category.
 
 ## Adding Or Changing Content
 
@@ -181,7 +186,7 @@ Browse flow: `app/(tabs)/index.tsx` → `content` screen → use case → `Conte
 
 ## Known Gaps
 
-- The read layer has no screen consumer yet; `explore-general-screen` and `category-filter` are the named consumers.
+- The Explorar category browser consumes the read layer, but the full prototype layout (weekly exercises, methodology overview, AI entry point, hero) still belongs to `explore-general-screen`; the dedicated category detail belongs to `explore-by-category-screen`.
 - The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.

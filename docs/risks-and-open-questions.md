@@ -14,7 +14,7 @@
 
 ## Blocking Next Phase
 
-None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, and all seven RFEF categories are seeded; the next feature ready to start is `category-filter`.
+None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, all seven RFEF categories are seeded, and the category filter is implemented; the next feature ready to start is `explore-general-screen`.
 
 ## Implementation-Time Questions
 
@@ -25,6 +25,8 @@ None. The stack, Board Data schema, and content licensing are resolved, the lice
 - Whether an AI-assisted variant becomes part of a session or always stays standalone.
 - Where locally saved AI results live and how the coach clears them.
 - Chat placement on mobile: full screen tab vs bottom sheet over the board.
+- Category selection is intentionally session-only; if coaches expect it to survive an app restart, `local-ai-results-persistence` or a settings feature owns that storage decision.
+- The repository still has no React Native component-test runner. The category filter is covered by pure view-model/reducer tests, a composition-wiring test, and the device smoke; adopting a Jest-based RNTL runner is its own feature-sized decision before more interactive screens land.
 
 ## Later / Not MVP
 

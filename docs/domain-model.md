@@ -38,6 +38,9 @@
 **Board playback (UI state, not persisted)**
 - `idle` → `playing` (phase by phase) → `ended`; coach can step forward/back and replay ("Animar jugada").
 
+**Category selection (UI state, session only)**
+- `unselected` → `selected` (one RFEF bracket) → another `selected` replaces it; unknown ids are ignored and no "all categories" state exists. It survives navigation for the app session and resets to `unselected` on app restart; it is never persisted.
+
 **Next phase — Team / Season**
 - Team: `created` → `active` → `archived`.
 - Season: `planned` → `in progress` → `completed`.

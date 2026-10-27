@@ -30,6 +30,15 @@ const requiredPublicApiExports = [
   'isPublishableExercise',
   'isPublishableProgramming',
   'ExploreScreen',
+  'CategorySelectionProvider',
+  'useCategorySelection',
+  'buildCategoryBrowseModel',
+  'formatCategoryLabel',
+  'formatExerciseMeta',
+  'formatSessionDuration',
+  'formatExerciseCount',
+  'selectCategory',
+  'INITIAL_CATEGORY_SELECTION',
 ];
 
 describe('Content public API', () => {
