@@ -286,7 +286,7 @@ The test name should read as a complete rule, not as a function name. Keep the a
 ## Verification
 
 - `npm run lint` includes the boundary checks.
-- `npm test` discovers every `tests/**/*.test.ts`.
+- `npm test` discovers every `tests/**/*.test.ts` and `tests/**/*.test.tsx`.
 - `npm run verify` runs lint, typecheck, tests, and `expo-doctor`.
 - `./init.sh` is the standard startup gate and never starts Metro.
 - User-visible changes are checked on the connected Android device following `docs/device-development-workflow.md`.

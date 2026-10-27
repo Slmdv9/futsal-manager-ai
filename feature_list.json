@@ -134,12 +134,12 @@
       "app-navigation-shell",
       "board-data-schema"
     ],
-    "status": "passing",
+    "status": "accepted",
     "verification": [
       "Inspect `src/modules` and confirm content, board, ai, and club each expose domain, application, infrastructure, presentation, and a public index.ts.",
       "Inspect `src/shared` and confirm Board Data, theme, and UI live there and do not import app routes or business modules.",
       "Open the four tab routes and the design-system gallery and confirm each renders a module screen or shared presentation with no business logic.",
-      "Introduce a deliberate cross-module deep import, app-to-module deep import, and shared-to-module import; confirm `npm run lint` rejects each with an architecture message.",
+      "Introduce deliberate violations (shared-to-module, cross-module public import, app-to-module deep import, domain-to-own-public-API, domain-to-`shared/ui`/`shared/theme`) and confirm `npm run lint` rejects each while allowed edges such as `ai -> content` and `presentation -> shared/ui` pass.",
       "Confirm tests mirror the source under `tests/modules`, `tests/shared`, and `tests/architecture`, and behavior tests use Given/When/Then.",
       "Run `npm run verify` and `./init.sh`; confirm lint, typecheck, tests, and expo-doctor pass and the app still starts from the standard path.",
       "Confirm the moved Board Data contract still validates at version 1.0.0 and still rejects invalid data."
@@ -151,13 +151,17 @@
       "Rewrote the four tab routes as thin wrappers over `@/modules/<module>` and kept `/design-system` outside the tabs.",
       "Rewrote the 12 Board Data tests as Given/When/Then under `tests/shared/domain/board-data/`; fixtures moved beside them.",
       "Added `tests/architecture/architecture.test.ts` covering the four modules and their layers, all public APIs, shared ownership of board-data/theme/ui, and removal of legacy folders.",
-      "Installed `eslint-plugin-boundaries@^7.3.0` and added dependency policies to `eslint.config.js`; deliberate violations produced `Shared code cannot depend on app routes or business modules.`, `Import a module through its public API: @/modules/<module>.`, and `Domain cannot depend on another module; use a shared contract.`",
-      "Updated `package.json` so `npm test` discovers `tests/**/*.test.ts` and added `test:watch`; removed `test:board`.",
-      "`npm test`: 16/16 pass across 27 suites (12 Board Data + 4 architecture); `npm run lint` and `npm run typecheck` pass.",
+      "Installed `eslint-plugin-boundaries@^7.3.0` and added dependency policies to `eslint.config.js`, including the full module dependency allowlist (`ai -> content`), self-public-API bans for module layers, and `shared/domain`, `shared/theme`, `shared/ui` sublayer rules; deliberate violations failed with messages naming the source and target modules or the shared sublayer.",
+      "Added `tests/architecture/boundaries.test.ts`, an ESLint-API regression test that asserts allowed imports pass and forbidden imports fail for shared-to-module, cross-module, self-public-API, and domain-to-`shared/theme`/`shared/ui` cases.",
+      "Mutation-checked the regression test: removing the cross-module allowlist made it fail with `board importing content public API should fail the boundaries rule`; the config was restored and the test passed again.",
+      "Independent re-validation re-ran the probes: `shared -> module`, `board -> content`, `content/application -> board`, `content/domain -> own public API`, `shared/domain -> shared/ui`, and domain-to-theme/UI all failed; `ai -> content`, `presentation -> shared/ui`, and `app -> module public API` passed.",
+      "TypeScript JSX test discovery verified: a temporary `tests/architecture/__tmp/probe.test.tsx` raised the run from 16 to 17 tests; the probe was removed.",
+      "Updated `package.json` so `npm test` discovers `tests/**/*.test.{ts,tsx}` and added `test:watch`; removed `test:board`.",
+      "`npm test`: 17/17 pass across 29 suites (12 Board Data + 4 architecture structure + 1 ESLint boundary regression); `npm run lint` and `npm run typecheck` pass.",
       "`npm run verify` exit 0 (lint, typecheck, all tests, expo-doctor 20/20) and `./init.sh` exit 0 without starting Metro.",
       "`npx expo export --platform android` succeeds after the reorg, and the four tabs plus `/design-system` were checked on the connected Samsung Galaxy M13 with no layout or navigation regression."
     ],
-    "notes": "Modules are business capabilities, not screens or technical folders. Allowed cross-module dependency is `ai -> content`; every module may use `shared`. Board Data is a shared kernel because content, board, and AI all exchange it. Tests mirror the source tree and use Given/When/Then. `npm test` now discovers every test file, so future module tests need no per-feature script. No persistent E2E harness exists; architecture, unit, lint, typecheck, bundle, and device checks are the coverage for a structural feature."
+    "notes": "Independent re-validation after the repair returned `accept`: the full module allowlist (`ai -> content`), self-public-API bans, and shared-sublayer boundaries are enforced and mutation-checked, `.test.tsx` tests are discovered, and all gates and the device smoke pass. Modules are business capabilities, not screens or technical folders. Allowed cross-module dependency is `ai -> content`; every module may use `shared`. Board Data is a shared kernel because content, board, and AI all exchange it. Tests mirror the source tree and use Given/When/Then. No persistent E2E harness exists; architecture, unit, lint, typecheck, bundle, and device checks are the coverage for a structural feature."
   },
   {
     "id": "content-model-and-store",

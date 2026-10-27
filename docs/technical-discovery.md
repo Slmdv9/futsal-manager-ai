@@ -16,7 +16,7 @@ A native mobile app built with React Native and Expo, targeting phones and table
 ## Commands
 
 - Install: `npm install`
-- Verify: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all tests discovered from `tests/**/*.test.ts`, and `expo-doctor`) — also executed by `./init.sh`
+- Verify: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all tests discovered from `tests/**/*.test.{ts,tsx}`, and `expo-doctor`) — also executed by `./init.sh`
 - Test: `npm test` (Node's `node:test` through `tsx`; tests mirror `src` under `tests/modules`, `tests/shared`, and `tests/architecture`)
 - Test in watch mode: `npm run test:watch`
 - Start: `npm start` (Expo dev server; `init.sh` never starts it)
