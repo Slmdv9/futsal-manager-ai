@@ -7,6 +7,7 @@ A native mobile app built with React Native and Expo, targeting phones and table
 ## Chosen Stack
 
 - **React Native + Expo** with Expo Router for navigation.
+- **Modular hexagonal architecture**: business modules under `src/modules` with `domain`, `application`, `infrastructure`, and `presentation` layers, shared code under `src/shared`, and boundary rules enforced by `eslint-plugin-boundaries`. See `ARCHITECTURE.md`.
 - **`react-native-svg`** for the tactics board, rendering full token/arrow/cone positions per phase and interpolating between phases.
 - **Expo Router API routes** deployed on **EAS Hosting** for the server-side LLM gateway and quota enforcement.
 - **TypeScript** across app and API routes.
@@ -15,7 +16,9 @@ A native mobile app built with React Native and Expo, targeting phones and table
 ## Commands
 
 - Install: `npm install`
-- Verify: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`) — also executed by `./init.sh`
+- Verify: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all tests discovered from `tests/**/*.test.{ts,tsx}`, and `expo-doctor`) — also executed by `./init.sh`
+- Test: `npm test` (Node's `node:test` through `tsx`; tests mirror `src` under `tests/modules`, `tests/shared`, and `tests/architecture`)
+- Test in watch mode: `npm run test:watch`
 - Start: `npm start` (Expo dev server; `init.sh` never starts it)
 - Bundle smoke: `npx expo export --platform android --output-dir dist`
 - Native Android debug build: `npm run android` (`expo run:android`)

@@ -3,15 +3,16 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/board-data-schema` (from `main` at `af588e3`)
-- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/board-data-schema`
+- Current branch: `feat/modular-hexagonal-architecture` (from `main` at `9418fde`)
+- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/modular-hexagonal-architecture`
 - Standard startup path: `./init.sh`
-- Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, Board Data schema tests via `npm test`, and `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted; `board-data-schema` is implemented and verified, pending independent validation.
-- Next ready feature after validation: `content-model-and-store`
+- Standard verification path: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all `tests/**/*.test.{ts,tsx}` via `npm test`, and `expo-doctor`), executed by `./init.sh`
+- Architecture: modular monolith with `content`, `board`, `ai`, and `club` modules, four hexagonal layers each, a public `index.ts` per module, and `shared/domain`, `shared/theme`, `shared/ui` at the bottom of the dependency graph; source of truth in `ARCHITECTURE.md`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, `board-data-schema`, and `modular-hexagonal-architecture` are accepted. Independent re-validation after the boundary repair returned `accept`.
+- Next ready feature: `content-model-and-store`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`board-data-schema`: 12/12 schema tests, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and invalid fixtures report the expected paths)
+- Last verified at: `2026-10-27` (`modular-hexagonal-architecture` repair: 17/17 tests across 29 suites, full module allowlist and shared-sublayer boundaries enforced by `tests/architecture/boundaries.test.ts`, `.test.tsx` discovery verified, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and the four tabs plus `/design-system` render on the connected device)
 
 ## Session Log
 
@@ -124,3 +125,26 @@
 - Files or artifacts updated: `package.json`, `package-lock.json`, `tsconfig.json`, `src/content/board-data/schema.ts`, `src/content/board-data/index.ts`, `src/content/board-data/board-data.test.ts`, `src/content/board-data/fixtures/*`, `docs/specs/board-data-schema.md`, `docs/board-data-schema.md`, `docs/domain-model.md`, `docs/risks-and-open-questions.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
 - Known risks: `npm audit` keeps 5 pre-existing high-severity transitive advisories with no non-breaking fix; the prototype is 4:3/half-pitch while the contract normalizes to a full 2:1 space, so the renderer must map coordinates deliberately; no device verification applies because there is no UI change.
 - Next best step: independently validate `board-data-schema`, then plan `content-model-and-store` from an updated `main`.
+
+### Session 011
+
+- Date: `2026-10-27`
+- Goal: Reconcile the merged `board-data-schema` acceptance and adopt a modular hexagonal architecture before product content work.
+- Completed: recorded the `board-data-schema` acceptance from `23ca764`; created `ARCHITECTURE.md` and `docs/specs/modular-hexagonal-architecture.md`; moved Board Data, theme, and UI into `src/shared`; created `content`, `board`, `ai`, and `club` modules with four hexagonal layers, public APIs, READMEs, and layer markers; made the Expo Router tabs thin wrappers; moved and rewrote the Board Data tests; added the architecture structural test; added `eslint-plugin-boundaries` policies; switched `npm test` to discover all tests.
+- Verification run: `npm test` (16/16 across 27 suites), `npm run lint` (including deliberate boundary violations), `npm run typecheck`, `npm run verify` exit 0 with `expo-doctor` 20/20, `./init.sh` exit 0, `npx expo export --platform android`, and a device smoke check of the four tabs plus `/design-system`.
+- Evidence captured: all 12 Board Data tests pass from `tests/shared/domain/board-data` with the contract unchanged at `1.0.0`; the 3 architecture tests pass; deliberate `shared -> module`, `app -> module internal`, and `cross-module internal` imports are rejected with the expected messages; `src/components`, `src/content`, and `src/theme` no longer exist; the app renders all four tabs and the gallery on `SM-M135F` with no layout or navigation regression.
+- Files or artifacts updated: `ARCHITECTURE.md`, `docs/specs/modular-hexagonal-architecture.md`, `eslint.config.js`, `package.json`, `package-lock.json`, `src/app/*`, `src/modules/*`, `src/shared/*`, `tests/shared/domain/board-data/*`, `tests/architecture/architecture.test.ts`, `docs/board-data-schema.md`, `docs/technical-discovery.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
+- Known risk or unresolved issue: independent validation has not run yet; `npm audit` keeps 4 high-severity transitive advisories in Expo tooling; empty module layers rely on `.gitkeep` until their features land; physical iOS and tablet rendering remain unverified.
+- Next best step: independently validate `modular-hexagonal-architecture`, then implement `content-model-and-store` inside the `content` module architecture.
+
+### Session 012
+
+- Date: `2026-10-27`
+- Goal: Apply the validator repair for `modular-hexagonal-architecture` and re-validate.
+- Completed: added the full cross-module dependency allowlist (`ai -> content` only) and self-public-API bans in `eslint.config.js`; classified `shared/domain`, `shared/theme`, and `shared/ui` and forbade domain layers from importing theme or UI; switched `npm test`/`test:watch` to `tests/**/*.test.{ts,tsx}`; added `tests/architecture/boundaries.test.ts`, an ESLint-API regression test for allowed and forbidden edges.
+- Verification run: `npm test` (17/17 across 29 suites), `npm run lint`, `npm run typecheck`, `npm run verify` exit 0 with `expo-doctor` 20/20, `./init.sh` exit 0, `npx expo export --platform android`, and a device smoke check of the four tabs plus `/design-system` on `SM-M135F`.
+- Evidence captured: forbidden probes (`shared -> module`, `board -> content`, `content/application -> board`, `content/domain -> own public API`, domain -> `shared/theme`/`shared/ui`) fail with architecture messages; allowed edges (`ai -> content`, `presentation -> shared/ui`, `app -> module public API`) pass; a temporary `.test.tsx` probe raised the run from 16 to 17 tests; Board Data still validates at `1.0.0` with 12 tests; no layout or navigation regression.
+- Files or artifacts updated: `eslint.config.js`, `package.json`, `tests/architecture/boundaries.test.ts`, `AGENTS.md`, `ARCHITECTURE.md`, `docs/technical-discovery.md`, `feature_list.json`, `PROGRESS.md`.
+- Known risk or unresolved issue: `npm audit` keeps four pre-existing high-severity transitive advisories in Expo tooling; screen-level mirror tests wait for React Native Testing Library; physical iOS and tablet rendering remain unverified.
+- Independent re-validation: verdict `accept`. Re-ran `npm run verify` (17/17 tests, 29 suites, expo-doctor 20/20), `./init.sh`, Android export, live boundary probes (all expected failures/passes), a mutation check of the new regression test, and the device smoke on `SM-M135F`; Board Data remains at `1.0.0`.
+- Next best step: commit and push the repair, then start `content-model-and-store`.

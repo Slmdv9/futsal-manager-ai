@@ -4,6 +4,7 @@ This repository contains **Futsal Manager AI**, a mobile-first, Spanish-language
 
 ## Read First
 
+- `ARCHITECTURE.md` — module map, hexagonal layers, public APIs, dependency rules, and test layout. Authoritative for where code belongs.
 - `CONTEXT.md` — domain language and canonical terms. Use these words in code and UI.
 - `docs/build-brief.md` — problem, users, goals, non-goals, MVP slice, validation.
 - `docs/domain-model.md` — core entities, relationships, states, edge cases.
@@ -19,7 +20,7 @@ Read on demand:
 
 ## Project Status
 
-Bootstrapped, design system, navigation, and the Board Data contract implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted; `board-data-schema` is implemented and verified, pending independent validation. The next ready feature after acceptance is `content-model-and-store`. The physical device loop is documented in `docs/device-development-workflow.md`.
+Bootstrapped, design system, navigation, Board Data contract, and modular hexagonal architecture implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. Source is organized into `content`, `board`, `ai`, and `club` modules under `src/modules`, each with `domain`, `application`, `infrastructure`, `presentation`, and a public `index.ts`; shared code lives in `src/shared`. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted; `modular-hexagonal-architecture` is implemented and verified, pending independent validation. The next ready feature after acceptance is `content-model-and-store`, which fills the `content` domain, application, and infrastructure layers. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 
@@ -28,8 +29,9 @@ Before writing code:
 1. Confirm the working directory with `pwd`.
 2. Read `PROGRESS.md` for current verified state and the next step.
 3. Read `feature_list.json` and pick the first ready unfinished feature in list order.
-4. Run `./init.sh`.
-5. If baseline verification fails, fix the baseline before adding new feature work.
+4. Read `ARCHITECTURE.md` and place the work in the owning module and layer before editing.
+5. Run `./init.sh`.
+6. If baseline verification fails, fix the baseline before adding new feature work.
 
 ## Branch And Pull Request Workflow
 
@@ -62,6 +64,10 @@ Do not reuse a merged phase branch for unrelated work.
 ## Working Rules
 
 - Work on one feature at a time; keep changes inside that feature's scope.
+- Place code by business module and hexagonal layer: `domain`, `application`, `infrastructure`, or `presentation` under `src/modules/<module>`. Put genuinely cross-module code in `src/shared`.
+- Import another module or an app route only through `@/modules/<module>` or `@/shared/*`. Never deep-import another module's layers; `npm run lint` enforces this with `eslint-plugin-boundaries`.
+- Keep Expo Router files in `src/app` thin: they render module screens through public APIs and wire adapters; no business logic there.
+- Mirror source under `tests/modules/<module>/...` and `tests/shared/...`, and write behavior tests as Given/When/Then. Cross-cutting structure checks live in `tests/architecture`.
 - Do not invent domain terminology; use `CONTEXT.md` (e.g. `Exercise` not "tarea", `Category` not skill level).
 - Follow `DESIGN.md` tokens and the prototype layout; do not introduce new colors, fonts, or heavy shadows.
 - Do not add code comments unless asked. Keep code identifiers in English.
@@ -70,7 +76,14 @@ Do not reuse a merged phase branch for unrelated work.
 
 ## Verification
 
-`./init.sh` is the standard startup path. It runs `npm run verify` (ESLint, `tsc --noEmit`, the Board Data schema tests via `npm test`, and `expo-doctor`) and never starts a long-running server. Start the app with `npm start`. For every notable UI or behavior change, follow `docs/device-development-workflow.md` and verify the change on the connected Android device before handoff.
+`./init.sh` is the standard startup path. It runs `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all tests discovered from `tests/**/*.test.{ts,tsx}` via `npm test`, and `expo-doctor`) and never starts a long-running server. Start the app with `npm start`. For every notable UI or behavior change, follow `docs/device-development-workflow.md` and verify the change on the connected Android device before handoff.
+
+For architecture:
+
+- Read `ARCHITECTURE.md` before adding a module, layer, port, adapter, or cross-module dependency.
+- Add or change a module through its public API; keep domain free of React Native, Expo, HTTP, and storage.
+- Update `ARCHITECTURE.md`, the allowed module dependency table, and `eslint.config.js` together when the dependency graph changes.
+- Add mirrored tests and keep `tests/architecture/architecture.test.ts` passing.
 
 For Board Data:
 
@@ -91,7 +104,7 @@ A feature is done only when: the target behavior works, the relevant verificatio
 - `PROGRESS.md`: current verified state and lightweight session log.
 - `init.sh`: standard startup and verification path.
 
-There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature after `board-data-schema` acceptance is `content-model-and-store`.
+There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature after `modular-hexagonal-architecture` acceptance is `content-model-and-store`, implemented inside the `content` module layers.
 
 ## End Of Session
 
