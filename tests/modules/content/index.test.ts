@@ -43,6 +43,17 @@ const requiredPublicApiExports = [
   'SESSION_PARTS',
   'selectCategory',
   'INITIAL_CATEGORY_SELECTION',
+  'buildExploreGeneralModel',
+  'buildExploreStats',
+  'buildWeeklyExercises',
+  'buildMethodologyOverview',
+  'formatWeeklySelection',
+  'WEEKLY_EXERCISES_PER_PART',
+  'METHODOLOGY_KEY_CONCEPTS_LIMIT',
+  'ExploreGeneralModel',
+  'WeeklyExercise',
+  'MethodologyOverview',
+  'ExploreStats',
 ];
 
 describe('Content public API', () => {

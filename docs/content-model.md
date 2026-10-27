@@ -178,7 +178,7 @@ A two-category exercise appears once under each category because the filter read
 
 Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → `buildCategoryBrowseModel` → `listExercises`/`getProgramming` → `ContentRepository` → bundled adapter → shared `parseBoardData`. The browse model groups the same `listExercises` result with `groupExercisesBySessionPart` into the fixed `warm-up` → `main` → `cool-down` order, preserving package order inside each group; grouping is presentation-only and adds no repository call.
 
-`ExploreScreen` is the first read-layer consumer. It renders the seven RFEF chips, the selected Programming summary, and the filtered Exercise Library; the pure view model calls only `listExercises` and `getProgramming`, so visibility and deduplication stay in the read layer. The selected category is **session-only UI state** owned by `content/presentation` (mounted once in `src/app/_layout.tsx`): it survives tab and `/design-system` navigation, is never written to device storage, and resets on app restart. There is no "all categories" state and no default category.
+`ExploreScreen` is the first read-layer consumer. It renders the seven RFEF chips, a compact anonymous hero with counts from `listExercises`/`listCategories`, the AI entry link to the Asistente IA tab, the selected Programming glance card, a deterministic weekly slice, and the filtered Exercise Library. The pure view models call only `listExercises` and `getProgramming`, so visibility and deduplication stay in the read layer. The weekly slice takes the first exercise of each `sessionPart` group in package order, ordered warm-up → main → cool-down, and skips a part with no exercises; the methodology glance card maps only `formativeStage`, `focus`, `playModel`, `sessionDurationMinutes` and the first three `keyConcepts` of the publishable `Programming` record. Nothing is invented when the record or a session part is missing. The selected category is **session-only UI state** owned by `content/presentation` (mounted once in `src/app/_layout.tsx`): it survives tab and `/design-system` navigation, is never written to device storage, and resets on app restart. There is no "all categories" state and no default category.
 
 ## Adding Or Changing Content
 
@@ -191,7 +191,7 @@ Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `Ex
 
 ## Known Gaps
 
-- The Explorar category browser consumes the read layer, but the full prototype layout (weekly exercises, methodology overview, AI entry point, hero) still belongs to `explore-general-screen`; the dedicated category detail belongs to `explore-by-category-screen`.
+- The general Explorar screen now consumes the read layer for the hero counts, category filter, methodology glance card, deterministic weekly slice and grouped library. The dedicated category detail (full methodology, objectives, macrocycles/microcycles, open-on-board) belongs to `explore-by-category-screen`; exercise detail, attribution display and board rendering remain separate features.
 - The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.

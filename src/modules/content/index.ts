@@ -19,6 +19,19 @@ export {
   type CategoryBrowseModel,
   type SessionPartGroup,
 } from './presentation/view-models/category-browse-model';
+export {
+  METHODOLOGY_KEY_CONCEPTS_LIMIT,
+  WEEKLY_EXERCISES_PER_PART,
+  buildExploreGeneralModel,
+  buildExploreStats,
+  buildMethodologyOverview,
+  buildWeeklyExercises,
+  formatWeeklySelection,
+  type ExploreGeneralModel,
+  type ExploreStats,
+  type MethodologyOverview,
+  type WeeklyExercise,
+} from './presentation/view-models/explore-general-model';
 
 export {
   CATEGORIES,

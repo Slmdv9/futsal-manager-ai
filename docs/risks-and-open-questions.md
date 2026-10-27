@@ -14,7 +14,7 @@
 
 ## Blocking Next Phase
 
-None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, all seven RFEF categories are session-shaped, and the category filter is implemented; the next feature ready to start is `explore-general-screen`. The coach's request to show the board drawing in exercise cards is captured by `exercise-preview-board-thumbnail`, deferred behind `tactics-board-renderer`.
+None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, all seven RFEF categories are session-shaped, and the general Explorar screen is implemented; the next feature ready to start is `explore-by-category-screen`. The coach's request to show the board drawing in exercise cards is captured by `exercise-preview-board-thumbnail`, deferred behind `tactics-board-renderer`.
 
 ## Implementation-Time Questions
 
@@ -26,7 +26,9 @@ None. The stack, Board Data schema, and content licensing are resolved, the lice
 - Where locally saved AI results live and how the coach clears them.
 - Chat placement on mobile: full screen tab vs bottom sheet over the board.
 - Category selection is intentionally session-only; if coaches expect it to survive an app restart, `local-ai-results-persistence` or a settings feature owns that storage decision.
-- The repository still has no React Native component-test runner. The category filter is covered by pure view-model/reducer tests, a composition-wiring test, and the device smoke; adopting a Jest-based RNTL runner is its own feature-sized decision before more interactive screens land.
+- There is no week, session or scheduler model, no clock port, and no persistence for a rotating plan. Explorar's "Ejercicios de la Semana" block is a deterministic curated slice (one exercise per session part, first in package order); a real scheduling feature must replace the rule and the copy.
+- The Explorar AI entry is a navigation link to the existing Asistente IA tab, which still renders its `PRÓXIMAMENTE` placeholder until `ai-session-generator-ui` lands; the link passes no category context because nothing consumes it yet.
+- The repository still has no React Native component-test runner. The general Explorar screen is covered by pure view-model tests, a source-structure guard, the composition-wiring test, and the device smoke; adopting a Jest-based RNTL runner is its own feature-sized decision before more interactive screens land.
 
 ## Later / Not MVP
 
@@ -48,6 +50,10 @@ None. The stack, Board Data schema, and content licensing are resolved, the lice
 
 ## Risks
 
+- **"Semana" copy without a scheduler.** Explorar labels the block `Ejercicios de la Semana`, but there is no week, calendar, clock port or persisted rotation state. The slice is deterministic (first exercise per session part, in package order), so the label could imply a scheduling feature that does not exist. Mitigation: the subtitle states the rule, the counter shows `3 de N`, and a future scheduling feature owns week rolls, recency and persistence.
+- **AI entry point visibility.** The AI session card sits below the customer-facing hero and the category filter; on short screens a long fold could push the card out of the first view. Mitigation: keep the hero compact, avoid an extra page title, and check the rendered layout on the Android device; if it fails, move the AI card above the filter row.
+- **Content quality and freshness.** The next visible step is `explore-by-category-screen`, but the current library is a fixed seed; a missing or stale exercise/category will surface directly in the weekly slice without any fallback beyond the empty copy. Mitigation: keep the publishable-only read layer authoritative, and treat content updates as a content-package change.
+- **Generated session placeholder.** The AI card points at the Asistente IA tab, which is still a `PRÓXIMAMENTE` placeholder; a coach could interpret the card as a working generator. Mitigation: the card copy explicitly says generation arrives in the next phase, and `ai-session-generator-ui` will replace the placeholder.
 - **Content quality/volume.** The library is the product's core value; a thin or low-quality seed makes the AI and the board feel generic. Mitigation: every RFEF category is now session-shaped with seven exercises and a Programming record (50 exercises, seven records), split 2 warm-up / 3 main / 2 cool-down except Infantil's 2/5/2, so Explorar reads like a session. Coach review of load, intensity, and age-appropriateness — especially U8 without specialist keepers versus Senior high-intensity blocks — is still pending. Board legibility of the hand-authored geometry is unverified until `tactics-board-renderer`.
 - **Infantil U14 session-part assignment.** Keeping all nine Infantil drills forces 2 warm-up / 5 main / 2 cool-down instead of the 2/3/2 used elsewhere; `juego-posicion-3-1-pivote` (14 min, medium 75) opens the session and the two lowest-load drills close it. It is the only assignment that keeps two drills in each end without adding or deleting content. Open for coach review; changing it is a data-only edit to `sessionPart`.
 - **Small-space geometry on the full board.** Prebenjamín and Benjamín drills use 10×10 to 20×20 spaces drawn inside the full 2:1 pitch. Coordinates are parser-valid but not visually reviewed, so the drills may render cramped or off-centre. Mitigation: keep every geometry inside a coherent sub-region, and review legibility in `tactics-board-renderer`.
@@ -62,6 +68,7 @@ None. The stack, Board Data schema, and content licensing are resolved, the lice
 - **Product naming.** "Futsal Manager AI" is the chosen name. Remaining mitigation: a basic trademark/domain check and consistent relabelling of prototype screens.
 - **DevExpert dependency.** A single inference provider is a single point of failure. Mitigation: keep the gateway provider-agnostic so an OpenAI-compatible fallback can be added.
 - **Expo tooling advisories.** `npm audit` currently reports four high-severity transitive advisories in `node-forge` and the `zod` nested under Expo CLI/code-signing tooling. The direct `zod@4.6.7` used by the Board Data runtime schema is outside the vulnerable range. The nested Expo CLI copy has no non-breaking fix; `node-forge` has a non-breaking `npm audit fix` available. Mitigation: keep the Expo CLI on the build-time path only, rerun the audit on dependency changes, and upgrade when Expo ships a compatible release.
+- **Explorar builds the browse model twice.** `ExploreScreen` calls `buildCategoryBrowseModel` and `buildExploreGeneralModel` also builds it internally, so a selected render performs two in-memory builds. Harmless at 50 records, but if the browse model later gains cost or state, pass a single shared model. Recorded by the `explore-general-screen` validator as an optional, non-blocking refactor.
 - **32-bit Android test device.** The connected Galaxy M13 reports only `armeabi-v7a`. Expo Go 58.0.5 and the native debug build work, but the build emits Google Play's 64-bit warning because it packages only 32-bit native libraries. Mitigation: add a 64-bit Android phone or tablet to `mobile-device-verification`, and make release builds include `arm64-v8a`.
 
 ## Research Tasks

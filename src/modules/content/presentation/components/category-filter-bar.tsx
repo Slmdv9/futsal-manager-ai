@@ -18,7 +18,7 @@ export function CategoryFilterBar({
   return (
     <View style={styles.wrapper}>
       <AppText variant="labelMd" color="primary" style={styles.label}>
-        CATEGORÍA
+        CATEGORÍA / RANGO DE EDAD
       </AppText>
       <ScrollView
         horizontal

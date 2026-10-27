@@ -17,7 +17,9 @@ export function ExerciseLibraryList({ groups }: ExerciseLibraryListProps) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
-        <AppText variant="headlineSm">Biblioteca de ejercicios</AppText>
+        <AppText variant="headlineSm" accessibilityRole="header">
+          Biblioteca de ejercicios
+        </AppText>
         <AppText variant="labelMd" color="textVariant">
           {formatExerciseCount(total)}
         </AppText>
