@@ -147,14 +147,14 @@ Then all four items sit in one row above the safe area, each item is at least 44
 
 ## Implementation Tasks
 
-- [ ] Create `src/components/navigation/tab-icon.tsx` using `expo-symbols` with iOS/Android names and optional AI/lock badges.
-- [ ] Create `src/components/navigation/section-placeholder.tsx` with a Spanish eyebrow, title, description, status chip, and optional children.
-- [ ] Create `src/app/(tabs)/_layout.tsx` with four `Tabs.Screen` entries, token-based bar styling, and safe-area sizing.
-- [ ] Create `src/app/(tabs)/index.tsx` for Explorar and keep the `Ver sistema de diseño` link.
-- [ ] Create `src/app/(tabs)/pizarra.tsx` and `src/app/(tabs)/asistente.tsx` placeholders with distinct Spanish copy.
-- [ ] Create `src/app/(tabs)/mi-club.tsx` with the locked next-phase state.
-- [ ] Update `src/app/_layout.tsx` to register `(tabs)` and `design-system`; delete `src/app/index.tsx`.
-- [ ] Run the verification gate and the physical Android device checks; record evidence.
+- [x] Create `src/components/navigation/tab-icon.tsx` using `expo-symbols` with iOS/Android names and optional AI/lock badges.
+- [x] Create `src/components/navigation/section-placeholder.tsx` with a Spanish eyebrow, title, description, status chip, and optional children.
+- [x] Create `src/app/(tabs)/_layout.tsx` with four `Tabs.Screen` entries, token-based bar styling, and safe-area sizing.
+- [x] Create `src/app/(tabs)/index.tsx` for Explorar and keep the `Ver sistema de diseño` link.
+- [x] Create `src/app/(tabs)/pizarra.tsx` and `src/app/(tabs)/asistente.tsx` placeholders with distinct Spanish copy.
+- [x] Create `src/app/(tabs)/mi-club.tsx` with the locked next-phase state.
+- [x] Update `src/app/_layout.tsx` to register `(tabs)` and `design-system`; delete `src/app/index.tsx`.
+- [x] Run the verification gate and the physical Android device checks; record evidence.
 
 ## Verification Plan
 
@@ -183,9 +183,9 @@ Then all four items sit in one row above the safe area, each item is at least 44
 
 ## Validator Checklist
 
-- [ ] Implementation stays within this feature's scope.
-- [ ] Acceptance scenarios pass.
-- [ ] Verification evidence is present.
-- [ ] Persistent E2E coverage was added/updated when the feature has an observable user/API flow and an E2E harness exists, or the spec explains why it is not needed.
-- [ ] `feature_list.json` and `PROGRESS.md` were updated correctly.
-- [ ] No unrelated product behavior or extra feature work was added.
+- [x] Implementation stays within this feature's scope.
+- [x] Acceptance scenarios pass.
+- [x] Verification evidence is present.
+- [x] Persistent E2E coverage was added/updated when the feature has an observable user/API flow and an E2E harness exists, or the spec explains why it is not needed.
+- [x] `feature_list.json` and `PROGRESS.md` were updated correctly.
+- [x] No unrelated product behavior or extra feature work was added.

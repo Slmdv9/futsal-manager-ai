@@ -10,6 +10,7 @@
 - **2026-10-26 — Anonymous quota.** 5 AI requests per day, keyed by Expo installation ID plus hashed IP, enforced server-side.
 - **2026-10-26 — Offline.** Bundled content and board playback work offline; AI-generated sessions and variants are saved locally on the device.
 - **2026-10-26 — Seed scope.** Infantil U14 fully seeded; minimum three exercises plus programming for each of the other six categories.
+- **2026-10-26 — Board Data schema.** Frozen at v1.0.0 in `docs/board-data-schema.md`: normalized 0–100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and a literal `schemaVersion`. Runtime validation ships with the contract; unknown versions are rejected and there are no MVP migrations.
 
 ## Blocking Next Phase
 
@@ -17,7 +18,6 @@ None. The stack, Board Data approach, and content licensing are resolved, so the
 
 ## Implementation-Time Questions
 
-- Exact Board Data schema fields, validation rules, and schema versioning details.
 - Retrieval approach: embeddings vs keyword search over a small curated library.
 - Whether DevExpert `chat` reliably produces valid structured JSON for sessions and variants, or whether those two features need `chat-pro`.
 - Quota edge cases: shared club/school networks, timezone used for the daily reset, and what happens if the installation ID changes.
