@@ -3,15 +3,16 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/board-data-schema` (feature commit `d676acd`, from `main` at `af588e3`)
-- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/board-data-schema`
+- Current branch: `feat/modular-hexagonal-architecture` (from `main` at `9418fde`)
+- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/modular-hexagonal-architecture`
 - Standard startup path: `./init.sh`
-- Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, Board Data schema tests via `npm test`, and `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted.
+- Standard verification path: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all `tests/**/*.test.{ts,tsx}` via `npm test`, and `expo-doctor`), executed by `./init.sh`
+- Architecture: modular monolith with `content`, `board`, `ai`, and `club` modules, four hexagonal layers each, a public `index.ts` per module, and `shared/domain`, `shared/theme`, `shared/ui` at the bottom of the dependency graph; source of truth in `ARCHITECTURE.md`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, `board-data-schema`, and `modular-hexagonal-architecture` are accepted. Independent re-validation after the boundary repair returned `accept`.
 - Next ready feature: `content-model-and-store`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-27` (`board-data-schema` independent validation: clean `npm ci` worktree, 12/12 schema tests, `npm run verify` and `./init.sh` exit 0, Android export, and adversarial parser checks)
+- Last verified at: `2026-10-27` (`modular-hexagonal-architecture` repair: 17/17 tests across 29 suites, full module allowlist and shared-sublayer boundaries enforced by `tests/architecture/boundaries.test.ts`, `.test.tsx` discovery verified, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and the four tabs plus `/design-system` render on the connected device)
 
 ## Session Log
 

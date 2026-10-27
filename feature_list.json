@@ -164,6 +164,46 @@
     "notes": "Independent re-validation after the repair returned `accept`: the full module allowlist (`ai -> content`), self-public-API bans, and shared-sublayer boundaries are enforced and mutation-checked, `.test.tsx` tests are discovered, and all gates and the device smoke pass. Modules are business capabilities, not screens or technical folders. Allowed cross-module dependency is `ai -> content`; every module may use `shared`. Board Data is a shared kernel because content, board, and AI all exchange it. Tests mirror the source tree and use Given/When/Then. No persistent E2E harness exists; architecture, unit, lint, typecheck, bundle, and device checks are the coverage for a structural feature."
   },
   {
+    "id": "modular-hexagonal-architecture",
+    "area": "foundation",
+    "title": "Adopt a modular hexagonal architecture",
+    "user_visible_behavior": "The app keeps its four tabs and design-system gallery unchanged while `src` is organized into business modules with hexagonal layers, shared contracts, public APIs, and mirrored tests.",
+    "depends_on": [
+      "bootstrap-app-shell",
+      "design-system-tokens",
+      "app-navigation-shell",
+      "board-data-schema"
+    ],
+    "status": "accepted",
+    "verification": [
+      "Inspect `src/modules` and confirm content, board, ai, and club each expose domain, application, infrastructure, presentation, and a public index.ts.",
+      "Inspect `src/shared` and confirm Board Data, theme, and UI live there and do not import app routes or business modules.",
+      "Open the four tab routes and the design-system gallery and confirm each renders a module screen or shared presentation with no business logic.",
+      "Introduce deliberate violations (shared-to-module, cross-module public import, app-to-module deep import, domain-to-own-public-API, domain-to-`shared/ui`/`shared/theme`) and confirm `npm run lint` rejects each while allowed edges such as `ai -> content` and `presentation -> shared/ui` pass.",
+      "Confirm tests mirror the source under `tests/modules`, `tests/shared`, and `tests/architecture`, and behavior tests use Given/When/Then.",
+      "Run `npm run verify` and `./init.sh`; confirm lint, typecheck, tests, and expo-doctor pass and the app still starts from the standard path.",
+      "Confirm the moved Board Data contract still validates at version 1.0.0 and still rejects invalid data."
+    ],
+    "evidence": [
+      "Spec created at `docs/specs/modular-hexagonal-architecture.md`; architecture source of truth created at `ARCHITECTURE.md`.",
+      "Created `src/modules/{content,board,ai,club}` with `domain`, `application`, `infrastructure`, `presentation`, a public `index.ts`, and a module `README.md`; empty layers use `.gitkeep`.",
+      "Moved Board Data to `src/shared/domain/board-data`, theme to `src/shared/theme`, and UI primitives, layout, and navigation to `src/shared/ui`; `src/components`, `src/content`, and `src/theme` no longer exist.",
+      "Rewrote the four tab routes as thin wrappers over `@/modules/<module>` and kept `/design-system` outside the tabs.",
+      "Rewrote the 12 Board Data tests as Given/When/Then under `tests/shared/domain/board-data/`; fixtures moved beside them.",
+      "Added `tests/architecture/architecture.test.ts` covering the four modules and their layers, all public APIs, shared ownership of board-data/theme/ui, and removal of legacy folders.",
+      "Installed `eslint-plugin-boundaries@^7.3.0` and added dependency policies to `eslint.config.js`, including the full module dependency allowlist (`ai -> content`), self-public-API bans for module layers, and `shared/domain`, `shared/theme`, `shared/ui` sublayer rules; deliberate violations failed with messages naming the source and target modules or the shared sublayer.",
+      "Added `tests/architecture/boundaries.test.ts`, an ESLint-API regression test that asserts allowed imports pass and forbidden imports fail for shared-to-module, cross-module, self-public-API, and domain-to-`shared/theme`/`shared/ui` cases.",
+      "Mutation-checked the regression test: removing the cross-module allowlist made it fail with `board importing content public API should fail the boundaries rule`; the config was restored and the test passed again.",
+      "Independent re-validation re-ran the probes: `shared -> module`, `board -> content`, `content/application -> board`, `content/domain -> own public API`, `shared/domain -> shared/ui`, and domain-to-theme/UI all failed; `ai -> content`, `presentation -> shared/ui`, and `app -> module public API` passed.",
+      "TypeScript JSX test discovery verified: a temporary `tests/architecture/__tmp/probe.test.tsx` raised the run from 16 to 17 tests; the probe was removed.",
+      "Updated `package.json` so `npm test` discovers `tests/**/*.test.{ts,tsx}` and added `test:watch`; removed `test:board`.",
+      "`npm test`: 17/17 pass across 29 suites (12 Board Data + 4 architecture structure + 1 ESLint boundary regression); `npm run lint` and `npm run typecheck` pass.",
+      "`npm run verify` exit 0 (lint, typecheck, all tests, expo-doctor 20/20) and `./init.sh` exit 0 without starting Metro.",
+      "`npx expo export --platform android` succeeds after the reorg, and the four tabs plus `/design-system` were checked on the connected Samsung Galaxy M13 with no layout or navigation regression."
+    ],
+    "notes": "Independent re-validation after the repair returned `accept`: the full module allowlist (`ai -> content`), self-public-API bans, and shared-sublayer boundaries are enforced and mutation-checked, `.test.tsx` tests are discovered, and all gates and the device smoke pass. Modules are business capabilities, not screens or technical folders. Allowed cross-module dependency is `ai -> content`; every module may use `shared`. Board Data is a shared kernel because content, board, and AI all exchange it. Tests mirror the source tree and use Given/When/Then. No persistent E2E harness exists; architecture, unit, lint, typecheck, bundle, and device checks are the coverage for a structural feature."
+  },
+  {
     "id": "content-model-and-store",
     "area": "content",
     "title": "Add exercise, category, and programming data model",
