@@ -14,7 +14,7 @@
 
 ## Blocking Next Phase
 
-None. The stack, Board Data approach, and content licensing are resolved, so the first feature (`bootstrap-app-shell`) can start.
+None. The stack, Board Data schema, and content licensing are resolved; the next feature ready to start is `content-model-and-store`.
 
 ## Implementation-Time Questions
 
@@ -56,7 +56,7 @@ None. The stack, Board Data approach, and content licensing are resolved, so the
 - **Legal/IP on source material.** Original content and CMD Mora permission still need to be documented. Mitigation: record source and license metadata on every record and keep external reference sites as inspiration only.
 - **Product naming.** "Futsal Manager AI" is the chosen name. Remaining mitigation: a basic trademark/domain check and consistent relabelling of prototype screens.
 - **DevExpert dependency.** A single inference provider is a single point of failure. Mitigation: keep the gateway provider-agnostic so an OpenAI-compatible fallback can be added.
-- **Expo tooling advisories.** `npm audit` reports five high-severity transitive advisories (`node-forge`, `zod`) inside Expo CLI and code-signing tooling, with no non-breaking fix. Mitigation: keep the Expo CLI on the build-time path only, rerun the audit on dependency changes, and upgrade when Expo ships a compatible release.
+- **Expo tooling advisories.** `npm audit` currently reports four high-severity transitive advisories in `node-forge` and the `zod` nested under Expo CLI/code-signing tooling. The direct `zod@4.6.7` used by the Board Data runtime schema is outside the vulnerable range. The nested Expo CLI copy has no non-breaking fix; `node-forge` has a non-breaking `npm audit fix` available. Mitigation: keep the Expo CLI on the build-time path only, rerun the audit on dependency changes, and upgrade when Expo ships a compatible release.
 - **32-bit Android test device.** The connected Galaxy M13 reports only `armeabi-v7a`. Expo Go 58.0.5 and the native debug build work, but the build emits Google Play's 64-bit warning because it packages only 32-bit native libraries. Mitigation: add a 64-bit Android phone or tablet to `mobile-device-verification`, and make release builds include `arm64-v8a`.
 
 ## Research Tasks

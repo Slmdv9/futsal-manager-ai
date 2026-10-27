@@ -15,7 +15,7 @@ A native mobile app built with React Native and Expo, targeting phones and table
 ## Commands
 
 - Install: `npm install`
-- Verify: `npm run verify` (ESLint, `tsc --noEmit`, `expo-doctor`) — also executed by `./init.sh`
+- Verify: `npm run verify` (ESLint, `tsc --noEmit`, Board Data schema tests via `npm test`, and `expo-doctor`) — also executed by `./init.sh`
 - Start: `npm start` (Expo dev server; `init.sh` never starts it)
 - Bundle smoke: `npx expo export --platform android --output-dir dist`
 - Native Android debug build: `npm run android` (`expo run:android`)

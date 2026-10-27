@@ -3,15 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/board-data-schema` (from `main` at `af588e3`)
+- Current branch: `feat/board-data-schema` (feature commit `d676acd`, from `main` at `af588e3`)
 - Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/board-data-schema`
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, Board Data schema tests via `npm test`, and `expo-doctor`), executed by `./init.sh`
-- Current state: `bootstrap-app-shell`, `design-system-tokens`, and `app-navigation-shell` are accepted; `board-data-schema` is implemented and verified, pending independent validation.
-- Next ready feature after validation: `content-model-and-store`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted.
+- Next ready feature: `content-model-and-store`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-26` (`board-data-schema`: 12/12 schema tests, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and invalid fixtures report the expected paths)
+- Last verified at: `2026-10-27` (`board-data-schema` independent validation: clean `npm ci` worktree, 12/12 schema tests, `npm run verify` and `./init.sh` exit 0, Android export, and adversarial parser checks)
 
 ## Session Log
 
@@ -122,5 +122,16 @@
 - Verification run: `npm test` (12/12 pass), `npm run verify` exit 0 with ESLint, `tsc --noEmit`, schema tests, and `expo-doctor` 20/20, `./init.sh` exit 0, `npx expo export --platform android` (2.9 MB bundle), and a direct parser run over all four invalid fixtures.
 - Evidence captured: valid three-phase fixture parses with defaults; missing position reports `phases.1.positions: Missing position for token "ala-izquierda" in phase 2.`; unknown kind reports `tokens.0.kind: Token kind must be "player" or "keeper".`; unknown version reports `schemaVersion: Board Data schemaVersion must be "1.0.0".`; extra field reports `(root): Unrecognized key: "notes"`; `schemaVersion` is recorded as `1.0.0` in code and docs.
 - Files or artifacts updated: `package.json`, `package-lock.json`, `tsconfig.json`, `src/content/board-data/schema.ts`, `src/content/board-data/index.ts`, `src/content/board-data/board-data.test.ts`, `src/content/board-data/fixtures/*`, `docs/specs/board-data-schema.md`, `docs/board-data-schema.md`, `docs/domain-model.md`, `docs/risks-and-open-questions.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
-- Known risks: `npm audit` keeps 5 pre-existing high-severity transitive advisories with no non-breaking fix; the prototype is 4:3/half-pitch while the contract normalizes to a full 2:1 space, so the renderer must map coordinates deliberately; no device verification applies because there is no UI change.
+- Known risks: at implementation time `npm audit` reported 5 pre-existing high-severity transitive advisories; the validator rerun on `2026-10-27` reports 4 (`node-forge` and the nested `zod` in Expo CLI), with the direct `zod@4.6.7` outside the vulnerable range. The prototype is 4:3/half-pitch while the contract normalizes to a full 2:1 space, so the renderer must map coordinates deliberately; no device verification applies because there is no UI change.
 - Next best step: independently validate `board-data-schema`, then plan `content-model-and-store` from an updated `main`.
+
+### Session 011
+
+- Date: `2026-10-27`
+- Goal: Independently validate `board-data-schema` and persist the acceptance in the harness.
+- Completed: validation returned `accept` with no critical, high, or medium findings; recorded the acceptance, the clean-install evidence, and the non-blocking follow-ups; corrected the stale verify command in `docs/technical-discovery.md` and the obsolete next-phase wording in `docs/risks-and-open-questions.md`.
+- Verification run: `npm test` (12/12), `npm run verify` (ESLint, `tsc --noEmit`, 12 tests, `expo-doctor` 20/20), `./init.sh` exit 0, `npx expo export --platform android` (2.9 MB), `npm ci --dry-run`, and a fresh worktree at `d676acd` with `npm ci` followed by `npm run verify` and `./init.sh`.
+- Evidence captured: clean main worktree; parser checks for duplicate ids, degenerate arrows, out-of-range coordinates, nested extra fields, invalid ball data, duplicate positions, and non-object input all returned the expected issue paths; `schemaVersion` `1.0.0` is enforced in code and docs; current `npm audit` reports 4 pre-existing high-severity transitives (`node-forge`, nested Expo CLI `zod`) and the direct `zod@4.6.7` is outside the vulnerable range.
+- Files or artifacts updated: `feature_list.json`, `PROGRESS.md`, `AGENTS.md`, `docs/specs/board-data-schema.md`, `docs/technical-discovery.md`, `docs/risks-and-open-questions.md`.
+- Known risks: the permanent suite does not yet cover every cross-field refinement and `npm test` targets a single file; `tactics-board-renderer` should pin the sign of arrow `curve` and the inactive-half rule for `pitch.format: 'half'` before content is seeded; no device verification applies because the feature has no UI.
+- Next best step: open and merge the `feat/board-data-schema` PR, then plan `content-model-and-store` from an updated `main`.

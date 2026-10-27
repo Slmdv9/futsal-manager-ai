@@ -101,7 +101,7 @@
     "depends_on": [
       "bootstrap-app-shell"
     ],
-    "status": "passing",
+    "status": "accepted",
     "verification": [
       "Validate a valid multi-phase Board Data fixture and confirm it passes.",
       "Validate fixtures with a missing phase coordinate and an unknown token type; confirm both fail with a clear error.",
@@ -117,9 +117,11 @@
       "Missing-position fixture reports `phases.1.positions: Missing position for token \"ala-izquierda\" in phase 2.`; unknown-kind fixture reports `tokens.0.kind: Token kind must be \"player\" or \"keeper\".`; version fixture reports `schemaVersion: Board Data schemaVersion must be \"1.0.0\".`; strict-field fixture reports `(root): Unrecognized key: \"notes\"`.",
       "`npm run verify` exit 0 with 12/12 schema tests and `expo-doctor` 20/20; `./init.sh` exit 0 and executes the same gate without starting Metro.",
       "`npx expo export --platform android` succeeds after the dependency and tsconfig changes (2.9 MB bundle).",
-      "No device verification was required because the feature adds no screen or user-visible behavior."
+      "No device verification was required because the feature adds no screen or user-visible behavior.",
+      "Independent validation verdict: accept at `d676acd`. The validator reran the gate in a clean worktree after `npm ci` (12/12 tests, `expo-doctor` 20/20), ran `./init.sh` and the Android export, and exercised duplicate ids, degenerate arrows, out-of-range coordinates, nested extra fields, invalid ball data, and non-object inputs with the expected paths.",
+      "Non-blocking validator observations: the permanent suite does not yet cover every cross-field refinement, and `npm test` targets a single file; both should grow with the contract. The stale verify command in `docs/technical-discovery.md` and the next-phase wording in `docs/risks-and-open-questions.md` were corrected during acceptance."
     ],
-    "notes": "Board Data v1.0.0 uses normalized 0-100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and no MVP migrations. Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio. No persistent E2E harness exists; unit tests are the correct coverage level until the renderer and playback exist."
+    "notes": "Board Data v1.0.0 uses normalized 0-100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and no MVP migrations. Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio. No persistent E2E harness exists; unit tests are the correct coverage level until the renderer and playback exist. Before seeding content, `tactics-board-renderer` should pin the sign of arrow `curve` and how the inactive half is chosen for `pitch.format: 'half'`."
   },
   {
     "id": "content-model-and-store",
