@@ -69,7 +69,7 @@ Programming is the per-category methodology and season plan. There is **at most 
 | --- | --- | --- |
 | `id` | lowercase slug | unique across the package |
 | `categoryId` | `CategoryId` | known category |
-| `version` | semver string | e.g. `1.0.0` |
+| `version` | semver string | plan version of this record, independent of `contentVersion` (`infantil-u14-base` is `1.1.0`) |
 | `formativeStage` | text ≤ 90 | |
 | `focus` | text ≤ 160 | |
 | `playModel` | text ≤ 240 | |
@@ -117,9 +117,10 @@ Attribution display belongs to `exercise-detail-screen`; the licence gate only m
 ```
 
 - `CONTENT_PACKAGE_VERSION` (`src/modules/content/domain/content-package.ts`) must equal the JSON `contentVersion`. Any other version fails validation. Additive changes bump the constant and the JSON together; breaking changes need a migration decision first.
+- `Programming.version` is the plan version of that single record, not the package version. `infantil-u14-base` moved to `1.1.0` when its season plan grew to three macrocycles while `contentVersion` stayed `1.0.0`.
 - Unknown keys are rejected at every level.
 - The package is imported once, parsed once, and indexed by the bundled adapter.
-- Current seed scope is deliberately minimal: three original exercises (one tagged `infantil` + `cadete`) and one published Infantil Programming record. `seed-infantil-u14` and `seed-remaining-categories` fill the real library.
+- Current seed scope: the complete Infantil U14 slice — nine original exercises in declaration order (one tagged `infantil` + `cadete`) and one published Infantil Programming record (`infantil-u14-base`, version `1.1.0`). Package order is part of the contract: seed tests assert the nine Infantil ids in this sequence. `seed-remaining-categories` fills the other six categories.
 
 ## Invariants And Validation
 
@@ -184,4 +185,5 @@ Browse flow: `app/(tabs)/index.tsx` → `content` screen → use case → `Conte
 - The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
-- Only the Infantil Programming record exists; the other six categories have neither Programming nor exercises.
+- Infantil U14 is the only complete category: nine exercises plus one Programming record. The other six categories have neither Programming nor exercises until `seed-remaining-categories`.
+- Board Data is authored but not rendered yet; legibility, 2:1 fidelity, and phase playback belong to the board features.

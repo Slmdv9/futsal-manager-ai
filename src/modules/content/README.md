@@ -6,7 +6,7 @@ Owns Category reference data, Exercise, Programming, the bundled content package
 
 - `domain` — active. Seven frozen RFEF `Category` brackets, `Exercise`, `Programming`, `ContentProvenance` plus the licence policy helpers in `provenance.ts` (`PUBLISHABLE_LICENSE_STATUSES`, `isPublishableProvenance`, `requiresAttribution`, `isLicenseStatusAllowedForKind`), the strict `content-package.ts` contract (`CONTENT_PACKAGE_VERSION`, `parseContentPackage`, `safeParseContentPackage`, `ContentValidationError`), and the `ContentRepository` port in `domain/ports`.
 - `application` — active. Publishable-only use cases: `listCategories`, `listExercises`, `getExercise`, `getProgramming`.
-- `infrastructure` — active. `content/content-package.json` plus `bundled-content-repository.ts` (`createBundledContentRepository`), which imports the JSON as `unknown`, parses it once, and indexes it.
+- `infrastructure` — active. `content/content-package.json` plus `bundled-content-repository.ts` (`createBundledContentRepository`), which imports the JSON as `unknown`, parses it once, and indexes it. The bundled seed currently holds the complete Infantil U14 slice: nine original exercises in package order plus the `infantil-u14-base` Programming record (record version `1.1.0`, `contentVersion` still `1.0.0`); the other six categories stay empty until `seed-remaining-categories`.
 - `presentation` — Explorar placeholder until `explore-general-screen`; exercise detail follows in `exercise-detail-screen`.
 
 ## Public API

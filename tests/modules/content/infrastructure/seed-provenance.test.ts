@@ -39,8 +39,8 @@ const seededRecords = [
 describe('Seeded content provenance audit', () => {
   describe('Given the bundled content package', () => {
     describe('When every seeded record is audited', () => {
-      it('then the audit sees all three seeded exercises and the Infantil programming', () => {
-        assert.equal(repository.getExercises().length, 3);
+      it('then the audit sees all nine seeded exercises and the Infantil programming', () => {
+        assert.equal(repository.getExercises().length, 9);
         assert.equal(seededProgramming.length, 1);
         assert.deepEqual(
           seededRecords.map((record) => record.id),
@@ -48,6 +48,12 @@ describe('Seeded content provenance audit', () => {
             'salida-3-1-presion-alta',
             'circulacion-cierre-ala',
             'presion-tras-perdida',
+            'rondo-4v1-orientacion',
+            'pase-y-va-carril-central',
+            'juego-posicion-3-1-pivote',
+            'ataque-4-0-rotaciones',
+            'basculacion-rombo-defensivo',
+            'transicion-3v2-tras-robo',
             'infantil-u14-base',
           ],
         );

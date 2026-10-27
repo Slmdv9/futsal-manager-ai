@@ -69,14 +69,14 @@ Record every source the library draws on. Update this table before adding materi
 
 | Source | Kind | License status | May ship? | Notes |
 | --- | --- | --- | --- | --- |
-| Futsal Manager AI (in-house authorship) | `original` | `owned` | yes | Current seed: three exercises plus the Infantil Programming record. |
+| Futsal Manager AI (in-house authorship) | `original` | `owned` | yes | Current seed: nine exercises plus the Infantil Programming record. |
 | CMD Mora season programme (club presentation) | `cmd-mora` | `permitted` | yes, with attribution, once written permission is recorded | Attribution names CMD Mora. Not seeded yet; `pending` until the permission is documented. |
 | `adrimartinofutsal.es.tl` | `reference` | `reference-only` | no | Inspiration for exercise ideas and category mapping only. |
 | `futsalcoach.es` | `reference` | `reference-only` | no | Inspiration only. |
 | `keepmove.net` | `reference` | `reference-only` | no | Inspiration only. |
 | `ejerciciosdefutbolsala.com` | `reference` | `reference-only` | no | Inspiration only. |
 
-The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.ts`) asserts that no seeded record is `reference`, that every seeded record is `original` / `owned` / `Futsal Manager AI`, and that no seeded `sourceName` names one of the four inspiration-only domains. Keep that list in sync when a new source is considered.
+The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.ts`) audits all ten seeded records — nine exercises plus one Programming record — at their current ids and asserts that no record is `reference`, that every record is `original` / `owned` / `Futsal Manager AI`, and that no `sourceName` names one of the four inspiration-only domains. Keep that list in sync when the seed grows or a new source is considered.
 
 ## Author Checklist
 

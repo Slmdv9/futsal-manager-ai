@@ -19,10 +19,20 @@ describe('Bundled content repository', () => {
       it('then it exposes the seeded published exercises', () => {
         const exercises = listExercises(repository);
 
-        assert.ok(exercises.length >= 3);
+        assert.ok(exercises.length >= 9);
         assert.deepEqual(
           exercises.map((exercise) => exercise.id),
-          ['salida-3-1-presion-alta', 'circulacion-cierre-ala', 'presion-tras-perdida'],
+          [
+            'salida-3-1-presion-alta',
+            'circulacion-cierre-ala',
+            'presion-tras-perdida',
+            'rondo-4v1-orientacion',
+            'pase-y-va-carril-central',
+            'juego-posicion-3-1-pivote',
+            'ataque-4-0-rotaciones',
+            'basculacion-rombo-defensivo',
+            'transicion-3v2-tras-robo',
+          ],
         );
         assert.ok(exercises.every((exercise) => exercise.status === 'published'));
       });
@@ -30,7 +40,7 @@ describe('Bundled content repository', () => {
       it('then every seeded exercise carries Board Data valid at 1.0.0', () => {
         const exercises = repository.getExercises();
 
-        assert.ok(exercises.length >= 3);
+        assert.ok(exercises.length >= 9);
         for (const exercise of exercises) {
           assert.equal(exercise.boardData.schemaVersion, BOARD_DATA_SCHEMA_VERSION);
 

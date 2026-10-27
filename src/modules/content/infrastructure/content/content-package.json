@@ -420,42 +420,1014 @@
         "sourceName": "Futsal Manager AI",
         "licenseStatus": "owned"
       }
+    },
+    {
+      "id": "rondo-4v1-orientacion",
+      "title": "Rondo 4v1 con orientación",
+      "summary": "Rondo 4v1 en cuadrado para orientar el primer toque hacia el hombre libre y activar la circulación.",
+      "focus": "Rondo",
+      "categoryIds": ["infantil"],
+      "objective": "Mantener la posesión en superioridad 4v1 orientando cada control hacia el compañero que queda libre.",
+      "players": { "total": 6, "goalkeepers": 0 },
+      "space": { "label": "Cuadrado de rondo", "widthM": 12, "lengthM": 12 },
+      "durationMinutes": 8,
+      "intensity": { "level": "low", "percent": 45 },
+      "workStructure": "Rondos de 90 segundos x 5 series",
+      "constraints": [
+        {
+          "rule": "Dos toques",
+          "detail": "El receptor controla y pasa en un máximo de dos contactos hacia el hombre libre."
+        }
+      ],
+      "coachingCues": [
+        "Control orientado antes de recibir",
+        "Ocupar los cuatro lados del cuadrado",
+        "Pasar al compañero que el defensor no cubre"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "rondo-1", "kind": "player", "team": "home", "label": "J1" },
+          { "id": "rondo-2", "kind": "player", "team": "home", "label": "J2" },
+          { "id": "rondo-3", "kind": "player", "team": "home", "label": "J3" },
+          { "id": "rondo-4", "kind": "player", "team": "home", "label": "J4" },
+          { "id": "defensor-rondo", "kind": "player", "team": "away", "label": "D1" }
+        ],
+        "cones": [
+          { "id": "cono-superior-izquierda", "x": 35, "y": 30 },
+          { "id": "cono-superior-derecha", "x": 65, "y": 30 },
+          { "id": "cono-inferior-izquierda", "x": 35, "y": 70 },
+          { "id": "cono-inferior-derecha", "x": 65, "y": 70 }
+        ],
+        "phases": [
+          {
+            "id": "rondo-inicial",
+            "order": 1,
+            "title": "Rondo con orientación",
+            "explanation": "Los cuatro jugadores ocupan el cuadrado y el primero orienta el pase al lado libre mientras el defensor cierra el centro.",
+            "positions": [
+              { "tokenId": "rondo-1", "x": 30, "y": 50 },
+              { "tokenId": "rondo-2", "x": 50, "y": 28 },
+              { "tokenId": "rondo-3", "x": 70, "y": 50 },
+              { "tokenId": "rondo-4", "x": 50, "y": 72 },
+              { "tokenId": "defensor-rondo", "x": 50, "y": 50 }
+            ],
+            "ball": { "x": 30, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-rondo-uno-dos",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 50 },
+                "to": { "x": 50, "y": 28 },
+                "curve": -6
+              },
+              {
+                "id": "presion-defensor-rondo",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 50, "y": 50 },
+                "to": { "x": 41, "y": 44 }
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-orientacion", "text": "Orientar al hombre libre", "x": 50, "y": 12 }
+            ]
+          },
+          {
+            "id": "cambio-rondo",
+            "order": 2,
+            "title": "Cambio al lado contrario",
+            "explanation": "El receptor gira el rondo hacia el lado contrario y el defensor ajusta su posición sin recuperar el balón.",
+            "positions": [
+              { "tokenId": "rondo-1", "x": 34, "y": 54 },
+              { "tokenId": "rondo-2", "x": 56, "y": 30 },
+              { "tokenId": "rondo-3", "x": 68, "y": 52 },
+              { "tokenId": "rondo-4", "x": 48, "y": 70 },
+              { "tokenId": "defensor-rondo", "x": 46, "y": 42 }
+            ],
+            "ball": { "x": 56, "y": 30 },
+            "arrows": [
+              {
+                "id": "pase-rondo-dos-cuatro",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 56, "y": 30 },
+                "to": { "x": 48, "y": 70 },
+                "curve": 14
+              },
+              {
+                "id": "ajuste-defensor-rondo",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 46, "y": 42 },
+                "to": { "x": 48, "y": 58 },
+                "curve": -6
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-lado-libre",
+                "text": "Lado contrario libre",
+                "x": 50,
+                "y": 88,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "pase-y-va-carril-central",
+      "title": "Pase y va al carril central",
+      "summary": "Pase y va del cierre con devolución al desmarque y liberación del carril central.",
+      "focus": "Pase y va",
+      "categoryIds": ["infantil"],
+      "objective": "Encadenar pase, desmarque y devolución para liberar el carril central con ventaja posicional.",
+      "players": { "total": 8, "goalkeepers": 2 },
+      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "durationMinutes": 12,
+      "intensity": { "level": "medium", "percent": 70 },
+      "workStructure": "Series de 3 minutos x 4 repeticiones",
+      "constraints": [
+        {
+          "rule": "Pase y va obligatorio",
+          "detail": "El pasador debe cambiar de altura después del pase antes de recibir de nuevo."
+        }
+      ],
+      "coachingCues": [
+        "Pasar y moverse en el mismo gesto",
+        "Devolver al espacio, no al pie",
+        "Ocupar el carril central antes de recibir"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "pivot", "kind": "player", "team": "home", "label": "PIV" },
+          { "id": "por-rival", "kind": "keeper", "team": "away", "label": "POR" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" }
+        ],
+        "cones": [
+          { "id": "cono-carril-central", "x": 50, "y": 50 },
+          { "id": "cono-zona-ruptura", "x": 70, "y": 50 }
+        ],
+        "phases": [
+          {
+            "id": "pase-al-pivot",
+            "order": 1,
+            "title": "Pase del cierre al pívot",
+            "explanation": "El cierre pasa al pívot y arranca el desmarque hacia el carril central.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 28, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 40, "y": 20 },
+              { "tokenId": "ala-izquierda", "x": 40, "y": 80 },
+              { "tokenId": "pivot", "x": 48, "y": 50 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "defensor-1", "x": 58, "y": 38 },
+              { "tokenId": "defensor-2", "x": 58, "y": 62 }
+            ],
+            "ball": { "x": 28, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-cierre-pivot",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 28, "y": 50 },
+                "to": { "x": 48, "y": 50 }
+              },
+              {
+                "id": "desmarque-cierre",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 28, "y": 50 },
+                "to": { "x": 34, "y": 44 },
+                "curve": -8
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-pase-y-va", "text": "Pase y va del cierre", "x": 32, "y": 8 }
+            ]
+          },
+          {
+            "id": "devolucion-desmarque",
+            "order": 2,
+            "title": "Devolución al desmarque",
+            "explanation": "El pívot devuelve al espacio y el ala derecha ataca la espalda de la defensa.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 38, "y": 44 },
+              { "tokenId": "ala-derecha", "x": 48, "y": 18 },
+              { "tokenId": "ala-izquierda", "x": 44, "y": 82 },
+              { "tokenId": "pivot", "x": 52, "y": 52 },
+              { "tokenId": "por-rival", "x": 90, "y": 50 },
+              { "tokenId": "defensor-1", "x": 54, "y": 32 },
+              { "tokenId": "defensor-2", "x": 62, "y": 66 }
+            ],
+            "ball": { "x": 52, "y": 52 },
+            "arrows": [
+              {
+                "id": "devolucion-pivot-cierre",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 52, "y": 52 },
+                "to": { "x": 38, "y": 44 }
+              },
+              {
+                "id": "desmarque-ala-derecha",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 48, "y": 18 },
+                "to": { "x": 58, "y": 14 },
+                "curve": -6
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-devolucion",
+                "text": "Devolución al desmarque",
+                "x": 46,
+                "y": 6,
+                "align": "left"
+              }
+            ]
+          },
+          {
+            "id": "carril-central",
+            "order": 3,
+            "title": "Carril central liberado",
+            "explanation": "El cierre conecta con el pívot en el carril central y el equipo gana la última línea.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 42, "y": 48 },
+              { "tokenId": "ala-derecha", "x": 58, "y": 16 },
+              { "tokenId": "ala-izquierda", "x": 52, "y": 84 },
+              { "tokenId": "pivot", "x": 74, "y": 50 },
+              { "tokenId": "por-rival", "x": 94, "y": 50 },
+              { "tokenId": "defensor-1", "x": 66, "y": 32 },
+              { "tokenId": "defensor-2", "x": 68, "y": 70 }
+            ],
+            "ball": { "x": 74, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-carril-central",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 42, "y": 48 },
+                "to": { "x": 74, "y": 50 },
+                "curve": 10
+              },
+              {
+                "id": "ruptura-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 74, "y": 50 },
+                "to": { "x": 86, "y": 48 }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-carril-central",
+                "text": "Carril central liberado",
+                "x": 74,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "juego-posicion-3-1-pivote",
+      "title": "Juego de posición 3-1 con pívot",
+      "summary": "Juego de posición 3-1 para fijar al par defensivo con el pívot y liberar al ala débil.",
+      "focus": "Juego de posición",
+      "categoryIds": ["infantil"],
+      "objective": "Sostener la estructura 3-1 fijando el pasillo central antes de cambiar la orientación al ala libre.",
+      "players": { "total": 10, "goalkeepers": 2 },
+      "space": { "label": "Tres cuartos de pista", "widthM": 20, "lengthM": 30 },
+      "durationMinutes": 14,
+      "intensity": { "level": "medium", "percent": 75 },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Pívot fijador",
+          "detail": "El pívot permanece en el pasillo central hasta que el balón cambia de banda."
+        }
+      ],
+      "coachingCues": [
+        "Fijar al par antes de liberar el balón",
+        "Ocupar el pasillo central con el pívot",
+        "Cambiar de orientación con ventaja"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "pivot", "kind": "player", "team": "home", "label": "PIV" },
+          { "id": "por-rival", "kind": "keeper", "team": "away", "label": "POR" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" },
+          { "id": "defensor-3", "kind": "player", "team": "away", "label": "D3" },
+          { "id": "defensor-4", "kind": "player", "team": "away", "label": "D4" }
+        ],
+        "cones": [
+          { "id": "cono-pasillo-central-superior", "x": 50, "y": 40 },
+          { "id": "cono-pasillo-central-inferior", "x": 50, "y": 60 }
+        ],
+        "phases": [
+          {
+            "id": "estructura-tres-uno",
+            "order": 1,
+            "title": "Estructura 3-1",
+            "explanation": "El equipo forma el 3-1 con el pívot en el pasillo central y el cierre sostiene el balón.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 28, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 36, "y": 24 },
+              { "tokenId": "ala-izquierda", "x": 36, "y": 76 },
+              { "tokenId": "pivot", "x": 52, "y": 50 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "defensor-1", "x": 46, "y": 34 },
+              { "tokenId": "defensor-2", "x": 46, "y": 66 },
+              { "tokenId": "defensor-3", "x": 64, "y": 42 },
+              { "tokenId": "defensor-4", "x": 64, "y": 58 }
+            ],
+            "ball": { "x": 28, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-cierre-pivot",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 28, "y": 50 },
+                "to": { "x": 52, "y": 50 }
+              },
+              {
+                "id": "desmarque-ala-derecha",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 36, "y": 24 },
+                "to": { "x": 44, "y": 18 },
+                "curve": -8
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-juego-posicion", "text": "Juego de posición 3-1", "x": 30, "y": 8 }
+            ]
+          },
+          {
+            "id": "fijar-liberar",
+            "order": 2,
+            "title": "Fijar y liberar al ala",
+            "explanation": "El pívot fija a su par y libera el balón al ala derecha mientras la defensa ajusta.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 32, "y": 52 },
+              { "tokenId": "ala-derecha", "x": 48, "y": 18 },
+              { "tokenId": "ala-izquierda", "x": 44, "y": 80 },
+              { "tokenId": "pivot", "x": 56, "y": 48 },
+              { "tokenId": "por-rival", "x": 90, "y": 50 },
+              { "tokenId": "defensor-1", "x": 52, "y": 30 },
+              { "tokenId": "defensor-2", "x": 52, "y": 68 },
+              { "tokenId": "defensor-3", "x": 66, "y": 40 },
+              { "tokenId": "defensor-4", "x": 68, "y": 60 }
+            ],
+            "ball": { "x": 56, "y": 48 },
+            "arrows": [
+              {
+                "id": "pase-pivot-ala-derecha",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 56, "y": 48 },
+                "to": { "x": 48, "y": 18 },
+                "curve": -16
+              },
+              {
+                "id": "presion-defensor-uno",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 52, "y": 30 },
+                "to": { "x": 49, "y": 24 }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-fijar-liberar",
+                "text": "Fijar para liberar",
+                "x": 44,
+                "y": 6,
+                "align": "left"
+              }
+            ]
+          },
+          {
+            "id": "ala-debil",
+            "order": 3,
+            "title": "Cambio al ala débil",
+            "explanation": "El ala derecha cambia la orientación y el ala izquierda queda libre en el último carril.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 34, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 58, "y": 16 },
+              { "tokenId": "ala-izquierda", "x": 66, "y": 84 },
+              { "tokenId": "pivot", "x": 62, "y": 48 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "defensor-1", "x": 60, "y": 28 },
+              { "tokenId": "defensor-2", "x": 66, "y": 66 },
+              { "tokenId": "defensor-3", "x": 74, "y": 44 },
+              { "tokenId": "defensor-4", "x": 76, "y": 62 }
+            ],
+            "ball": { "x": 66, "y": 84 },
+            "arrows": [
+              {
+                "id": "cambio-ala-debil",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 58, "y": 16 },
+                "to": { "x": 66, "y": 84 },
+                "curve": 22
+              },
+              {
+                "id": "ruptura-pivot-ala",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 62, "y": 48 },
+                "to": { "x": 72, "y": 50 },
+                "curve": -6
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-ala-debil",
+                "text": "Ala débil libre",
+                "x": 66,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "ataque-4-0-rotaciones",
+      "title": "Ataque 4-0 con rotaciones",
+      "summary": "Ataque 4-0 con rotación continua para ocupar el carril que deja el receptor y mantener amenaza en ambos lados.",
+      "focus": "Ataque 4-0",
+      "categoryIds": ["infantil"],
+      "objective": "Mantener el ataque 4-0 activo rotando posiciones después de cada pase sin perder el equilibrio defensivo.",
+      "players": { "total": 10, "goalkeepers": 2 },
+      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "durationMinutes": 15,
+      "intensity": { "level": "high", "percent": 80 },
+      "workStructure": "Series de 5 minutos x 3 repeticiones",
+      "constraints": [
+        {
+          "rule": "Rotación continua",
+          "detail": "Después de cada pase, el pasador ocupa el carril que deja el receptor."
+        }
+      ],
+      "coachingCues": [
+        "Rotar después del pase, nunca antes",
+        "Mantener siempre un carril ocupado en el lado débil",
+        "Reconocer el momento de la rotación completa"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "pivot", "kind": "player", "team": "home", "label": "PIV" },
+          { "id": "por-rival", "kind": "keeper", "team": "away", "label": "POR" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" },
+          { "id": "defensor-3", "kind": "player", "team": "away", "label": "D3" },
+          { "id": "defensor-4", "kind": "player", "team": "away", "label": "D4" }
+        ],
+        "cones": [
+          { "id": "cono-carril-derecho", "x": 55, "y": 18 },
+          { "id": "cono-carril-izquierdo", "x": 55, "y": 82 }
+        ],
+        "phases": [
+          {
+            "id": "posicion-cuatro-cero",
+            "order": 1,
+            "title": "Posición 4-0",
+            "explanation": "El equipo se coloca en 4-0 con amplitud en ambas bandas y el pívot como referencia central.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 30, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 40, "y": 22 },
+              { "tokenId": "ala-izquierda", "x": 40, "y": 78 },
+              { "tokenId": "pivot", "x": 52, "y": 50 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "defensor-1", "x": 50, "y": 34 },
+              { "tokenId": "defensor-2", "x": 62, "y": 38 },
+              { "tokenId": "defensor-3", "x": 62, "y": 62 },
+              { "tokenId": "defensor-4", "x": 50, "y": 66 }
+            ],
+            "ball": { "x": 30, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-cierre-ala-derecha",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 50 },
+                "to": { "x": 40, "y": 22 },
+                "curve": -12
+              },
+              {
+                "id": "apoyo-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 52, "y": 50 },
+                "to": { "x": 60, "y": 46 }
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-ataque-cuatro-cero", "text": "Ataque 4-0", "x": 30, "y": 8 }
+            ]
+          },
+          {
+            "id": "rotacion-pivot",
+            "order": 2,
+            "title": "Rotación del pívot al ala",
+            "explanation": "El pívot rota hacia la banda derecha y el cierre ocupa el pasillo central.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 36, "y": 52 },
+              { "tokenId": "ala-derecha", "x": 54, "y": 20 },
+              { "tokenId": "ala-izquierda", "x": 46, "y": 80 },
+              { "tokenId": "pivot", "x": 62, "y": 48 },
+              { "tokenId": "por-rival", "x": 90, "y": 50 },
+              { "tokenId": "defensor-1", "x": 58, "y": 34 },
+              { "tokenId": "defensor-2", "x": 68, "y": 40 },
+              { "tokenId": "defensor-3", "x": 68, "y": 62 },
+              { "tokenId": "defensor-4", "x": 58, "y": 68 }
+            ],
+            "ball": { "x": 54, "y": 20 },
+            "arrows": [
+              {
+                "id": "pase-cierre-ala-adelantada",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 36, "y": 52 },
+                "to": { "x": 54, "y": 20 },
+                "curve": -14
+              },
+              {
+                "id": "rotacion-pivot-banda",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 62, "y": 48 },
+                "to": { "x": 68, "y": 36 }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-rotacion",
+                "text": "Rotación del pívot",
+                "x": 56,
+                "y": 6,
+                "align": "left"
+              }
+            ]
+          },
+          {
+            "id": "rotacion-completa",
+            "order": 3,
+            "title": "Rotación completa",
+            "explanation": "La rotación se completa con el cambio al ala izquierda mientras el pívot cierra el lado débil.",
+            "positions": [
+              { "tokenId": "por-local", "x": 14, "y": 50 },
+              { "tokenId": "cierre", "x": 66, "y": 28 },
+              { "tokenId": "ala-derecha", "x": 74, "y": 18 },
+              { "tokenId": "ala-izquierda", "x": 58, "y": 86 },
+              { "tokenId": "pivot", "x": 52, "y": 50 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "defensor-1", "x": 70, "y": 36 },
+              { "tokenId": "defensor-2", "x": 78, "y": 44 },
+              { "tokenId": "defensor-3", "x": 72, "y": 64 },
+              { "tokenId": "defensor-4", "x": 60, "y": 72 }
+            ],
+            "ball": { "x": 66, "y": 28 },
+            "arrows": [
+              {
+                "id": "cambio-ala-izquierda",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 74, "y": 18 },
+                "to": { "x": 58, "y": 86 },
+                "curve": 26
+              },
+              {
+                "id": "cierre-lado-debil",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 52, "y": 50 },
+                "to": { "x": 60, "y": 80 },
+                "curve": 12
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-rotacion-completa",
+                "text": "Rotación completa",
+                "x": 74,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "basculacion-rombo-defensivo",
+      "title": "Basculación del rombo defensivo",
+      "summary": "Rombo defensivo que bascula con el balón para cerrar el centro y proteger el carril del ala.",
+      "focus": "Basculación defensiva",
+      "categoryIds": ["infantil"],
+      "objective": "Bascular el rombo defensivo con el balón manteniendo la distancia entre cierre y pívot y cerrando el pase interior.",
+      "players": { "total": 10, "goalkeepers": 2 },
+      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "durationMinutes": 15,
+      "intensity": { "level": "medium", "percent": 70 },
+      "workStructure": "Bloques de 5 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Rombo compacto",
+          "detail": "La distancia entre el cierre y el pívot no puede superar los ocho metros."
+        }
+      ],
+      "coachingCues": [
+        "Moverse a la vez que el balón",
+        "Cerrar el pase interior antes que la banda",
+        "Mantener el rombo sin romper la distancia entre líneas"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "pivot", "kind": "player", "team": "home", "label": "PIV" },
+          { "id": "por-rival", "kind": "keeper", "team": "away", "label": "POR" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" },
+          { "id": "rival-3", "kind": "player", "team": "away", "label": "R3" },
+          { "id": "rival-4", "kind": "player", "team": "away", "label": "R4" }
+        ],
+        "cones": [
+          { "id": "cono-vertice-rombo", "x": 50, "y": 50 },
+          { "id": "cono-zona-interior", "x": 40, "y": 50 }
+        ],
+        "phases": [
+          {
+            "id": "balon-banda-derecha",
+            "order": 1,
+            "title": "Balón en banda derecha",
+            "explanation": "El rival tiene el balón en la banda derecha y el rombo bascula hacia ese lado cerrando el interior.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 52, "y": 44 },
+              { "tokenId": "ala-derecha", "x": 46, "y": 26 },
+              { "tokenId": "ala-izquierda", "x": 46, "y": 74 },
+              { "tokenId": "pivot", "x": 38, "y": 50 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "rival-1", "x": 60, "y": 20 },
+              { "tokenId": "rival-2", "x": 66, "y": 44 },
+              { "tokenId": "rival-3", "x": 66, "y": 62 },
+              { "tokenId": "rival-4", "x": 78, "y": 50 }
+            ],
+            "ball": { "x": 60, "y": 20 },
+            "arrows": [
+              {
+                "id": "presion-ala-derecha",
+                "kind": "press",
+                "team": "home",
+                "from": { "x": 46, "y": 26 },
+                "to": { "x": 58, "y": 22 }
+              },
+              {
+                "id": "cobertura-cierre",
+                "kind": "cover",
+                "team": "home",
+                "from": { "x": 52, "y": 44 },
+                "to": { "x": 58, "y": 36 },
+                "curve": 6
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-basculacion-derecha", "text": "Basculación a banda derecha", "x": 44, "y": 8 }
+            ]
+          },
+          {
+            "id": "cambio-orientacion-rival",
+            "order": 2,
+            "title": "Cambio de orientación rival",
+            "explanation": "El rival cambia el balón a la banda izquierda y el rombo se desplaza sin perder la referencia central.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 48, "y": 60 },
+              { "tokenId": "ala-derecha", "x": 46, "y": 40 },
+              { "tokenId": "ala-izquierda", "x": 58, "y": 76 },
+              { "tokenId": "pivot", "x": 38, "y": 54 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "rival-1", "x": 66, "y": 26 },
+              { "tokenId": "rival-2", "x": 66, "y": 52 },
+              { "tokenId": "rival-3", "x": 62, "y": 78 },
+              { "tokenId": "rival-4", "x": 76, "y": 40 }
+            ],
+            "ball": { "x": 62, "y": 78 },
+            "arrows": [
+              {
+                "id": "pase-rival-banda-izquierda",
+                "kind": "pass",
+                "team": "away",
+                "from": { "x": 66, "y": 26 },
+                "to": { "x": 62, "y": 78 },
+                "curve": 14
+              },
+              {
+                "id": "presion-ala-izquierda",
+                "kind": "press",
+                "team": "home",
+                "from": { "x": 58, "y": 76 },
+                "to": { "x": 60, "y": 77 }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-basculacion-izquierda",
+                "text": "Basculación a banda izquierda",
+                "x": 50,
+                "y": 92,
+                "align": "left"
+              }
+            ]
+          },
+          {
+            "id": "rombo-cerrado",
+            "order": 3,
+            "title": "Cierre del rombo",
+            "explanation": "El rombo se cierra sobre el portador y el pívot cubre el pase interior para forzar la pérdida.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 56, "y": 60 },
+              { "tokenId": "ala-derecha", "x": 52, "y": 40 },
+              { "tokenId": "ala-izquierda", "x": 60, "y": 74 },
+              { "tokenId": "pivot", "x": 46, "y": 52 },
+              { "tokenId": "por-rival", "x": 90, "y": 50 },
+              { "tokenId": "rival-1", "x": 70, "y": 30 },
+              { "tokenId": "rival-2", "x": 70, "y": 54 },
+              { "tokenId": "rival-3", "x": 60, "y": 80 },
+              { "tokenId": "rival-4", "x": 80, "y": 44 }
+            ],
+            "ball": { "x": 60, "y": 80 },
+            "arrows": [
+              {
+                "id": "cobertura-interior-pivot",
+                "kind": "cover",
+                "team": "home",
+                "from": { "x": 46, "y": 52 },
+                "to": { "x": 54, "y": 64 },
+                "curve": 8
+              },
+              {
+                "id": "presion-cierre-rombo",
+                "kind": "press",
+                "team": "home",
+                "from": { "x": 56, "y": 60 },
+                "to": { "x": 59, "y": 70 }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-rombo-cerrado",
+                "text": "Rombo cerrado",
+                "x": 68,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "transicion-3v2-tras-robo",
+      "title": "Transición 3v2 tras robo",
+      "summary": "Transición rápida en 3v2 tras recuperar el balón en el carril central para rematar antes de que recomponga la defensa.",
+      "focus": "Transición",
+      "categoryIds": ["infantil"],
+      "objective": "Convertir el robo en una transición 3v2 vertical, con el balón en el carril central y remate en pocos pases.",
+      "players": { "total": 7, "goalkeepers": 1 },
+      "space": { "label": "Medio campo", "widthM": 20, "lengthM": 25 },
+      "durationMinutes": 12,
+      "intensity": { "level": "high", "percent": 85 },
+      "workStructure": "Series de 2 minutos x 6 repeticiones",
+      "constraints": [
+        {
+          "rule": "Tres pases máximo",
+          "detail": "La transición debe terminar en remate en un máximo de tres pases."
+        }
+      ],
+      "coachingCues": [
+        "El primer pase tras el robo va hacia delante",
+        "Atacar el espacio que deja el rival desequilibrado",
+        "Abrir el carril del ala para el remate"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "pivot", "kind": "player", "team": "home", "label": "PIV" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" }
+        ],
+        "cones": [
+          { "id": "cono-carril-central", "x": 40, "y": 50 },
+          { "id": "cono-zona-remate", "x": 80, "y": 50 }
+        ],
+        "phases": [
+          {
+            "id": "robo-central",
+            "order": 1,
+            "title": "Robo en el carril central",
+            "explanation": "El cierre recupera el balón en el carril central y el ala derecha inicia el desmarque.",
+            "positions": [
+              { "tokenId": "por-local", "x": 8, "y": 50 },
+              { "tokenId": "cierre", "x": 34, "y": 48 },
+              { "tokenId": "ala-derecha", "x": 40, "y": 24 },
+              { "tokenId": "pivot", "x": 46, "y": 50 },
+              { "tokenId": "defensor-1", "x": 44, "y": 58 },
+              { "tokenId": "defensor-2", "x": 58, "y": 40 }
+            ],
+            "ball": { "x": 34, "y": 48 },
+            "arrows": [
+              {
+                "id": "robo-cierre",
+                "kind": "press",
+                "team": "home",
+                "from": { "x": 34, "y": 48 },
+                "to": { "x": 42, "y": 44 }
+              },
+              {
+                "id": "desmarque-ala-derecha",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 40, "y": 24 },
+                "to": { "x": 52, "y": 18 },
+                "curve": -8
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-robo", "text": "Robo en el carril central", "x": 28, "y": 8 }
+            ]
+          },
+          {
+            "id": "ataque-tres-dos",
+            "order": 2,
+            "title": "Ataque 3v2 tras robo",
+            "explanation": "El cierre conduce y abre al ala derecha mientras el pívot ataca el segundo palo.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 48, "y": 46 },
+              { "tokenId": "ala-derecha", "x": 62, "y": 20 },
+              { "tokenId": "pivot", "x": 66, "y": 48 },
+              { "tokenId": "defensor-1", "x": 56, "y": 52 },
+              { "tokenId": "defensor-2", "x": 70, "y": 42 }
+            ],
+            "ball": { "x": 48, "y": 46 },
+            "arrows": [
+              {
+                "id": "pase-transicion-ala",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 48, "y": 46 },
+                "to": { "x": 62, "y": 20 },
+                "curve": -12
+              },
+              {
+                "id": "ruptura-pivot-segundo-palo",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 66, "y": 48 },
+                "to": { "x": 78, "y": 44 },
+                "curve": -6
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-transicion",
+                "text": "Transición 3v2 tras robo",
+                "x": 66,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
     }
   ],
   "programming": [
     {
       "id": "infantil-u14-base",
       "categoryId": "infantil",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "formativeStage": "Etapa de asimilación táctica cognitiva",
-      "focus": "Foco metodológico Infantil",
+      "focus": "Foco Metodológico Infantil",
       "playModel": "Iniciación dinámica a sistemas base 3-1 con pívot fijador y transición a rotación continua 4-0.",
       "sessionDurationMinutes": { "min": 60, "max": 75 },
       "keyConcepts": [
         "Desmarques de ruptura al espacio ciego",
         "Fijación del par defensivo",
-        "Repliegue ordenado de seguridad"
+        "Repliegue ordenado de seguridad",
+        "Orientación del primer toque hacia el carril libre",
+        "Basculación defensiva del rombo"
       ],
       "objectives": [
         "Consolidar la salida 3-1 ante presión alta",
-        "Automatizar la circulación cierre-ala",
-        "Mejorar la presión tras pérdida"
+        "Automatizar la circulación cierre-ala y el pase y va",
+        "Sostener la presión tras pérdida y la transición tras robo",
+        "Dominar el juego de posición 3-1 con pívot fijador",
+        "Ejecutar las rotaciones del ataque 4-0 sin perder el equilibrio",
+        "Cerrar el rombo defensivo ante los cambios de orientación rival"
       ],
       "sessionStructure": [
         {
           "part": "warm-up",
-          "title": "Activación con balón",
-          "description": "Rondo 4v1 y movilidad articular con balón durante 12 minutos."
+          "title": "Activación con rondo 4v1",
+          "description": "Rondo 4v1 con orientación y movilidad articular con balón durante 12 minutos."
         },
         {
           "part": "main",
-          "title": "Salida 3-1 y circulación",
-          "description": "Tareas de salida de presión y circulación cierre-ala durante 35 minutos."
+          "title": "Bloques tácticos del microciclo",
+          "description": "Cuatro bloques de 8 a 9 minutos con la tarea principal del microciclo y una tarea complementaria durante 35 minutos."
         },
         {
           "part": "cool-down",
           "title": "Vuelta a la calma",
-          "description": "Estiramientos guiados y preguntas de comprensión táctica durante 10 minutos."
+          "description": "Estiramientos guiados y preguntas de comprensión táctica durante 8 minutos."
         }
       ],
       "macrocycles": [
@@ -474,6 +1446,44 @@
               "id": "microciclo-2",
               "label": "Microciclo 2 · semanas 3-4",
               "focus": "Circulación cierre-ala",
+              "sessionCount": 4
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Circulación, pase y va y juego de posición",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Pase y va en el carril central",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Juego de posición 3-1 con pívot",
+              "sessionCount": 4
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-3",
+          "label": "Macrociclo 3 · enero-marzo",
+          "focus": "Rotaciones 4-0, rombo defensivo y transición",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 9-10",
+              "focus": "Ataque 4-0 y rotaciones",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 11-12",
+              "focus": "Basculación del rombo y transición tras robo",
               "sessionCount": 4
             }
           ]

@@ -156,7 +156,7 @@ Owns the Exercise Library, Category reference data, Programming, the content rea
 - `infrastructure`: `content/content-package.json`, the single versioned content package (`contentVersion` `1.0.0`), and `bundled-content-repository.ts`, which imports the JSON as `unknown`, parses it once through `domain/content-package.ts`, indexes by exercise id and Programming category, and exposes `createBundledContentRepository()`.
 - `presentation`: the Explorar placeholder until `explore-general-screen` lands.
 
-The content contract, invariants, and validation paths are documented in `docs/content-model.md`; the licensing gate, source register, and author checklist in `docs/content-licensing.md`. Full seeding, attribution display, category filter state, and screens are separate features.
+The bundled seed holds the complete Infantil U14 slice — nine original exercises in package order plus the `infantil-u14-base` Programming record — while the other six categories stay empty until `seed-remaining-categories`. The content contract, invariants, and validation paths are documented in `docs/content-model.md`; the licensing gate, source register, and author checklist in `docs/content-licensing.md`. Attribution display, category filter state, and screens are separate features.
 
 ### `board`
 

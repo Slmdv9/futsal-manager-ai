@@ -277,14 +277,30 @@
       "board-data-schema",
       "seed-content-licensing"
     ],
-    "status": "not_started",
+    "status": "accepted",
     "verification": [
       "Run Board Data validation over every Infantil U14 exercise and confirm all pass.",
       "Confirm the Infantil U14 programming record renders all required sections.",
       "Confirm every seeded exercise carries provenance and license metadata."
     ],
-    "evidence": [],
-    "notes": "First full category; the prototype and build brief both use Infantil U14."
+    "evidence": [
+      "Bundled package `src/modules/content/infrastructure/content/content-package.json`: nine exercises in package order (`salida-3-1-presion-alta`, `circulacion-cierre-ala`, `presion-tras-perdida`, `rondo-4v1-orientacion`, `pase-y-va-carril-central`, `juego-posicion-3-1-pivote`, `ataque-4-0-rotaciones`, `basculacion-rombo-defensivo`, `transicion-3v2-tras-robo`) plus `infantil-u14-base`. The three legacy records are byte-identical (diff shows only the six appended exercises and the Programming edits).",
+      "The six new exercises carry Spanish copy and multi-phase Board Data (`pitch.format: 'full'`, 2–3 phases each, coordinates inside 4–96, one position per token per phase, tokens within `players.total`): rondo 5/6 tokens, pase y va 8/8, juego de posición 10/10, ataque 4-0 10/10, basculación 10/10, transición 6/7. Focus values are nine distinct planned blocks.",
+      "`infantil-u14-base` is published, `version` `1.1.0` (plan version, not the package version), with 5 key concepts, 6 objectives, warm-up/main/cool-down, and three macrocycles (`macrociclo-1..3`) of two four-session microcycles each; `sessionDurationMinutes` 60–75.",
+      "All ten records are `published` / `original` / `owned` / `sourceName` `Futsal Manager AI` with no `attribution`; no `reference` record and no inspiration-only domain in any `sourceName`. `contentVersion` and `CONTENT_PACKAGE_VERSION` stay `1.0.0`, Board Data stays `1.0.0`, and `ContentProvenance` keys are unchanged.",
+      "No cross-category growth: `cadete` still returns exactly `salida-3-1-presion-alta`; `prebenjamin`, `benjamin`, `alevin`, `juvenil`, and `senior` return no exercises and `getProgramming` returns `null`.",
+      "`npm test`: 114/114 pass across 122 suites (baseline 97/97 across 114). New `tests/modules/content/infrastructure/seed-infantil-u14.test.ts` contributes 17 tests; `seed-provenance.test.ts` and `bundled-content-repository.test.ts` now assert 9 + 1 records and the canonical nine-id list.",
+      "`npm run lint` exit 0 (boundaries unchanged), `npm run typecheck` exit 0, `npm run verify` exit 0 with `expo-doctor` 20/20, and `./init.sh` exit 0 without starting Metro.",
+      "Read-layer smoke: Infantil returns the nine ids in package order, total exercise count 9, `infantil-u14-base` at `1.1.0` with 3 macrocycles and `warm-up,main,cool-down`; Cadete returns one exercise and `null` programming; the other five categories return 0 exercises and `null`.",
+      "In-memory probes on the shipped package (no file edits): `exercises.3.boardData.phases.0.positions.0.x` set to `140` fails as `exercises.3.boardData.phases.0.positions.0.x: Too big: expected number to be <=100`; deleting a position from `exercises.4.boardData.phases.1.positions` fails as `exercises.4.boardData.phases.1.positions: Missing position for token \"defensor-2\" in phase 2.`; the untouched package still parses (9 exercises, 1 programming, `contentVersion` `1.0.0`).",
+      "`npx expo export --platform android` exit 0 with a 3,647,600-byte Hermes bundle; `strings` found all six new ids plus `infantil-u14-base`.",
+      "Device smoke on Samsung Galaxy M13 (`SM-M135F`, Android 14, Expo Go 58.0.5): Metro bundled 1258 modules, Explorar rendered `FUTSAL MANAGER AI`, `EN CONSTRUCCIÓN`, `La biblioteca llega en la siguiente fase`, and all four tabs; `adb logcat` showed no React Native errors or fatal exceptions.",
+      "Docs updated: `docs/content-model.md` (seed scope/order, Programming version note, Known Gaps), `docs/content-licensing.md` (source register and audit scope), `ARCHITECTURE.md` (one catalogue sentence), `docs/risks-and-open-questions.md` (volume risk and next feature), `src/modules/content/README.md`, `AGENTS.md`, `PROGRESS.md`, and this spec's tasks/notes.",
+      "No persistent E2E harness exists and the feature changes no route, API route, or screen; node:test package/application/infrastructure coverage plus the parser probes and the Explorar device smoke is the right level.",
+      "Evidence interpretation: the requested 'programming record renders all required sections' is verified structurally through the read layer because no screen or renderer exists in this feature; UI rendering is deferred to `explore-by-category-screen` / `exercise-detail-screen`, and board legibility to `tactics-board-renderer`.",
+      "Independent validator acceptance: verdict `accept`. The validator reran 114/114 tests across 122 suites, lint, typecheck, `npm run verify` (expo-doctor 20/20), `./init.sh`, an independent package-contract probe, a nine-id read-layer probe, invalid-package probes, an Android export, and the Explorar device smoke on `SM-M135F`; the nine Infantil ids appear once in package order, `infantil-u14-base` is complete at `1.1.0`, `cadete` stays at one exercise, the five other categories stay empty, all ten records are `original`/`owned`, and versions remain `1.0.0`. Non-blocking follow-ups: exact-count seed assertions will need edits on future content changes, board geometry legibility is unverified until `tactics-board-renderer`, and U14 load/intensity needs coach review."
+    ],
+    "notes": "Independent validator acceptance: `accept`. Implemented and self-verified, then independently validated. Infantil U14 is the first complete category: nine original exercises plus the extended `infantil-u14-base` season plan (`version` `1.1.0`) while the package stays `contentVersion` `1.0.0`. Only data, mirrored content tests, and the named docs changed; no schema, port, export, UI, board, or AI code was touched. Remaining risks: hand-authored board geometry is structurally valid but its legibility is unverified until the renderer; U14 load/intensity is a coaching judgement pending coach review; the other six categories stay empty for `seed-remaining-categories`."
   },
   {
     "id": "seed-remaining-categories",

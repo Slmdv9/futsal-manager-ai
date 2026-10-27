@@ -14,7 +14,7 @@
 
 ## Blocking Next Phase
 
-None. The stack, Board Data schema, and content licensing are resolved and the licence gate is implemented; the next feature ready to start is `seed-infantil-u14`.
+None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, and the Infantil U14 seed is complete; the next feature ready to start is `seed-remaining-categories`.
 
 ## Implementation-Time Questions
 
@@ -46,7 +46,7 @@ None. The stack, Board Data schema, and content licensing are resolved and the l
 
 ## Risks
 
-- **Content quality/volume.** The library is the product's core value; a thin or low-quality seed makes the AI and the board feel generic. Mitigation: seed Infantil U14 deeply, then validate with real coaches.
+- **Content quality/volume.** The library is the product's core value; a thin or low-quality seed makes the AI and the board feel generic. Mitigation: the Infantil U14 library is now a complete slice (nine exercises plus a three-macrocycle Programming record) and `seed-remaining-categories` closes the other six categories; coach review of load, intensity, and U14 appropriateness is still pending. Board legibility of the hand-authored geometry is unverified until `tactics-board-renderer`.
 - **AI hallucination.** The board, session generator, and chatbot can produce plausible but invented tactics. Mitigation: mandatory grounding, cite source exercises, validate Board Data schema, and show provenance.
 - **Anonymous AI cost/abuse.** A 5/day quota plus installation ID and hashed IP reduces abuse, but shared networks and reset tricks remain. Mitigation: server-side key, rate limiting, per-request caps, logging.
 - **Structured-output reliability.** DevExpert `chat` may return JSON that fails Board Data validation. Mitigation: strict JSON schema prompts, server-side validation, retry/fallback, and escalate to `chat-pro` if needed.
