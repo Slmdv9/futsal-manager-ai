@@ -1,0 +1,490 @@
+{
+  "contentVersion": "1.0.0",
+  "exercises": [
+    {
+      "id": "salida-3-1-presion-alta",
+      "title": "Salida 3-1 ante presión alta",
+      "summary": "Salida en 3-1 con fijación del cierre y cambio de orientación al ala débil.",
+      "focus": "Salida de presión",
+      "categoryIds": ["infantil", "cadete"],
+      "objective": "Superar la primera línea de presión con control orientado y liberar el carril del ala débil.",
+      "players": { "total": 10, "goalkeepers": 2 },
+      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "durationMinutes": 15,
+      "intensity": { "level": "high", "percent": 85 },
+      "workStructure": "Bloques de 3 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "2 toques",
+          "detail": "Obligatorio primer toque con control orientado hacia el carril libre."
+        }
+      ],
+      "coachingCues": [
+        "Timing de desmarque del ala",
+        "Orientación de control en banda",
+        "Fijación del pívot sin falta en ataque"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "pivot", "kind": "player", "team": "home", "label": "PIV" },
+          { "id": "por-rival", "kind": "keeper", "team": "away", "label": "POR" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensor-2", "kind": "player", "team": "away", "label": "D2" },
+          { "id": "defensor-3", "kind": "player", "team": "away", "label": "D3" }
+        ],
+        "cones": [
+          { "id": "cono-salida", "x": 18, "y": 50 },
+          { "id": "cono-banda-derecha", "x": 40, "y": 5 },
+          { "id": "cono-banda-izquierda", "x": 40, "y": 95 }
+        ],
+        "phases": [
+          {
+            "id": "salida",
+            "order": 1,
+            "title": "Salida desde portero",
+            "explanation": "El portero inicia la salida en 3-1 y el cierre ofrece la primera línea de pase.",
+            "positions": [
+              { "tokenId": "por-local", "x": 8, "y": 50 },
+              { "tokenId": "cierre", "x": 25, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 35, "y": 20 },
+              { "tokenId": "ala-izquierda", "x": 35, "y": 80 },
+              { "tokenId": "pivot", "x": 48, "y": 50 },
+              { "tokenId": "por-rival", "x": 92, "y": 50 },
+              { "tokenId": "defensor-1", "x": 62, "y": 35 },
+              { "tokenId": "defensor-2", "x": 62, "y": 65 },
+              { "tokenId": "defensor-3", "x": 75, "y": 50 }
+            ],
+            "ball": { "x": 8, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-portero-cierre",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 8, "y": 50 },
+                "to": { "x": 25, "y": 50 }
+              },
+              {
+                "id": "desmarque-ala-derecha",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 35, "y": 20 },
+                "to": { "x": 46, "y": 14 },
+                "curve": -12
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-salida", "text": "Salida en 3-1", "x": 20, "y": 8 }
+            ]
+          },
+          {
+            "id": "carril-derecho",
+            "order": 2,
+            "title": "Pase al carril derecho",
+            "explanation": "El cierre conecta con el ala derecha mientras la defensa rival ajusta la presión.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 30, "y": 55 },
+              { "tokenId": "ala-derecha", "x": 45, "y": 18 },
+              { "tokenId": "ala-izquierda", "x": 38, "y": 82 },
+              { "tokenId": "pivot", "x": 52, "y": 52 },
+              { "tokenId": "por-rival", "x": 90, "y": 50 },
+              { "tokenId": "defensor-1", "x": 55, "y": 30 },
+              { "tokenId": "defensor-2", "x": 65, "y": 70 },
+              { "tokenId": "defensor-3", "x": 72, "y": 45 }
+            ],
+            "ball": { "x": 30, "y": 55 },
+            "arrows": [
+              {
+                "id": "pase-cierre-ala",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 30, "y": 55 },
+                "to": { "x": 45, "y": 18 },
+                "curve": -18
+              },
+              {
+                "id": "presion-defensor",
+                "kind": "press",
+                "team": "away",
+                "from": { "x": 55, "y": 30 },
+                "to": { "x": 47, "y": 20 },
+                "curve": 8
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-presion",
+                "text": "Presión al carril derecho",
+                "x": 55,
+                "y": 6,
+                "align": "left"
+              }
+            ]
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 3,
+            "title": "Cambio de orientación",
+            "explanation": "El balón cambia de orientación para liberar al ala izquierda en el último carril.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 32, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 60, "y": 15 },
+              { "tokenId": "ala-izquierda", "x": 70, "y": 85 },
+              { "tokenId": "pivot", "x": 78, "y": 50 },
+              { "tokenId": "por-rival", "x": 94, "y": 50 },
+              { "tokenId": "defensor-1", "x": 68, "y": 28 },
+              { "tokenId": "defensor-2", "x": 72, "y": 68 },
+              { "tokenId": "defensor-3", "x": 85, "y": 50 }
+            ],
+            "ball": { "x": 70, "y": 85 },
+            "arrows": [
+              {
+                "id": "cambio-orientacion",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 60, "y": 15 },
+                "to": { "x": 70, "y": 85 },
+                "curve": 24
+              },
+              {
+                "id": "ruptura-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 78, "y": 50 },
+                "to": { "x": 88, "y": 46 },
+                "curve": -6
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio",
+                "text": "Cambio de orientación",
+                "x": 68,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "circulacion-cierre-ala",
+      "title": "Circulación rápida cierre-ala",
+      "summary": "Circulación de balón entre cierre y ala para fijar el par defensivo rival.",
+      "focus": "Circulación",
+      "categoryIds": ["infantil"],
+      "objective": "Fijar al defensor de punta y encontrar el carril del ala contraria con dos pases.",
+      "players": { "total": 8, "goalkeepers": 2 },
+      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "durationMinutes": 12,
+      "intensity": { "level": "medium", "percent": 65 },
+      "workStructure": "Ondas de 4 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Máximo 3 segundos",
+          "detail": "El balón no puede quedarse más de tres segundos en el cierre."
+        }
+      ],
+      "coachingCues": [
+        "Primer toque hacia el carril libre",
+        "Pivote como apoyo por detrás del balón",
+        "Ocupar el espacio ciego antes del pase"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "defensor-1", "kind": "player", "team": "away", "label": "D1" },
+          { "id": "defensa-2", "kind": "player", "team": "away", "label": "D2" }
+        ],
+        "cones": [
+          { "id": "cono-carril-derecho", "x": 45, "y": 12 },
+          { "id": "cono-carril-izquierdo", "x": 45, "y": 88 }
+        ],
+        "phases": [
+          {
+            "id": "fijar-cierre",
+            "order": 1,
+            "title": "Fijar con el cierre",
+            "explanation": "El cierre recibe del portero y conduce hacia el defensor de punta.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 28, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 38, "y": 20 },
+              { "tokenId": "ala-izquierda", "x": 38, "y": 80 },
+              { "tokenId": "defensor-1", "x": 48, "y": 35 },
+              { "tokenId": "defensa-2", "x": 48, "y": 65 }
+            ],
+            "ball": { "x": 28, "y": 50 },
+            "arrows": [
+              {
+                "id": "pase-portero-cierre",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 10, "y": 50 },
+                "to": { "x": 28, "y": 50 }
+              },
+              {
+                "id": "conduccion-cierre",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 28, "y": 50 },
+                "to": { "x": 34, "y": 42 }
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-fijar", "text": "Fijar al defensa de punta", "x": 26, "y": 6 }
+            ]
+          },
+          {
+            "id": "conectar-ala",
+            "order": 2,
+            "title": "Conectar con el ala",
+            "explanation": "El cierre libera el balón al ala derecha y el equipo ocupa el carril contrario.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 32, "y": 55 },
+              { "tokenId": "ala-derecha", "x": 46, "y": 18 },
+              { "tokenId": "ala-izquierda", "x": 52, "y": 82 },
+              { "tokenId": "defensor-1", "x": 52, "y": 30 },
+              { "tokenId": "defensa-2", "x": 55, "y": 68 }
+            ],
+            "ball": { "x": 46, "y": 18 },
+            "arrows": [
+              {
+                "id": "pase-cierre-ala",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 32, "y": 55 },
+                "to": { "x": 46, "y": 18 },
+                "curve": -16
+              },
+              {
+                "id": "desmarque-ala-izquierda",
+                "kind": "run",
+                "team": "home",
+                "from": { "x": 38, "y": 80 },
+                "to": { "x": 52, "y": 82 }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-carril",
+                "text": "Carril contrario libre",
+                "x": 50,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "presion-tras-perdida",
+      "title": "Presión tras pérdida",
+      "summary": "Reacción inmediata tras pérdida para recuperar el balón en campo rival.",
+      "focus": "Defensa",
+      "categoryIds": ["infantil"],
+      "objective": "Recuperar el balón en menos de seis segundos cerrando la línea de pase interior.",
+      "players": { "total": 10, "goalkeepers": 2 },
+      "space": { "label": "Medio campo", "widthM": 20, "lengthM": 20 },
+      "durationMinutes": 18,
+      "intensity": { "level": "high", "percent": 90 },
+      "workStructure": "Series de 2 minutos x 6 repeticiones",
+      "constraints": [
+        {
+          "rule": "Seis segundos",
+          "detail": "Si no hay recuperación en seis segundos, el equipo replega y ordena la defensa."
+        }
+      ],
+      "coachingCues": [
+        "El jugador más cercano presiona el balón",
+        "Cerrar la línea de pase interior",
+        "Replegar ordenado si la presión falla"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": { "format": "full" },
+        "tokens": [
+          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
+          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
+          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" },
+          { "id": "ala-izquierda", "kind": "player", "team": "home", "label": "AI" },
+          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
+          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" }
+        ],
+        "cones": [
+          { "id": "cono-zona-presion", "x": 45, "y": 30 },
+          { "id": "cono-zona-presion-baja", "x": 45, "y": 70 }
+        ],
+        "phases": [
+          {
+            "id": "perdida",
+            "order": 1,
+            "title": "Pérdida del balón",
+            "explanation": "El rival recibe entre líneas y el equipo reacciona cerrando el carril interior.",
+            "positions": [
+              { "tokenId": "por-local", "x": 10, "y": 50 },
+              { "tokenId": "cierre", "x": 34, "y": 50 },
+              { "tokenId": "ala-derecha", "x": 42, "y": 22 },
+              { "tokenId": "ala-izquierda", "x": 42, "y": 78 },
+              { "tokenId": "rival-1", "x": 46, "y": 45 },
+              { "tokenId": "rival-2", "x": 58, "y": 60 }
+            ],
+            "ball": { "x": 46, "y": 45 },
+            "arrows": [
+              {
+                "id": "presion-cierre",
+                "kind": "press",
+                "team": "home",
+                "from": { "x": 34, "y": 50 },
+                "to": { "x": 44, "y": 47 }
+              },
+              {
+                "id": "cobertura-ala",
+                "kind": "cover",
+                "team": "home",
+                "from": { "x": 42, "y": 22 },
+                "to": { "x": 50, "y": 36 },
+                "curve": 10
+              }
+            ],
+            "labels": [
+              { "id": "etiqueta-presion", "text": "Presión inmediata", "x": 38, "y": 6 }
+            ]
+          },
+          {
+            "id": "recuperacion",
+            "order": 2,
+            "title": "Recuperación en banda",
+            "explanation": "El cierre roba el balón y el ala izquierda ofrece la salida por banda.",
+            "positions": [
+              { "tokenId": "por-local", "x": 12, "y": 50 },
+              { "tokenId": "cierre", "x": 44, "y": 44 },
+              { "tokenId": "ala-derecha", "x": 50, "y": 26 },
+              { "tokenId": "ala-izquierda", "x": 54, "y": 82 },
+              { "tokenId": "rival-1", "x": 50, "y": 52 },
+              { "tokenId": "rival-2", "x": 62, "y": 64 }
+            ],
+            "ball": { "x": 44, "y": 44 },
+            "arrows": [
+              {
+                "id": "pase-salida-banda",
+                "kind": "pass",
+                "team": "home",
+                "from": { "x": 44, "y": 44 },
+                "to": { "x": 54, "y": 82 },
+                "curve": 18
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-salida",
+                "text": "Salida por banda",
+                "x": 56,
+                "y": 94,
+                "align": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    }
+  ],
+  "programming": [
+    {
+      "id": "infantil-u14-base",
+      "categoryId": "infantil",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de asimilación táctica cognitiva",
+      "focus": "Foco metodológico Infantil",
+      "playModel": "Iniciación dinámica a sistemas base 3-1 con pívot fijador y transición a rotación continua 4-0.",
+      "sessionDurationMinutes": { "min": 60, "max": 75 },
+      "keyConcepts": [
+        "Desmarques de ruptura al espacio ciego",
+        "Fijación del par defensivo",
+        "Repliegue ordenado de seguridad"
+      ],
+      "objectives": [
+        "Consolidar la salida 3-1 ante presión alta",
+        "Automatizar la circulación cierre-ala",
+        "Mejorar la presión tras pérdida"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Activación con balón",
+          "description": "Rondo 4v1 y movilidad articular con balón durante 12 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Salida 3-1 y circulación",
+          "description": "Tareas de salida de presión y circulación cierre-ala durante 35 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Vuelta a la calma",
+          "description": "Estiramientos guiados y preguntas de comprensión táctica durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Asimilación de la salida 3-1",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Salida de presión",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Circulación cierre-ala",
+              "sessionCount": 4
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    }
+  ]
+}

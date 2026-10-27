@@ -3,16 +3,17 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/modular-hexagonal-architecture` (from `main` at `9418fde`)
-- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/modular-hexagonal-architecture`
+- Current branch: `feat/content-model-and-store` (from `main` at `a00e64b`)
+- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/content-model-and-store`
 - Standard startup path: `./init.sh`
 - Standard verification path: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all `tests/**/*.test.{ts,tsx}` via `npm test`, and `expo-doctor`), executed by `./init.sh`
 - Architecture: modular monolith with `content`, `board`, `ai`, and `club` modules, four hexagonal layers each, a public `index.ts` per module, and `shared/domain`, `shared/theme`, `shared/ui` at the bottom of the dependency graph; source of truth in `ARCHITECTURE.md`
-- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, `board-data-schema`, and `modular-hexagonal-architecture` are accepted. Independent re-validation after the boundary repair returned `accept`.
-- Next ready feature: `content-model-and-store`
+- Content: the `content` module owns the seven RFEF `Category` brackets, `Exercise`, `Programming`, the strict `1.0.0` bundled package at `src/modules/content/infrastructure/content/content-package.json`, published-only read use cases, and `createBundledContentRepository()`; contract in `docs/content-model.md`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, `board-data-schema`, `modular-hexagonal-architecture`, and `content-model-and-store` are accepted. `content-model-and-store` passed independent validation with verdict `accept`.
+- Next ready feature: `seed-content-licensing`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-27` (`modular-hexagonal-architecture` repair: 17/17 tests across 29 suites, full module allowlist and shared-sublayer boundaries enforced by `tests/architecture/boundaries.test.ts`, `.test.tsx` discovery verified, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and the four tabs plus `/design-system` render on the connected device)
+- Last verified at: `2026-10-27` (`content-model-and-store`: 55/55 tests across 86 suites, `npm run lint`/`typecheck`/`verify` exit 0 with `expo-doctor` 20/20, `./init.sh` exit 0, Android export succeeds with the seeded package in the 3.6 MB bundle, read-layer smoke prints 7 categories / 3 exercises / the dual-category result / Infantil Programming, invalid-package probes report actionable paths, and Explorar is unchanged on `SM-M135F`)
 
 ## Session Log
 
@@ -148,3 +149,15 @@
 - Known risk or unresolved issue: `npm audit` keeps four pre-existing high-severity transitive advisories in Expo tooling; screen-level mirror tests wait for React Native Testing Library; physical iOS and tablet rendering remain unverified.
 - Independent re-validation: verdict `accept`. Re-ran `npm run verify` (17/17 tests, 29 suites, expo-doctor 20/20), `./init.sh`, Android export, live boundary probes (all expected failures/passes), a mutation check of the new regression test, and the device smoke on `SM-M135F`; Board Data remains at `1.0.0`.
 - Next best step: commit and push the repair, then start `content-model-and-store`.
+
+### Session 013
+
+- Date: `2026-10-27`
+- Goal: Implement `content-model-and-store` from its feature spec: the content domain, bundled package, read layer, tests, and contract docs.
+- Completed: added the seven frozen RFEF categories, `Exercise`, `Programming`, `ContentProvenance`, the strict `1.0.0` content package contract with `parseContentPackage`/`safeParseContentPackage` and `ContentValidationError`, the `ContentRepository` port, four read use cases, the bundled JSON package plus the `createBundledContentRepository()` adapter, the public API exports, the module README, `docs/content-model.md`, and five mirrored content test files (four planned plus a public-API surface check).
+- Verification run: `npm test` (55/55 across 86 suites), `npm run lint`, `npm run typecheck`, `npm run verify` exit 0 with `expo-doctor` 20/20, `./init.sh` exit 0, `npx expo export --platform android`, `tsx` read-layer smoke, two invalid-package probes (unknown seeded category, out-of-range seeded Board Data coordinate) with restore, and an Expo Go device smoke of Explorar on `SM-M135F`.
+- Evidence captured: smoke output listed the seven category ids, exercise count 3, `infantil` returning all three exercises, `cadete` returning only `salida-3-1-presion-alta`, and Programming Infantil `infantil-u14-base`; probes reported `exercises.1.categoryIds.0: Unknown category id; use one of the seven RFEF age brackets.` and `exercises.0.boardData.phases.1.positions.0.x: Too big: expected number to be <=100`; the Android bundle is 3.6 MB and contains `salida-3-1-presion-alta` and `infantil-u14-base`; Explorar still shows `LA BIBLIOTECA LLEGA EN LA SIGUIENTE FASE` with no React Native errors in `logcat`.
+- Files or artifacts updated: `src/modules/content/**`, `tests/modules/content/**`, `docs/content-model.md`, `docs/specs/content-model-and-store.md`, `ARCHITECTURE.md`, `AGENTS.md`, `docs/domain-model.md`, `docs/technical-discovery.md`, `src/modules/content/README.md`, `feature_list.json`, `PROGRESS.md`.
+- Known risk or unresolved issue: provenance is recorded but not enforced and no attribution renders until `seed-content-licensing`; only the Infantil Programming record exists; `node:test` cannot import the module public API because it re-exports `ExploreScreen`, so node tests import layers directly and the public API surface is covered by `tests/modules/content/index.test.ts` plus the device smoke; `npm audit` keeps four pre-existing high-severity transitive advisories in Expo tooling; `feature_list.json` contains a pre-existing duplicated `modular-hexagonal-architecture` entry (both `accepted`) that should be de-duplicated in a harness change; physical iOS and tablet rendering remain unverified.
+- Independent validation: verdict `accept`. The validator reran 55/55 tests across 86 suites, lint, typecheck, `npm run verify` (expo-doctor 20/20), `./init.sh`, Android export (3.6 MB), independent read-layer and invalid-package probes, and confirmed Board Data remains at `1.0.0`, boundary rules are unchanged, and no unrelated UI changed. Non-blocking follow-ups: one spec note overstates combined structural-plus-Board-Data reporting, no direct duplicate Programming-id test, spec task checkboxes remain unchecked, and the general adapter-path wording in `ARCHITECTURE.md` can be reconciled.
+- Next best step: commit and push the feature, then implement `seed-content-licensing`.

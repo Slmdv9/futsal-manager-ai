@@ -8,6 +8,7 @@ This repository contains **Futsal Manager AI**, a mobile-first, Spanish-language
 - `CONTEXT.md` — domain language and canonical terms. Use these words in code and UI.
 - `docs/build-brief.md` — problem, users, goals, non-goals, MVP slice, validation.
 - `docs/domain-model.md` — core entities, relationships, states, edge cases.
+- `docs/content-model.md` — content package contract: RFEF categories, Exercise/Programming fields, invariants, provenance, and validation paths.
 - `DESIGN.md` — visual direction and design tokens; authoritative for UI.
 - `docs/risks-and-open-questions.md` — current risks and unresolved decisions.
 
@@ -20,7 +21,7 @@ Read on demand:
 
 ## Project Status
 
-Bootstrapped, design system, navigation, Board Data contract, and modular hexagonal architecture implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. Source is organized into `content`, `board`, `ai`, and `club` modules under `src/modules`, each with `domain`, `application`, `infrastructure`, `presentation`, and a public `index.ts`; shared code lives in `src/shared`. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted; `modular-hexagonal-architecture` is implemented and verified, pending independent validation. The next ready feature after acceptance is `content-model-and-store`, which fills the `content` domain, application, and infrastructure layers. The physical device loop is documented in `docs/device-development-workflow.md`.
+Bootstrapped, design system, navigation, Board Data contract, modular hexagonal architecture, and the content model plus bundled read layer implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. The `content` module holds the seven RFEF `Category` brackets, `Exercise`, `Programming`, a strict `1.0.0` content package, and published-only read use cases; its contract lives in `docs/content-model.md`. Source is organized into `content`, `board`, `ai`, and `club` modules under `src/modules`, each with `domain`, `application`, `infrastructure`, `presentation`, and a public `index.ts`; shared code lives in `src/shared`. Install with `npm install`, run `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, `board-data-schema`, and `modular-hexagonal-architecture` are accepted; `content-model-and-store` is implemented and verified, pending independent validation. The next ready feature after acceptance is `seed-content-licensing`. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 
@@ -94,6 +95,12 @@ For Board Data:
 - Test quota enforcement server-side.
 - Manually test the board and screens on a real phone and tablet.
 
+For content:
+
+- Validate the bundled package with `parseContentPackage` and keep every Exercise `boardData` passing `parseBoardData`; the content tests load the real `content-package.json`, so `npm test` fails on invalid seed data.
+- Read content through the `content` public API and its published-only use cases; never deep-import the package or expose draft/archived records. Contract: `docs/content-model.md`.
+- Bump `CONTENT_PACKAGE_VERSION` and the JSON `contentVersion` together when the package contract changes.
+
 ## Definition Of Done
 
 A feature is done only when: the target behavior works, the relevant verification actually ran, evidence is recorded, the app still starts from the standard path, and affected docs are updated.
@@ -104,7 +111,7 @@ A feature is done only when: the target behavior works, the relevant verificatio
 - `PROGRESS.md`: current verified state and lightweight session log.
 - `init.sh`: standard startup and verification path.
 
-There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature after `modular-hexagonal-architecture` acceptance is `content-model-and-store`, implemented inside the `content` module layers.
+There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature after `content-model-and-store` acceptance is `seed-content-licensing`, then the `seed-*` library features.
 
 ## End Of Session
 

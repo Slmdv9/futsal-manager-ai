@@ -212,14 +212,29 @@
       "bootstrap-app-shell",
       "modular-hexagonal-architecture"
     ],
-    "status": "not_started",
+    "status": "accepted",
     "verification": [
       "Load the seeded data through the app's read layer.",
       "Confirm an exercise mapped to two categories appears under both without duplication.",
       "Confirm all seven RFEF categories exist as reference data."
     ],
-    "evidence": [],
-    "notes": "Categories are RFEF age brackets, never skill tiers (CONTEXT.md)."
+    "evidence": [
+      "Spec implemented at `docs/specs/content-model-and-store.md`; durable contract written to `docs/content-model.md`.",
+      "Added `content` domain: seven frozen RFEF `Category` brackets (`category.ts`), `Exercise`, `Programming`, `ContentProvenance`, strict `content-package.ts` (`CONTENT_PACKAGE_VERSION`, `parseContentPackage`, `safeParseContentPackage`, `ContentValidationError`), and the `ContentRepository` port in `domain/ports/content-repository.ts`.",
+      "Added `content` application use cases (`listCategories`, `listExercises`, `getExercise`, `getProgramming`) with published-only filtering, category filtering, deduplication by id, and `null` for a missing or draft-only Programming record.",
+      "Added the bundled package `src/modules/content/infrastructure/content/content-package.json` with three original `published` exercises (`salida-3-1-presion-alta` tagged `infantil` + `cadete`, `circulacion-cierre-ala`, `presion-tras-perdida`) and one published Infantil Programming record (`infantil-u14-base`); every record is `original`/`owned` provenance and every Board Data is validated with `parseBoardData`.",
+      "Added `createBundledContentRepository()`: imports the JSON as `unknown`, parses it once, indexes exercises by id and Programming by category, and returns the cached repository.",
+      "Read-layer smoke (`tsx` over application use cases + bundled adapter): category ids `prebenjamin, benjamin, alevin, infantil, cadete, juvenil, senior`; exercise count 3; `infantil` returned `salida-3-1-presion-alta, circulacion-cierre-ala, presion-tras-perdida`; `cadete` returned exactly `salida-3-1-presion-alta`; Programming Infantil id `infantil-u14-base`.",
+      "Seed validation probe: corrupting the seeded category id reported `exercises.1.categoryIds.0: Unknown category id; use one of the seven RFEF age brackets.`; corrupting a seeded Board Data coordinate reported `exercises.0.boardData.phases.1.positions.0.x: Too big: expected number to be <=100`; the package was restored and revalidated as valid.",
+      "`npm test`: 55/55 pass across 86 suites (up from 17/17 across 29), including categories, package validation (unknown category, duplicate exercise id, empty and duplicated `categoryIds`, invalid Board Data re-prefixed path, duplicate published Programming, wrong version, unexpected key, goalkeepers over total), application queries with fake repositories, the real bundled package, and the public API surface.",
+      "`npm run lint` exit 0, `npm run typecheck` exit 0, `npm run verify` exit 0 with `expo-doctor` 20/20, and `./init.sh` exit 0 without starting Metro.",
+      "`npx expo export --platform android` succeeded; the Hermes bundle is 3.6 MB and `strings` found both `salida-3-1-presion-alta` and `infantil-u14-base`, confirming the bundled JSON ships.",
+      "`CONTENT_PACKAGE_VERSION` and the JSON `contentVersion` are both `1.0.0`, and any other version fails with a `contentVersion` issue.",
+      "Device check on Samsung Galaxy M13 (`SM-M135F`, Android 14, Expo Go 58.0.5): Metro bundled 1628 modules, Explorar still rendered `LA BIBLIOTECA LLEGA EN LA SIGUIENTE FASE`, `EN CONSTRUCCIÓN`, the Spanish subtitle, all four tabs, and `Ver sistema de diseño`; `logcat` showed no React Native errors or fatal exceptions.",
+      "No persistent E2E harness exists and the feature adds no route, API, or user flow; `node:test` domain/application/adapter coverage plus the read-layer smoke, Android export, and device smoke are the correct level until screens and API routes land.",
+      "Independent validator acceptance: verdict `accept`. The validator reran 55/55 tests across 86 suites, lint, typecheck, `npm run verify` (expo-doctor 20/20), `./init.sh`, Android export (3.6 MB), independent read-layer and invalid-package probes, and confirmed Board Data still at 1.0.0, boundaries unchanged, and no unrelated UI edits. Non-blocking follow-ups: one low-severity spec note overstates combined structural plus Board Data reporting, no direct duplicate Programming-id test, spec task checkboxes remain unchecked, and the general adapter-path wording in ARCHITECTURE.md can be reconciled."
+    ],
+    "notes": "Independent validator acceptance: `accept`. Categories are RFEF age brackets, never skill tiers (CONTEXT.md). Only `published` records are readable; a two-category exercise appears once under each category. Board Data enters only through `@/shared/domain` and is validated with `parseBoardData`; issues surface as `exercises.<i>.boardData.<path>`. Provenance is recorded but not enforced and no attribution is displayed; that plus seed volume, filter UI, offline gating, and board rendering are later features. Node tests import content layers directly because `node:test` cannot load React Native while the public API re-exports `ExploreScreen`; `tests/modules/content/index.test.ts` and the device smoke cover the public API surface. Spec: docs/specs/content-model-and-store.md; contract: docs/content-model.md."
   },
   {
     "id": "seed-content-licensing",

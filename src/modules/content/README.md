@@ -1,18 +1,27 @@
 # Content module
 
-Owns Category reference data, Exercise, Programming, and the read layer that powers browsing. Board Data is a shared kernel in `src/shared/domain/board-data` because content, board, and AI all exchange it.
+Owns Category reference data, Exercise, Programming, the bundled content package, and the read layer that powers browsing. Board Data is a shared kernel in `src/shared/domain/board-data` because content, board, and AI all exchange it. The durable contract is `docs/content-model.md`.
 
 ## Layers
 
-- `domain`: Category, Exercise, Programming, content rules, and the content repository port. Added with `content-model-and-store`.
-- `application`: use cases such as listing categories, filtering exercises, and loading programming.
-- `infrastructure`: bundled JSON adapters and content validation.
-- `presentation`: Explorar and exercise-detail screens.
+- `domain` — active. Seven frozen RFEF `Category` brackets, `Exercise`, `Programming`, `ContentProvenance`, the strict `content-package.ts` contract (`CONTENT_PACKAGE_VERSION`, `parseContentPackage`, `safeParseContentPackage`, `ContentValidationError`), and the `ContentRepository` port in `domain/ports`.
+- `application` — active. Published-only use cases: `listCategories`, `listExercises`, `getExercise`, `getProgramming`.
+- `infrastructure` — active. `content/content-package.json` plus `bundled-content-repository.ts` (`createBundledContentRepository`), which imports the JSON as `unknown`, parses it once, and indexes it.
+- `presentation` — Explorar placeholder until `explore-general-screen`; exercise detail follows in `exercise-detail-screen`.
 
 ## Public API
 
-`src/modules/content/index.ts`. Other modules and routes must not import this module's internals directly.
+`src/modules/content/index.ts`. Other modules and routes must not import this module's internals directly. It exports the categories, package parser and error, entities, port, use cases, the bundled repository factory, and `ExploreScreen`.
+
+Browse flow: route → use case → `ContentRepository` → bundled adapter → shared `parseBoardData`.
+
+## Rules
+
+- Categories exist only as domain reference data; the package references ids and parsing rejects unknown ones.
+- Every exercise `boardData` is validated with `parseBoardData`; issues surface under `exercises.<i>.boardData.`.
+- Only `published` records are readable; Programming returns one published record per category or `null`.
+- A two-category exercise appears once under each category and never twice in one result.
 
 ## Tests
 
-Mirror the source path under `tests/modules/content/`.
+Mirror the source path under `tests/modules/content/`. `node:test` cannot load React Native, so node tests import layers directly; `tests/modules/content/index.test.ts` checks the public API surface and the device smoke covers the route that imports it.

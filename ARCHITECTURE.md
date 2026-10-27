@@ -31,9 +31,9 @@ src/
     design-system.tsx               # Development gallery
   modules/
     content/
-      domain/
-      application/
-      infrastructure/
+      domain/                       # Categories, Exercise, Programming, package parser, port
+      application/                  # Published-only read use cases
+      infrastructure/               # Bundled content-package.json and repository adapter
       presentation/
         screens/
       index.ts                      # Public API
@@ -149,7 +149,14 @@ All modules may import `shared`. The only planned cross-module dependency is `ai
 
 ### `content`
 
-Owns the Exercise Library, Category reference data, Programming, the content read layer, and the Explorar/exercise-detail screens. The next feature, `content-model-and-store`, fills the domain, application, and infrastructure layers. Board Data comes from the shared kernel.
+Owns the Exercise Library, Category reference data, Programming, the content read layer, and the Explorar/exercise-detail screens. Board Data comes from the shared kernel.
+
+- `domain`: the seven frozen RFEF `Category` brackets (`category.ts`), `Exercise`, `Programming`, `ContentProvenance`, the strict `content-package.ts` contract with `parseContentPackage`/`safeParseContentPackage` and `ContentValidationError`, and the `ContentRepository` port in `domain/ports`.
+- `application`: published-only read use cases — `listCategories`, `listExercises` (optional category filter, deduplicated), `getExercise`, `getProgramming` (single published record or `null`).
+- `infrastructure`: `content/content-package.json`, the single versioned content package (`contentVersion` `1.0.0`), and `bundled-content-repository.ts`, which imports the JSON as `unknown`, parses it once through `domain/content-package.ts`, indexes by exercise id and Programming category, and exposes `createBundledContentRepository()`.
+- `presentation`: the Explorar placeholder until `explore-general-screen` lands.
+
+The content contract, invariants, and validation paths are documented in `docs/content-model.md`. Full seeding, licensing enforcement, category filter state, and screens are separate features.
 
 ### `board`
 
@@ -208,6 +215,7 @@ tests/
 - One test file per unit or cohesive behavior.
 - Name files `*.test.ts` or `*.test.tsx`.
 - Domain, application, and adapter tests use Node's built-in `node:test` through `tsx`. UI tests add React Native Testing Library when the first interactive screen lands.
+- `node:test` cannot load React Native, so node tests import module layers directly instead of a module `index.ts` that re-exports a screen. Public API surfaces are covered by a structural test on the barrel plus the device smoke for the route that imports it.
 - Keep fixtures next to the test that owns them.
 - Do not use the network in unit tests. Use fakes for ports.
 - Add a contract test for every module public API that another module consumes.
@@ -264,7 +272,7 @@ The test name should read as a complete rule, not as a function name. Keep the a
 
 **Browse an exercise**
 
-`app/(tabs)/index.tsx` -> `content` screen -> `content` use case -> `ContentRepository` port -> bundled JSON adapter -> shared `parseBoardData`.
+`app/(tabs)/index.tsx` -> `content` screen -> `content` use case (`listExercises`/`getExercise`) -> `ContentRepository` port -> `createBundledContentRepository` over `content-package.json` -> shared `parseBoardData`. Use cases return only `published` content.
 
 **Render a board**
 
