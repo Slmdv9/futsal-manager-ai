@@ -1387,6 +1387,5818 @@
         "sourceName": "Futsal Manager AI",
         "licenseStatus": "owned"
       }
+    },
+    {
+      "id": "conduccion-entre-conos",
+      "title": "Conducción entre conos",
+      "summary": "Circuito de conducción con cambios de dirección entre conos, ida y vuelta por parejas.",
+      "focus": "Conducción",
+      "categoryIds": [
+        "prebenjamin"
+      ],
+      "objective": "Conducir el balón con las dos piernas y cambiar de dirección sin perder el control.",
+      "players": {
+        "total": 8,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Franja de conducción",
+        "widthM": 10,
+        "lengthM": 20
+      },
+      "durationMinutes": 8,
+      "intensity": {
+        "level": "low",
+        "percent": 45
+      },
+      "workStructure": "Bloques de 3 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Dos pies",
+          "detail": "Cada tramo entre conos se recorre alternando el pie de conducción."
+        },
+        {
+          "rule": "Sin choques",
+          "detail": "Mantener la cabeza levantada para no tocar los conos ni a la pareja."
+        }
+      ],
+      "coachingCues": [
+        "Toque suave y frecuente con la planta",
+        "Cambio de dirección antes del cono",
+        "Cabeza arriba para ver el siguiente tramo"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "jugador-1",
+            "kind": "player",
+            "team": "home",
+            "label": "J1"
+          },
+          {
+            "id": "jugador-2",
+            "kind": "player",
+            "team": "home",
+            "label": "J2"
+          },
+          {
+            "id": "jugador-3",
+            "kind": "player",
+            "team": "home",
+            "label": "J3"
+          },
+          {
+            "id": "jugador-4",
+            "kind": "player",
+            "team": "home",
+            "label": "J4"
+          },
+          {
+            "id": "jugador-5",
+            "kind": "player",
+            "team": "home",
+            "label": "J5"
+          },
+          {
+            "id": "jugador-6",
+            "kind": "player",
+            "team": "home",
+            "label": "J6"
+          },
+          {
+            "id": "jugador-7",
+            "kind": "player",
+            "team": "home",
+            "label": "J7"
+          },
+          {
+            "id": "jugador-8",
+            "kind": "player",
+            "team": "home",
+            "label": "J8"
+          }
+        ],
+        "cones": [
+          {
+            "id": "cono-1",
+            "x": 35,
+            "y": 40
+          },
+          {
+            "id": "cono-2",
+            "x": 35,
+            "y": 60
+          },
+          {
+            "id": "cono-3",
+            "x": 50,
+            "y": 40
+          },
+          {
+            "id": "cono-4",
+            "x": 50,
+            "y": 60
+          },
+          {
+            "id": "cono-5",
+            "x": 65,
+            "y": 40
+          },
+          {
+            "id": "cono-6",
+            "x": 65,
+            "y": 60
+          },
+          {
+            "id": "cono-7",
+            "x": 80,
+            "y": 40
+          },
+          {
+            "id": "cono-8",
+            "x": 80,
+            "y": 60
+          }
+        ],
+        "phases": [
+          {
+            "id": "ida",
+            "order": 1,
+            "title": "Ida entre conos",
+            "explanation": "Cada jugador conduce el balón entre los conos de su carril, alternando el pie de contacto.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 30,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 30,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 45,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 45,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 60,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 60,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 75,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 75,
+                "y": 60
+              }
+            ],
+            "ball": {
+              "x": 30,
+              "y": 40
+            },
+            "arrows": [
+              {
+                "id": "conduccion-carril-alto",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 40
+                },
+                "to": {
+                  "x": 70,
+                  "y": 40
+                }
+              },
+              {
+                "id": "conduccion-carril-bajo",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 60
+                },
+                "to": {
+                  "x": 70,
+                  "y": 60
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-ida",
+                "text": "Ida entre conos",
+                "x": 52,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "vuelta",
+            "order": 2,
+            "title": "Vuelta con cambio de pie",
+            "explanation": "La vuelta se recorre en sentido inverso, cambiando de pie en cada cono y manteniendo el control.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 75,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 75,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 60,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 60,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 45,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 45,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 30,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 30,
+                "y": 60
+              }
+            ],
+            "ball": {
+              "x": 30,
+              "y": 40
+            },
+            "arrows": [
+              {
+                "id": "vuelta-carril-alto",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 40
+                },
+                "to": {
+                  "x": 70,
+                  "y": 40
+                }
+              },
+              {
+                "id": "vuelta-carril-bajo",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 60
+                },
+                "to": {
+                  "x": 70,
+                  "y": 60
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-vuelta",
+                "text": "Vuelta con cambio de pie",
+                "x": 50,
+                "y": 70
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "pases-por-parejas",
+      "title": "Pases por parejas en el cuadrado",
+      "summary": "Parejas en los lados del cuadrado se pasan el balón y cambian de lado tras cada entrega.",
+      "focus": "Pase",
+      "categoryIds": [
+        "prebenjamin"
+      ],
+      "objective": "Golpear el balón con el interior del pie y orientar el control hacia el compañero.",
+      "players": {
+        "total": 8,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Cuadrado de pase",
+        "widthM": 10,
+        "lengthM": 10
+      },
+      "durationMinutes": 8,
+      "intensity": {
+        "level": "low",
+        "percent": 40
+      },
+      "workStructure": "Bloques de 2 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Interior del pie",
+          "detail": "Todos los pases se golpean con el interior del pie."
+        },
+        {
+          "rule": "Control orientado",
+          "detail": "El primer toque debe orientarse hacia el compañero de la siguiente entrega."
+        }
+      ],
+      "coachingCues": [
+        "Pie de apoyo al lado del balón",
+        "Control con la planta hacia el lado libre",
+        "Cambio de lado después de cada pase"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "jugador-1",
+            "kind": "player",
+            "team": "home",
+            "label": "J1"
+          },
+          {
+            "id": "jugador-2",
+            "kind": "player",
+            "team": "home",
+            "label": "J2"
+          },
+          {
+            "id": "jugador-3",
+            "kind": "player",
+            "team": "home",
+            "label": "J3"
+          },
+          {
+            "id": "jugador-4",
+            "kind": "player",
+            "team": "home",
+            "label": "J4"
+          },
+          {
+            "id": "jugador-5",
+            "kind": "player",
+            "team": "home",
+            "label": "J5"
+          },
+          {
+            "id": "jugador-6",
+            "kind": "player",
+            "team": "home",
+            "label": "J6"
+          },
+          {
+            "id": "jugador-7",
+            "kind": "player",
+            "team": "home",
+            "label": "J7"
+          },
+          {
+            "id": "jugador-8",
+            "kind": "player",
+            "team": "home",
+            "label": "J8"
+          }
+        ],
+        "cones": [
+          {
+            "id": "cono-1",
+            "x": 38,
+            "y": 38
+          },
+          {
+            "id": "cono-2",
+            "x": 62,
+            "y": 38
+          },
+          {
+            "id": "cono-3",
+            "x": 62,
+            "y": 62
+          },
+          {
+            "id": "cono-4",
+            "x": 38,
+            "y": 62
+          }
+        ],
+        "phases": [
+          {
+            "id": "pase-control",
+            "order": 1,
+            "title": "Pase y control",
+            "explanation": "Cada pareja intercambia el balón con el interior del pie y orienta el control hacia el lado del cuadrado.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 50,
+                "y": 36
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 50,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 64,
+                "y": 50
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 60,
+                "y": 50
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 50,
+                "y": 64
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 50,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 36,
+                "y": 50
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 40,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 50,
+              "y": 36
+            },
+            "arrows": [
+              {
+                "id": "pase-pareja-superior",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 36
+                },
+                "to": {
+                  "x": 50,
+                  "y": 40
+                }
+              },
+              {
+                "id": "pase-pareja-derecha",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 64,
+                  "y": 50
+                },
+                "to": {
+                  "x": 60,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-pase",
+                "text": "Pase y control",
+                "x": 50,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "cambio-lado",
+            "order": 2,
+            "title": "Cambio de lado",
+            "explanation": "Tras la entrega, las parejas se desplazan al lado contrario y conectan con el compañero del lado opuesto.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 50,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 54,
+                "y": 60
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 36,
+                "y": 50
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 40,
+                "y": 52
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 50,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 46,
+                "y": 40
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 64,
+                "y": 50
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 60,
+                "y": 48
+              }
+            ],
+            "ball": {
+              "x": 50,
+              "y": 60
+            },
+            "arrows": [
+              {
+                "id": "pase-diagonal-superior",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 60
+                },
+                "to": {
+                  "x": 50,
+                  "y": 40
+                }
+              },
+              {
+                "id": "pase-diagonal-lateral",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 36,
+                  "y": 50
+                },
+                "to": {
+                  "x": 64,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio",
+                "text": "Cambio de lado",
+                "x": 50,
+                "y": 70
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "juego-3v3-conos-porteria",
+      "title": "Juego 3 contra 3 con conos portería",
+      "summary": "Partido 3 contra 3 en espacio reducido con dos conos portería por equipo.",
+      "focus": "Juego reducido",
+      "categoryIds": [
+        "prebenjamin"
+      ],
+      "objective": "Buscar la portería contraria con conducción y pase corto sin perder el balón.",
+      "players": {
+        "total": 6,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Cuadrado de juego",
+        "widthM": 15,
+        "lengthM": 15
+      },
+      "durationMinutes": 10,
+      "intensity": {
+        "level": "medium",
+        "percent": 55
+      },
+      "workStructure": "Bloques de 4 minutos x 2 series",
+      "constraints": [
+        {
+          "rule": "Dos conos portería",
+          "detail": "Solo vale gol cuando el balón pasa entre los dos conos de la portería."
+        },
+        {
+          "rule": "Sin contacto",
+          "detail": "No se permite contacto para quitar el balón; se defiende con el cuerpo."
+        }
+      ],
+      "coachingCues": [
+        "Conducir hacia el cono libre",
+        "Pase corto con el interior",
+        "Ocupar los dos lados de la portería"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          }
+        ],
+        "cones": [
+          {
+            "id": "porteria-izquierda-arriba",
+            "x": 33,
+            "y": 44
+          },
+          {
+            "id": "porteria-izquierda-abajo",
+            "x": 33,
+            "y": 56
+          },
+          {
+            "id": "porteria-derecha-arriba",
+            "x": 67,
+            "y": 44
+          },
+          {
+            "id": "porteria-derecha-abajo",
+            "x": 67,
+            "y": 56
+          }
+        ],
+        "phases": [
+          {
+            "id": "conservacion",
+            "order": 1,
+            "title": "Conservación y búsqueda",
+            "explanation": "El equipo local conserva el balón con pases cortos mientras busca el hueco para conducir hacia la portería contraria.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 45,
+                "y": 40
+              },
+              {
+                "tokenId": "local-2",
+                "x": 45,
+                "y": 60
+              },
+              {
+                "tokenId": "local-3",
+                "x": 55,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 40,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 55,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 55,
+                "y": 62
+              }
+            ],
+            "ball": {
+              "x": 45,
+              "y": 40
+            },
+            "arrows": [
+              {
+                "id": "pase-interior",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 45,
+                  "y": 40
+                },
+                "to": {
+                  "x": 55,
+                  "y": 50
+                }
+              },
+              {
+                "id": "desmarque-local-2",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 45,
+                  "y": 60
+                },
+                "to": {
+                  "x": 52,
+                  "y": 54
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-conservacion",
+                "text": "Conservación y búsqueda",
+                "x": 50,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "gol-cono",
+            "order": 2,
+            "title": "Gol en el cono portería",
+            "explanation": "El portador conduce hacia el cono libre y busca el pase al compañero que llega por el otro lado de la portería.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 55,
+                "y": 42
+              },
+              {
+                "tokenId": "local-2",
+                "x": 58,
+                "y": 58
+              },
+              {
+                "tokenId": "local-3",
+                "x": 62,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 52,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 64,
+                "y": 62
+              }
+            ],
+            "ball": {
+              "x": 62,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "remate-cono",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 58,
+                  "y": 58
+                },
+                "to": {
+                  "x": 66,
+                  "y": 50
+                }
+              },
+              {
+                "id": "conduccion-local-3",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 62,
+                  "y": 50
+                },
+                "to": {
+                  "x": 65,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-gol",
+                "text": "Gol en el cono portería",
+                "x": 50,
+                "y": 72
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "rondo-4v1-dos-toques",
+      "title": "Rondo 4 contra 1 a dos toques",
+      "summary": "Rondo 4 contra 1 con límite de dos toques donde el defensor entra al recuperar el balón.",
+      "focus": "Rondo",
+      "categoryIds": [
+        "benjamin"
+      ],
+      "objective": "Mantener el balón con control orientado y ocupar los apoyos del cuadrado.",
+      "players": {
+        "total": 5,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Cuadrado de rondo",
+        "widthM": 12,
+        "lengthM": 12
+      },
+      "durationMinutes": 10,
+      "intensity": {
+        "level": "low",
+        "percent": 50
+      },
+      "workStructure": "Bloques de 3 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Dos toques",
+          "detail": "El jugador con balón solo dispone de dos toques para pasarlo."
+        },
+        {
+          "rule": "Defensor activo",
+          "detail": "El defensor entra al rondo en cuanto recupera o toca el balón."
+        }
+      ],
+      "coachingCues": [
+        "Control orientado antes del pase",
+        "Ocupar el vértice libre del cuadrado",
+        "Pasar al compañero que no está presionado"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "local-4",
+            "kind": "player",
+            "team": "home",
+            "label": "L4"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          }
+        ],
+        "cones": [
+          {
+            "id": "cono-1",
+            "x": 38,
+            "y": 38
+          },
+          {
+            "id": "cono-2",
+            "x": 62,
+            "y": 38
+          },
+          {
+            "id": "cono-3",
+            "x": 62,
+            "y": 62
+          },
+          {
+            "id": "cono-4",
+            "x": 38,
+            "y": 62
+          }
+        ],
+        "phases": [
+          {
+            "id": "rondo",
+            "order": 1,
+            "title": "Rondo con dos toques",
+            "explanation": "El cuadrado mueve el balón a dos toques mientras el defensor busca cortar la línea de pase.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 50,
+                "y": 36
+              },
+              {
+                "tokenId": "local-2",
+                "x": 64,
+                "y": 50
+              },
+              {
+                "tokenId": "local-3",
+                "x": 50,
+                "y": 64
+              },
+              {
+                "tokenId": "local-4",
+                "x": 36,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 50,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 50,
+              "y": 36
+            },
+            "arrows": [
+              {
+                "id": "pase-rondo",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 36
+                },
+                "to": {
+                  "x": 64,
+                  "y": 50
+                }
+              },
+              {
+                "id": "presion-rival",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 50,
+                  "y": 50
+                },
+                "to": {
+                  "x": 54,
+                  "y": 44
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-rondo",
+                "text": "Rondo con dos toques",
+                "x": 50,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "cambio-defensor",
+            "order": 2,
+            "title": "Cambio de defensor",
+            "explanation": "El defensor cambia de posición y el cuadrado ajusta los apoyos para conservar el balón.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 64,
+                "y": 50
+              },
+              {
+                "tokenId": "local-2",
+                "x": 50,
+                "y": 64
+              },
+              {
+                "tokenId": "local-3",
+                "x": 36,
+                "y": 50
+              },
+              {
+                "tokenId": "local-4",
+                "x": 50,
+                "y": 36
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 50,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 64,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "pase-cambio-defensor",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 64,
+                  "y": 50
+                },
+                "to": {
+                  "x": 50,
+                  "y": 64
+                }
+              },
+              {
+                "id": "presion-cambio",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 50,
+                  "y": 50
+                },
+                "to": {
+                  "x": 46,
+                  "y": 56
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio",
+                "text": "Cambio de defensor",
+                "x": 50,
+                "y": 72
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "pase-y-va-cambio-orientacion",
+      "title": "Pase y va con cambio de orientación",
+      "summary": "Pase y va por parejas que cambian de cuadrado tras cada entrega para liberar el carril.",
+      "focus": "Pase y va",
+      "categoryIds": [
+        "benjamin"
+      ],
+      "objective": "Pasar y desmarcarse al espacio libre con perfil abierto y buen timing de la entrega.",
+      "players": {
+        "total": 8,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Doble cuadrado",
+        "widthM": 20,
+        "lengthM": 20
+      },
+      "durationMinutes": 12,
+      "intensity": {
+        "level": "medium",
+        "percent": 60
+      },
+      "workStructure": "Bloques de 4 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Pase y moverse",
+          "detail": "Después de cada pase el jugador debe cambiar de cuadrado."
+        },
+        {
+          "rule": "Un toque",
+          "detail": "La recepción en el cuadrado contrario se hace de un solo toque."
+        }
+      ],
+      "coachingCues": [
+        "Perfil abierto antes de recibir",
+        "Timing del desmarque tras el pase",
+        "Cambio de orientación con el interior"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "jugador-1",
+            "kind": "player",
+            "team": "home",
+            "label": "J1"
+          },
+          {
+            "id": "jugador-2",
+            "kind": "player",
+            "team": "home",
+            "label": "J2"
+          },
+          {
+            "id": "jugador-3",
+            "kind": "player",
+            "team": "home",
+            "label": "J3"
+          },
+          {
+            "id": "jugador-4",
+            "kind": "player",
+            "team": "home",
+            "label": "J4"
+          },
+          {
+            "id": "jugador-5",
+            "kind": "player",
+            "team": "home",
+            "label": "J5"
+          },
+          {
+            "id": "jugador-6",
+            "kind": "player",
+            "team": "home",
+            "label": "J6"
+          },
+          {
+            "id": "jugador-7",
+            "kind": "player",
+            "team": "home",
+            "label": "J7"
+          },
+          {
+            "id": "jugador-8",
+            "kind": "player",
+            "team": "home",
+            "label": "J8"
+          }
+        ],
+        "cones": [
+          {
+            "id": "cono-izquierda-arriba",
+            "x": 27,
+            "y": 36
+          },
+          {
+            "id": "cono-izquierda-abajo",
+            "x": 27,
+            "y": 64
+          },
+          {
+            "id": "cono-izquierda-arriba-b",
+            "x": 43,
+            "y": 36
+          },
+          {
+            "id": "cono-izquierda-abajo-b",
+            "x": 43,
+            "y": 64
+          },
+          {
+            "id": "cono-derecha-arriba",
+            "x": 57,
+            "y": 36
+          },
+          {
+            "id": "cono-derecha-abajo",
+            "x": 57,
+            "y": 64
+          },
+          {
+            "id": "cono-derecha-arriba-b",
+            "x": 73,
+            "y": 36
+          },
+          {
+            "id": "cono-derecha-abajo-b",
+            "x": 73,
+            "y": 64
+          }
+        ],
+        "phases": [
+          {
+            "id": "pase-desmarque",
+            "order": 1,
+            "title": "Pase y desmarque",
+            "explanation": "Cada pareja combina con el interior y el pasador se desmarca al espacio libre del cuadrado.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 30,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 40,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 30,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 40,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 60,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 70,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 60,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 70,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 30,
+              "y": 42
+            },
+            "arrows": [
+              {
+                "id": "pase-jugador-1",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 42
+                },
+                "to": {
+                  "x": 40,
+                  "y": 42
+                }
+              },
+              {
+                "id": "desmarque-jugador-2",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 40,
+                  "y": 42
+                },
+                "to": {
+                  "x": 45,
+                  "y": 36
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-pase-desmarque",
+                "text": "Pase y desmarque",
+                "x": 50,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "recepcion",
+            "order": 2,
+            "title": "Recepción en el cuadrado contrario",
+            "explanation": "El balón cruza al cuadrado contrario y el receptor controla de un toque con el perfil abierto.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 43,
+                "y": 44
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 55,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 43,
+                "y": 56
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 55,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 60,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 70,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 60,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 70,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 55,
+              "y": 42
+            },
+            "arrows": [
+              {
+                "id": "pase-cuadrado-contrario",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 43,
+                  "y": 44
+                },
+                "to": {
+                  "x": 55,
+                  "y": 42
+                }
+              },
+              {
+                "id": "recepcion-jugador-6",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 70,
+                  "y": 42
+                },
+                "to": {
+                  "x": 64,
+                  "y": 38
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-recepcion",
+                "text": "Recepción en el cuadrado contrario",
+                "x": 50,
+                "y": 72
+              }
+            ]
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 3,
+            "title": "Cambio de orientación",
+            "explanation": "La posesión cambia de orientación hacia el cuadrado de salida para liberar el carril opuesto.",
+            "positions": [
+              {
+                "tokenId": "jugador-1",
+                "x": 57,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-2",
+                "x": 60,
+                "y": 36
+              },
+              {
+                "tokenId": "jugador-3",
+                "x": 57,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-4",
+                "x": 60,
+                "y": 64
+              },
+              {
+                "tokenId": "jugador-5",
+                "x": 40,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-6",
+                "x": 30,
+                "y": 42
+              },
+              {
+                "tokenId": "jugador-7",
+                "x": 40,
+                "y": 58
+              },
+              {
+                "tokenId": "jugador-8",
+                "x": 30,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 57,
+              "y": 42
+            },
+            "arrows": [
+              {
+                "id": "cambio-orientacion",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 57,
+                  "y": 42
+                },
+                "to": {
+                  "x": 40,
+                  "y": 42
+                }
+              },
+              {
+                "id": "desmarque-jugador-6",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 40,
+                  "y": 42
+                },
+                "to": {
+                  "x": 34,
+                  "y": 36
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio-orientacion",
+                "text": "Cambio de orientación",
+                "x": 50,
+                "y": 72
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "salida-portero-3v2",
+      "title": "Salida del portero en 3 contra 2",
+      "summary": "Salida desde portero con tres jugadores ante la presión de dos rivales en medio campo.",
+      "focus": "Salida de balón",
+      "categoryIds": [
+        "benjamin"
+      ],
+      "objective": "Superar la primera presión con pase al hombre libre y ocupar los tres carriles.",
+      "players": {
+        "total": 6,
+        "goalkeepers": 1
+      },
+      "space": {
+        "label": "Medio campo",
+        "widthM": 20,
+        "lengthM": 20
+      },
+      "durationMinutes": 12,
+      "intensity": {
+        "level": "medium",
+        "percent": 65
+      },
+      "workStructure": "Bloques de 3 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Portero inicia",
+          "detail": "La salida empieza siempre con el portero y no se puede jugar directo."
+        },
+        {
+          "rule": "Tres carriles",
+          "detail": "Los tres jugadores de campo deben ocupar carriles distintos antes del pase."
+        }
+      ],
+      "coachingCues": [
+        "Portero con las manos abiertas y mirada al hombre libre",
+        "Cierre como primera opción de pase",
+        "Alas abiertas para estirar la presión"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "ala-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "AD"
+          },
+          {
+            "id": "ala-izquierda",
+            "kind": "player",
+            "team": "home",
+            "label": "AI"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "salida",
+            "order": 1,
+            "title": "Portero con balón",
+            "explanation": "El portero inicia la salida y el cierre se ofrece por el centro mientras las alas abren los carriles.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 30,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 38,
+                "y": 50
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 45,
+                "y": 38
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 45,
+                "y": 62
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 52,
+                "y": 42
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 52,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 30,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "pase-portero-cierre",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 50
+                },
+                "to": {
+                  "x": 38,
+                  "y": 50
+                }
+              },
+              {
+                "id": "presion-rival-1",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 52,
+                  "y": 42
+                },
+                "to": {
+                  "x": 46,
+                  "y": 36
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-salida",
+                "text": "Portero con balón",
+                "x": 40,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "hombre-libre",
+            "order": 2,
+            "title": "Pase al hombre libre",
+            "explanation": "El cierre recibe y encuentra al ala izquierda libre mientras el rival ajusta la presión.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 30,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 42,
+                "y": 46
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 50,
+                "y": 34
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 58,
+                "y": 64
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 48,
+                "y": 42
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 56,
+                "y": 56
+              }
+            ],
+            "ball": {
+              "x": 42,
+              "y": 46
+            },
+            "arrows": [
+              {
+                "id": "pase-cierre-ala",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 42,
+                  "y": 46
+                },
+                "to": {
+                  "x": 58,
+                  "y": 64
+                },
+                "curve": 14
+              },
+              {
+                "id": "desmarque-ala",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 34
+                },
+                "to": {
+                  "x": 56,
+                  "y": 30
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-hombre-libre",
+                "text": "Pase al hombre libre",
+                "x": 44,
+                "y": 72
+              }
+            ]
+          },
+          {
+            "id": "progresion",
+            "order": 3,
+            "title": "Progresión por el carril libre",
+            "explanation": "El ala izquierda conduce por el carril libre y el ala derecha ataca el espacio interior.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 32,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 45,
+                "y": 48
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 60,
+                "y": 30
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 65,
+                "y": 62
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 55,
+                "y": 40
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 62,
+                "y": 54
+              }
+            ],
+            "ball": {
+              "x": 65,
+              "y": 62
+            },
+            "arrows": [
+              {
+                "id": "conduccion-ala",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 65,
+                  "y": 62
+                },
+                "to": {
+                  "x": 72,
+                  "y": 58
+                }
+              },
+              {
+                "id": "ruptura-ala-derecha",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 60,
+                  "y": 30
+                },
+                "to": {
+                  "x": 68,
+                  "y": 26
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-progresion",
+                "text": "Progresión por el carril libre",
+                "x": 52,
+                "y": 76
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "conservacion-4v2-carriles",
+      "title": "Conservación 4 contra 2 por carriles",
+      "summary": "Conservación 4 contra 2 en un rectángulo de tres carriles con punto extra al cambiar de carril.",
+      "focus": "Conservación",
+      "categoryIds": [
+        "alevin"
+      ],
+      "objective": "Conservar el balón cambiando de orientación para encontrar el carril libre.",
+      "players": {
+        "total": 6,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Rectángulo de tres carriles",
+        "widthM": 20,
+        "lengthM": 30
+      },
+      "durationMinutes": 12,
+      "intensity": {
+        "level": "medium",
+        "percent": 60
+      },
+      "workStructure": "Bloques de 4 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Tres carriles",
+          "detail": "Cada carril solo puede tener un jugador por equipo en el momento del pase."
+        },
+        {
+          "rule": "Punto extra",
+          "detail": "Cambiar de carril con el pase suma un punto extra."
+        }
+      ],
+      "coachingCues": [
+        "Orientar el control hacia el carril libre",
+        "Apoyo por detrás del portador",
+        "Cambio de carril antes de la presión"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "local-4",
+            "kind": "player",
+            "team": "home",
+            "label": "L4"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          }
+        ],
+        "cones": [
+          {
+            "id": "cono-carril-1",
+            "x": 30,
+            "y": 43
+          },
+          {
+            "id": "cono-carril-2",
+            "x": 30,
+            "y": 57
+          },
+          {
+            "id": "cono-carril-3",
+            "x": 75,
+            "y": 43
+          },
+          {
+            "id": "cono-carril-4",
+            "x": 75,
+            "y": 57
+          }
+        ],
+        "phases": [
+          {
+            "id": "posesion-carril",
+            "order": 1,
+            "title": "Posesión en el carril",
+            "explanation": "El equipo conserva el balón en el carril fuerte con apoyos cortos y el rival cierra la salida.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 38,
+                "y": 36
+              },
+              {
+                "tokenId": "local-2",
+                "x": 45,
+                "y": 50
+              },
+              {
+                "tokenId": "local-3",
+                "x": 38,
+                "y": 64
+              },
+              {
+                "tokenId": "local-4",
+                "x": 55,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 48,
+                "y": 44
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 52,
+                "y": 56
+              }
+            ],
+            "ball": {
+              "x": 38,
+              "y": 36
+            },
+            "arrows": [
+              {
+                "id": "pase-posesion",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 38,
+                  "y": 36
+                },
+                "to": {
+                  "x": 45,
+                  "y": 50
+                }
+              },
+              {
+                "id": "presion-rival-1",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 48,
+                  "y": 44
+                },
+                "to": {
+                  "x": 42,
+                  "y": 40
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-posesion",
+                "text": "Posesión en el carril",
+                "x": 44,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "cambio-carril",
+            "order": 2,
+            "title": "Cambio de carril",
+            "explanation": "El balón cambia de carril con un pase tenso y el equipo acompaña la nueva orientación.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 60,
+                "y": 36
+              },
+              {
+                "tokenId": "local-2",
+                "x": 55,
+                "y": 50
+              },
+              {
+                "tokenId": "local-3",
+                "x": 60,
+                "y": 64
+              },
+              {
+                "tokenId": "local-4",
+                "x": 68,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 58,
+                "y": 44
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 62,
+                "y": 56
+              }
+            ],
+            "ball": {
+              "x": 60,
+              "y": 64
+            },
+            "arrows": [
+              {
+                "id": "pase-cambio-carril",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 60,
+                  "y": 64
+                },
+                "to": {
+                  "x": 68,
+                  "y": 50
+                }
+              },
+              {
+                "id": "conduccion-carril",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 60,
+                  "y": 36
+                },
+                "to": {
+                  "x": 66,
+                  "y": 36
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio-carril",
+                "text": "Cambio de carril",
+                "x": 50,
+                "y": 72
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "reaccion-tras-perdida-3v2",
+      "title": "Reacción tras pérdida en 3 contra 2",
+      "summary": "Tras la pérdida, tres jugadores presionan al portador y cierran la salida en cinco segundos.",
+      "focus": "Presión tras pérdida",
+      "categoryIds": [
+        "alevin"
+      ],
+      "objective": "Reaccionar juntos tras la pérdida y cerrar la salida del rival por el centro.",
+      "players": {
+        "total": 5,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Medio campo",
+        "widthM": 20,
+        "lengthM": 20
+      },
+      "durationMinutes": 12,
+      "intensity": {
+        "level": "high",
+        "percent": 75
+      },
+      "workStructure": "Bloques de 3 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Cinco segundos",
+          "detail": "La presión tras la pérdida se sostiene durante cinco segundos."
+        },
+        {
+          "rule": "Cerrar el centro",
+          "detail": "El jugador más alejado cierra la salida central del rival."
+        }
+      ],
+      "coachingCues": [
+        "Reacción inmediata al perder el balón",
+        "Presionar al portador por el lado del apoyo",
+        "Repliegue ordenado si no hay robo"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "perdida",
+            "order": 1,
+            "title": "Pérdida del balón",
+            "explanation": "El equipo local pierde el balón en la frontal y el rival inicia la salida por el centro.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 38,
+                "y": 40
+              },
+              {
+                "tokenId": "local-2",
+                "x": 42,
+                "y": 60
+              },
+              {
+                "tokenId": "local-3",
+                "x": 50,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 45,
+                "y": 42
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 45,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 45,
+              "y": 42
+            },
+            "arrows": [
+              {
+                "id": "perdida-balon",
+                "kind": "pass",
+                "team": "away",
+                "from": {
+                  "x": 38,
+                  "y": 40
+                },
+                "to": {
+                  "x": 45,
+                  "y": 42
+                }
+              },
+              {
+                "id": "reaccion-local-3",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 50
+                },
+                "to": {
+                  "x": 46,
+                  "y": 44
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-perdida",
+                "text": "Pérdida del balón",
+                "x": 42,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "id": "presion-portador",
+            "order": 2,
+            "title": "Presión al portador",
+            "explanation": "El jugador más cercano presiona al portador y el segundo cierra la línea de pase interior.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 42,
+                "y": 42
+              },
+              {
+                "tokenId": "local-2",
+                "x": 46,
+                "y": 56
+              },
+              {
+                "tokenId": "local-3",
+                "x": 48,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 49,
+                "y": 44
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 52,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 49,
+              "y": 44
+            },
+            "arrows": [
+              {
+                "id": "presion-local-1",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 42,
+                  "y": 42
+                },
+                "to": {
+                  "x": 48,
+                  "y": 42
+                }
+              },
+              {
+                "id": "cierre-local-2",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 46,
+                  "y": 56
+                },
+                "to": {
+                  "x": 51,
+                  "y": 52
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-presion",
+                "text": "Presión al portador",
+                "x": 44,
+                "y": 72
+              }
+            ]
+          },
+          {
+            "id": "recuperacion",
+            "order": 3,
+            "title": "Recuperación o repliegue",
+            "explanation": "El tercer jugador llega al duelo y, si no recupera, el bloque repliega hacia el centro.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 50,
+                "y": 40
+              },
+              {
+                "tokenId": "local-2",
+                "x": 56,
+                "y": 54
+              },
+              {
+                "tokenId": "local-3",
+                "x": 55,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 58,
+                "y": 46
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 60
+              }
+            ],
+            "ball": {
+              "x": 58,
+              "y": 46
+            },
+            "arrows": [
+              {
+                "id": "recuperacion-local-3",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 55,
+                  "y": 48
+                },
+                "to": {
+                  "x": 57,
+                  "y": 47
+                }
+              },
+              {
+                "id": "repliegue-local-2",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 56,
+                  "y": 54
+                },
+                "to": {
+                  "x": 52,
+                  "y": 60
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-recuperacion",
+                "text": "Recuperación o repliegue",
+                "x": 52,
+                "y": 70
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "ataque-3v2-banda",
+      "title": "Ataque 3 contra 2 por banda",
+      "summary": "Ataque 3 contra 2 por banda con llegada del segundo hombre al área.",
+      "focus": "Ataque 3v2",
+      "categoryIds": [
+        "alevin"
+      ],
+      "objective": "Finalizar el 3 contra 2 por banda con remate o pase atrás.",
+      "players": {
+        "total": 6,
+        "goalkeepers": 1
+      },
+      "space": {
+        "label": "Medio campo",
+        "widthM": 20,
+        "lengthM": 25
+      },
+      "durationMinutes": 14,
+      "intensity": {
+        "level": "medium",
+        "percent": 70
+      },
+      "workStructure": "Bloques de 4 minutos x 3 series",
+      "constraints": [
+        {
+          "rule": "Carril de banda",
+          "detail": "El ataque progresa por el carril de banda hasta el último tercio."
+        },
+        {
+          "rule": "Pase atrás",
+          "detail": "El remate solo vale tras un pase atrás desde la línea de fondo."
+        }
+      ],
+      "coachingCues": [
+        "Conducir con el pie exterior hacia la banda",
+        "Fijar al defensor antes de soltar el pase",
+        "Llegada del segundo hombre al área"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "ala-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "AD"
+          },
+          {
+            "id": "pivot",
+            "kind": "player",
+            "team": "home",
+            "label": "PIV"
+          },
+          {
+            "id": "por-rival",
+            "kind": "keeper",
+            "team": "away",
+            "label": "POR"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "conduccion-banda",
+            "order": 1,
+            "title": "Conducción por banda",
+            "explanation": "El ala derecha conduce por la banda mientras el cierre acompaña y el pívot ocupa el área.",
+            "positions": [
+              {
+                "tokenId": "cierre",
+                "x": 38,
+                "y": 50
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 48,
+                "y": 30
+              },
+              {
+                "tokenId": "pivot",
+                "x": 55,
+                "y": 58
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 78,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 52,
+                "y": 36
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 58,
+                "y": 54
+              }
+            ],
+            "ball": {
+              "x": 48,
+              "y": 30
+            },
+            "arrows": [
+              {
+                "id": "conduccion-banda",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 48,
+                  "y": 30
+                },
+                "to": {
+                  "x": 58,
+                  "y": 26
+                }
+              },
+              {
+                "id": "presion-rival-1",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 52,
+                  "y": 36
+                },
+                "to": {
+                  "x": 56,
+                  "y": 32
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-banda",
+                "text": "Conducción por banda",
+                "x": 50,
+                "y": 22
+              }
+            ]
+          },
+          {
+            "id": "fijacion",
+            "order": 2,
+            "title": "Fijación del defensor",
+            "explanation": "El ala fija al defensor con la conducción y el pívot se desmarca al segundo palo.",
+            "positions": [
+              {
+                "tokenId": "cierre",
+                "x": 45,
+                "y": 48
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 60,
+                "y": 28
+              },
+              {
+                "tokenId": "pivot",
+                "x": 62,
+                "y": 56
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 78,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 58,
+                "y": 34
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 64,
+                "y": 48
+              }
+            ],
+            "ball": {
+              "x": 60,
+              "y": 28
+            },
+            "arrows": [
+              {
+                "id": "fijacion-ala",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 60,
+                  "y": 28
+                },
+                "to": {
+                  "x": 65,
+                  "y": 24
+                }
+              },
+              {
+                "id": "apoyo-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 62,
+                  "y": 56
+                },
+                "to": {
+                  "x": 66,
+                  "y": 52
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-fijacion",
+                "text": "Fijación del defensor",
+                "x": 60,
+                "y": 20
+              }
+            ]
+          },
+          {
+            "id": "pase-atras",
+            "order": 3,
+            "title": "Pase atrás y remate",
+            "explanation": "El ala llega a la línea de fondo y sirve el pase atrás para el remate del pívot.",
+            "positions": [
+              {
+                "tokenId": "cierre",
+                "x": 55,
+                "y": 50
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 70,
+                "y": 32
+              },
+              {
+                "tokenId": "pivot",
+                "x": 68,
+                "y": 56
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 66,
+                "y": 40
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 70,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 70,
+              "y": 32
+            },
+            "arrows": [
+              {
+                "id": "pase-atras-pivot",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 70,
+                  "y": 32
+                },
+                "to": {
+                  "x": 68,
+                  "y": 56
+                },
+                "curve": 10
+              },
+              {
+                "id": "remate-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 68,
+                  "y": 56
+                },
+                "to": {
+                  "x": 80,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-remate",
+                "text": "Pase atrás y remate",
+                "x": 70,
+                "y": 66
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "juego-posicion-4v4-comodines",
+      "title": "Juego de posición 4 contra 4 con comodines",
+      "summary": "Juego de posición 4 contra 4 con dos comodines que juegan con el equipo en posesión.",
+      "focus": "Juego de posición",
+      "categoryIds": [
+        "cadete"
+      ],
+      "objective": "Sostener la posesión con apoyos interiores y cambio de orientación ante presión media.",
+      "players": {
+        "total": 10,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 16,
+      "intensity": {
+        "level": "medium",
+        "percent": 75
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Comodines",
+          "detail": "Los dos comodines juegan siempre con el equipo en posesión."
+        },
+        {
+          "rule": "Máximo tres toques",
+          "detail": "Nadie puede retener el balón más de tres toques."
+        }
+      ],
+      "coachingCues": [
+        "Apoyo interior constante",
+        "Cambio de orientación ante presión media",
+        "Progresar por el carril libre"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "local-4",
+            "kind": "player",
+            "team": "home",
+            "label": "L4"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          },
+          {
+            "id": "rival-4",
+            "kind": "player",
+            "team": "away",
+            "label": "R4"
+          },
+          {
+            "id": "comodin-1",
+            "kind": "player",
+            "team": "neutral",
+            "label": "C1"
+          },
+          {
+            "id": "comodin-2",
+            "kind": "player",
+            "team": "neutral",
+            "label": "C2"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "posesion-comodines",
+            "order": 1,
+            "title": "Posesión con comodines",
+            "explanation": "El equipo en posesión usa a los dos comodines para superar la primera línea de presión.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 35,
+                "y": 35
+              },
+              {
+                "tokenId": "local-2",
+                "x": 35,
+                "y": 65
+              },
+              {
+                "tokenId": "local-3",
+                "x": 50,
+                "y": 30
+              },
+              {
+                "tokenId": "local-4",
+                "x": 50,
+                "y": 70
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 45,
+                "y": 42
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 45,
+                "y": 58
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 60,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 60,
+                "y": 62
+              },
+              {
+                "tokenId": "comodin-1",
+                "x": 40,
+                "y": 50
+              },
+              {
+                "tokenId": "comodin-2",
+                "x": 55,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 40,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "pase-comodin",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 40,
+                  "y": 50
+                },
+                "to": {
+                  "x": 50,
+                  "y": 70
+                }
+              },
+              {
+                "id": "apoyo-interior",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 30
+                },
+                "to": {
+                  "x": 54,
+                  "y": 34
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-posesion",
+                "text": "Posesión con comodines",
+                "x": 42,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "cambio-orientacion",
+            "order": 2,
+            "title": "Cambio de orientación",
+            "explanation": "La posesión cambia de orientación con el comodín y libera el carril derecho.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 60,
+                "y": 35
+              },
+              {
+                "tokenId": "local-2",
+                "x": 60,
+                "y": 65
+              },
+              {
+                "tokenId": "local-3",
+                "x": 70,
+                "y": 30
+              },
+              {
+                "tokenId": "local-4",
+                "x": 70,
+                "y": 70
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 55,
+                "y": 42
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 55,
+                "y": 58
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 45,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 45,
+                "y": 62
+              },
+              {
+                "tokenId": "comodin-1",
+                "x": 50,
+                "y": 50
+              },
+              {
+                "tokenId": "comodin-2",
+                "x": 65,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 65,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "cambio-orientacion",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 65,
+                  "y": 50
+                },
+                "to": {
+                  "x": 60,
+                  "y": 65
+                }
+              },
+              {
+                "id": "desmarque-local-3",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 30
+                },
+                "to": {
+                  "x": 56,
+                  "y": 26
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio",
+                "text": "Cambio de orientación",
+                "x": 55,
+                "y": 76
+              }
+            ]
+          },
+          {
+            "id": "progresion-carril",
+            "order": 3,
+            "title": "Progresión al carril libre",
+            "explanation": "El comodín interior filtra el pase al carril libre y el equipo progresa hacia el área.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 65,
+                "y": 32
+              },
+              {
+                "tokenId": "local-2",
+                "x": 62,
+                "y": 68
+              },
+              {
+                "tokenId": "local-3",
+                "x": 78,
+                "y": 38
+              },
+              {
+                "tokenId": "local-4",
+                "x": 78,
+                "y": 62
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 60,
+                "y": 44
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 56
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 70,
+                "y": 46
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 70,
+                "y": 54
+              },
+              {
+                "tokenId": "comodin-1",
+                "x": 58,
+                "y": 50
+              },
+              {
+                "tokenId": "comodin-2",
+                "x": 72,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 72,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "progresion-carril",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 72,
+                  "y": 50
+                },
+                "to": {
+                  "x": 78,
+                  "y": 62
+                }
+              },
+              {
+                "id": "ruptura",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 78,
+                  "y": 38
+                },
+                "to": {
+                  "x": 84,
+                  "y": 34
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-progresion",
+                "text": "Progresión al carril libre",
+                "x": 66,
+                "y": 24
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "basculacion-bloque-1-2-1",
+      "title": "Basculación del bloque 1-2-1",
+      "summary": "Bloque 1-2-1 que bascula con el balón y cierra el pasillo central ante el cambio de orientación.",
+      "focus": "Bloque defensivo",
+      "categoryIds": [
+        "cadete"
+      ],
+      "objective": "Basculación del bloque 1-2-1 con coberturas y cierre del pasillo central.",
+      "players": {
+        "total": 10,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 18,
+      "intensity": {
+        "level": "medium",
+        "percent": 70
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Bloque junto",
+          "detail": "El bloque no puede superar los diez metros entre líneas."
+        },
+        {
+          "rule": "Cierre central",
+          "detail": "Ningún rival puede recibir en el pasillo central sin presión."
+        }
+      ],
+      "coachingCues": [
+        "Basculación coordinada al lado del balón",
+        "Cobertura del interior más cercano",
+        "Cierre del pasillo central con el delantero"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "interior-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "ID"
+          },
+          {
+            "id": "interior-izquierda",
+            "kind": "player",
+            "team": "home",
+            "label": "II"
+          },
+          {
+            "id": "delantero",
+            "kind": "player",
+            "team": "home",
+            "label": "DEL"
+          },
+          {
+            "id": "por-rival",
+            "kind": "keeper",
+            "team": "away",
+            "label": "POR"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          },
+          {
+            "id": "rival-4",
+            "kind": "player",
+            "team": "away",
+            "label": "R4"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "bloque-orientado",
+            "order": 1,
+            "title": "Bloque orientado al balón",
+            "explanation": "El bloque bascula hacia el lado del balón y el delantero orienta la presión al pasillo exterior.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 18,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 30,
+                "y": 50
+              },
+              {
+                "tokenId": "interior-derecha",
+                "x": 38,
+                "y": 42
+              },
+              {
+                "tokenId": "interior-izquierda",
+                "x": 38,
+                "y": 58
+              },
+              {
+                "tokenId": "delantero",
+                "x": 50,
+                "y": 50
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 60,
+                "y": 36
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 60,
+                "y": 64
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 70,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 60,
+              "y": 36
+            },
+            "arrows": [
+              {
+                "id": "presion-delantero",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 50,
+                  "y": 50
+                },
+                "to": {
+                  "x": 56,
+                  "y": 42
+                }
+              },
+              {
+                "id": "cobertura-interior",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 38,
+                  "y": 42
+                },
+                "to": {
+                  "x": 42,
+                  "y": 46
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-bloque",
+                "text": "Bloque orientado al balón",
+                "x": 42,
+                "y": 26
+              }
+            ]
+          },
+          {
+            "id": "basculacion",
+            "order": 2,
+            "title": "Basculación al lado contrario",
+            "explanation": "El rival cambia la orientación y el bloque bascula para no dejar hombres libres en el interior.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 20,
+                "y": 46
+              },
+              {
+                "tokenId": "cierre",
+                "x": 32,
+                "y": 46
+              },
+              {
+                "tokenId": "interior-derecha",
+                "x": 40,
+                "y": 38
+              },
+              {
+                "tokenId": "interior-izquierda",
+                "x": 42,
+                "y": 60
+              },
+              {
+                "tokenId": "delantero",
+                "x": 52,
+                "y": 46
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 62,
+                "y": 32
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 58,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 58,
+                "y": 66
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 72,
+                "y": 44
+              }
+            ],
+            "ball": {
+              "x": 58,
+              "y": 66
+            },
+            "arrows": [
+              {
+                "id": "basculacion-bloque",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 40,
+                  "y": 38
+                },
+                "to": {
+                  "x": 44,
+                  "y": 56
+                }
+              },
+              {
+                "id": "presion-interior",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 42,
+                  "y": 60
+                },
+                "to": {
+                  "x": 52,
+                  "y": 62
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-basculacion",
+                "text": "Basculación al lado contrario",
+                "x": 46,
+                "y": 76
+              }
+            ]
+          },
+          {
+            "id": "cierre-central",
+            "order": 3,
+            "title": "Cierre del pasillo central",
+            "explanation": "El bloque cierra el pasillo central y el delantero presiona la recepción del rival.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 20,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 33,
+                "y": 46
+              },
+              {
+                "tokenId": "interior-derecha",
+                "x": 42,
+                "y": 40
+              },
+              {
+                "tokenId": "interior-izquierda",
+                "x": 42,
+                "y": 52
+              },
+              {
+                "tokenId": "delantero",
+                "x": 55,
+                "y": 46
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 64,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 62,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 60,
+                "y": 58
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 72,
+                "y": 44
+              }
+            ],
+            "ball": {
+              "x": 60,
+              "y": 58
+            },
+            "arrows": [
+              {
+                "id": "cierre-central",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 42,
+                  "y": 52
+                },
+                "to": {
+                  "x": 50,
+                  "y": 52
+                }
+              },
+              {
+                "id": "presion-final",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 55,
+                  "y": 46
+                },
+                "to": {
+                  "x": 58,
+                  "y": 52
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cierre",
+                "text": "Cierre del pasillo central",
+                "x": 46,
+                "y": 24
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "salida-4v3-con-portero",
+      "title": "Salida de presión 4 más portero contra 3",
+      "summary": "Salida en 4 con portero ante la presión de tres rivales que defienden la primera línea.",
+      "focus": "Salida de presión",
+      "categoryIds": [
+        "juvenil"
+      ],
+      "objective": "Fijar la presión rival y liberar el carril opuesto con el pase del cierre.",
+      "players": {
+        "total": 9,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 18,
+      "intensity": {
+        "level": "high",
+        "percent": 80
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Salida en cuatro",
+          "detail": "La primera línea debe mantener cuatro apoyos antes del pase."
+        },
+        {
+          "rule": "Un pase por línea",
+          "detail": "No se permite más de un pase por línea defensiva."
+        }
+      ],
+      "coachingCues": [
+        "Portero como hombre libre",
+        "Fijar la presión derecha",
+        "Pase al carril opuesto con el cierre"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "ala-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "AD"
+          },
+          {
+            "id": "ala-izquierda",
+            "kind": "player",
+            "team": "home",
+            "label": "AI"
+          },
+          {
+            "id": "pivot",
+            "kind": "player",
+            "team": "home",
+            "label": "PIV"
+          },
+          {
+            "id": "por-rival",
+            "kind": "keeper",
+            "team": "away",
+            "label": "POR"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "salida-portero",
+            "order": 1,
+            "title": "Salida desde portero",
+            "explanation": "El portero inicia la salida en cuatro mientras los tres rivales defienden la primera línea.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 20,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 30,
+                "y": 42
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 35,
+                "y": 30
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 35,
+                "y": 70
+              },
+              {
+                "tokenId": "pivot",
+                "x": 48,
+                "y": 50
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 85,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 55,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 55,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 55,
+                "y": 62
+              }
+            ],
+            "ball": {
+              "x": 20,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "pase-portero-calle",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 20,
+                  "y": 50
+                },
+                "to": {
+                  "x": 30,
+                  "y": 42
+                }
+              },
+              {
+                "id": "presion-rival-2",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 55,
+                  "y": 50
+                },
+                "to": {
+                  "x": 46,
+                  "y": 48
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-salida",
+                "text": "Salida desde portero",
+                "x": 32,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "fijacion-derecha",
+            "order": 2,
+            "title": "Fijación por el carril derecho",
+            "explanation": "El cierre fija la presión por el carril derecho y el ala derecha ataca el espacio exterior.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 22,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 32,
+                "y": 44
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 45,
+                "y": 26
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 42,
+                "y": 72
+              },
+              {
+                "tokenId": "pivot",
+                "x": 55,
+                "y": 48
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 85,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 58,
+                "y": 34
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 56,
+                "y": 46
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 58,
+                "y": 60
+              }
+            ],
+            "ball": {
+              "x": 45,
+              "y": 26
+            },
+            "arrows": [
+              {
+                "id": "pase-carril-derecho",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 32,
+                  "y": 44
+                },
+                "to": {
+                  "x": 45,
+                  "y": 26
+                }
+              },
+              {
+                "id": "fijacion-ala",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 45,
+                  "y": 26
+                },
+                "to": {
+                  "x": 50,
+                  "y": 22
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-fijacion",
+                "text": "Fijación por el carril derecho",
+                "x": 50,
+                "y": 18
+              }
+            ]
+          },
+          {
+            "id": "pase-opuesto",
+            "order": 3,
+            "title": "Pase al carril opuesto",
+            "explanation": "El cierre cambia la orientación al carril opuesto y el pívot ataca la espalda de la defensa.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 24,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 38,
+                "y": 44
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 55,
+                "y": 22
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 65,
+                "y": 72
+              },
+              {
+                "tokenId": "pivot",
+                "x": 62,
+                "y": 46
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 85,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 62,
+                "y": 34
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 62,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 64,
+                "y": 64
+              }
+            ],
+            "ball": {
+              "x": 65,
+              "y": 72
+            },
+            "arrows": [
+              {
+                "id": "pase-carril-opuesto",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 38,
+                  "y": 44
+                },
+                "to": {
+                  "x": 65,
+                  "y": 72
+                },
+                "curve": 18
+              },
+              {
+                "id": "ruptura-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 62,
+                  "y": 46
+                },
+                "to": {
+                  "x": 72,
+                  "y": 44
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-opuesto",
+                "text": "Pase al carril opuesto",
+                "x": 58,
+                "y": 80
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "transicion-4v3-tras-robo",
+      "title": "Transición 4 contra 3 tras robo",
+      "summary": "Tras el robo en medio campo, cuatro jugadores atacan en transición contra tres defensores.",
+      "focus": "Transición",
+      "categoryIds": [
+        "juvenil"
+      ],
+      "objective": "Atacar el espacio antes de que el rival reorganice su línea defensiva.",
+      "players": {
+        "total": 7,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Medio campo",
+        "widthM": 20,
+        "lengthM": 25
+      },
+      "durationMinutes": 16,
+      "intensity": {
+        "level": "high",
+        "percent": 85
+      },
+      "workStructure": "Bloques de 3 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Primer pase vertical",
+          "detail": "El primer pase tras el robo debe ir hacia delante."
+        },
+        {
+          "rule": "Tres pases máximo",
+          "detail": "La transición termina en remate en un máximo de tres pases."
+        }
+      ],
+      "coachingCues": [
+        "Robo orientado hacia el carril central",
+        "Ataque del espacio antes del repliegue",
+        "Ocupar el segundo palo en la finalización"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "local-4",
+            "kind": "player",
+            "team": "home",
+            "label": "L4"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "robo",
+            "order": 1,
+            "title": "Robo y primer pase",
+            "explanation": "El cierre roba el balón y el primer pase vertical busca al interior que ataca el espacio.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 34,
+                "y": 46
+              },
+              {
+                "tokenId": "local-2",
+                "x": 42,
+                "y": 30
+              },
+              {
+                "tokenId": "local-3",
+                "x": 42,
+                "y": 62
+              },
+              {
+                "tokenId": "local-4",
+                "x": 48,
+                "y": 46
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 40,
+                "y": 46
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 52,
+                "y": 36
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 52,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 34,
+              "y": 46
+            },
+            "arrows": [
+              {
+                "id": "primer-pase",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 34,
+                  "y": 46
+                },
+                "to": {
+                  "x": 48,
+                  "y": 46
+                }
+              },
+              {
+                "id": "desmarque-local-2",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 42,
+                  "y": 30
+                },
+                "to": {
+                  "x": 50,
+                  "y": 26
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-robo",
+                "text": "Robo y primer pase",
+                "x": 42,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "ataque-espacio",
+            "order": 2,
+            "title": "Ataque del espacio",
+            "explanation": "Los cuatro jugadores atacan el espacio libre y buscan el remate antes de que el rival se reorganice.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 52,
+                "y": 44
+              },
+              {
+                "tokenId": "local-2",
+                "x": 62,
+                "y": 30
+              },
+              {
+                "tokenId": "local-3",
+                "x": 58,
+                "y": 64
+              },
+              {
+                "tokenId": "local-4",
+                "x": 68,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 56,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 64,
+                "y": 40
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 66,
+                "y": 58
+              }
+            ],
+            "ball": {
+              "x": 52,
+              "y": 44
+            },
+            "arrows": [
+              {
+                "id": "ataque-espacio",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 52,
+                  "y": 44
+                },
+                "to": {
+                  "x": 60,
+                  "y": 40
+                }
+              },
+              {
+                "id": "pase-filtrado",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 58,
+                  "y": 64
+                },
+                "to": {
+                  "x": 68,
+                  "y": 48
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-ataque",
+                "text": "Ataque del espacio",
+                "x": 58,
+                "y": 72
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "presion-alta-4v4",
+      "title": "Presión alta 4 contra 4",
+      "summary": "Presión alta coordinada en 4 contra 4 con referencia al pasillo y salto del hombre del balón.",
+      "focus": "Presión alta",
+      "categoryIds": [
+        "juvenil"
+      ],
+      "objective": "Presionar alto en 4 contra 4 sin romper la línea defensiva.",
+      "players": {
+        "total": 10,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 18,
+      "intensity": {
+        "level": "high",
+        "percent": 85
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Referencia al pasillo",
+          "detail": "El hombre del balón salta cuando el rival recibe en el pasillo."
+        },
+        {
+          "rule": "Línea intacta",
+          "detail": "La línea defensiva no se rompe durante la presión."
+        }
+      ],
+      "coachingCues": [
+        "Orientar la presión hacia la banda",
+        "Salto coordinado del hombre del balón",
+        "Robo y transición inmediata"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "local-4",
+            "kind": "player",
+            "team": "home",
+            "label": "L4"
+          },
+          {
+            "id": "por-rival",
+            "kind": "keeper",
+            "team": "away",
+            "label": "POR"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          },
+          {
+            "id": "rival-4",
+            "kind": "player",
+            "team": "away",
+            "label": "R4"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "orientacion-presion",
+            "order": 1,
+            "title": "Orientación de la presión",
+            "explanation": "El equipo orienta la presión hacia la banda y espera la recepción del rival en el pasillo.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 20,
+                "y": 50
+              },
+              {
+                "tokenId": "local-1",
+                "x": 35,
+                "y": 38
+              },
+              {
+                "tokenId": "local-2",
+                "x": 40,
+                "y": 50
+              },
+              {
+                "tokenId": "local-3",
+                "x": 35,
+                "y": 62
+              },
+              {
+                "tokenId": "local-4",
+                "x": 52,
+                "y": 44
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 58,
+                "y": 36
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 58,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 58,
+                "y": 64
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 70,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 58,
+              "y": 36
+            },
+            "arrows": [
+              {
+                "id": "orientacion-local-4",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 52,
+                  "y": 44
+                },
+                "to": {
+                  "x": 56,
+                  "y": 40
+                }
+              },
+              {
+                "id": "presion-local-2",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 40,
+                  "y": 50
+                },
+                "to": {
+                  "x": 50,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-orientacion",
+                "text": "Orientación de la presión",
+                "x": 46,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "salto-pasillo",
+            "order": 2,
+            "title": "Salto al pasillo",
+            "explanation": "El hombre del balón salta al pasillo y el interior cubre la segunda línea sin romper el bloque.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 22,
+                "y": 50
+              },
+              {
+                "tokenId": "local-1",
+                "x": 40,
+                "y": 34
+              },
+              {
+                "tokenId": "local-2",
+                "x": 46,
+                "y": 48
+              },
+              {
+                "tokenId": "local-3",
+                "x": 38,
+                "y": 64
+              },
+              {
+                "tokenId": "local-4",
+                "x": 58,
+                "y": 38
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 60,
+                "y": 32
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 60,
+                "y": 64
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 72,
+                "y": 48
+              }
+            ],
+            "ball": {
+              "x": 60,
+              "y": 32
+            },
+            "arrows": [
+              {
+                "id": "salto-pasillo",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 58,
+                  "y": 38
+                },
+                "to": {
+                  "x": 60,
+                  "y": 36
+                }
+              },
+              {
+                "id": "cobertura-local-2",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 46,
+                  "y": 48
+                },
+                "to": {
+                  "x": 52,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-salto",
+                "text": "Salto al pasillo",
+                "x": 50,
+                "y": 22
+              }
+            ]
+          },
+          {
+            "id": "robo-transicion",
+            "order": 3,
+            "title": "Robo y transición",
+            "explanation": "El hombre del balón roba y el equipo inicia la transición sin perder la línea defensiva.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 24,
+                "y": 50
+              },
+              {
+                "tokenId": "local-1",
+                "x": 48,
+                "y": 34
+              },
+              {
+                "tokenId": "local-2",
+                "x": 52,
+                "y": 46
+              },
+              {
+                "tokenId": "local-3",
+                "x": 46,
+                "y": 62
+              },
+              {
+                "tokenId": "local-4",
+                "x": 64,
+                "y": 36
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 66,
+                "y": 32
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 64,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 66,
+                "y": 60
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 74,
+                "y": 44
+              }
+            ],
+            "ball": {
+              "x": 64,
+              "y": 36
+            },
+            "arrows": [
+              {
+                "id": "robo-local-4",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 64,
+                  "y": 36
+                },
+                "to": {
+                  "x": 66,
+                  "y": 32
+                }
+              },
+              {
+                "id": "transicion-local-1",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 48,
+                  "y": 34
+                },
+                "to": {
+                  "x": 58,
+                  "y": 30
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-robo",
+                "text": "Robo y transición",
+                "x": 58,
+                "y": 24
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "salida-3-2-cambio-ala",
+      "title": "Salida 3-2 con cambio de ala",
+      "summary": "Salida 3-2 que fija la presión por un carril y cambia de ala para progresar.",
+      "focus": "Salida de presión",
+      "categoryIds": [
+        "senior"
+      ],
+      "objective": "Superar la presión con la salida 3-2 y el cambio de ala al jugador libre.",
+      "players": {
+        "total": 10,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 20,
+      "intensity": {
+        "level": "high",
+        "percent": 85
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Salida 3-2",
+          "detail": "La salida mantiene tres apoyos atrás y dos por delante."
+        },
+        {
+          "rule": "Cambio de ala",
+          "detail": "El balón debe pasar por las dos alas antes de progresar."
+        }
+      ],
+      "coachingCues": [
+        "Fijar el carril fuerte con la conducción",
+        "Cambio de ala con el interior",
+        "Ocupar el carril débil antes del pase"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "ala-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "AD"
+          },
+          {
+            "id": "ala-izquierda",
+            "kind": "player",
+            "team": "home",
+            "label": "AI"
+          },
+          {
+            "id": "pivot",
+            "kind": "player",
+            "team": "home",
+            "label": "PIV"
+          },
+          {
+            "id": "por-rival",
+            "kind": "keeper",
+            "team": "away",
+            "label": "POR"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          },
+          {
+            "id": "rival-4",
+            "kind": "player",
+            "team": "away",
+            "label": "R4"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "salida-3-2",
+            "order": 1,
+            "title": "Salida 3-2",
+            "explanation": "El portero inicia la salida 3-2 y el cierre fija la primera línea de presión.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 18,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 30,
+                "y": 50
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 38,
+                "y": 34
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 38,
+                "y": 66
+              },
+              {
+                "tokenId": "pivot",
+                "x": 48,
+                "y": 50
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 84,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 56,
+                "y": 34
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 56,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 58,
+                "y": 66
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 68,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 18,
+              "y": 50
+            },
+            "arrows": [
+              {
+                "id": "pase-salida",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 18,
+                  "y": 50
+                },
+                "to": {
+                  "x": 30,
+                  "y": 50
+                }
+              },
+              {
+                "id": "presion-rival-1",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 56,
+                  "y": 34
+                },
+                "to": {
+                  "x": 50,
+                  "y": 38
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-salida-3-2",
+                "text": "Salida 3-2",
+                "x": 34,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "fijacion-carril",
+            "order": 2,
+            "title": "Fijación del carril fuerte",
+            "explanation": "El ala derecha conduce para fijar la presión y el cierre acompaña por dentro.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 20,
+                "y": 48
+              },
+              {
+                "tokenId": "cierre",
+                "x": 32,
+                "y": 48
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 42,
+                "y": 32
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 42,
+                "y": 68
+              },
+              {
+                "tokenId": "pivot",
+                "x": 54,
+                "y": 50
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 56,
+                "y": 34
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 56,
+                "y": 46
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 58,
+                "y": 64
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 68,
+                "y": 48
+              }
+            ],
+            "ball": {
+              "x": 42,
+              "y": 32
+            },
+            "arrows": [
+              {
+                "id": "fijacion-ala-derecha",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 42,
+                  "y": 32
+                },
+                "to": {
+                  "x": 48,
+                  "y": 28
+                }
+              },
+              {
+                "id": "presion-rival-1",
+                "kind": "press",
+                "team": "away",
+                "from": {
+                  "x": 56,
+                  "y": 34
+                },
+                "to": {
+                  "x": 50,
+                  "y": 34
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-fijacion-carril",
+                "text": "Fijación del carril fuerte",
+                "x": 44,
+                "y": 22
+              }
+            ]
+          },
+          {
+            "id": "cambio-ala",
+            "order": 3,
+            "title": "Cambio de ala",
+            "explanation": "El balón cambia de ala y el ala izquierda progresa por el carril débil.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 22,
+                "y": 46
+              },
+              {
+                "tokenId": "cierre",
+                "x": 36,
+                "y": 46
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 58,
+                "y": 26
+              },
+              {
+                "tokenId": "ala-izquierda",
+                "x": 52,
+                "y": 68
+              },
+              {
+                "tokenId": "pivot",
+                "x": 60,
+                "y": 48
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 60,
+                "y": 34
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 60,
+                "y": 64
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 70,
+                "y": 44
+              }
+            ],
+            "ball": {
+              "x": 52,
+              "y": 68
+            },
+            "arrows": [
+              {
+                "id": "cambio-ala",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 52,
+                  "y": 68
+                },
+                "to": {
+                  "x": 66,
+                  "y": 72
+                },
+                "curve": 12
+              },
+              {
+                "id": "ruptura-pivot",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 60,
+                  "y": 48
+                },
+                "to": {
+                  "x": 68,
+                  "y": 44
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cambio-ala",
+                "text": "Cambio de ala",
+                "x": 58,
+                "y": 78
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "defensa-3-1-presion-cierre",
+      "title": "Defensa 3-1 en zona con presión al cierre",
+      "summary": "Defensa 3-1 en zona que presiona al cierre rival y cierra el carril central.",
+      "focus": "Defensa en zona",
+      "categoryIds": [
+        "senior"
+      ],
+      "objective": "Defender en 3-1 en zona cerrando al cierre rival y el pasillo central.",
+      "players": {
+        "total": 10,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 18,
+      "intensity": {
+        "level": "medium",
+        "percent": 75
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Defensa en zona",
+          "detail": "Cada defensor cubre su zona y no persigue fuera de ella."
+        },
+        {
+          "rule": "Presión al cierre",
+          "detail": "El jugador de la línea 3-1 presiona al cierre rival."
+        }
+      ],
+      "coachingCues": [
+        "Basculación de la línea de tres",
+        "Presión al cierre por el lado del balón",
+        "Cierre del carril central"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "lateral-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "LD"
+          },
+          {
+            "id": "lateral-izquierda",
+            "kind": "player",
+            "team": "home",
+            "label": "LI"
+          },
+          {
+            "id": "presion",
+            "kind": "player",
+            "team": "home",
+            "label": "PRE"
+          },
+          {
+            "id": "por-rival",
+            "kind": "keeper",
+            "team": "away",
+            "label": "POR"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          },
+          {
+            "id": "rival-4",
+            "kind": "player",
+            "team": "away",
+            "label": "R4"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "bloque-3-1",
+            "order": 1,
+            "title": "Bloque 3-1",
+            "explanation": "La línea de tres bascula con el balón y el jugador de la línea 3-1 orienta la presión al cierre rival.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 18,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 32,
+                "y": 50
+              },
+              {
+                "tokenId": "lateral-derecha",
+                "x": 38,
+                "y": 36
+              },
+              {
+                "tokenId": "lateral-izquierda",
+                "x": 38,
+                "y": 64
+              },
+              {
+                "tokenId": "presion",
+                "x": 48,
+                "y": 50
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 58,
+                "y": 32
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 58,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 58,
+                "y": 68
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 70,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 58,
+              "y": 68
+            },
+            "arrows": [
+              {
+                "id": "bloque-3-1",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 38,
+                  "y": 64
+                },
+                "to": {
+                  "x": 42,
+                  "y": 60
+                }
+              },
+              {
+                "id": "presion-cierre",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 48,
+                  "y": 50
+                },
+                "to": {
+                  "x": 54,
+                  "y": 54
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-bloque-3-1",
+                "text": "Bloque 3-1",
+                "x": 40,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "presion-cierre",
+            "order": 2,
+            "title": "Presión al cierre",
+            "explanation": "El jugador de la línea 3-1 presiona al cierre rival mientras la línea de tres cierra las coberturas.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 20,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 34,
+                "y": 48
+              },
+              {
+                "tokenId": "lateral-derecha",
+                "x": 40,
+                "y": 34
+              },
+              {
+                "tokenId": "lateral-izquierda",
+                "x": 40,
+                "y": 62
+              },
+              {
+                "tokenId": "presion",
+                "x": 54,
+                "y": 52
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 60,
+                "y": 30
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 60,
+                "y": 48
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 60,
+                "y": 66
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 70,
+                "y": 48
+              }
+            ],
+            "ball": {
+              "x": 60,
+              "y": 66
+            },
+            "arrows": [
+              {
+                "id": "presion-al-cierre",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 54,
+                  "y": 52
+                },
+                "to": {
+                  "x": 58,
+                  "y": 60
+                }
+              },
+              {
+                "id": "cobertura-lateral",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 40,
+                  "y": 62
+                },
+                "to": {
+                  "x": 46,
+                  "y": 58
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-presion-cierre",
+                "text": "Presión al cierre",
+                "x": 46,
+                "y": 76
+              }
+            ]
+          },
+          {
+            "id": "cierre-centro",
+            "order": 3,
+            "title": "Cierre del centro",
+            "explanation": "El bloque cierra el pasillo central y la presión final impide la recepción interior.",
+            "positions": [
+              {
+                "tokenId": "por-local",
+                "x": 22,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 36,
+                "y": 50
+              },
+              {
+                "tokenId": "lateral-derecha",
+                "x": 46,
+                "y": 36
+              },
+              {
+                "tokenId": "lateral-izquierda",
+                "x": 46,
+                "y": 64
+              },
+              {
+                "tokenId": "presion",
+                "x": 58,
+                "y": 50
+              },
+              {
+                "tokenId": "por-rival",
+                "x": 82,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 64,
+                "y": 38
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 66,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 64,
+                "y": 62
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 74,
+                "y": 50
+              }
+            ],
+            "ball": {
+              "x": 64,
+              "y": 62
+            },
+            "arrows": [
+              {
+                "id": "cierre-centro",
+                "kind": "cover",
+                "team": "home",
+                "from": {
+                  "x": 46,
+                  "y": 64
+                },
+                "to": {
+                  "x": 54,
+                  "y": 60
+                }
+              },
+              {
+                "id": "presion-final",
+                "kind": "press",
+                "team": "home",
+                "from": {
+                  "x": 58,
+                  "y": 50
+                },
+                "to": {
+                  "x": 62,
+                  "y": 56
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-cierre-centro",
+                "text": "Cierre del centro",
+                "x": 48,
+                "y": 24
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "transicion-5v4-carril-central",
+      "title": "Transición 5 contra 4 por el carril central",
+      "summary": "Transición de cinco jugadores por el carril central tras recuperar el balón en campo propio.",
+      "focus": "Transición",
+      "categoryIds": [
+        "senior"
+      ],
+      "objective": "Finalizar la transición 5 contra 4 por el carril central antes del repliegue.",
+      "players": {
+        "total": 9,
+        "goalkeepers": 0
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
+      "durationMinutes": 18,
+      "intensity": {
+        "level": "high",
+        "percent": 90
+      },
+      "workStructure": "Bloques de 4 minutos x 4 series",
+      "constraints": [
+        {
+          "rule": "Carril central",
+          "detail": "La transición progresa por el carril central hasta el área."
+        },
+        {
+          "rule": "Cinco jugadores",
+          "detail": "Los cinco jugadores atacan el área antes del repliegue."
+        }
+      ],
+      "coachingCues": [
+        "Primer pase vertical tras la recuperación",
+        "Ocupar los tres carriles en la finalización",
+        "Remate antes de que el rival reorganice"
+      ],
+      "boardData": {
+        "schemaVersion": "1.0.0",
+        "pitch": {
+          "format": "full"
+        },
+        "tokens": [
+          {
+            "id": "local-1",
+            "kind": "player",
+            "team": "home",
+            "label": "L1"
+          },
+          {
+            "id": "local-2",
+            "kind": "player",
+            "team": "home",
+            "label": "L2"
+          },
+          {
+            "id": "local-3",
+            "kind": "player",
+            "team": "home",
+            "label": "L3"
+          },
+          {
+            "id": "local-4",
+            "kind": "player",
+            "team": "home",
+            "label": "L4"
+          },
+          {
+            "id": "local-5",
+            "kind": "player",
+            "team": "home",
+            "label": "L5"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          },
+          {
+            "id": "rival-3",
+            "kind": "player",
+            "team": "away",
+            "label": "R3"
+          },
+          {
+            "id": "rival-4",
+            "kind": "player",
+            "team": "away",
+            "label": "R4"
+          }
+        ],
+        "cones": [],
+        "phases": [
+          {
+            "id": "recuperacion-salida",
+            "order": 1,
+            "title": "Recuperación y salida",
+            "explanation": "El equipo recupera el balón en campo propio y el primer pase busca el carril central.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 30,
+                "y": 46
+              },
+              {
+                "tokenId": "local-2",
+                "x": 38,
+                "y": 32
+              },
+              {
+                "tokenId": "local-3",
+                "x": 38,
+                "y": 68
+              },
+              {
+                "tokenId": "local-4",
+                "x": 46,
+                "y": 44
+              },
+              {
+                "tokenId": "local-5",
+                "x": 50,
+                "y": 56
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 44,
+                "y": 40
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 48,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 52,
+                "y": 60
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 60,
+                "y": 44
+              }
+            ],
+            "ball": {
+              "x": 30,
+              "y": 46
+            },
+            "arrows": [
+              {
+                "id": "primer-pase",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 30,
+                  "y": 46
+                },
+                "to": {
+                  "x": 46,
+                  "y": 44
+                }
+              },
+              {
+                "id": "desmarque-carril",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 38,
+                  "y": 32
+                },
+                "to": {
+                  "x": 46,
+                  "y": 28
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-recuperacion",
+                "text": "Recuperación y salida",
+                "x": 40,
+                "y": 24
+              }
+            ]
+          },
+          {
+            "id": "finalizacion-centro",
+            "order": 2,
+            "title": "Finalización por el centro",
+            "explanation": "Los cinco jugadores atacan el área y finalizan por el carril central antes del repliegue.",
+            "positions": [
+              {
+                "tokenId": "local-1",
+                "x": 55,
+                "y": 46
+              },
+              {
+                "tokenId": "local-2",
+                "x": 62,
+                "y": 30
+              },
+              {
+                "tokenId": "local-3",
+                "x": 62,
+                "y": 66
+              },
+              {
+                "tokenId": "local-4",
+                "x": 68,
+                "y": 44
+              },
+              {
+                "tokenId": "local-5",
+                "x": 72,
+                "y": 54
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 60,
+                "y": 40
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 64,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-3",
+                "x": 68,
+                "y": 62
+              },
+              {
+                "tokenId": "rival-4",
+                "x": 74,
+                "y": 40
+              }
+            ],
+            "ball": {
+              "x": 55,
+              "y": 46
+            },
+            "arrows": [
+              {
+                "id": "conduccion-central",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 55,
+                  "y": 46
+                },
+                "to": {
+                  "x": 62,
+                  "y": 46
+                }
+              },
+              {
+                "id": "finalizacion",
+                "kind": "pass",
+                "team": "home",
+                "from": {
+                  "x": 68,
+                  "y": 44
+                },
+                "to": {
+                  "x": 78,
+                  "y": 50
+                }
+              },
+              {
+                "id": "remate-local-5",
+                "kind": "run",
+                "team": "home",
+                "from": {
+                  "x": 72,
+                  "y": 54
+                },
+                "to": {
+                  "x": 80,
+                  "y": 50
+                }
+              }
+            ],
+            "labels": [
+              {
+                "id": "etiqueta-finalizacion",
+                "text": "Finalización por el centro",
+                "x": 62,
+                "y": 72
+              }
+            ]
+          }
+        ]
+      },
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
     }
   ],
   "programming": [
@@ -1484,6 +7296,522 @@
               "id": "microciclo-2",
               "label": "Microciclo 2 · semanas 11-12",
               "focus": "Basculación del rombo y transición tras robo",
+              "sessionCount": 4
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "prebenjamin-u8-base",
+      "categoryId": "prebenjamin",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de iniciación motriz y familiarización con el balón",
+      "focus": "Foco Metodológico Prebenjamín",
+      "playModel": "Juego guiado con conducción, pase y partidos reducidos, sin especialización por puestos.",
+      "sessionDurationMinutes": {
+        "min": 45,
+        "max": 60
+      },
+      "keyConcepts": [
+        "Conducción con ambas piernas",
+        "Control con la planta del pie",
+        "Pase con el interior del pie",
+        "Ocupación de espacios libres"
+      ],
+      "objectives": [
+        "Conducir el balón con seguridad en espacios reducidos",
+        "Pasar y recibir con el interior del pie a un compañero",
+        "Resolver el 3 contra 3 buscando la portería contraria"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Juego de activación con balón",
+          "description": "Juego de activación con balón y movilidad durante 10 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Circuito de conducción y juego reducido",
+          "description": "Circuito de conducción y dos bloques de juego reducido durante 35 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Estiramientos y juego tranquilo",
+          "description": "Estiramientos guiados y juego tranquilo durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Conducción y control",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Conducción en espacios reducidos",
+              "sessionCount": 3
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Pase y control orientado",
+              "sessionCount": 3
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Juego reducido",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Juego 3 contra 3",
+              "sessionCount": 3
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Progresión al 4 contra 4",
+              "sessionCount": 3
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "benjamin-u10-base",
+      "categoryId": "benjamin",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de iniciación táctica con apoyos y desmarques",
+      "focus": "Foco Metodológico Benjamín",
+      "playModel": "Posesión guiada en espacios reducidos con pase y va, apoyos constantes y salida desde portero.",
+      "sessionDurationMinutes": {
+        "min": 50,
+        "max": 65
+      },
+      "keyConcepts": [
+        "Control orientado antes del pase",
+        "Desmarque de apoyo al lado del balón",
+        "Pase y va al espacio libre",
+        "Salida desde portero en tres carriles"
+      ],
+      "objectives": [
+        "Mantener el balón en superioridad con dos toques",
+        "Pasar y desmarcarse para ocupar el espacio libre",
+        "Iniciar la salida desde portero con el hombre libre"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Rondo de activación",
+          "description": "Rondo de activación con control orientado durante 10 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Bloques de pase y va con salida",
+          "description": "Bloques de pase y va y salida desde portero durante 40 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Estiramientos y preguntas",
+          "description": "Estiramientos guiados y preguntas de comprensión durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Rondo, pase y va",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Rondo y control orientado",
+              "sessionCount": 3
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Pase y va con cambio de orientación",
+              "sessionCount": 3
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Salida desde portero y juego",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Salida del portero en 3 contra 2",
+              "sessionCount": 3
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Juego reducido con porteros",
+              "sessionCount": 3
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "alevin-u12-base",
+      "categoryId": "alevin",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de desarrollo táctico colectivo con superioridades",
+      "focus": "Foco Metodológico Alevín",
+      "playModel": "Conservación y presión organizada en medio campo con transición inmediata y ataque por banda.",
+      "sessionDurationMinutes": {
+        "min": 55,
+        "max": 70
+      },
+      "keyConcepts": [
+        "Cambio de orientación para liberar el carril",
+        "Presión coordinada tras la pérdida",
+        "Ataque por banda con llegada del segundo hombre",
+        "Repliegue ordenado a la línea del balón"
+      ],
+      "objectives": [
+        "Conservar el balón en superioridad cambiando de carril",
+        "Recuperar el balón en cinco segundos tras la pérdida",
+        "Finalizar el 3 contra 2 por banda con remate o pase atrás"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Rondo y movilidad",
+          "description": "Rondo y movilidad articular con balón durante 12 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Bloques de conservación, presión y ataque por banda",
+          "description": "Bloques de conservación, presión tras pérdida y ataque por banda durante 43 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Estiramientos y análisis",
+          "description": "Estiramientos guiados y análisis breve durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Conservación y presión tras pérdida",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Conservación por carriles",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Reacción tras pérdida",
+              "sessionCount": 4
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Ataque por banda y repliegue",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Ataque 3 contra 2 por banda",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Repliegue y equilibrio",
+              "sessionCount": 4
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "cadete-u16-base",
+      "categoryId": "cadete",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de especialización táctica y consolidación del modelo",
+      "focus": "Foco Metodológico Cadete",
+      "playModel": "Juego de posición 4-4 con comodines, basculación del bloque 1-2-1 y salida de presión 3-1.",
+      "sessionDurationMinutes": {
+        "min": 65,
+        "max": 80
+      },
+      "keyConcepts": [
+        "Superioridad en el juego de posición",
+        "Basculación del bloque 1-2-1",
+        "Cierre del pasillo central",
+        "Fijación del cierre rival en la salida 3-1"
+      ],
+      "objectives": [
+        "Sostener la posesión en 4 contra 4 con comodines",
+        "Bascular el bloque 1-2-1 con coberturas",
+        "Superar la primera presión con la salida 3-1"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Rondo y activación",
+          "description": "Rondo de activación con orientación durante 15 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Juego de posición y bloque defensivo",
+          "description": "Bloques de juego de posición, salida 3-1 y bloque defensivo durante 55 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Estiramientos y preguntas",
+          "description": "Estiramientos guiados y preguntas tácticas durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Juego de posición y salida 3-1",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Juego de posición 4 contra 4",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Salida 3-1 ante presión alta",
+              "sessionCount": 4
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Bloque defensivo y repaso del modelo",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Basculación del bloque 1-2-1",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Repaso de salida y juego de posición",
+              "sessionCount": 4
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "juvenil-u19-base",
+      "categoryId": "juvenil",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de rendimiento táctico y autonomía competitiva",
+      "focus": "Foco Metodológico Juvenil",
+      "playModel": "Presión alta coordinada, salida de presión en cuatro y transición vertical de cuatro jugadores.",
+      "sessionDurationMinutes": {
+        "min": 70,
+        "max": 85
+      },
+      "keyConcepts": [
+        "Salida en cuatro con portero",
+        "Presión alta con referencia al pasillo",
+        "Transición vertical de cuatro jugadores",
+        "Cambio de orientación para atacar el carril opuesto"
+      ],
+      "objectives": [
+        "Superar la primera línea con la salida en cuatro",
+        "Presionar alto en 4 contra 4 sin romper la línea",
+        "Atacar en transición antes de que el rival reorganice"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Activación con rondo",
+          "description": "Activación con rondo y movilidad durante 15 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Salida, presión alta y transición",
+          "description": "Bloques de salida de presión, presión alta y transición durante 60 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Estiramientos y análisis táctico",
+          "description": "Estiramientos guiados y análisis táctico durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Salida de presión y presión alta",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Salida 4 más portero contra 3",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Presión alta 4 contra 4",
+              "sessionCount": 4
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Transición y competitividad",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Transición 4 contra 3 tras robo",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Repaso del modelo y partido condicionado",
+              "sessionCount": 4
+            }
+          ]
+        }
+      ],
+      "status": "published",
+      "provenance": {
+        "kind": "original",
+        "sourceName": "Futsal Manager AI",
+        "licenseStatus": "owned"
+      }
+    },
+    {
+      "id": "senior-base",
+      "categoryId": "senior",
+      "version": "1.0.0",
+      "formativeStage": "Etapa de rendimiento y gestión del modelo de juego",
+      "focus": "Foco Metodológico Senior",
+      "playModel": "Salida 3-2 con cambio de ala, defensa 3-1 en zona y transición de cinco jugadores por el centro.",
+      "sessionDurationMinutes": {
+        "min": 75,
+        "max": 90
+      },
+      "keyConcepts": [
+        "Cambio de ala en la salida 3-2",
+        "Presión al cierre en la defensa 3-1",
+        "Transición de cinco jugadores por el carril central",
+        "Cierre del pasillo central en zona"
+      ],
+      "objectives": [
+        "Superar la presión con la salida 3-2 y el cambio de ala",
+        "Defender en 3-1 en zona cerrando al cierre rival",
+        "Finalizar la transición 5 contra 4 por el carril central"
+      ],
+      "sessionStructure": [
+        {
+          "part": "warm-up",
+          "title": "Activación con rondo y movilidad",
+          "description": "Activación con rondo y movilidad durante 15 minutos."
+        },
+        {
+          "part": "main",
+          "title": "Salida, defensa en zona y transición",
+          "description": "Bloques de salida 3-2, defensa 3-1 y transición durante 65 minutos."
+        },
+        {
+          "part": "cool-down",
+          "title": "Vuelta a la calma y análisis",
+          "description": "Vuelta a la calma y análisis del modelo durante 10 minutos."
+        }
+      ],
+      "macrocycles": [
+        {
+          "id": "macrociclo-1",
+          "label": "Macrociclo 1 · septiembre-octubre",
+          "focus": "Salida 3-2 y defensa en zona",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 1-2",
+              "focus": "Salida 3-2 con cambio de ala",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 3-4",
+              "focus": "Defensa 3-1 en zona",
+              "sessionCount": 4
+            }
+          ]
+        },
+        {
+          "id": "macrociclo-2",
+          "label": "Macrociclo 2 · noviembre-diciembre",
+          "focus": "Transición y ritmo competitivo",
+          "microcycles": [
+            {
+              "id": "microciclo-1",
+              "label": "Microciclo 1 · semanas 5-6",
+              "focus": "Transición 5 contra 4",
+              "sessionCount": 4
+            },
+            {
+              "id": "microciclo-2",
+              "label": "Microciclo 2 · semanas 7-8",
+              "focus": "Repaso del modelo y ritmo de partido",
               "sessionCount": 4
             }
           ]

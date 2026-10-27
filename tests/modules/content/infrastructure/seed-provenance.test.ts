@@ -39,9 +39,9 @@ const seededRecords = [
 describe('Seeded content provenance audit', () => {
   describe('Given the bundled content package', () => {
     describe('When every seeded record is audited', () => {
-      it('then the audit sees all nine seeded exercises and the Infantil programming', () => {
-        assert.equal(repository.getExercises().length, 9);
-        assert.equal(seededProgramming.length, 1);
+      it('then the audit sees all 26 seeded exercises and the seven Programming records', () => {
+        assert.equal(repository.getExercises().length, 26);
+        assert.equal(seededProgramming.length, 7);
         assert.deepEqual(
           seededRecords.map((record) => record.id),
           [
@@ -54,7 +54,30 @@ describe('Seeded content provenance audit', () => {
             'ataque-4-0-rotaciones',
             'basculacion-rombo-defensivo',
             'transicion-3v2-tras-robo',
+            'conduccion-entre-conos',
+            'pases-por-parejas',
+            'juego-3v3-conos-porteria',
+            'rondo-4v1-dos-toques',
+            'pase-y-va-cambio-orientacion',
+            'salida-portero-3v2',
+            'conservacion-4v2-carriles',
+            'reaccion-tras-perdida-3v2',
+            'ataque-3v2-banda',
+            'juego-posicion-4v4-comodines',
+            'basculacion-bloque-1-2-1',
+            'salida-4v3-con-portero',
+            'transicion-4v3-tras-robo',
+            'presion-alta-4v4',
+            'salida-3-2-cambio-ala',
+            'defensa-3-1-presion-cierre',
+            'transicion-5v4-carril-central',
+            'prebenjamin-u8-base',
+            'benjamin-u10-base',
+            'alevin-u12-base',
             'infantil-u14-base',
+            'cadete-u16-base',
+            'juvenil-u19-base',
+            'senior-base',
           ],
         );
       });
@@ -108,6 +131,16 @@ describe('Seeded content provenance audit', () => {
             record.provenance.kind,
             'reference',
             `Expected ${record.id} not to be reference-kind material.`,
+          );
+        }
+      });
+
+      it('then no record carries an attribution', () => {
+        for (const record of seededRecords) {
+          assert.equal(
+            record.provenance.attribution,
+            undefined,
+            `Expected ${record.id} not to require an attribution.`,
           );
         }
       });

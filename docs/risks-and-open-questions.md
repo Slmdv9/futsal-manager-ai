@@ -9,12 +9,12 @@
 - **2026-10-26 — Content storage.** Versioned JSON in the repo, validated at build time and shared by the app bundle and the API. No database in the MVP.
 - **2026-10-26 — Anonymous quota.** 5 AI requests per day, keyed by Expo installation ID plus hashed IP, enforced server-side.
 - **2026-10-26 — Offline.** Bundled content and board playback work offline; AI-generated sessions and variants are saved locally on the device.
-- **2026-10-26 — Seed scope.** Infantil U14 fully seeded; minimum three exercises plus programming for each of the other six categories.
+- **2026-10-26 — Seed scope.** Infantil U14 fully seeded; minimum three exercises plus programming for each of the other six categories. Implemented on 2026-10-27 by `seed-remaining-categories`: 26 exercises and seven Programming records, all `original`/`owned`.
 - **2026-10-26 — Board Data schema.** Frozen at v1.0.0 in `docs/board-data-schema.md`: normalized 0–100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and a literal `schemaVersion`. Runtime validation ships with the contract; unknown versions are rejected and there are no MVP migrations.
 
 ## Blocking Next Phase
 
-None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, and the Infantil U14 seed is complete; the next feature ready to start is `seed-remaining-categories`.
+None. The stack, Board Data schema, and content licensing are resolved, the licence gate is implemented, and all seven RFEF categories are seeded; the next feature ready to start is `category-filter`.
 
 ## Implementation-Time Questions
 
@@ -46,7 +46,8 @@ None. The stack, Board Data schema, and content licensing are resolved, the lice
 
 ## Risks
 
-- **Content quality/volume.** The library is the product's core value; a thin or low-quality seed makes the AI and the board feel generic. Mitigation: the Infantil U14 library is now a complete slice (nine exercises plus a three-macrocycle Programming record) and `seed-remaining-categories` closes the other six categories; coach review of load, intensity, and U14 appropriateness is still pending. Board legibility of the hand-authored geometry is unverified until `tactics-board-renderer`.
+- **Content quality/volume.** The library is the product's core value; a thin or low-quality seed makes the AI and the board feel generic. Mitigation: every RFEF category now has at least three exercises plus a Programming record (26 exercises, seven records), with Infantil U14 still the deep slice. The other six categories have exactly three drills each, so a category filter exposes a shallow library, and coach review of load, intensity, and age-appropriateness — especially U8 without specialist keepers versus Senior high-intensity blocks — is still pending. Board legibility of the hand-authored geometry is unverified until `tactics-board-renderer`.
+- **Small-space geometry on the full board.** Prebenjamín and Benjamín drills use 10×10 to 20×20 spaces drawn inside the full 2:1 pitch. Coordinates are parser-valid but not visually reviewed, so the drills may render cramped or off-centre. Mitigation: keep every geometry inside a coherent sub-region, and review legibility in `tactics-board-renderer`.
 - **AI hallucination.** The board, session generator, and chatbot can produce plausible but invented tactics. Mitigation: mandatory grounding, cite source exercises, validate Board Data schema, and show provenance.
 - **Anonymous AI cost/abuse.** A 5/day quota plus installation ID and hashed IP reduces abuse, but shared networks and reset tricks remain. Mitigation: server-side key, rate limiting, per-request caps, logging.
 - **Structured-output reliability.** DevExpert `chat` may return JSON that fails Board Data validation. Mitigation: strict JSON schema prompts, server-side validation, retry/fallback, and escalate to `chat-pro` if needed.

@@ -120,7 +120,7 @@ Attribution display belongs to `exercise-detail-screen`; the licence gate only m
 - `Programming.version` is the plan version of that single record, not the package version. `infantil-u14-base` moved to `1.1.0` when its season plan grew to three macrocycles while `contentVersion` stayed `1.0.0`.
 - Unknown keys are rejected at every level.
 - The package is imported once, parsed once, and indexed by the bundled adapter.
-- Current seed scope: the complete Infantil U14 slice — nine original exercises in declaration order (one tagged `infantil` + `cadete`) and one published Infantil Programming record (`infantil-u14-base`, version `1.1.0`). Package order is part of the contract: seed tests assert the nine Infantil ids in this sequence. `seed-remaining-categories` fills the other six categories.
+- Current seed scope: 26 original exercises and 7 published Programming records covering all seven RFEF categories. Package order is part of the contract and append-only: the first nine exercises are the Infantil U14 slice in its original sequence (index 0 is `salida-3-1-presion-alta`, tagged `infantil` + `cadete`), followed by three exercises per remaining category in `CATEGORY_IDS` order — Prebenjamín, Benjamín, Alevín, Cadete (two new), Juvenil, Senior. Programming holds `infantil-u14-base` (version `1.1.0`) first, then `prebenjamin-u8-base`, `benjamin-u10-base`, `alevin-u12-base`, `cadete-u16-base`, `juvenil-u19-base`, and `senior-base`, each at version `1.0.0`. Seed tests assert the exact 26 exercise ids in package order and the seven Programming ids in `CATEGORY_IDS` order.
 
 ## Invariants And Validation
 
@@ -185,5 +185,5 @@ Browse flow: `app/(tabs)/index.tsx` → `content` screen → use case → `Conte
 - The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
-- Infantil U14 is the only complete category: nine exercises plus one Programming record. The other six categories have neither Programming nor exercises until `seed-remaining-categories`.
+- Every category now has at least three exercises plus one Programming record, but Infantil U14 stays the only deep slice: the other six have exactly three representative exercises each until a later content-authoring feature deepens them.
 - Board Data is authored but not rendered yet; legibility, 2:1 fidelity, and phase playback belong to the board features.

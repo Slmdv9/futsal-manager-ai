@@ -4,7 +4,6 @@ import { describe, it } from 'node:test';
 import { BOARD_DATA_SCHEMA_VERSION, parseBoardData } from '@/shared/domain';
 import { getProgramming } from '@/modules/content/application/get-programming';
 import { listExercises } from '@/modules/content/application/list-exercises';
-import { CATEGORY_IDS } from '@/modules/content/domain/category';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
 import { createBundledContentRepository } from '@/modules/content/infrastructure/bundled-content-repository';
 
@@ -40,8 +39,6 @@ const LEGACY_BOARDS = [
   { id: 'presion-tras-perdida', categoryIds: ['infantil'], phases: 2 },
 ];
 
-const EMPTY_CATEGORY_IDS = ['prebenjamin', 'benjamin', 'alevin', 'juvenil', 'senior'] as const;
-
 const PLACEHOLDER_PATTERN = /^(todo|tbd|pendiente|xxx)$/i;
 
 const infantilExercises = listExercises(repository, { categoryId: 'infantil' });
@@ -69,7 +66,7 @@ describe('Infantil U14 seed', () => {
           INFANTIL_EXERCISE_IDS,
         );
         assert.equal(new Set(infantilExercises.map((exercise) => exercise.id)).size, 9);
-        assert.equal(listExercises(repository).length, 9);
+        assert.equal(listExercises(repository).length, 26);
       });
 
       it('then every exercise is published and tagged Infantil', () => {
@@ -207,32 +204,6 @@ describe('Infantil U14 seed', () => {
             assert.ok(microcycle.sessionCount >= 1);
           });
         });
-      });
-    });
-
-    describe('When the other categories are listed', () => {
-      it('then Cadete keeps only the crossover exercise and the rest stay empty', () => {
-        assert.deepEqual(
-          listExercises(repository, { categoryId: 'cadete' }).map((exercise) => exercise.id),
-          ['salida-3-1-presion-alta'],
-        );
-
-        for (const categoryId of EMPTY_CATEGORY_IDS) {
-          assert.ok(
-            CATEGORY_IDS.includes(categoryId),
-            `Expected ${categoryId} to be a known RFEF category.`,
-          );
-          assert.deepEqual(
-            listExercises(repository, { categoryId }),
-            [],
-            `Expected ${categoryId} to have no seeded exercises.`,
-          );
-          assert.equal(
-            getProgramming(repository, categoryId),
-            null,
-            `Expected no programming record for ${categoryId}.`,
-          );
-        }
       });
     });
 
