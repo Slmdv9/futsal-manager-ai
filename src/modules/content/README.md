@@ -4,8 +4,8 @@ Owns Category reference data, Exercise, Programming, the bundled content package
 
 ## Layers
 
-- `domain` — active. Seven frozen RFEF `Category` brackets, `Exercise`, `Programming`, `ContentProvenance`, the strict `content-package.ts` contract (`CONTENT_PACKAGE_VERSION`, `parseContentPackage`, `safeParseContentPackage`, `ContentValidationError`), and the `ContentRepository` port in `domain/ports`.
-- `application` — active. Published-only use cases: `listCategories`, `listExercises`, `getExercise`, `getProgramming`.
+- `domain` — active. Seven frozen RFEF `Category` brackets, `Exercise`, `Programming`, `ContentProvenance` plus the licence policy helpers in `provenance.ts` (`PUBLISHABLE_LICENSE_STATUSES`, `isPublishableProvenance`, `requiresAttribution`, `isLicenseStatusAllowedForKind`), the strict `content-package.ts` contract (`CONTENT_PACKAGE_VERSION`, `parseContentPackage`, `safeParseContentPackage`, `ContentValidationError`), and the `ContentRepository` port in `domain/ports`.
+- `application` — active. Publishable-only use cases: `listCategories`, `listExercises`, `getExercise`, `getProgramming`.
 - `infrastructure` — active. `content/content-package.json` plus `bundled-content-repository.ts` (`createBundledContentRepository`), which imports the JSON as `unknown`, parses it once, and indexes it.
 - `presentation` — Explorar placeholder until `explore-general-screen`; exercise detail follows in `exercise-detail-screen`.
 
@@ -19,7 +19,9 @@ Browse flow: route → use case → `ContentRepository` → bundled adapter → 
 
 - Categories exist only as domain reference data; the package references ids and parsing rejects unknown ones.
 - Every exercise `boardData` is validated with `parseBoardData`; issues surface under `exercises.<i>.boardData.`.
-- Only `published` records are readable; Programming returns one published record per category or `null`.
+- Licensing is a gate, not a note: parsing rejects published content unless its `licenseStatus` is `owned` or `permitted`, rejects `kind`/`licenseStatus` contradictions, and requires `attribution` for published `permitted`/`cmd-mora` records. Policy and source register: `docs/content-licensing.md`.
+- Visibility means `published` **and** publishable: `listExercises`, `getExercise`, and `getProgramming` use `isPublishableExercise` / `isPublishableProgramming`, so an unlicensed record never leaks from a non-bundled repository. `isPublishedExercise` / `isPublishedProgramming` are status-only helpers, never a visibility rule.
+- Programming returns one publishable record per category or `null`.
 - A two-category exercise appears once under each category and never twice in one result.
 
 ## Tests

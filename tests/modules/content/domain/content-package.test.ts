@@ -9,10 +9,19 @@ import {
   type ContentValidationIssue,
 } from '@/modules/content/domain/content-package';
 
+type MutableProvenance = {
+  kind: string;
+  sourceName: string;
+  licenseStatus: string;
+  attribution?: string;
+};
+
 type MutableExercise = {
   id: string;
   categoryIds: string[];
   players: { total: number; goalkeepers: number };
+  status: string;
+  provenance?: MutableProvenance;
   boardData: { phases: { positions: { tokenId: string; x: number; y: number }[] }[] };
 };
 
@@ -20,6 +29,7 @@ type MutableProgramming = {
   id: string;
   categoryId: string;
   status: string;
+  provenance?: MutableProvenance;
 };
 
 type MutablePackage = {
@@ -245,6 +255,285 @@ describe('Content package validation', () => {
           findIssue(result.issues, 'exercises.0.players.total'),
           `Expected exercises.0.players.total in ${issuePaths(result.issues)}`,
         );
+      });
+    });
+  });
+
+  describe('Given a published record with a non-publishable license status', () => {
+    describe('When the package is parsed', () => {
+      for (const licenseStatus of ['unlicensed', 'pending', 'reference-only']) {
+        it(`fails for an exercise whose licenseStatus is "${licenseStatus}"`, () => {
+          const contentPackage = cloneValidPackage();
+          contentPackage.exercises[0].provenance = {
+            kind: 'original',
+            sourceName: 'Futsal Manager AI',
+            licenseStatus,
+          };
+
+          const result = safeParseContentPackage(contentPackage);
+
+          assert.equal(result.success, false);
+          if (result.success) {
+            return;
+          }
+
+          const issue = findIssue(result.issues, 'exercises.0.provenance.licenseStatus');
+
+          assert.ok(
+            issue,
+            `Expected exercises.0.provenance.licenseStatus in ${issuePaths(result.issues)}`,
+          );
+          assert.match(issue.message, /requires licenseStatus "owned" or "permitted"/);
+          assert.match(issue.message, new RegExp(`"${licenseStatus}" cannot be published`));
+        });
+
+        it(`fails for programming whose licenseStatus is "${licenseStatus}"`, () => {
+          const contentPackage = cloneValidPackage();
+          contentPackage.programming[0].provenance = {
+            kind: 'original',
+            sourceName: 'Futsal Manager AI',
+            licenseStatus,
+          };
+
+          const result = safeParseContentPackage(contentPackage);
+
+          assert.equal(result.success, false);
+          if (result.success) {
+            return;
+          }
+
+          const issue = findIssue(result.issues, 'programming.0.provenance.licenseStatus');
+
+          assert.ok(
+            issue,
+            `Expected programming.0.provenance.licenseStatus in ${issuePaths(result.issues)}`,
+          );
+          assert.match(issue.message, new RegExp(`"${licenseStatus}" cannot be published`));
+        });
+      }
+    });
+  });
+
+  describe('Given a record without provenance', () => {
+    describe('When the package is parsed', () => {
+      it('fails with a path naming the exercise provenance and a required message', () => {
+        const contentPackage = cloneValidPackage();
+        delete contentPackage.exercises[0].provenance;
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.0.provenance');
+
+        assert.ok(issue, `Expected exercises.0.provenance in ${issuePaths(result.issues)}`);
+        assert.match(issue.message, /Provenance is required/);
+      });
+
+      it('fails with a path naming the programming provenance and a required message', () => {
+        const contentPackage = cloneValidPackage();
+        delete contentPackage.programming[0].provenance;
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'programming.0.provenance');
+
+        assert.ok(issue, `Expected programming.0.provenance in ${issuePaths(result.issues)}`);
+        assert.match(issue.message, /Provenance is required/);
+      });
+    });
+  });
+
+  describe('Given a record whose provenance kind contradicts its license status', () => {
+    describe('When the package is parsed', () => {
+      const contradictions = [
+        { kind: 'reference', licenseStatus: 'owned' },
+        { kind: 'reference', licenseStatus: 'permitted' },
+        { kind: 'reference', licenseStatus: 'unlicensed' },
+        { kind: 'cmd-mora', licenseStatus: 'owned' },
+      ];
+
+      for (const { kind, licenseStatus } of contradictions) {
+        it(`fails for kind "${kind}" with licenseStatus "${licenseStatus}"`, () => {
+          const contentPackage = cloneValidPackage();
+          contentPackage.exercises[1].status = 'draft';
+          contentPackage.exercises[1].provenance = {
+            kind,
+            sourceName: 'CMD Mora',
+            licenseStatus,
+          };
+
+          const result = safeParseContentPackage(contentPackage);
+
+          assert.equal(result.success, false);
+          if (result.success) {
+            return;
+          }
+
+          const issue = findIssue(result.issues, 'exercises.1.provenance.licenseStatus');
+
+          assert.ok(
+            issue,
+            `Expected exercises.1.provenance.licenseStatus in ${issuePaths(result.issues)}`,
+          );
+          assert.match(
+            issue.message,
+            new RegExp(`"${licenseStatus}" is not allowed for kind "${kind}"`),
+          );
+        });
+      }
+
+      it('accepts a draft reference record with reference-only or pending status', () => {
+        for (const licenseStatus of ['reference-only', 'pending']) {
+          const contentPackage = cloneValidPackage();
+          contentPackage.exercises[1].status = 'draft';
+          contentPackage.exercises[1].provenance = {
+            kind: 'reference',
+            sourceName: 'Inspiration only',
+            licenseStatus,
+          };
+
+          const result = safeParseContentPackage(contentPackage);
+
+          assert.equal(
+            result.success,
+            true,
+            `Expected a draft reference record with "${licenseStatus}" to parse.`,
+          );
+        }
+      });
+
+      it('accepts a draft pending programming record', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.programming[1].status = 'draft';
+        contentPackage.programming[1].provenance = {
+          kind: 'original',
+          sourceName: 'Futsal Manager AI',
+          licenseStatus: 'pending',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, true);
+      });
+
+      it('accepts a draft cmd-mora record with permitted status', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.programming[1].status = 'draft';
+        contentPackage.programming[1].provenance = {
+          kind: 'cmd-mora',
+          sourceName: 'CMD Mora',
+          licenseStatus: 'permitted',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, true);
+      });
+    });
+  });
+
+  describe('Given a published record whose permission depends on attribution', () => {
+    describe('When the package is parsed', () => {
+      it('fails for a permitted exercise without attribution', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[0].provenance = {
+          kind: 'original',
+          sourceName: 'CMD Mora',
+          licenseStatus: 'permitted',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.0.provenance.attribution');
+
+        assert.ok(
+          issue,
+          `Expected exercises.0.provenance.attribution in ${issuePaths(result.issues)}`,
+        );
+        assert.match(issue.message, /licenseStatus "permitted" requires an attribution/);
+      });
+
+      it('fails for a cmd-mora exercise without attribution', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[0].provenance = {
+          kind: 'cmd-mora',
+          sourceName: 'CMD Mora',
+          licenseStatus: 'permitted',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        assert.ok(
+          findIssue(result.issues, 'exercises.0.provenance.attribution'),
+          `Expected exercises.0.provenance.attribution in ${issuePaths(result.issues)}`,
+        );
+      });
+
+      it('fails for a permitted programming record without attribution', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.programming[0].provenance = {
+          kind: 'cmd-mora',
+          sourceName: 'CMD Mora',
+          licenseStatus: 'permitted',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        assert.ok(
+          findIssue(result.issues, 'programming.0.provenance.attribution'),
+          `Expected programming.0.provenance.attribution in ${issuePaths(result.issues)}`,
+        );
+      });
+
+      it('accepts the same record once attribution is present', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[0].provenance = {
+          kind: 'cmd-mora',
+          sourceName: 'CMD Mora',
+          licenseStatus: 'permitted',
+          attribution: 'CMD Mora',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, true);
+      });
+
+      it('keeps a published original owned record valid without attribution', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[0].provenance = {
+          kind: 'original',
+          sourceName: 'Futsal Manager AI',
+          licenseStatus: 'owned',
+        };
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, true);
       });
     });
   });

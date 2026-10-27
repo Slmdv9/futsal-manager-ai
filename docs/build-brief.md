@@ -64,5 +64,5 @@ End-to-end: an anonymous coach filters by category, opens an exercise, watches i
 
 - Project name is **Futsal Manager AI**. The prototype still uses the old working name "FutsalCoach AI" and should be relabelled.
 - The app UI and content language is Spanish; project documents are in English.
-- Seed content inputs: the CMD Mora season program presentation, and reference sites (adrimartinofutsal.es.tl, futsalcoach.es, keepmove.net, ejerciciosdefutbolsala.com). Licensing/attribution for these sources is unresolved (see Risks).
+- Seed content inputs: the CMD Mora season program presentation, and reference sites (adrimartinofutsal.es.tl, futsalcoach.es, keepmove.net, ejerciciosdefutbolsala.com). The reference sites are inspiration only; the licensing policy, source register, and still-open CMD Mora written permission are tracked in `docs/content-licensing.md`.
 - Design direction and screen prototypes live under `docs/design/prototype/` and are summarized in `DESIGN.md`.

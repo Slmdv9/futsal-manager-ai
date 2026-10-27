@@ -4,7 +4,7 @@
 
 - **2026-10-26 — Stack.** React Native + Expo with Expo Router, `react-native-svg` for the board, and Expo Router API routes on EAS Hosting.
 - **2026-10-26 — Board rendering.** SVG with full keyframe positions per phase, interpolated between phases.
-- **2026-10-26 — Seed content licensing.** Original content plus CMD Mora material used with the club's permission; the external reference sites are inspiration only, not redistribution sources.
+- **2026-10-26 — Seed content licensing.** Original content plus CMD Mora material used with the club's permission; the external reference sites are inspiration only, not redistribution sources. Enforced in code by `seed-content-licensing`: policy, source register, and author checklist in `docs/content-licensing.md`.
 - **2026-10-26 — AI provider.** DevExpert Inference (OpenAI-compatible API, `DEVEXPERT_API_KEY`), model `chat` for session generator, variant adapter, and chatbot. Voice via `transcribe` is deferred.
 - **2026-10-26 — Content storage.** Versioned JSON in the repo, validated at build time and shared by the app bundle and the API. No database in the MVP.
 - **2026-10-26 — Anonymous quota.** 5 AI requests per day, keyed by Expo installation ID plus hashed IP, enforced server-side.
@@ -14,7 +14,7 @@
 
 ## Blocking Next Phase
 
-None. The stack, Board Data schema, and content licensing are resolved; the next feature ready to start is `content-model-and-store`.
+None. The stack, Board Data schema, and content licensing are resolved and the licence gate is implemented; the next feature ready to start is `seed-infantil-u14`.
 
 ## Implementation-Time Questions
 
@@ -53,7 +53,7 @@ None. The stack, Board Data schema, and content licensing are resolved; the next
 - **Board rendering complexity.** SVG interpolation across phases, tokens, and arrows is non-trivial on React Native. Mitigation: freeze the schema early and cover it with golden tests.
 - **Offline/local persistence bugs.** Locally saved AI results can go stale or corrupt. Mitigation: version the local record format and test reopen-after-restart.
 - **Category taxonomy drift.** RFEF brackets vs school-stage content (Chupetín) can misclassify exercises. Mitigation: explicit mapping table, no runtime guessing.
-- **Legal/IP on source material.** Original content and CMD Mora permission still need to be documented. Mitigation: record source and license metadata on every record and keep external reference sites as inspiration only.
+- **Legal/IP on source material.** Original content and CMD Mora permission still need to be documented in writing. Mitigation: the licence policy is now enforced in code — parsing rejects publishing `pending`/`unlicensed`/`reference-only` material and rejects `kind`/`licenseStatus` contradictions, published permission-dependent content needs attribution, and the read layer filters unlicensed records (`docs/content-licensing.md`). External reference sites stay inspiration only. Remaining gap: written confirmation from CMD Mora.
 - **Product naming.** "Futsal Manager AI" is the chosen name. Remaining mitigation: a basic trademark/domain check and consistent relabelling of prototype screens.
 - **DevExpert dependency.** A single inference provider is a single point of failure. Mitigation: keep the gateway provider-agnostic so an OpenAI-compatible fallback can be added.
 - **Expo tooling advisories.** `npm audit` currently reports four high-severity transitive advisories in `node-forge` and the `zod` nested under Expo CLI/code-signing tooling. The direct `zod@4.6.7` used by the Board Data runtime schema is outside the vulnerable range. The nested Expo CLI copy has no non-breaking fix; `node-forge` has a non-breaking `npm audit fix` available. Mitigation: keep the Expo CLI on the build-time path only, rerun the audit on dependency changes, and upgrade when Expo ships a compatible release.
@@ -61,7 +61,7 @@ None. The stack, Board Data schema, and content licensing are resolved; the next
 
 ## Research Tasks
 
-- Confirm CMD Mora's permission in writing and record it with the seeded content.
+- Confirm CMD Mora's permission in writing and record it with the seeded content. Until then CMD Mora material stays `pending` (unpublishable) and no CMD Mora record is seeded; the rule is in `docs/content-licensing.md`.
 - Confirm DevExpert Inference production pricing, rate limits, and structured-output support for `chat`.
 - Prototype the Board Data schema against 5–10 real exercises of varying complexity to confirm it is expressive enough for SVG keyframes.
 - Estimate LLM cost per typical session/variant/chat and confirm the 5/day quota is sustainable.

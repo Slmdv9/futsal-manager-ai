@@ -22,6 +22,7 @@ export {
   EXERCISE_INTENSITY_LEVELS,
   EXERCISE_LIMITS,
   EXERCISE_STATUSES,
+  isPublishableExercise,
   isPublishedExercise,
   type Exercise,
   type ExerciseConstraint,
@@ -34,6 +35,7 @@ export {
 export {
   PROGRAMMING_LIMITS,
   PROGRAMMING_STATUSES,
+  isPublishableProgramming,
   isPublishedProgramming,
   type Macrocycle,
   type Microcycle,
@@ -45,9 +47,15 @@ export {
 export {
   CONTENT_LICENSE_STATUSES,
   CONTENT_PROVENANCE_KINDS,
+  LICENSE_STATUSES_BY_PROVENANCE_KIND,
+  PUBLISHABLE_LICENSE_STATUSES,
+  isLicenseStatusAllowedForKind,
+  isPublishableProvenance,
+  requiresAttribution,
   type ContentLicenseStatus,
   type ContentProvenance,
   type ContentProvenanceKind,
+  type PublishableLicenseStatus,
 } from './domain/provenance';
 export type { ContentRepository } from './domain/ports/content-repository';
 

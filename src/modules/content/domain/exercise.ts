@@ -1,6 +1,6 @@
 import type { BoardData } from '@/shared/domain';
 import type { CategoryId } from './category';
-import type { ContentProvenance } from './provenance';
+import { isPublishableProvenance, type ContentProvenance } from './provenance';
 
 export const EXERCISE_STATUSES = ['draft', 'published', 'archived'] as const;
 
@@ -60,4 +60,8 @@ export const EXERCISE_LIMITS = {
 
 export function isPublishedExercise(exercise: Exercise): boolean {
   return exercise.status === 'published';
+}
+
+export function isPublishableExercise(exercise: Exercise): boolean {
+  return isPublishedExercise(exercise) && isPublishableProvenance(exercise.provenance);
 }

@@ -1,6 +1,6 @@
 import type { CategoryId } from '../domain/category';
 import type { ContentRepository } from '../domain/ports/content-repository';
-import { isPublishedExercise, type Exercise } from '../domain/exercise';
+import { isPublishableExercise, type Exercise } from '../domain/exercise';
 
 export type ListExercisesQuery = {
   categoryId?: CategoryId;
@@ -14,7 +14,7 @@ export function listExercises(
   const exercises: Exercise[] = [];
 
   repository.getExercises().forEach((exercise) => {
-    if (!isPublishedExercise(exercise) || seenExerciseIds.has(exercise.id)) {
+    if (!isPublishableExercise(exercise) || seenExerciseIds.has(exercise.id)) {
       return;
     }
 

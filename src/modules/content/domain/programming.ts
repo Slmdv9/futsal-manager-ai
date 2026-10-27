@@ -1,5 +1,5 @@
 import type { CategoryId } from './category';
-import type { ContentProvenance } from './provenance';
+import { isPublishableProvenance, type ContentProvenance } from './provenance';
 
 export const PROGRAMMING_STATUSES = ['draft', 'published'] as const;
 
@@ -55,4 +55,10 @@ export const PROGRAMMING_LIMITS = {
 
 export function isPublishedProgramming(programming: Programming): boolean {
   return programming.status === 'published';
+}
+
+export function isPublishableProgramming(programming: Programming): boolean {
+  return (
+    isPublishedProgramming(programming) && isPublishableProvenance(programming.provenance)
+  );
 }

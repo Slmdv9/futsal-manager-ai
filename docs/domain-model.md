@@ -27,7 +27,7 @@
 **Exercise**
 - `draft` → `published` (visible in the library). MVP library is curated, so most exercises enter as `published`.
 - `published` → `archived` (removed from browsing, retained for references).
-- Every Exercise and Programming record carries `provenance` (`kind`, `sourceName`, `licenseStatus`, optional `attribution`). The read layer exposes only `published` records; an archived exercise is absent when looked up by id.
+- Every Exercise and Programming record carries `provenance` (`kind`, `sourceName`, `licenseStatus`, optional `attribution`). Only `owned` or `permitted` content may be published, `kind` and `licenseStatus` cannot contradict, published permission-dependent content needs an `attribution`, and the read layer exposes only published records that pass the licence gate. Policy: `docs/content-licensing.md`.
 
 **Programming**
 - Authored per Category and versioned; `draft` → `published`. MVP presents the `published` version.

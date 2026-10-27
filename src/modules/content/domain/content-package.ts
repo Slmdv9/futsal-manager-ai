@@ -8,7 +8,18 @@ import {
   PROGRAMMING_STATUSES,
   type Programming,
 } from './programming';
-import { CONTENT_LICENSE_STATUSES, CONTENT_PROVENANCE_KINDS } from './provenance';
+import {
+  CONTENT_LICENSE_STATUSES,
+  CONTENT_PROVENANCE_KINDS,
+  LICENSE_STATUSES_BY_PROVENANCE_KIND,
+  PUBLISHABLE_LICENSE_STATUSES,
+  isLicenseStatusAllowedForKind,
+  isPublishableProvenance,
+  requiresAttribution,
+  type ContentLicenseStatus,
+  type ContentProvenance,
+  type ContentProvenanceKind,
+} from './provenance';
 
 export const CONTENT_PACKAGE_VERSION = '1.0.0' as const;
 
@@ -54,16 +65,79 @@ const slugSchema = z
 
 const textSchema = (max: number) => z.string().trim().min(1).max(max);
 
+const MISSING_PROVENANCE_MESSAGE =
+  'Provenance is required on every Exercise and Programming record.';
+
+function formatLicenseStatusList(statuses: readonly ContentLicenseStatus[]): string {
+  return statuses.map((status) => `"${status}"`).join(' or ');
+}
+
+function formatAttributionReason(provenance: ContentProvenance): string {
+  return provenance.licenseStatus === 'permitted'
+    ? 'licenseStatus "permitted"'
+    : `kind "${provenance.kind}"`;
+}
+
+function formatKindStatusMessage(
+  kind: ContentProvenanceKind,
+  licenseStatus: ContentLicenseStatus,
+): string {
+  return `License status "${licenseStatus}" is not allowed for kind "${kind}"; use ${formatLicenseStatusList(
+    LICENSE_STATUSES_BY_PROVENANCE_KIND[kind],
+  )}.`;
+}
+
+function addProvenanceIssues(
+  ctx: z.RefinementCtx,
+  recordPath: (string | number)[],
+  status: string,
+  provenance: ContentProvenance,
+): void {
+  const licenseStatusPath = [...recordPath, 'provenance', 'licenseStatus'];
+  const isPublished = status === 'published';
+
+  if (isPublished && !isPublishableProvenance(provenance)) {
+    ctx.addIssue({
+      code: 'custom',
+      path: licenseStatusPath,
+      message: `Published content requires licenseStatus ${formatLicenseStatusList(
+        PUBLISHABLE_LICENSE_STATUSES,
+      )}; "${provenance.licenseStatus}" cannot be published.`,
+    });
+  }
+
+  if (isPublished && requiresAttribution(provenance) && !provenance.attribution) {
+    ctx.addIssue({
+      code: 'custom',
+      path: [...recordPath, 'provenance', 'attribution'],
+      message: `Published content with ${formatAttributionReason(
+        provenance,
+      )} requires an attribution naming the credited source.`,
+    });
+  }
+
+  if (!isLicenseStatusAllowedForKind(provenance.kind, provenance.licenseStatus)) {
+    ctx.addIssue({
+      code: 'custom',
+      path: licenseStatusPath,
+      message: formatKindStatusMessage(provenance.kind, provenance.licenseStatus),
+    });
+  }
+}
+
 const categoryIdSchema = z.enum(CATEGORY_IDS, {
   error: 'Unknown category id; use one of the seven RFEF age brackets.',
 });
 
-const provenanceSchema = z.strictObject({
-  kind: z.enum(CONTENT_PROVENANCE_KINDS),
-  sourceName: textSchema(120),
-  licenseStatus: z.enum(CONTENT_LICENSE_STATUSES),
-  attribution: textSchema(200).optional(),
-});
+const provenanceSchema = z.strictObject(
+  {
+    kind: z.enum(CONTENT_PROVENANCE_KINDS),
+    sourceName: textSchema(120),
+    licenseStatus: z.enum(CONTENT_LICENSE_STATUSES),
+    attribution: textSchema(200).optional(),
+  },
+  { error: MISSING_PROVENANCE_MESSAGE },
+);
 
 const playersSchema = z.strictObject({
   total: z.number().int().min(2).max(30),
@@ -215,6 +289,13 @@ const contentPackageSchema = z
           message: 'players.total must be greater than or equal to players.goalkeepers.',
         });
       }
+
+      addProvenanceIssues(
+        ctx,
+        ['exercises', exerciseIndex],
+        exercise.status,
+        exercise.provenance,
+      );
     });
 
     const programmingIds = new Set<string>();
@@ -229,6 +310,13 @@ const contentPackageSchema = z
         });
       }
       programmingIds.add(programming.id);
+
+      addProvenanceIssues(
+        ctx,
+        ['programming', programmingIndex],
+        programming.status,
+        programming.provenance,
+      );
 
       if (programming.status !== 'published') {
         return;

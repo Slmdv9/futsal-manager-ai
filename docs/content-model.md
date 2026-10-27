@@ -2,7 +2,7 @@
 
 The durable contract for curated content: Category reference data, Exercise, Programming, the bundled content package, its validation rules, and the read layer that powers browsing and later AI grounding.
 
-`docs/domain-model.md` owns the vocabulary and relationships. This document owns the concrete shape, file paths, invariants, and validation behavior.
+`docs/domain-model.md` owns the vocabulary and relationships. This document owns the concrete shape, file paths, invariants, and validation behavior. `docs/content-licensing.md` owns the licensing policy, the source register, and the author checklist.
 
 ## Source Of Truth
 
@@ -58,8 +58,8 @@ An Exercise is the atomic library unit: one drill with one Board Data payload.
 | `constraints` | `{ rule; detail }[]` | ≤ 6 entries |
 | `coachingCues` | text[] | 1–8 entries |
 | `boardData` | `BoardData` | validated with `parseBoardData` |
-| `status` | `'draft' \| 'published' \| 'archived'` | only `published` is readable |
-| `provenance` | `ContentProvenance` | required on every record |
+| `status` | `'draft' \| 'published' \| 'archived'` | only `published` + publishable provenance is readable |
+| `provenance` | `ContentProvenance` | required on every record; see `docs/content-licensing.md` |
 
 ## Programming
 
@@ -79,12 +79,12 @@ Programming is the per-category methodology and season plan. There is **at most 
 | `sessionStructure` | `{ part: 'warm-up' \| 'main' \| 'cool-down'; title; description }[]` | 1–5 entries |
 | `macrocycles` | `{ id; label; focus; microcycles }[]` | 1–6 entries |
 | `microcycles` | `{ id; label; focus; sessionCount: 1–20 }[]` | 1–8 per macrocycle |
-| `status` | `'draft' \| 'published'` | only `published` is readable |
-| `provenance` | `ContentProvenance` | required on every record |
+| `status` | `'draft' \| 'published'` | only `published` + publishable provenance is readable |
+| `provenance` | `ContentProvenance` | required on every record; see `docs/content-licensing.md` |
 
 ## Provenance
 
-Every record carries provenance so licensing can be enforced later without rewriting the library:
+Every record carries provenance and the licence policy is enforced when the package is parsed:
 
 ```ts
 type ContentProvenance = {
@@ -95,7 +95,14 @@ type ContentProvenance = {
 };
 ```
 
-The current seed package is `original` with `licenseStatus: 'owned'`. **Provenance is recorded but not yet enforced**: blocking publication of `pending`/`unlicensed`/`reference-only` material and showing attribution belong to `seed-content-licensing`.
+The current seed package is `original` with `licenseStatus: 'owned'`, `sourceName` `Futsal Manager AI`. The policy, the source register, and the author checklist live in `docs/content-licensing.md`; the enforced rules are:
+
+- only `owned` and `permitted` may be published; `pending`, `unlicensed`, and `reference-only` records stay draft or archived;
+- `kind` and `licenseStatus` cannot contradict: `cmd-mora` requires `permitted`, `reference` requires `reference-only` or `pending`, `original` accepts any status;
+- published `permitted` or `cmd-mora` content must carry an `attribution`;
+- the read layer also filters published-but-unlicensed records, so a repository that bypasses the parser cannot leak them.
+
+Attribution display belongs to `exercise-detail-screen`; the licence gate only makes the value required and exposes `requiresAttribution`.
 
 ## Package Contract
 
@@ -118,13 +125,14 @@ The current seed package is `original` with `licenseStatus: 'owned'`. **Provenan
 
 `safeParseContentPackage(input)` and `parseContentPackage(input)` enforce, in order:
 
-1. Strict structural schema: package, Exercise, Programming, provenance, nested macrocycles/microcycles.
+1. Strict structural schema: package, Exercise, Programming, provenance, nested macrocycles/microcycles. A missing `provenance` block reports `Provenance is required on every Exercise and Programming record.`
 2. `contentVersion` equals `CONTENT_PACKAGE_VERSION`.
 3. Exercise ids are unique; Programming ids are unique.
 4. `categoryIds` is non-empty, unique, and every id is one of the seven RFEF brackets.
 5. `players.total >= players.goalkeepers`.
-6. At most one `published` Programming record per `categoryId`.
-7. Every Exercise `boardData` passes `parseBoardData`; Board Data issues are re-prefixed under `exercises.<i>.boardData.`.
+6. Licensing: a published record needs `owned` or `permitted`; published `permitted`/`cmd-mora` content needs `attribution`; every record's `kind` must allow its `licenseStatus` (see `docs/content-licensing.md`).
+7. At most one `published` Programming record per `categoryId`.
+8. Every Exercise `boardData` passes `parseBoardData`; Board Data issues are re-prefixed under `exercises.<i>.boardData.`.
 
 Issues use dot paths like Board Data issues, for example:
 
@@ -132,6 +140,9 @@ Issues use dot paths like Board Data issues, for example:
 - `exercises.1.id` — duplicate exercise id.
 - `exercises.1.categoryIds` — empty category list.
 - `exercises.0.players.total` — goalkeepers exceed the player total.
+- `exercises.0.provenance` — record without provenance.
+- `exercises.0.provenance.licenseStatus` — published with `pending`, `unlicensed`, or `reference-only`, or a `kind`/`licenseStatus` contradiction.
+- `exercises.0.provenance.attribution` — published `permitted`/`cmd-mora` record without attribution.
 - `exercises.0.boardData.phases.1.positions` — missing phase position.
 - `exercises.0.boardData.phases.1.positions.0.x` — coordinate outside 0–100.
 - `programming.2.categoryId` — second published Programming record for one category.
@@ -146,9 +157,11 @@ Port (`ContentRepository`) exposes raw package reads: `getExercises`, `getExerci
 | Use case | Behavior |
 | --- | --- |
 | `listCategories()` | the seven frozen RFEF categories in order |
-| `listExercises(repository, { categoryId? })` | published only, deduplicated by id, optionally filtered by one category |
-| `getExercise(repository, id)` | published exercise or `null` (archived, draft, and unknown ids return `null`) |
-| `getProgramming(repository, categoryId)` | the published record or `null`; never invents content |
+| `listExercises(repository, { categoryId? })` | published and publishable only, deduplicated by id, optionally filtered by one category |
+| `getExercise(repository, id)` | publishable exercise or `null` (archived, draft, unlicensed, and unknown ids return `null`) |
+| `getProgramming(repository, categoryId)` | the publishable record or `null`; never invents content |
+
+Visibility is `isPublishableExercise` / `isPublishableProgramming`: status `published` **and** a publishable license status. `isPublishedExercise` / `isPublishedProgramming` exist for status-only authoring checks and are never a visibility rule — a non-bundled repository cannot leak `pending`, `unlicensed`, or `reference-only` content into browsing or AI grounding.
 
 A two-category exercise appears once under each category because the filter reads `categoryIds` and the result is deduplicated by exercise id.
 
@@ -161,12 +174,14 @@ Browse flow: `app/(tabs)/index.tsx` → `content` screen → use case → `Conte
 1. Edit `content-package.json` only; never add category names to JSON.
 2. Validate every new Board Data payload against `docs/board-data-schema.md` (the package parser does this automatically; the test suite fails if it does not).
 3. Keep exercise and programming ids unique and stable; ids are how browsing, saves, and AI grounding reference content.
-4. Publish only content whose provenance is `owned` or `permitted` once `seed-content-licensing` lands.
-5. Run `npm test` (content suites validate the real package) and `npm run verify`.
+4. Record provenance with the source register in `docs/content-licensing.md`: `kind`, `sourceName`, and a `licenseStatus` that the kind allows, plus `attribution` when permission depends on credit.
+5. Publish only `owned` or `permitted` content; keep `pending`, `unlicensed`, and `reference-only` material `draft` or `archived`.
+6. Run `npm test` (content suites validate the real package, including the seed licensing audit) and `npm run verify`.
 
 ## Known Gaps
 
 - The read layer has no screen consumer yet; `explore-general-screen` and `category-filter` are the named consumers.
-- Provenance is recorded but not enforced, and no attribution is displayed.
+- The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
+- CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
 - Only the Infantil Programming record exists; the other six categories have neither Programming nor exercises.

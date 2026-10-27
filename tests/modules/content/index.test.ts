@@ -22,6 +22,13 @@ const requiredPublicApiExports = [
   'getExercise',
   'getProgramming',
   'createBundledContentRepository',
+  'PUBLISHABLE_LICENSE_STATUSES',
+  'PublishableLicenseStatus',
+  'isPublishableProvenance',
+  'requiresAttribution',
+  'isLicenseStatusAllowedForKind',
+  'isPublishableExercise',
+  'isPublishableProgramming',
   'ExploreScreen',
 ];
 

@@ -9,6 +9,13 @@ import type { CategoryId } from '@/modules/content/domain/category';
 import type { ContentRepository } from '@/modules/content/domain/ports/content-repository';
 import type { Exercise, ExerciseStatus } from '@/modules/content/domain/exercise';
 import type { Programming, ProgrammingStatus } from '@/modules/content/domain/programming';
+import type { ContentProvenance } from '@/modules/content/domain/provenance';
+
+const ownedProvenance: ContentProvenance = {
+  kind: 'original',
+  sourceName: 'Futsal Manager AI',
+  licenseStatus: 'owned',
+};
 
 const minimalBoardData = parseBoardData({
   schemaVersion: '1.0.0',
@@ -33,6 +40,7 @@ function makeExercise(
   id: string,
   categoryIds: CategoryId[],
   status: ExerciseStatus,
+  provenance: Partial<ContentProvenance> = {},
 ): Exercise {
   return {
     id,
@@ -50,11 +58,7 @@ function makeExercise(
     coachingCues: ['Timing de desmarque del ala'],
     boardData: minimalBoardData,
     status,
-    provenance: {
-      kind: 'original',
-      sourceName: 'Futsal Manager AI',
-      licenseStatus: 'owned',
-    },
+    provenance: { ...ownedProvenance, ...provenance },
   };
 }
 
@@ -62,6 +66,7 @@ function makeProgramming(
   id: string,
   categoryId: CategoryId,
   status: ProgrammingStatus,
+  provenance: Partial<ContentProvenance> = {},
 ): Programming {
   return {
     id,
@@ -96,11 +101,7 @@ function makeProgramming(
       },
     ],
     status,
-    provenance: {
-      kind: 'original',
-      sourceName: 'Futsal Manager AI',
-      licenseStatus: 'owned',
-    },
+    provenance: { ...ownedProvenance, ...provenance },
   };
 }
 
@@ -242,6 +243,137 @@ describe('Content read use cases', () => {
           [
             makeProgramming('infantil-u14-draft', 'infantil', 'draft'),
             makeProgramming('infantil-u14-base', 'infantil', 'published'),
+          ],
+        );
+
+        assert.equal(getProgramming(repository, 'infantil')?.id, 'infantil-u14-base');
+      });
+    });
+  });
+
+  describe('Given a repository that returns published exercises without a publishable license', () => {
+    describe('When exercises are listed', () => {
+      it('then unlicensed, pending, and reference-only records are skipped', () => {
+        const repository = createFakeRepository([
+          makeExercise('salida-3-1', ['infantil'], 'published'),
+          makeExercise('sin-licencia', ['infantil'], 'published', {
+            licenseStatus: 'unlicensed',
+          }),
+          makeExercise('pendiente', ['infantil'], 'published', { licenseStatus: 'pending' }),
+          makeExercise('inspiracion', ['infantil'], 'published', {
+            kind: 'reference',
+            licenseStatus: 'reference-only',
+          }),
+        ]);
+
+        const exercises = listExercises(repository);
+
+        assert.deepEqual(
+          exercises.map((exercise) => exercise.id),
+          ['salida-3-1'],
+        );
+      });
+
+      it('then an unlicensed record never displaces a licensed one for the same id', () => {
+        const repository = createFakeRepository([
+          makeExercise('salida-3-1', ['infantil'], 'published', { licenseStatus: 'pending' }),
+          makeExercise('salida-3-1', ['infantil'], 'published'),
+        ]);
+
+        const exercises = listExercises(repository);
+
+        assert.deepEqual(
+          exercises.map((exercise) => exercise.id),
+          ['salida-3-1'],
+        );
+        assert.equal(exercises[0].provenance.licenseStatus, 'owned');
+      });
+
+      it('then permitted cmd-mora-style content stays readable when attributed', () => {
+        const repository = createFakeRepository([
+          makeExercise('salida-3-1', ['infantil'], 'published', {
+            kind: 'cmd-mora',
+            sourceName: 'CMD Mora',
+            licenseStatus: 'permitted',
+            attribution: 'CMD Mora',
+          }),
+        ]);
+
+        assert.deepEqual(
+          listExercises(repository).map((exercise) => exercise.id),
+          ['salida-3-1'],
+        );
+      });
+    });
+  });
+
+  describe('Given an unlicensed exercise looked up by id', () => {
+    describe('When the exercise is requested', () => {
+      it('then the lookup returns null without throwing', () => {
+        const repository = createFakeRepository([
+          makeExercise('sin-licencia', ['infantil'], 'published', {
+            licenseStatus: 'unlicensed',
+          }),
+        ]);
+
+        assert.equal(getExercise(repository, 'sin-licencia'), null);
+      });
+    });
+  });
+
+  describe('Given a repository that returns published programming without a publishable license', () => {
+    describe('When programming is requested', () => {
+      it('then a pending record returns null', () => {
+        const repository = createFakeRepository(
+          [],
+          [
+            makeProgramming('infantil-u14-base', 'infantil', 'published', {
+              licenseStatus: 'pending',
+            }),
+          ],
+        );
+
+        assert.equal(getProgramming(repository, 'infantil'), null);
+      });
+
+      it('then a reference-only record returns null', () => {
+        const repository = createFakeRepository(
+          [],
+          [
+            makeProgramming('infantil-u14-base', 'infantil', 'published', {
+              kind: 'reference',
+              licenseStatus: 'reference-only',
+            }),
+          ],
+        );
+
+        assert.equal(getProgramming(repository, 'infantil'), null);
+      });
+
+      it('then an unpublishable record never shadows the licensed one', () => {
+        const repository = createFakeRepository(
+          [],
+          [
+            makeProgramming('infantil-u14-sin-licencia', 'infantil', 'published', {
+              licenseStatus: 'unlicensed',
+            }),
+            makeProgramming('infantil-u14-base', 'infantil', 'published'),
+          ],
+        );
+
+        assert.equal(getProgramming(repository, 'infantil')?.id, 'infantil-u14-base');
+      });
+
+      it('then permitted programming with attribution is still returned', () => {
+        const repository = createFakeRepository(
+          [],
+          [
+            makeProgramming('infantil-u14-base', 'infantil', 'published', {
+              kind: 'cmd-mora',
+              sourceName: 'CMD Mora',
+              licenseStatus: 'permitted',
+              attribution: 'CMD Mora',
+            }),
           ],
         );
 

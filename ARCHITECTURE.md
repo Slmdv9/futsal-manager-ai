@@ -151,12 +151,12 @@ All modules may import `shared`. The only planned cross-module dependency is `ai
 
 Owns the Exercise Library, Category reference data, Programming, the content read layer, and the Explorar/exercise-detail screens. Board Data comes from the shared kernel.
 
-- `domain`: the seven frozen RFEF `Category` brackets (`category.ts`), `Exercise`, `Programming`, `ContentProvenance`, the strict `content-package.ts` contract with `parseContentPackage`/`safeParseContentPackage` and `ContentValidationError`, and the `ContentRepository` port in `domain/ports`.
-- `application`: published-only read use cases — `listCategories`, `listExercises` (optional category filter, deduplicated), `getExercise`, `getProgramming` (single published record or `null`).
+- `domain`: the seven frozen RFEF `Category` brackets (`category.ts`), `Exercise`, `Programming`, `ContentProvenance` with the licence policy helpers (`isPublishableProvenance`, `requiresAttribution`, `isLicenseStatusAllowedForKind`), the strict `content-package.ts` contract with `parseContentPackage`/`safeParseContentPackage` and `ContentValidationError`, and the `ContentRepository` port in `domain/ports`.
+- `application`: publishable-only read use cases — `listCategories`, `listExercises` (optional category filter, deduplicated), `getExercise`, `getProgramming` (single publishable record or `null`). Visibility uses `isPublishableExercise`/`isPublishableProgramming`, so published but unlicensed records are filtered even from a non-bundled repository.
 - `infrastructure`: `content/content-package.json`, the single versioned content package (`contentVersion` `1.0.0`), and `bundled-content-repository.ts`, which imports the JSON as `unknown`, parses it once through `domain/content-package.ts`, indexes by exercise id and Programming category, and exposes `createBundledContentRepository()`.
 - `presentation`: the Explorar placeholder until `explore-general-screen` lands.
 
-The content contract, invariants, and validation paths are documented in `docs/content-model.md`. Full seeding, licensing enforcement, category filter state, and screens are separate features.
+The content contract, invariants, and validation paths are documented in `docs/content-model.md`; the licensing gate, source register, and author checklist in `docs/content-licensing.md`. Full seeding, attribution display, category filter state, and screens are separate features.
 
 ### `board`
 

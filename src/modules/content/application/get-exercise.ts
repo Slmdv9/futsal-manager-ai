@@ -1,5 +1,5 @@
 import type { ContentRepository } from '../domain/ports/content-repository';
-import { isPublishedExercise, type Exercise } from '../domain/exercise';
+import { isPublishableExercise, type Exercise } from '../domain/exercise';
 
 export function getExercise(
   repository: ContentRepository,
@@ -7,7 +7,7 @@ export function getExercise(
 ): Exercise | null {
   const exercise = repository.getExerciseById(exerciseId);
 
-  if (!exercise || !isPublishedExercise(exercise)) {
+  if (!exercise || !isPublishableExercise(exercise)) {
     return null;
   }
 
