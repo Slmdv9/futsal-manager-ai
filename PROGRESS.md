@@ -3,16 +3,15 @@
 ## Current Verified State
 
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
-- Current branch: `feat/modular-hexagonal-architecture` (from `main` at `9418fde`)
-- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/modular-hexagonal-architecture`
+- Current branch: `feat/board-data-schema` (feature commit `d676acd`, from `main` at `af588e3`)
+- Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/main...feat/board-data-schema`
 - Standard startup path: `./init.sh`
-- Standard verification path: `npm run verify` (ESLint with architecture boundaries, `tsc --noEmit`, all `tests/**/*.test.{ts,tsx}` via `npm test`, and `expo-doctor`), executed by `./init.sh`
-- Architecture: modular monolith with `content`, `board`, `ai`, and `club` modules, four hexagonal layers each, a public `index.ts` per module, and `shared/domain`, `shared/theme`, `shared/ui` at the bottom of the dependency graph; source of truth in `ARCHITECTURE.md`
-- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, `board-data-schema`, and `modular-hexagonal-architecture` are accepted. Independent re-validation after the boundary repair returned `accept`.
+- Standard verification path: `npm run verify` (ESLint, `tsc --noEmit`, Board Data schema tests via `npm test`, and `expo-doctor`), executed by `./init.sh`
+- Current state: `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted.
 - Next ready feature: `content-model-and-store`
 - Current blocker: none; remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`
 - Device loop: `docs/device-development-workflow.md` (Samsung Galaxy M13, Android 14, Expo Go 58.0.5)
-- Last verified at: `2026-10-27` (`modular-hexagonal-architecture` repair: 17/17 tests across 29 suites, full module allowlist and shared-sublayer boundaries enforced by `tests/architecture/boundaries.test.ts`, `.test.tsx` discovery verified, `npm run verify` exit 0, `./init.sh` exit 0, Android export succeeds, and the four tabs plus `/design-system` render on the connected device)
+- Last verified at: `2026-10-27` (`board-data-schema` independent validation: clean `npm ci` worktree, 12/12 schema tests, `npm run verify` and `./init.sh` exit 0, Android export, and adversarial parser checks)
 
 ## Session Log
 
@@ -123,7 +122,7 @@
 - Verification run: `npm test` (12/12 pass), `npm run verify` exit 0 with ESLint, `tsc --noEmit`, schema tests, and `expo-doctor` 20/20, `./init.sh` exit 0, `npx expo export --platform android` (2.9 MB bundle), and a direct parser run over all four invalid fixtures.
 - Evidence captured: valid three-phase fixture parses with defaults; missing position reports `phases.1.positions: Missing position for token "ala-izquierda" in phase 2.`; unknown kind reports `tokens.0.kind: Token kind must be "player" or "keeper".`; unknown version reports `schemaVersion: Board Data schemaVersion must be "1.0.0".`; extra field reports `(root): Unrecognized key: "notes"`; `schemaVersion` is recorded as `1.0.0` in code and docs.
 - Files or artifacts updated: `package.json`, `package-lock.json`, `tsconfig.json`, `src/content/board-data/schema.ts`, `src/content/board-data/index.ts`, `src/content/board-data/board-data.test.ts`, `src/content/board-data/fixtures/*`, `docs/specs/board-data-schema.md`, `docs/board-data-schema.md`, `docs/domain-model.md`, `docs/risks-and-open-questions.md`, `AGENTS.md`, `PROGRESS.md`, `feature_list.json`.
-- Known risks: `npm audit` keeps 5 pre-existing high-severity transitive advisories with no non-breaking fix; the prototype is 4:3/half-pitch while the contract normalizes to a full 2:1 space, so the renderer must map coordinates deliberately; no device verification applies because there is no UI change.
+- Known risks: at implementation time `npm audit` reported 5 pre-existing high-severity transitive advisories; the validator rerun on `2026-10-27` reports 4 (`node-forge` and the nested `zod` in Expo CLI), with the direct `zod@4.6.7` outside the vulnerable range. The prototype is 4:3/half-pitch while the contract normalizes to a full 2:1 space, so the renderer must map coordinates deliberately; no device verification applies because there is no UI change.
 - Next best step: independently validate `board-data-schema`, then plan `content-model-and-store` from an updated `main`.
 
 ### Session 011

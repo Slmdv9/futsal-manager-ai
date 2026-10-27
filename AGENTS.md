@@ -20,7 +20,7 @@ Read on demand:
 
 ## Project Status
 
-Bootstrapped, design system, navigation, Board Data contract, and modular hexagonal architecture implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. Source is organized into `content`, `board`, `ai`, and `club` modules under `src/modules`, each with `domain`, `application`, `infrastructure`, `presentation`, and a public `index.ts`; shared code lives in `src/shared`. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted; `modular-hexagonal-architecture` is implemented and verified, pending independent validation. The next ready feature after acceptance is `content-model-and-store`, which fills the `content` domain, application, and infrastructure layers. The physical device loop is documented in `docs/device-development-workflow.md`.
+Bootstrapped, design system, navigation, and the Board Data contract implemented. The app runs on React Native + Expo (Expo Router) with a four-tab bottom navigation (Explorar, Pizarra, Asistente IA, Mi Club) and a `/design-system` gallery outside the tabs. Board Data v1.0.0 is defined and validated with `parseBoardData`; its contract lives in `docs/board-data-schema.md`. Install with `npm install`, verify with `npm run verify` (or `./init.sh`), and start with `npm start`. `bootstrap-app-shell`, `design-system-tokens`, `app-navigation-shell`, and `board-data-schema` are accepted. The next ready feature is `content-model-and-store`. The physical device loop is documented in `docs/device-development-workflow.md`.
 
 ## Startup Workflow
 
@@ -104,7 +104,7 @@ A feature is done only when: the target behavior works, the relevant verificatio
 - `PROGRESS.md`: current verified state and lightweight session log.
 - `init.sh`: standard startup and verification path.
 
-There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature after `modular-hexagonal-architecture` acceptance is `content-model-and-store`, implemented inside the `content` module layers.
+There are no blocking open questions. Remaining implementation-time questions are tracked in `docs/risks-and-open-questions.md`. The next ready feature is `content-model-and-store`.
 
 ## End Of Session
 

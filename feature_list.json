@@ -121,7 +121,7 @@
       "Independent validation returned `accept` with no blocking findings and was recorded at commit `23ca764` (PR #6 merged to `main` at `9418fde`).",
       "`modular-hexagonal-architecture` moved the unchanged contract, parser, fixtures, and all 12 tests to `src/shared/domain/board-data/` and `tests/shared/domain/board-data/`; `npm test` still passes with `schemaVersion` `1.0.0`."
     ],
-    "notes": "Board Data v1.0.0 uses normalized 0-100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and no MVP migrations. Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio. No persistent E2E harness exists; unit tests are the correct coverage level until the renderer and playback exist."
+    "notes": "Board Data v1.0.0 uses normalized 0-100 coordinates on a full 2:1 pitch, board-level tokens and static cones, per-phase positions/ball/arrows/labels, exactly one position per token per phase, strict unknown-key rejection, and no MVP migrations. Rendered with react-native-svg using full keyframe positions per phase, interpolated between phases. The board must preserve a 2:1 pitch ratio. No persistent E2E harness exists; unit tests are the correct coverage level until the renderer and playback exist. Before seeding content, `tactics-board-renderer` should pin the sign of arrow `curve` and how the inactive half is chosen for `pitch.format: 'half'`."
   },
   {
     "id": "modular-hexagonal-architecture",
