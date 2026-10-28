@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { BOARD_DATA_SCHEMA_VERSION, parseBoardData } from '@/shared/domain';
-import { listExercises } from '@/modules/content/application/list-exercises';
+import { listLibraryExercises } from '@/modules/content/application/list-library-exercises';
 import { CATEGORY_IDS, type CategoryId } from '@/modules/content/domain/category';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
 import { SESSION_PARTS, type SessionPart } from '@/modules/content/domain/session-part';
@@ -614,7 +614,7 @@ function readBundledPackage(): { contentVersion: string } {
 }
 
 function groupedIds(categoryId: CategoryId): Record<SessionPart, string[]> {
-  const exercises = listExercises(repository, { categoryId });
+  const exercises = listLibraryExercises(repository, categoryId);
   const groups = Object.fromEntries(
     SESSION_PARTS.map((part) => [part, [] as string[]]),
   ) as Record<SessionPart, string[]>;
@@ -629,14 +629,14 @@ function groupedIds(categoryId: CategoryId): Record<SessionPart, string[]> {
 describe('Seed session structure', () => {
   describe('Given the bundled content package', () => {
     describe('When the package is read', () => {
-      it('then it holds 50 exercises and 57 audited records', () => {
+      it('then it holds 71 exercises and 78 audited records', () => {
         const programming = CATEGORY_IDS.flatMap((categoryId) =>
           repository.getProgrammingByCategory(categoryId),
         );
 
-        assert.equal(repository.getExercises().length, 50);
+        assert.equal(repository.getExercises().length, 71);
         assert.equal(programming.length, 7);
-        assert.equal(repository.getExercises().length + programming.length, 57);
+        assert.equal(repository.getExercises().length + programming.length, 78);
         assert.deepEqual(
           repository.getExercises().slice(0, 26).map((exercise) => exercise.id),
           LEGACY_EXERCISE_IDS,
@@ -820,9 +820,9 @@ describe('Seed session structure', () => {
     });
 
     describe('When versions and forbidden stage names are checked', () => {
-      it('then the package is 1.1.0, Board Data is 1.0.0 and the Infantil plan is 1.1.0', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
-        assert.equal(readBundledPackage().contentVersion, '1.1.0');
+      it('then the package is 1.2.0, Board Data is 1.0.0 and the Infantil plan is 1.1.0', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.2.0');
+        assert.equal(readBundledPackage().contentVersion, '1.2.0');
         assert.equal(BOARD_DATA_SCHEMA_VERSION, '1.0.0');
         assert.equal(
           repository.getProgrammingByCategory('infantil')[0]?.version,

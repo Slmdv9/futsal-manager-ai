@@ -1,5 +1,5 @@
 {
-  "contentVersion": "1.1.0",
+  "contentVersion": "1.2.0",
   "exercises": [
     {
       "id": "salida-3-1",
@@ -7,12 +7,25 @@
       "summary": "Salida en 3-1 con fijación del cierre.",
       "focus": "Salida de presión",
       "sessionPart": "main",
-      "categoryIds": ["infantil"],
+      "collection": "library",
+      "categoryIds": [
+        "infantil"
+      ],
       "objective": "Superar la primera línea de presión con control orientado.",
-      "players": { "total": 8, "goalkeepers": 2 },
-      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "players": {
+        "total": 8,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
       "durationMinutes": 15,
-      "intensity": { "level": "high", "percent": 85 },
+      "intensity": {
+        "level": "high",
+        "percent": 85
+      },
       "workStructure": "Bloques de 3 minutos x 4 series",
       "constraints": [
         {
@@ -20,17 +33,48 @@
           "detail": "Primer toque con control orientado hacia el carril libre."
         }
       ],
-      "coachingCues": ["Timing de desmarque del ala", "Orientación de control en banda"],
+      "coachingCues": [
+        "Timing de desmarque del ala",
+        "Orientación de control en banda"
+      ],
       "boardData": {
         "schemaVersion": "1.0.0",
-        "pitch": { "format": "full" },
+        "pitch": {
+          "format": "full"
+        },
         "tokens": [
-          { "id": "por-local", "kind": "keeper", "team": "home", "label": "POR" },
-          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
-          { "id": "rival-1", "kind": "player", "team": "away", "label": "R1" },
-          { "id": "rival-2", "kind": "player", "team": "away", "label": "R2" }
+          {
+            "id": "por-local",
+            "kind": "keeper",
+            "team": "home",
+            "label": "POR"
+          },
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "rival-1",
+            "kind": "player",
+            "team": "away",
+            "label": "R1"
+          },
+          {
+            "id": "rival-2",
+            "kind": "player",
+            "team": "away",
+            "label": "R2"
+          }
         ],
-        "cones": [{ "id": "cono-salida", "x": 18, "y": 50 }],
+        "cones": [
+          {
+            "id": "cono-salida",
+            "x": 18,
+            "y": 50
+          }
+        ],
         "phases": [
           {
             "id": "salida",
@@ -38,22 +82,54 @@
             "title": "Salida desde portero",
             "explanation": "El portero inicia la salida y el cierre ofrece la primera línea de pase.",
             "positions": [
-              { "tokenId": "por-local", "x": 8, "y": 50 },
-              { "tokenId": "cierre", "x": 25, "y": 50 },
-              { "tokenId": "rival-1", "x": 62, "y": 35 },
-              { "tokenId": "rival-2", "x": 62, "y": 65 }
+              {
+                "tokenId": "por-local",
+                "x": 8,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 25,
+                "y": 50
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 62,
+                "y": 35
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 62,
+                "y": 65
+              }
             ],
-            "ball": { "x": 8, "y": 50 },
+            "ball": {
+              "x": 8,
+              "y": 50
+            },
             "arrows": [
               {
                 "id": "pase-portero-cierre",
                 "kind": "pass",
                 "team": "home",
-                "from": { "x": 8, "y": 50 },
-                "to": { "x": 25, "y": 50 }
+                "from": {
+                  "x": 8,
+                  "y": 50
+                },
+                "to": {
+                  "x": 25,
+                  "y": 50
+                }
               }
             ],
-            "labels": [{ "id": "etiqueta-salida", "text": "Salida en 3-1", "x": 20, "y": 8 }]
+            "labels": [
+              {
+                "id": "etiqueta-salida",
+                "text": "Salida en 3-1",
+                "x": 20,
+                "y": 8
+              }
+            ]
           },
           {
             "id": "carril-derecho",
@@ -61,19 +137,44 @@
             "title": "Pase al carril derecho",
             "explanation": "El cierre conecta con el ala mientras la defensa rival ajusta la presión.",
             "positions": [
-              { "tokenId": "por-local", "x": 10, "y": 50 },
-              { "tokenId": "cierre", "x": 30, "y": 55 },
-              { "tokenId": "rival-1", "x": 55, "y": 30 },
-              { "tokenId": "rival-2", "x": 65, "y": 70 }
+              {
+                "tokenId": "por-local",
+                "x": 10,
+                "y": 50
+              },
+              {
+                "tokenId": "cierre",
+                "x": 30,
+                "y": 55
+              },
+              {
+                "tokenId": "rival-1",
+                "x": 55,
+                "y": 30
+              },
+              {
+                "tokenId": "rival-2",
+                "x": 65,
+                "y": 70
+              }
             ],
-            "ball": { "x": 30, "y": 55 },
+            "ball": {
+              "x": 30,
+              "y": 55
+            },
             "arrows": [
               {
                 "id": "presion-rival",
                 "kind": "press",
                 "team": "away",
-                "from": { "x": 55, "y": 30 },
-                "to": { "x": 47, "y": 20 },
+                "from": {
+                  "x": 55,
+                  "y": 30
+                },
+                "to": {
+                  "x": 47,
+                  "y": 20
+                },
                 "curve": 8
               }
             ],
@@ -102,21 +203,48 @@
       "summary": "Circulación de balón entre cierre y ala.",
       "focus": "Circulación",
       "sessionPart": "cool-down",
-      "categoryIds": ["infantil", "cadete"],
+      "collection": "library",
+      "categoryIds": [
+        "infantil",
+        "cadete"
+      ],
       "objective": "Fijar al defensor de punta y encontrar el carril contrario.",
-      "players": { "total": 8, "goalkeepers": 2 },
-      "space": { "label": "Pista completa", "widthM": 20, "lengthM": 40 },
+      "players": {
+        "total": 8,
+        "goalkeepers": 2
+      },
+      "space": {
+        "label": "Pista completa",
+        "widthM": 20,
+        "lengthM": 40
+      },
       "durationMinutes": 12,
-      "intensity": { "level": "medium" },
+      "intensity": {
+        "level": "medium"
+      },
       "workStructure": "Ondas de 4 minutos x 3 series",
       "constraints": [],
-      "coachingCues": ["Primer toque hacia el carril libre"],
+      "coachingCues": [
+        "Primer toque hacia el carril libre"
+      ],
       "boardData": {
         "schemaVersion": "1.0.0",
-        "pitch": { "format": "full" },
+        "pitch": {
+          "format": "full"
+        },
         "tokens": [
-          { "id": "cierre", "kind": "player", "team": "home", "label": "CIE" },
-          { "id": "ala-derecha", "kind": "player", "team": "home", "label": "AD" }
+          {
+            "id": "cierre",
+            "kind": "player",
+            "team": "home",
+            "label": "CIE"
+          },
+          {
+            "id": "ala-derecha",
+            "kind": "player",
+            "team": "home",
+            "label": "AD"
+          }
         ],
         "cones": [],
         "phases": [
@@ -126,17 +254,34 @@
             "title": "Conectar con el ala",
             "explanation": "El cierre libera el balón al ala derecha.",
             "positions": [
-              { "tokenId": "cierre", "x": 32, "y": 55 },
-              { "tokenId": "ala-derecha", "x": 46, "y": 18 }
+              {
+                "tokenId": "cierre",
+                "x": 32,
+                "y": 55
+              },
+              {
+                "tokenId": "ala-derecha",
+                "x": 46,
+                "y": 18
+              }
             ],
-            "ball": { "x": 46, "y": 18 },
+            "ball": {
+              "x": 46,
+              "y": 18
+            },
             "arrows": [
               {
                 "id": "pase-cierre-ala",
                 "kind": "pass",
                 "team": "home",
-                "from": { "x": 32, "y": 55 },
-                "to": { "x": 46, "y": 18 },
+                "from": {
+                  "x": 32,
+                  "y": 55
+                },
+                "to": {
+                  "x": 46,
+                  "y": 18
+                },
                 "curve": -16
               }
             ],
@@ -149,7 +294,13 @@
         "kind": "original",
         "sourceName": "Futsal Manager AI",
         "licenseStatus": "owned"
-      }
+      },
+      "references": [
+        {
+          "label": "Adri Martín Futsal",
+          "url": "https://adrimartinofutsal.es.tl/"
+        }
+      ]
     }
   ],
   "programming": [
@@ -160,9 +311,16 @@
       "formativeStage": "Etapa de asimilación táctica cognitiva",
       "focus": "Foco metodológico Infantil",
       "playModel": "Iniciación dinámica a sistemas base 3-1.",
-      "sessionDurationMinutes": { "min": 60, "max": 75 },
-      "keyConcepts": ["Desmarques de ruptura al espacio ciego"],
-      "objectives": ["Consolidar la salida 3-1 ante presión alta"],
+      "sessionDurationMinutes": {
+        "min": 60,
+        "max": 75
+      },
+      "keyConcepts": [
+        "Desmarques de ruptura al espacio ciego"
+      ],
+      "objectives": [
+        "Consolidar la salida 3-1 ante presión alta"
+      ],
       "sessionStructure": [
         {
           "part": "warm-up",
@@ -209,9 +367,16 @@
       "formativeStage": "Etapa de desarrollo táctico",
       "focus": "Foco metodológico Cadete",
       "playModel": "Rotación continua 4-0.",
-      "sessionDurationMinutes": { "min": 70, "max": 85 },
-      "keyConcepts": ["Rotación continua"],
-      "objectives": ["Consolidar la rotación 4-0"],
+      "sessionDurationMinutes": {
+        "min": 70,
+        "max": 85
+      },
+      "keyConcepts": [
+        "Rotación continua"
+      ],
+      "objectives": [
+        "Consolidar la rotación 4-0"
+      ],
       "sessionStructure": [
         {
           "part": "main",

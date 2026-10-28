@@ -1,5 +1,6 @@
 import type { BoardData } from '@/shared/domain';
 import type { CategoryId } from './category';
+import type { ExerciseCollection } from './exercise-collection';
 import { isPublishableProvenance, type ContentProvenance } from './provenance';
 import type { SessionPart } from './session-part';
 
@@ -32,12 +33,18 @@ export type ExerciseConstraint = {
   detail: string;
 };
 
+export type ExerciseReference = {
+  label: string;
+  url: string;
+};
+
 export type Exercise = {
   id: string;
   title: string;
   summary: string;
   focus: string;
   sessionPart: SessionPart;
+  collection: ExerciseCollection;
   categoryIds: CategoryId[];
   objective: string;
   players: ExercisePlayers;
@@ -50,6 +57,7 @@ export type Exercise = {
   boardData: BoardData;
   status: ExerciseStatus;
   provenance: ContentProvenance;
+  references?: ExerciseReference[];
 };
 
 export const EXERCISE_LIMITS = {
@@ -58,6 +66,7 @@ export const EXERCISE_LIMITS = {
   maxCategoryIds: 3,
   maxConstraints: 6,
   maxCoachingCues: 8,
+  maxReferences: 3,
 } as const;
 
 export function isPublishedExercise(exercise: Exercise): boolean {

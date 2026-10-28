@@ -4,6 +4,8 @@ import { BOARD_DATA_SCHEMA_VERSION, parseBoardData } from '@/shared/domain';
 import { getExercise } from '@/modules/content/application/get-exercise';
 import { getProgramming } from '@/modules/content/application/get-programming';
 import { listExercises } from '@/modules/content/application/list-exercises';
+import { listLibraryExercises } from '@/modules/content/application/list-library-exercises';
+import { listWeeklyHighlights } from '@/modules/content/application/list-weekly-highlights';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
 import { CATEGORY_IDS } from '@/modules/content/domain/category';
 import { createBundledContentRepository } from '@/modules/content/infrastructure/bundled-content-repository';
@@ -14,7 +16,7 @@ describe('Bundled content repository', () => {
   describe('Given the bundled content package', () => {
     describe('When the repository is created', () => {
       it('then the package version is the supported one', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.2.0');
       });
 
       it('then it exposes the seeded published exercises', () => {
@@ -74,14 +76,35 @@ describe('Bundled content repository', () => {
             'activacion-con-movilidad-y-pases',
             'conservacion-6v2-baja-intensidad',
             'vuelta-a-la-calma-y-analisis',
+            'activacion-pases-y-nombres',
+            'juego-cuatro-esquinas',
+            'rondo-tranquilo-en-circulo',
+            'pase-y-movimiento-en-triangulo',
+            'juego-4v4-con-portero-apoyo',
+            'circulacion-tranquila-en-parejas',
+            'activacion-3v1-con-pared',
+            'salida-de-presion-3v2-con-pivote',
+            'conservacion-suave-en-dos-zonas',
+            'activacion-con-pases-entre-lineas',
+            'ataque-3-1-con-cambio-de-orientacion',
+            'rondo-de-cierre-con-movilidad',
+            'activacion-con-triangulos-y-desmarques',
+            'presion-tras-saque-de-banda',
+            'circulacion-suave-con-cambios-de-lado',
+            'activacion-con-salida-de-presion-4v2',
+            'ataque-4-0-con-rotacion-de-alas',
+            'conservacion-lenta-con-apoyos',
+            'activacion-con-rondo-y-cambio-de-ritmo',
+            'salida-4-0-ante-defensa-en-rombo',
+            'vuelta-a-la-calma-con-respiracion-guiada',
           ],
         );
-        assert.equal(exercises.length, 50);
+        assert.equal(exercises.length, 71);
         assert.ok(exercises.every((exercise) => exercise.status === 'published'));
       });
 
-      it('then every RFEF category exposes its planned exercise count', () => {
-        const expectedCounts = {
+      it('then every RFEF category exposes its planned library and weekly counts', () => {
+        const expectedLibraryCounts = {
           prebenjamin: 7,
           benjamin: 7,
           alevin: 7,
@@ -92,14 +115,43 @@ describe('Bundled content repository', () => {
         } as const;
 
         for (const categoryId of CATEGORY_IDS) {
-          const exercises = listExercises(repository, { categoryId });
+          const libraryExercises = listLibraryExercises(repository, categoryId);
+          const weeklyExercises = listWeeklyHighlights(repository, categoryId);
 
           assert.equal(
-            exercises.length,
-            expectedCounts[categoryId],
-            `Expected ${categoryId} to expose its planned count.`,
+            libraryExercises.length,
+            expectedLibraryCounts[categoryId],
+            `Expected ${categoryId} to expose its planned library count.`,
+          );
+          assert.equal(
+            weeklyExercises.length,
+            3,
+            `Expected ${categoryId} to expose its three weekly highlights.`,
+          );
+          assert.ok(
+            libraryExercises.every((exercise) => exercise.collection === 'library'),
+            `Expected ${categoryId} library records to stay in the library collection.`,
+          );
+          assert.ok(
+            weeklyExercises.every((exercise) => exercise.collection === 'weekly'),
+            `Expected ${categoryId} weekly records to stay in the weekly collection.`,
           );
         }
+      });
+
+      it('then the package splits into fifty library exercises and twenty-one weekly highlights', () => {
+        const libraryExercises = listLibraryExercises(repository);
+        const weeklyExercises = listWeeklyHighlights(repository);
+
+        assert.equal(libraryExercises.length, 50);
+        assert.equal(weeklyExercises.length, 21);
+        assert.equal(libraryExercises.length + weeklyExercises.length, 71);
+        assert.equal(
+          libraryExercises.some((libraryExercise) =>
+            weeklyExercises.some((weeklyExercise) => weeklyExercise.id === libraryExercise.id),
+          ),
+          false,
+        );
       });
 
       it('then every seeded exercise carries Board Data valid at 1.0.0', () => {
@@ -120,8 +172,8 @@ describe('Bundled content repository', () => {
   describe('Given a seeded exercise tagged Infantil and Cadete', () => {
     describe('When exercises are listed for each category', () => {
       it('then it appears exactly once under each category', () => {
-        const infantil = listExercises(repository, { categoryId: 'infantil' });
-        const cadete = listExercises(repository, { categoryId: 'cadete' });
+        const infantil = listLibraryExercises(repository, 'infantil');
+        const cadete = listLibraryExercises(repository, 'cadete');
 
         assert.equal(
           infantil.filter((exercise) => exercise.id === 'salida-3-1-presion-alta').length,

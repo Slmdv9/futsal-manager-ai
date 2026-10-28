@@ -432,6 +432,57 @@
     "notes": "Implemented and self-verified, ready for independent validation. Adds the prototype-shaped general Explorar composition (hero, AI entry link, methodology glance card, deterministic weekly slice, grouped library) inside `content/presentation`, with no content, Board Data, version, AI, quota, board, route, shared or dependency change. No commit was created in this session."
   },
   {
+    "id": "seed-weekly-highlights",
+    "area": "content",
+    "title": "Seed weekly highlight exercises with inspiration references",
+    "user_visible_behavior": "Each category has three weekly highlight exercises that do not appear in its exercise library, each carrying the public URL of the resource that inspired it.",
+    "depends_on": [
+      "seed-session-structure",
+      "explore-general-screen"
+    ],
+    "status": "accepted",
+    "verification": [
+      "Confirm each category has exactly three weekly highlights, one per session part, and that none of them is listed in that category's library.",
+      "Confirm every new highlight is original/owned, keeps valid Board Data, and stores a public reference URL for the future detail screen.",
+      "Run content validation and confirm all previous content still parses, the library stays 2/3/2 (Infantil 2/5/2) and the package contract version is 1.2.0.",
+      "Open Explorar and confirm the library still shows 7 drills per category (Infantil 9), the weekly block shows the three new weekly titles in warm-up to cool-down order with the pinned copy, and the hero reads 71 Ejercicios."
+    ],
+    "evidence": [
+      "Implemented exactly the spec surface. Domain: new `exercise-collection.ts` (`EXERCISE_COLLECTIONS`, `ExerciseCollection`), required `Exercise.collection`, optional `Exercise.references` (`ExerciseReference`), `EXERCISE_LIMITS.maxReferences = 3`, and `CONTENT_PACKAGE_VERSION` `1.2.0` with the collection enum, reference schema and absolute-http(s) check pinned to `Exercise collection must be \"library\" or \"weekly\".`, `At most 3 reference citations are allowed per exercise.` and `Reference url must be an absolute http(s) URL.`. Application: new `listLibraryExercises`/`listWeeklyHighlights`. Presentation: `buildCategoryBrowseModel` reads `listLibraryExercises`, `buildExploreGeneralModel` reads `listWeeklyHighlights` with `buildWeeklyExercises(readonly Exercise[])` and `formatWeeklySelection(count)`, and `weekly-exercises.tsx` shows `Una selección fuera de la biblioteca` with the weekly-only counter while keeping the `totalCount` prop. Public API exports `EXERCISE_COLLECTIONS`, `ExerciseCollection`, `ExerciseReference`, `listLibraryExercises`, `listWeeklyHighlights`. `ExploreScreen`, `AiSessionEntryCard`, routes, `src/app/**`, `src/shared/**`, Board Data `1.0.0`, AI, quota, `package.json`, `eslint.config.js` and `init.sh` are unchanged.",
+      "Package: `contentVersion` `1.2.0`, 71 exercises + 7 Programming = 78 records, 50 `library` + 21 `weekly`, Programming ids/versions unchanged (`infantil-u14-base` still plan `1.1.0`). All 50 legacy records differ from HEAD only by `collection: 'library'`; the 21 appended records use the Table A order and Table B–D metadata, two constraints, three cues, valid `1.0.0` boards and exactly one citation each. Reference spread: UEFA manual 6 (indices 53, 59, 62, 65, 68, 69), Adri Martín Futsal 5 (50, 52, 54, 61, 67), KeepMove 5 (51, 55, 58, 64, 70), Ejercicios de Fútbol Sala 5 (56, 57, 60, 63, 66); all `original`/`owned`/`Futsal Manager AI`, `published`, no `attribution`, no record `kind: 'reference'`, no inspiration domain in `sourceName`.",
+      "Standalone parse: exit 0, `1.2.0`, 71 exercises, 7 Programming, 50 library, 21 weekly. In-memory probes all failed at the pinned paths/messages: missing `exercises.50.collection` and `'highlights'` at the same path with the two-value message; `exercises.50.references[0].url` set to `ftp://example.com/x` and `/recursos` reported `Reference url must be an absolute http(s) URL.`; four references reported `At most 3 reference citations are allowed per exercise.`; `contentVersion` `'1.1.0'` reported an issue naming `1.2.0`. The untouched package still parsed and the JSON file was not modified by the probes.",
+      "Read-layer smoke: `listExercises` returns 71 unique; library counts per category are 7/7/7/9/7/7/7 and weekly counts are 3 each, every weekly category reading `warm-up > main > cool-down`; e.g. Prebenjamín weekly = `activacion-pases-y-nombres`, `juego-cuatro-esquinas`, `rondo-tranquilo-en-circulo`; Infantil = `activacion-con-pases-entre-lineas`, `ataque-3-1-con-cambio-de-orientacion`, `rondo-de-cierre-con-movilidad`. `buildCategoryBrowseModel` returns only library ids (7 or 9) and `buildExploreGeneralModel` returns the three weekly ids; `getExercise('activacion-pases-y-nombres')` resolves.",
+      "`npm test`: 356/356 tests pass across 227 suites, up from 280/205. The spec target is 356 tests / 220 suites: the test count matches exactly, and the +7 suites come from `node:test` counting each Given/When `describe` as a suite for the extra Given/When wrappers added around the same pinned assertions in the four new domain scenarios and the browse weekly-exclusion test. `seed-weekly-highlights.test.ts` is 60/60 across 8 suites; `content-package.test.ts` 40, `content-queries.test.ts` 23, `category-browse-model.test.ts` 10/17, `explore-general-model.test.ts` 17/23, `explore-general-screen.test.ts` 11/9, `seed-provenance.test.ts` audits 78 records and only weekly references.",
+      "`npm run lint` exit 0, `npm run typecheck` exit 0, `npm run verify` exit 0 with 356/356 tests across 227 suites and `expo-doctor` 20/20, `./init.sh` exit 0 and no Metro started.",
+      "Scans: no `reference` provenance value in the package; no inspiration domain in `sourceName`; no literal hex colours or `content/infrastructure` imports in `content/presentation`; `buildCategoryBrowseModel` imports `listLibraryExercises` instead of `listExercises`; Board Data stays `1.0.0`; `git diff --stat` limited to the spec file table plus `docs/risks-and-open-questions.md`, `docs/technical-discovery.md`, `AGENTS.md`, `PROGRESS.md` and `feature_list.json`. Temporary scripts (`tmp-*`) were deleted.",
+      "`npx expo export --platform android` exit 0 with a 3,847,823-byte Hermes bundle (`entry-3c1c22a30311020a33abd01ca62d2b82.hbc`). A UTF-8/UTF-16LE scan found the first and last weekly ids, all four citation labels (`Manual de entrenamiento de fútbol sala de la UEFA`, `Adri Martín Futsal`, `KeepMove`, `Ejercicios de Fútbol Sala`) and `Una selección fuera de la biblioteca`.",
+      "Device smoke on Samsung Galaxy M13 (`SM-M135F`, serial `RF8TC0GPY6H`, Android 14, Expo Go 58.0.5 via `adb reverse tcp:8081 tcp:8081`, Metro restarted clean on 8081). Explorar booted with the hero reading `71 Ejercicios`; Prebenjamín showed weekly `Activación con pases y nombres` / `Juego de las cuatro esquinas` / `Rondo tranquilo en círculo` in warm-up → main → cool-down order with `3 ejercicios` and `Una selección fuera de la biblioteca`, and its 7 library drills under 2/3/2 with none of the weekly titles present; Infantil U14 showed `Activación con pases entre líneas` / `Ataque 3-1 con cambio de orientación` / `Rondo de cierre con movilidad` and its 9 library drills under 2/5/2. Pizarra, Asistente IA, Mi Club and `/design-system` still rendered their accepted screens, the AI card stayed in its current position, and `adb logcat` had no React Native or `FATAL EXCEPTION` lines.",
+      "No persistent E2E harness or React Native component-test runner exists; the parse proofs, read-layer smoke, seed suites, Android export and scripted device smoke are the agreed coverage. Remaining risks: the `\"Semana\"` copy still has no scheduler (now a separate weekly collection read), the citation display obligation belongs to `exercise-detail-screen`, and the 21 records passed the validator technical originality check (no 5-/6-word overlap and no identical titles against the four cited sources), while a human/editorial legal review remains advisable before public release.",
+      "Not committed: the branch `feat/seed-weekly-highlights` is stacked on `feat/explore-general-screen` @ `6d18ee6` and all work is left uncommitted for independent validation.",
+      "Independent validator acceptance: verdict `accept` after a repair pass. The validator confirmed the 50 legacy records are byte-identical to `HEAD` apart from the 50 inserted `collection` lines (the JSON was rebuilt from HEAD instead of reserialising), the 21 weekly rows match Tables A–D, all 78 records stay `original` / `owned` / `Futsal Manager AI`, and the UEFA domains are now covered by the seed audit. It also verified the new legacy SHA-256 fingerprint detects field mutations, the six parser probes, all 71 boards at `1.0.0`, the library/weekly read split, the pinned weekly copy and the untouched `ExploreScreen`/AI card. Re-ran `npm run verify` (exit 0, 356/356 tests in 227 suites, expo-doctor 20/20), `./init.sh`, lint and typecheck, plus an `SM-M135F` smoke (hero `71 Ejercicios`, Prebenjamín 7 library + 3 weekly, Infantil 9 library 2/5/2 + 3 weekly, AI card still after the filter, clean logcat). The technical originality check found no 5-/6-word overlap and no identical titles; it is not a legal opinion. Non-blocking: the second inspiration-domain list in `seed-remaining-categories.test.ts` was aligned with UEFA, and the `\"Semana\"` copy still has no scheduler."
+    ],
+    "notes": "Coach request 2026-10-28: the weekly block repeats the library, so it should surface different exercises. Decision: author 21 new in-house exercises (three per RFEF category, one per session part) inspired by the UEFA futsal manual, adrimartinofutsal.es.tl, keepmove.net and ejerciciosdefutbolsala.com; never copy their text or diagrams. Adds a required `collection` field ('library' | 'weekly') and an optional `references` array (label + URL), plus `listLibraryExercises`/`listWeeklyHighlights`. The presentation switch is in scope: the library browse model reads the library collection and the weekly block reads the weekly collection, with the counter copy pinned in Spanish. Package contract moves to 1.2.0; Board Data stays 1.0.0; ExploreScreen and the AI card do not move."
+  },
+  {
+    "id": "explore-weekly-highlights",
+    "area": "browse",
+    "title": "Finish the Explore weekly block layout and AI card order",
+    "user_visible_behavior": "The AI session card is the last product card on Explorar, and the weekly block keeps its three session-part cards without repeating library drills.",
+    "depends_on": [
+      "seed-weekly-highlights",
+      "explore-general-screen"
+    ],
+    "status": "not_started",
+    "verification": [
+      "Confirm the AI session card sits after the exercise library and before the development gallery link.",
+      "Confirm the weekly block still shows three cards with the correct session-part labels and the `3 ejercicios` counter.",
+      "Confirm the library keeps 7 drills per category (Infantil 9) and none of the three weekly cards is repeated in it.",
+      "Confirm no content, parser, read-layer, Board Data, AI, quota, route or package.json change is made."
+    ],
+    "evidence": [],
+    "notes": "Follows `seed-weekly-highlights`. This feature owns the final Explore composition, the AI card move and the removal of the now-unused `totalCount` prop only; the library/weekly data split, the weekly copy and the hero count were delivered earlier."
+  },
+  {
     "id": "explore-by-category-screen",
     "area": "browse",
     "title": "Build the explore-by-category screen",
@@ -454,19 +505,21 @@
     "id": "exercise-detail-screen",
     "area": "browse",
     "title": "Build the exercise detail screen",
-    "user_visible_behavior": "A coach sees an exercise's objective, category, duration, players, space, intensity, coaching cues, and ordered phase explanations.",
+    "user_visible_behavior": "A coach sees an exercise's objective, category, duration, players, space, intensity, coaching cues, ordered phase explanations, and the public source reference when the exercise was inspired by an external resource.",
     "depends_on": [
       "content-model-and-store",
-      "design-system-tokens"
+      "design-system-tokens",
+      "seed-weekly-highlights"
     ],
     "status": "not_started",
     "verification": [
       "Open a seeded exercise and confirm every metadata field is shown.",
       "Confirm coaching cues and phase explanations render in order.",
-      "Confirm a missing optional field does not break the screen."
+      "Confirm a missing optional field does not break the screen.",
+      "Confirm an exercise with references shows the source label and URL, and an owned exercise without references shows no empty source block."
     ],
     "evidence": [],
-    "notes": "Reference: docs/design/prototype/03-exercise-detail-board/code.html."
+    "notes": "Reference: docs/design/prototype/03-exercise-detail-board/code.html. Must render the `references` label and URL as an 'Inspirado en' note with the disclaimer that the exercise is original Futsal Manager AI content; the field ships with `seed-weekly-highlights`."
   },
   {
     "id": "tactics-board-renderer",

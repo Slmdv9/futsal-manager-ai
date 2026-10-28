@@ -1,5 +1,5 @@
 import { getProgramming } from '../../application/get-programming';
-import { listExercises } from '../../application/list-exercises';
+import { listLibraryExercises } from '../../application/list-library-exercises';
 import type { Category } from '../../domain/category';
 import type { Exercise, ExerciseIntensityLevel } from '../../domain/exercise';
 import type { ContentRepository } from '../../domain/ports/content-repository';
@@ -35,7 +35,7 @@ export function buildCategoryBrowseModel(
   repository: ContentRepository,
   category: Category,
 ): CategoryBrowseModel {
-  const exercises = listExercises(repository, { categoryId: category.id });
+  const exercises = listLibraryExercises(repository, category.id);
 
   return {
     category,

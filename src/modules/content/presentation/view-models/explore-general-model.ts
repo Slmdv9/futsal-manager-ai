@@ -1,5 +1,6 @@
 import { listCategories } from '../../application/list-categories';
 import { listExercises } from '../../application/list-exercises';
+import { listWeeklyHighlights } from '../../application/list-weekly-highlights';
 import type { Category } from '../../domain/category';
 import type { Exercise } from '../../domain/exercise';
 import type { ContentRepository } from '../../domain/ports/content-repository';
@@ -7,8 +8,9 @@ import type { Programming } from '../../domain/programming';
 import { SESSION_PARTS, type SessionPart } from '../../domain/session-part';
 import {
   buildCategoryBrowseModel,
+  formatExerciseCount,
   formatSessionDuration,
-  type SessionPartGroup,
+  formatSessionPartLabel,
 } from './category-browse-model';
 
 export const WEEKLY_EXERCISES_PER_PART = 1;
@@ -49,18 +51,14 @@ export function buildExploreStats(repository: ContentRepository): ExploreStats {
 }
 
 export function buildWeeklyExercises(
-  sessionParts: readonly SessionPartGroup[],
+  exercises: readonly Exercise[],
 ): WeeklyExercise[] {
   return SESSION_PARTS.flatMap((part) => {
-    const group = sessionParts.find((candidate) => candidate.part === part);
+    const partExercises = exercises.filter((exercise) => exercise.sessionPart === part);
 
-    if (!group) {
-      return [];
-    }
-
-    return group.exercises.slice(0, WEEKLY_EXERCISES_PER_PART).map((exercise) => ({
+    return partExercises.slice(0, WEEKLY_EXERCISES_PER_PART).map((exercise) => ({
       part,
-      label: group.label,
+      label: formatSessionPartLabel(part),
       exercise,
     }));
   });
@@ -100,11 +98,11 @@ export function buildExploreGeneralModel(
 
   return {
     stats,
-    weeklyExercises: buildWeeklyExercises(browseModel.sessionParts),
+    weeklyExercises: buildWeeklyExercises(listWeeklyHighlights(repository, category.id)),
     methodology: buildMethodologyOverview(browseModel.programming),
   };
 }
 
-export function formatWeeklySelection(shown: number, total: number): string {
-  return `${shown} de ${total}`;
+export function formatWeeklySelection(count: number): string {
+  return formatExerciseCount(count);
 }

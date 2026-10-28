@@ -21,6 +21,8 @@ type MutableExercise = {
   categoryIds: string[];
   players: { total: number; goalkeepers: number };
   sessionPart?: string;
+  collection?: string;
+  references?: Array<{ label?: string; url: string }>;
   status: string;
   provenance?: MutableProvenance;
   boardData: { phases: { positions: { tokenId: string; x: number; y: number }[] }[] };
@@ -64,8 +66,8 @@ function findIssue(
 describe('Content package validation', () => {
   describe('Given the supported content package version', () => {
     describe('When the contract constant is read', () => {
-      it('then it records content package version 1.1.0', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
+      it('then it records content package version 1.2.0', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.2.0');
       });
     });
   });
@@ -87,6 +89,11 @@ describe('Content package validation', () => {
         assert.deepEqual(contentPackage.exercises[1].categoryIds, ['infantil', 'cadete']);
         assert.equal(contentPackage.exercises[0].sessionPart, 'main');
         assert.equal(contentPackage.exercises[1].sessionPart, 'cool-down');
+        assert.equal(contentPackage.exercises[0].collection, 'library');
+        assert.deepEqual(contentPackage.exercises[0].references, undefined);
+        assert.deepEqual(contentPackage.exercises[1].references, [
+          { label: 'Adri Martín Futsal', url: 'https://adrimartinofutsal.es.tl/' },
+        ]);
         assert.equal(contentPackage.exercises[0].boardData.schemaVersion, '1.0.0');
         assert.equal(contentPackage.exercises[0].boardData.phases.length, 2);
       });
@@ -130,6 +137,123 @@ describe('Content package validation', () => {
 
         assert.ok(issue, `Expected exercises.0.sessionPart in ${issuePaths(result.issues)}`);
         assert.match(issue.message, /"warm-up", "main", or "cool-down"/);
+      });
+    });
+  });
+
+  describe('Given an exercise without a collection', () => {
+    describe('When the package is parsed', () => {
+      it('fails with a dot path naming exercises.0.collection and the two allowed values', () => {
+        const contentPackage = cloneValidPackage();
+        delete contentPackage.exercises[0].collection;
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.0.collection');
+
+        assert.ok(issue, `Expected exercises.0.collection in ${issuePaths(result.issues)}`);
+        assert.match(issue.message, /"library"/);
+        assert.match(issue.message, /"weekly"/);
+      });
+    });
+  });
+
+  describe('Given an exercise with an unknown collection', () => {
+    describe('When the package is parsed', () => {
+      it('fails at exercises.0.collection naming only library or weekly', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[0].collection = 'highlights';
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.0.collection');
+
+        assert.ok(issue, `Expected exercises.0.collection in ${issuePaths(result.issues)}`);
+        assert.match(issue.message, /Exercise collection must be "library" or "weekly"\./);
+      });
+    });
+  });
+
+  describe('Given an exercise reference whose url or label is invalid', () => {
+    describe('When the package is parsed', () => {
+      it('fails at the reference url path for non-http schemes and relative paths', () => {
+        const invalidUrls = ['ftp://example.com/x', '/recursos', 'adrimartinofutsal.es.tl'];
+
+        for (const url of invalidUrls) {
+          const contentPackage = cloneValidPackage();
+          contentPackage.exercises[1].references = [{ label: 'Fuente', url }];
+
+          const result = safeParseContentPackage(contentPackage);
+
+          assert.equal(result.success, false, `Expected "${url}" to be rejected.`);
+          if (result.success) {
+            continue;
+          }
+
+          const issue = findIssue(result.issues, 'exercises.1.references.0.url');
+
+          assert.ok(
+            issue,
+            `Expected exercises.1.references.0.url in ${issuePaths(result.issues)}`,
+          );
+          assert.match(issue.message, /Reference url must be an absolute http\(s\) URL\./);
+        }
+
+        const missingLabel = cloneValidPackage();
+        missingLabel.exercises[1].references = [
+          { url: 'https://example.com/recurso' },
+        ];
+
+        const missingLabelResult = safeParseContentPackage(missingLabel);
+
+        assert.equal(missingLabelResult.success, false);
+        if (missingLabelResult.success) {
+          return;
+        }
+
+        assert.ok(
+          findIssue(missingLabelResult.issues, 'exercises.1.references.0.label'),
+          `Expected exercises.1.references.0.label in ${issuePaths(missingLabelResult.issues)}`,
+        );
+      });
+    });
+  });
+
+  describe('Given an exercise with more than three references', () => {
+    describe('When the package is parsed', () => {
+      it('fails at exercises.1.references with the max-3 message', () => {
+        const contentPackage = cloneValidPackage();
+        contentPackage.exercises[1].references = [
+          { label: 'Uno', url: 'https://example.com/uno' },
+          { label: 'Dos', url: 'https://example.com/dos' },
+          { label: 'Tres', url: 'https://example.com/tres' },
+          { label: 'Cuatro', url: 'https://example.com/cuatro' },
+        ];
+
+        const result = safeParseContentPackage(contentPackage);
+
+        assert.equal(result.success, false);
+        if (result.success) {
+          return;
+        }
+
+        const issue = findIssue(result.issues, 'exercises.1.references');
+
+        assert.ok(issue, `Expected exercises.1.references in ${issuePaths(result.issues)}`);
+        assert.match(
+          issue.message,
+          /At most 3 reference citations are allowed per exercise\./,
+        );
       });
     });
   });
@@ -598,12 +722,12 @@ describe('Content package validation', () => {
         const issue = findIssue(result.issues, 'contentVersion');
 
         assert.ok(issue, `Expected contentVersion in ${issuePaths(result.issues)}`);
-        assert.match(issue.message, /contentVersion must be "1\.1\.0"/);
+        assert.match(issue.message, /contentVersion must be "1\.2\.0"/);
       });
 
-      it('rejects the previous 1.0.0 package version', () => {
+      it('rejects the previous 1.1.0 package version', () => {
         const contentPackage = cloneValidPackage();
-        contentPackage.contentVersion = '1.0.0';
+        contentPackage.contentVersion = '1.1.0';
 
         const result = safeParseContentPackage(contentPackage);
 
@@ -615,7 +739,7 @@ describe('Content package validation', () => {
         const issue = findIssue(result.issues, 'contentVersion');
 
         assert.ok(issue, `Expected contentVersion in ${issuePaths(result.issues)}`);
-        assert.match(issue.message, /contentVersion must be "1\.1\.0"/);
+        assert.match(issue.message, /contentVersion must be "1\.2\.0"/);
       });
     });
   });

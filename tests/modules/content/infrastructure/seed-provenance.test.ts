@@ -12,9 +12,11 @@ const repository = createBundledContentRepository();
 
 const INSPIRATION_ONLY_DOMAINS = [
   'adrimartinofutsal.es.tl',
+  'editorial.uefa.com',
   'futsalcoach.es',
   'keepmove.net',
   'ejerciciosdefutbolsala.com',
+  'uefa.com',
 ];
 
 const seededProgramming = CATEGORY_IDS.flatMap((categoryId) =>
@@ -39,8 +41,8 @@ const seededRecords = [
 describe('Seeded content provenance audit', () => {
   describe('Given the bundled content package', () => {
     describe('When every seeded record is audited', () => {
-      it('then the audit sees all 50 seeded exercises and the seven Programming records', () => {
-        assert.equal(repository.getExercises().length, 50);
+      it('then the audit sees all 71 seeded exercises and the seven Programming records', () => {
+        assert.equal(repository.getExercises().length, 71);
         assert.equal(seededProgramming.length, 7);
         assert.deepEqual(
           seededRecords.map((record) => record.id),
@@ -95,6 +97,27 @@ describe('Seeded content provenance audit', () => {
             'activacion-con-movilidad-y-pases',
             'conservacion-6v2-baja-intensidad',
             'vuelta-a-la-calma-y-analisis',
+            'activacion-pases-y-nombres',
+            'juego-cuatro-esquinas',
+            'rondo-tranquilo-en-circulo',
+            'pase-y-movimiento-en-triangulo',
+            'juego-4v4-con-portero-apoyo',
+            'circulacion-tranquila-en-parejas',
+            'activacion-3v1-con-pared',
+            'salida-de-presion-3v2-con-pivote',
+            'conservacion-suave-en-dos-zonas',
+            'activacion-con-pases-entre-lineas',
+            'ataque-3-1-con-cambio-de-orientacion',
+            'rondo-de-cierre-con-movilidad',
+            'activacion-con-triangulos-y-desmarques',
+            'presion-tras-saque-de-banda',
+            'circulacion-suave-con-cambios-de-lado',
+            'activacion-con-salida-de-presion-4v2',
+            'ataque-4-0-con-rotacion-de-alas',
+            'conservacion-lenta-con-apoyos',
+            'activacion-con-rondo-y-cambio-de-ritmo',
+            'salida-4-0-ante-defensa-en-rombo',
+            'vuelta-a-la-calma-con-respiracion-guiada',
             'prebenjamin-u8-base',
             'benjamin-u10-base',
             'alevin-u12-base',
@@ -104,7 +127,7 @@ describe('Seeded content provenance audit', () => {
             'senior-base',
           ],
         );
-        assert.equal(seededRecords.length, 57);
+        assert.equal(seededRecords.length, 78);
       });
 
       it('then every exercise carries one of the three allowed session parts', () => {
@@ -186,8 +209,37 @@ describe('Seeded content provenance audit', () => {
           for (const domain of INSPIRATION_ONLY_DOMAINS) {
             assert.ok(
               !sourceName.includes(domain),
-              `Expected ${record.id} not to name ${domain}.`,
+              `Expected ${record.id} not to reference ${domain}.`,
             );
+          }
+        }
+      });
+
+      it('then only weekly exercises carry references, exactly one each', () => {
+        for (const exercise of repository.getExercises()) {
+          if (exercise.collection === 'weekly') {
+            assert.equal(exercise.references?.length, 1);
+          } else {
+            assert.equal(exercise.references, undefined);
+          }
+        }
+      });
+
+      it('then every citation is a public http(s) URL with one of the four labels', () => {
+        const labels = new Set([
+          'Adri Martín Futsal',
+          'KeepMove — Recursos de entrenamiento',
+          'Manual de entrenamiento de fútbol sala de la UEFA',
+          'Ejercicios de Fútbol Sala',
+        ]);
+
+        for (const exercise of repository.getExercises().filter(
+          (record) => record.references !== undefined,
+        )) {
+          for (const reference of exercise.references ?? []) {
+            assert.ok(labels.has(reference.label));
+            assert.match(reference.url, /^https?:\/\//);
+            assert.equal('references' in exercise.provenance, false);
           }
         }
       });

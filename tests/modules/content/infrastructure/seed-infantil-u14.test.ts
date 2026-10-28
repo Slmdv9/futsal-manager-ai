@@ -4,6 +4,7 @@ import { describe, it } from 'node:test';
 import { BOARD_DATA_SCHEMA_VERSION, parseBoardData } from '@/shared/domain';
 import { getProgramming } from '@/modules/content/application/get-programming';
 import { listExercises } from '@/modules/content/application/list-exercises';
+import { listLibraryExercises } from '@/modules/content/application/list-library-exercises';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
 import { createBundledContentRepository } from '@/modules/content/infrastructure/bundled-content-repository';
 
@@ -41,7 +42,7 @@ const LEGACY_BOARDS = [
 
 const PLACEHOLDER_PATTERN = /^(todo|tbd|pendiente|xxx)$/i;
 
-const infantilExercises = listExercises(repository, { categoryId: 'infantil' });
+const infantilExercises = listLibraryExercises(repository, 'infantil');
 
 function readBundledPackage(): { contentVersion: string } {
   const packageUrl = new URL(
@@ -66,7 +67,7 @@ describe('Infantil U14 seed', () => {
           INFANTIL_EXERCISE_IDS,
         );
         assert.equal(new Set(infantilExercises.map((exercise) => exercise.id)).size, 9);
-        assert.equal(listExercises(repository).length, 50);
+        assert.equal(listExercises(repository).length, 71);
       });
 
       it('then it groups as two warm-up, five main-part, and two cool-down exercises', () => {
@@ -245,9 +246,9 @@ describe('Infantil U14 seed', () => {
         }
       });
 
-      it('then the package moves to 1.1.0 while Board Data and the Infantil plan stay pinned', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
-        assert.equal(readBundledPackage().contentVersion, '1.1.0');
+      it('then the package moves to 1.2.0 while Board Data and the Infantil plan stay pinned', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.2.0');
+        assert.equal(readBundledPackage().contentVersion, '1.2.0');
         assert.equal(BOARD_DATA_SCHEMA_VERSION, '1.0.0');
         for (const exercise of repository.getExercises()) {
           assert.equal(exercise.boardData.schemaVersion, '1.0.0');

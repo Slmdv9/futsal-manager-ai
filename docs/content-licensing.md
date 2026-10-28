@@ -12,6 +12,7 @@ The concrete `ContentProvenance` shape, the package contract, and the validation
 4. Published content whose permission depends on credit (`licenseStatus: 'permitted'` or `kind: 'cmd-mora'`) must carry an `attribution`.
 5. The read layer returns only records that are both `published` and publishable, so a repository that bypasses the parser still cannot leak unlicensed content into browsing or later AI grounding.
 6. The app ships no third-party material without recorded permission. External reference sites are inspiration only, never redistribution sources.
+7. `Exercise.references` is an inspiration citation, not provenance: it grants no rights, is never used in place of `provenance`, and cannot publish otherwise unlicensed material.
 
 ### Rule Table
 
@@ -69,14 +70,24 @@ Record every source the library draws on. Update this table before adding materi
 
 | Source | Kind | License status | May ship? | Notes |
 | --- | --- | --- | --- | --- |
-| Futsal Manager AI (in-house authorship) | `original` | `owned` | yes | Current seed: 50 exercises plus seven Programming records, one per RFEF category. |
+| Futsal Manager AI (in-house authorship) | `original` | `owned` | yes | Seed: 50 library exercises, 21 weekly highlights and seven Programming records. |
 | CMD Mora season programme (club presentation) | `cmd-mora` | `permitted` | yes, with attribution, once written permission is recorded | Attribution names CMD Mora. Not seeded yet; `pending` until the permission is documented. |
-| `adrimartinofutsal.es.tl` | `reference` | `reference-only` | no | Inspiration for exercise ideas and category mapping only. |
-| `futsalcoach.es` | `reference` | `reference-only` | no | Inspiration only. |
-| `keepmove.net` | `reference` | `reference-only` | no | Inspiration only. |
-| `ejerciciosdefutbolsala.com` | `reference` | `reference-only` | no | Inspiration only. |
+| `adrimartinofutsal.es.tl` | `reference` | `reference-only` | no | Inspiration for exercise ideas, warm-ups and goalkeepers; cited by five weekly highlights. |
+| `futsalcoach.es` | `reference` | `reference-only` | no | Inspiration only; currently uncited by the seed. |
+| `keepmove.net` | `reference` | `reference-only` | no | Inspiration for categorised resources and planning; cited by five weekly highlights. |
+| `ejerciciosdefutbolsala.com` | `reference` | `reference-only` | no | Inspiration for systems, set pieces and goalkeepers; cited by five weekly highlights. |
+| `editorial.uefa.com` (UEFA futsal coaching manual) | `reference` | `reference-only` | no | Inspiration for periodisation and playing principles; cited by six weekly highlights. |
 
-The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.ts`) audits all 57 seeded records — 50 exercises plus seven Programming records — at their canonical ids and asserts that no record is `reference`, that every record is `original` / `owned` / `Futsal Manager AI`, that no record carries `attribution`, and that no `sourceName` names one of the four inspiration-only domains. Keep that list in sync when the seed grows or a new source is considered.
+The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.ts`) audits all 78 seeded records — 71 exercises plus seven Programming records — at their canonical ids and asserts that no record is `reference`, that every record is `original` / `owned` / `Futsal Manager AI`, that no record carries `attribution`, and that no `sourceName` names one of the five inspiration-only sources. It also asserts that only weekly records carry `references`, exactly one citation each, and that every citation is a public http(s) URL with one of the four citation labels. Keep that list in sync when the seed grows or a new source is considered.
+
+## Reference Citation Rule
+
+`Exercise.references` stores an **inspiration citation**, not provenance and not a licence:
+
+- A reference is a `{ label, url }` pointer to the public resource that inspired an original exercise; it grants no redistribution right and never satisfies the publish gate.
+- References must never appear in `provenance.sourceName` or `provenance.attribution`, and a cited source is still `reference-only` in the source register.
+- The weekly seed carries exactly one citation per record, with an absolute public http(s) URL; the parser allows up to three and rejects non-http(s) URLs.
+- The citation is displayed later by `exercise-detail-screen`; it must not imply endorsement or copied expression. The 21 weekly records are original authorship and passed a technical originality check during validation (no 5- or 6-word overlap and no identical titles against the four cited sources); this is not a legal opinion, so a human review is still advisable before public release.
 
 ## Author Checklist
 
@@ -87,6 +98,8 @@ Before adding or changing content in `content-package.json`:
 - [ ] CMD Mora material is `kind: 'cmd-mora'` with `licenseStatus: 'permitted'` and an `attribution` naming the club.
 - [ ] Published records use `owned` or `permitted`; anything unsettled stays `draft`.
 - [ ] The source register above lists the source.
+- [ ] The exercise is original expression; a `references` citation is added for the public inspiration source when one exists, and the URL is absolute http(s).
+- [ ] `references` is not used as provenance: `provenance.kind`/`licenseStatus` still reflect the real rights, and a citation never unlocks publication.
 - [ ] Every exercise `boardData` is valid Board Data `1.0.0` (`parseBoardData` runs inside the package parser).
 - [ ] `npm test` passes, including the seed audit, and `npm run verify` is clean.
 

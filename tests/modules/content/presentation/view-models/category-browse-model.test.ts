@@ -3,6 +3,7 @@ import { describe, it } from 'node:test';
 import { parseBoardData } from '@/shared/domain';
 import type { CategoryId } from '@/modules/content/domain/category';
 import { getCategoryById } from '@/modules/content/domain/category';
+import type { ExerciseCollection } from '@/modules/content/domain/exercise-collection';
 import type { Exercise, ExerciseStatus } from '@/modules/content/domain/exercise';
 import type { Programming, ProgrammingStatus } from '@/modules/content/domain/programming';
 import type { SessionPart } from '@/modules/content/domain/session-part';
@@ -51,6 +52,7 @@ function makeExercise(
   status: ExerciseStatus,
   provenance: Partial<ContentProvenance> = {},
   sessionPart: SessionPart = 'main',
+  collection: ExerciseCollection = 'library',
 ): Exercise {
   return {
     id,
@@ -58,6 +60,7 @@ function makeExercise(
     summary: 'Ejercicio de prueba.',
     focus: 'Salida de presión',
     sessionPart,
+    collection,
     categoryIds,
     objective: 'Superar la primera línea de presión.',
     players: { total: 8, goalkeepers: 2 },
@@ -302,6 +305,42 @@ describe('Category browse view model', () => {
           model.exercises.map((exercise) => exercise.id),
           ['publicado'],
         );
+      });
+    });
+  });
+
+  describe('Given a repository that returns library and weekly exercises together', () => {
+    describe('When the browse model is built', () => {
+      it('then only library exercises reach the category lists and session parts', () => {
+        const repository = createFakeRepository([
+          makeExercise('biblioteca-calentamiento', 'Biblioteca calentamiento', ['infantil'], 'published', {}, 'warm-up'),
+          makeExercise(
+            'semanal-principal',
+            'Semanal principal',
+            ['infantil'],
+            'published',
+            {},
+            'main',
+            'weekly',
+          ),
+          makeExercise('biblioteca-principal', 'Biblioteca principal', ['infantil'], 'published'),
+        ]);
+
+        const model = buildCategoryBrowseModel(repository, infantil);
+
+        assert.deepEqual(
+          model.exercises.map((exercise) => exercise.id),
+          ['biblioteca-calentamiento', 'biblioteca-principal'],
+        );
+        assert.deepEqual(
+          model.sessionParts.map((group) => group.exercises.map((exercise) => exercise.id)),
+          [
+            ['biblioteca-calentamiento'],
+            ['biblioteca-principal'],
+            [],
+          ],
+        );
+        assert.ok(model.exercises.every((exercise) => exercise.collection === 'library'));
       });
     });
   });

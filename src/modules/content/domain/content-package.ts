@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { BOARD_DATA_ROOT_ISSUE_PATH, safeParseBoardData } from '@/shared/domain';
 import { CATEGORY_IDS } from './category';
 import type { CategoryId } from './category';
+import { EXERCISE_COLLECTIONS } from './exercise-collection';
 import { EXERCISE_LIMITS, EXERCISE_STATUSES, type Exercise } from './exercise';
 import {
   PROGRAMMING_LIMITS,
@@ -22,7 +23,7 @@ import {
   type ContentProvenanceKind,
 } from './provenance';
 
-export const CONTENT_PACKAGE_VERSION = '1.1.0' as const;
+export const CONTENT_PACKAGE_VERSION = '1.2.0' as const;
 
 export const CONTENT_PACKAGE_ROOT_ISSUE_PATH = '(root)';
 
@@ -161,6 +162,27 @@ const constraintSchema = z.strictObject({
   detail: textSchema(240),
 });
 
+const MAX_REFERENCE_URL_LENGTH = 2048;
+
+function isAbsoluteHttpUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+
+    return (url.protocol === 'http:' || url.protocol === 'https:') && url.hostname.length > 0;
+  } catch {
+    return false;
+  }
+}
+
+const referenceSchema = z.strictObject({
+  label: textSchema(120),
+  url: z
+    .string()
+    .trim()
+    .max(MAX_REFERENCE_URL_LENGTH)
+    .refine(isAbsoluteHttpUrl, 'Reference url must be an absolute http(s) URL.'),
+});
+
 const exerciseSchema = z.strictObject({
   id: slugSchema,
   title: textSchema(90),
@@ -168,6 +190,9 @@ const exerciseSchema = z.strictObject({
   focus: textSchema(60),
   sessionPart: z.enum(SESSION_PARTS, {
     error: 'Exercise sessionPart must be "warm-up", "main", or "cool-down".',
+  }),
+  collection: z.enum(EXERCISE_COLLECTIONS, {
+    error: 'Exercise collection must be "library" or "weekly".',
   }),
   categoryIds: z.array(categoryIdSchema).min(1).max(EXERCISE_LIMITS.maxCategoryIds),
   objective: textSchema(300),
@@ -188,6 +213,13 @@ const exerciseSchema = z.strictObject({
   boardData: z.unknown(),
   status: z.enum(EXERCISE_STATUSES),
   provenance: provenanceSchema,
+  references: z
+    .array(referenceSchema)
+    .max(
+      EXERCISE_LIMITS.maxReferences,
+      'At most 3 reference citations are allowed per exercise.',
+    )
+    .optional(),
 });
 
 const sessionStructureSchema = z.strictObject({

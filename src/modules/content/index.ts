@@ -52,6 +52,10 @@ export {
   type ContentValidationIssue,
 } from './domain/content-package';
 export {
+  EXERCISE_COLLECTIONS,
+  type ExerciseCollection,
+} from './domain/exercise-collection';
+export {
   EXERCISE_INTENSITY_LEVELS,
   EXERCISE_LIMITS,
   EXERCISE_STATUSES,
@@ -62,6 +66,7 @@ export {
   type ExerciseIntensity,
   type ExerciseIntensityLevel,
   type ExercisePlayers,
+  type ExerciseReference,
   type ExerciseSpace,
   type ExerciseStatus,
 } from './domain/exercise';
@@ -97,6 +102,8 @@ export type { ContentRepository } from './domain/ports/content-repository';
 
 export { listCategories } from './application/list-categories';
 export { listExercises, type ListExercisesQuery } from './application/list-exercises';
+export { listLibraryExercises } from './application/list-library-exercises';
+export { listWeeklyHighlights } from './application/list-weekly-highlights';
 export { getExercise } from './application/get-exercise';
 export { getProgramming } from './application/get-programming';
 

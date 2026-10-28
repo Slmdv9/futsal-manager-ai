@@ -19,7 +19,7 @@ const PART_CHIP_VARIANTS: Record<SessionPart, ChipVariant> = {
   'cool-down': 'neutral',
 };
 
-export function WeeklyExercises({ exercises, totalCount }: WeeklyExercisesProps) {
+export function WeeklyExercises({ exercises }: WeeklyExercisesProps) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -28,11 +28,11 @@ export function WeeklyExercises({ exercises, totalCount }: WeeklyExercisesProps)
             Ejercicios de la Semana
           </AppText>
           <AppText variant="bodySm" color="textVariant">
-            Un ejercicio de cada tramo de la sesión
+            Una selección fuera de la biblioteca
           </AppText>
         </View>
         <AppText variant="labelMd" color="primary">
-          {formatWeeklySelection(exercises.length, totalCount)}
+          {formatWeeklySelection(exercises.length)}
         </AppText>
       </View>
       {exercises.length === 0 ? (

@@ -5,8 +5,11 @@ import { getExercise } from '@/modules/content/application/get-exercise';
 import { getProgramming } from '@/modules/content/application/get-programming';
 import { listCategories } from '@/modules/content/application/list-categories';
 import { listExercises } from '@/modules/content/application/list-exercises';
+import { listLibraryExercises } from '@/modules/content/application/list-library-exercises';
+import { listWeeklyHighlights } from '@/modules/content/application/list-weekly-highlights';
 import type { CategoryId } from '@/modules/content/domain/category';
 import type { ContentRepository } from '@/modules/content/domain/ports/content-repository';
+import type { ExerciseCollection } from '@/modules/content/domain/exercise-collection';
 import type { Exercise, ExerciseStatus } from '@/modules/content/domain/exercise';
 import type { Programming, ProgrammingStatus } from '@/modules/content/domain/programming';
 import type { ContentProvenance } from '@/modules/content/domain/provenance';
@@ -41,6 +44,7 @@ function makeExercise(
   categoryIds: CategoryId[],
   status: ExerciseStatus,
   provenance: Partial<ContentProvenance> = {},
+  collection: ExerciseCollection = 'library',
 ): Exercise {
   return {
     id,
@@ -48,6 +52,7 @@ function makeExercise(
     summary: 'Salida en 3-1 con fijación del cierre.',
     focus: 'Salida de presión',
     sessionPart: 'main',
+    collection,
     categoryIds,
     objective: 'Superar la primera línea de presión.',
     players: { total: 8, goalkeepers: 2 },
@@ -252,6 +257,57 @@ describe('Content read use cases', () => {
     });
   });
 
+  describe('Given a repository mixing library and weekly exercises', () => {
+    describe('When the collection queries run', () => {
+      const repository = createFakeRepository([
+        makeExercise('biblioteca-uno', ['infantil'], 'published', {}, 'library'),
+        makeExercise('semanal-uno', ['infantil'], 'published', {}, 'weekly'),
+      ]);
+
+      it('then the library query returns only library exercises', () => {
+        assert.deepEqual(
+          listLibraryExercises(repository).map((exercise) => exercise.id),
+          ['biblioteca-uno'],
+        );
+      });
+
+      it('then the weekly query returns only weekly records', () => {
+        assert.deepEqual(
+          listWeeklyHighlights(repository).map((exercise) => exercise.id),
+          ['semanal-uno'],
+        );
+      });
+
+      it('then listExercises still returns every publishable exercise in both collections', () => {
+        assert.deepEqual(
+          listExercises(repository).map((exercise) => exercise.id),
+          ['biblioteca-uno', 'semanal-uno'],
+        );
+      });
+    });
+  });
+
+  describe('Given weekly highlights tagged to different categories', () => {
+    describe('When weekly highlights are listed for one category', () => {
+      it('then only that category is returned, never a library record', () => {
+        const repository = createFakeRepository([
+          makeExercise('semanal-infantil', ['infantil'], 'published', {}, 'weekly'),
+          makeExercise('semanal-senior', ['senior'], 'published', {}, 'weekly'),
+          makeExercise('biblioteca-infantil', ['infantil'], 'published'),
+        ]);
+
+        assert.deepEqual(
+          listWeeklyHighlights(repository, 'infantil').map((exercise) => exercise.id),
+          ['semanal-infantil'],
+        );
+        assert.deepEqual(
+          listLibraryExercises(repository, 'infantil').map((exercise) => exercise.id),
+          ['biblioteca-infantil'],
+        );
+      });
+    });
+  });
+
   describe('Given a repository that returns published exercises without a publishable license', () => {
     describe('When exercises are listed', () => {
       it('then unlicensed, pending, and reference-only records are skipped', () => {
@@ -272,6 +328,40 @@ describe('Content read use cases', () => {
         assert.deepEqual(
           exercises.map((exercise) => exercise.id),
           ['salida-3-1'],
+        );
+      });
+
+      it('then unpublishable weekly records stay out of both collection queries', () => {
+        const repository = createFakeRepository([
+          makeExercise('semanal-licito', ['infantil'], 'published', {}, 'weekly'),
+          makeExercise(
+            'semanal-borrador',
+            ['infantil'],
+            'draft',
+            {},
+            'weekly',
+          ),
+          makeExercise(
+            'semanal-sin-licencia',
+            ['infantil'],
+            'published',
+            { licenseStatus: 'unlicensed' },
+            'weekly',
+          ),
+          makeExercise('biblioteca-licita', ['infantil'], 'published'),
+        ]);
+
+        assert.deepEqual(
+          listWeeklyHighlights(repository).map((exercise) => exercise.id),
+          ['semanal-licito'],
+        );
+        assert.deepEqual(
+          listLibraryExercises(repository).map((exercise) => exercise.id),
+          ['biblioteca-licita'],
+        );
+        assert.deepEqual(
+          listExercises(repository).map((exercise) => exercise.id),
+          ['semanal-licito', 'biblioteca-licita'],
         );
       });
 

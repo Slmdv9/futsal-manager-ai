@@ -4,6 +4,7 @@ import { describe, it } from 'node:test';
 import { BOARD_DATA_SCHEMA_VERSION, parseBoardData } from '@/shared/domain';
 import { getProgramming } from '@/modules/content/application/get-programming';
 import { listExercises } from '@/modules/content/application/list-exercises';
+import { listLibraryExercises } from '@/modules/content/application/list-library-exercises';
 import { CATEGORY_IDS, type CategoryId } from '@/modules/content/domain/category';
 import { CONTENT_PACKAGE_VERSION } from '@/modules/content/domain/content-package';
 import type { SessionPart } from '@/modules/content/domain/session-part';
@@ -739,9 +740,11 @@ const SESSION_SHAPED_EXERCISE_IDS = [
 
 const INSPIRATION_ONLY_DOMAINS = [
   'adrimartinofutsal.es.tl',
+  'editorial.uefa.com',
   'futsalcoach.es',
   'keepmove.net',
   'ejerciciosdefutbolsala.com',
+  'uefa.com',
 ];
 
 const PLACEHOLDER_PATTERN = /(?:^|\b)(?:tbd|pendiente|xxx)(?:\b|$)/i;
@@ -769,7 +772,7 @@ describe('Seed for the remaining categories', () => {
     describe('When the exercise library is listed', () => {
       it('then every RFEF category has its planned published exercises', () => {
         for (const categoryId of CATEGORY_IDS) {
-          const exercises = listExercises(repository, { categoryId });
+          const exercises = listLibraryExercises(repository, categoryId);
           const expectedCount = categoryId === 'infantil' ? 9 : 7;
 
           assert.equal(
@@ -804,8 +807,8 @@ describe('Seed for the remaining categories', () => {
         }
       });
 
-      it('then the package holds 50 unique exercises in canonical order', () => {
-        const exercises = listExercises(repository);
+      it('then the library holds 50 unique exercises in canonical order', () => {
+        const exercises = listLibraryExercises(repository);
         const expectedIds = [
           ...LEGACY_EXERCISE_IDS,
           ...NEW_EXERCISE_PLANS.map((plan) => plan.id),
@@ -824,7 +827,7 @@ describe('Seed for the remaining categories', () => {
         assert.deepEqual(
           repository
             .getExercises()
-            .slice(26)
+            .slice(26, 50)
             .map((exercise) => exercise.id),
           SESSION_SHAPED_EXERCISE_IDS,
         );
@@ -837,7 +840,7 @@ describe('Seed for the remaining categories', () => {
       )) {
         it(`then ${categoryId} returns exactly its planned ids`, () => {
           assert.deepEqual(
-            listExercises(repository, { categoryId: categoryId as CategoryId }).map(
+            listLibraryExercises(repository, categoryId as CategoryId).map(
               (exercise) => exercise.id,
             ),
             expectedIds,
@@ -846,7 +849,7 @@ describe('Seed for the remaining categories', () => {
       }
 
       it('then Cadete keeps the legacy crossover exercise first', () => {
-        const cadete = listExercises(repository, { categoryId: 'cadete' });
+        const cadete = listLibraryExercises(repository, 'cadete');
 
         assert.equal(cadete.length, 7);
         assert.equal(cadete[0].id, 'salida-3-1-presion-alta');
@@ -1090,9 +1093,9 @@ describe('Seed for the remaining categories', () => {
           })),
         ];
 
-        assert.equal(repository.getExercises().length, 50);
+        assert.equal(repository.getExercises().length, 71);
         assert.equal(programming.length, 7);
-        assert.equal(records.length, 57);
+        assert.equal(records.length, 78);
 
         for (const record of records) {
           assert.equal(record.status, 'published');
@@ -1129,9 +1132,9 @@ describe('Seed for the remaining categories', () => {
         );
       });
 
-      it('then the package is 1.1.0 and Board Data remains 1.0.0', () => {
-        assert.equal(CONTENT_PACKAGE_VERSION, '1.1.0');
-        assert.equal(readBundledPackage().contentVersion, '1.1.0');
+      it('then the package is 1.2.0 and Board Data remains 1.0.0', () => {
+        assert.equal(CONTENT_PACKAGE_VERSION, '1.2.0');
+        assert.equal(readBundledPackage().contentVersion, '1.2.0');
         assert.equal(BOARD_DATA_SCHEMA_VERSION, '1.0.0');
         for (const exercise of repository.getExercises()) {
           assert.equal(exercise.boardData.schemaVersion, '1.0.0');

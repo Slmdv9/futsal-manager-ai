@@ -10,6 +10,7 @@ The durable contract for curated content: Category reference data, Exercise, Pro
 | --- | --- |
 | Category reference data | `src/modules/content/domain/category.ts` |
 | Exercise entity | `src/modules/content/domain/exercise.ts` |
+| Collection vocabulary | `src/modules/content/domain/exercise-collection.ts` |
 | Session part vocabulary | `src/modules/content/domain/session-part.ts` |
 | Programming entity | `src/modules/content/domain/programming.ts` |
 | Provenance | `src/modules/content/domain/provenance.ts` |
@@ -53,6 +54,7 @@ An Exercise is the atomic library unit: one drill with one Board Data payload.
 | `summary` | text ≤ 240 | Spanish |
 | `focus` | text ≤ 60 | e.g. `Salida de presión`, `Defensa` |
 | `sessionPart` | `'warm-up' \| 'main' \| 'cool-down'` | required; never inferred from `focus` |
+| `collection` | `'library' \| 'weekly'` | required; separates the browsable library from weekly highlights |
 | `categoryIds` | `CategoryId[]` | 1–3 entries, unique, all known |
 | `objective` | text ≤ 300 | Spanish |
 | `players` | `{ total: 2–30; goalkeepers: 0–4 }` | `total >= goalkeepers` |
@@ -65,6 +67,7 @@ An Exercise is the atomic library unit: one drill with one Board Data payload.
 | `boardData` | `BoardData` | validated with `parseBoardData` |
 | `status` | `'draft' \| 'published' \| 'archived'` | only `published` + publishable provenance is readable |
 | `provenance` | `ContentProvenance` | required on every record; see `docs/content-licensing.md` |
+| `references` | `{ label; url }[]` | optional, ≤ 3; `url` must be an absolute http(s) URL |
 
 ## Programming
 
@@ -115,18 +118,18 @@ Attribution display belongs to `exercise-detail-screen`; the licence gate only m
 
 ```json
 {
-  "contentVersion": "1.1.0",
+  "contentVersion": "1.2.0",
   "exercises": [],
   "programming": []
 }
 ```
 
 - `CONTENT_PACKAGE_VERSION` (`src/modules/content/domain/content-package.ts`) must equal the JSON `contentVersion`. Any other version fails validation. Additive changes bump the constant and the JSON together; breaking changes need a migration decision first.
-- `contentVersion` is `1.1.0` since `Exercise` gained the required `sessionPart` field. Board Data stays `1.0.0`.
+- `contentVersion` is `1.2.0` since `Exercise` gained the required `collection` and the optional `references` fields. Board Data stays `1.0.0`.
 - `Programming.version` is the plan version of that single record, not the package version. `infantil-u14-base` is `1.1.0` because its season plan grew to three macrocycles; the six other base records are `1.0.0`.
 - Unknown keys are rejected at every level.
 - The package is imported once, parsed once, and indexed by the bundled adapter.
-- Current seed scope: 50 original exercises and 7 published Programming records, 57 audited records in total. Each non-Infantil category has seven exercises split 2 warm-up / 3 main / 2 cool-down; Infantil keeps its original nine exercises split 2 warm-up / 5 main / 2 cool-down. Package order is part of the contract and append-only: exercises 0–25 keep their original sequence (index 0 is `salida-3-1-presion-alta`, tagged `infantil` + `cadete`), then indices 26–49 append four exercises per category in `CATEGORY_IDS` order — Prebenjamín, Benjamín, Alevín, Cadete, Juvenil, Senior. Programming holds `infantil-u14-base` (version `1.1.0`) first, then `prebenjamin-u8-base`, `benjamin-u10-base`, `alevin-u12-base`, `cadete-u16-base`, `juvenil-u19-base`, and `senior-base`, each at version `1.0.0`. Seed tests assert the exact 50 exercise ids in package order and the seven Programming ids in `CATEGORY_IDS` order.
+- Current seed scope: 50 library exercises + 21 weekly highlights = 71 original exercises, plus 7 published Programming records, 78 audited records in total. Each non-Infantil category has seven library exercises split 2 warm-up / 3 main / 2 cool-down; Infantil keeps its original nine library exercises split 2 warm-up / 5 main / 2 cool-down. Every category also has exactly three weekly highlights, one per session part. Package order is part of the contract and append-only: exercises 0–25 keep their original sequence (index 0 is `salida-3-1-presion-alta`, tagged `infantil` + `cadete`), then indices 26–49 append four library exercises per category in `CATEGORY_IDS` order — Prebenjamín, Benjamín, Alevín, Cadete, Juvenil, Senior — and indices 50–70 append the 21 weekly highlights in the same category order, warm-up → main → cool-down inside each category. Programming holds `infantil-u14-base` (version `1.1.0`) first, then `prebenjamin-u8-base`, `benjamin-u10-base`, `alevin-u12-base`, `cadete-u16-base`, `juvenil-u19-base`, and `senior-base`, each at version `1.0.0`. Seed tests assert the exact 50 library ids and 21 weekly ids in package order and the seven Programming ids in `CATEGORY_IDS` order.
 
 ## Invariants And Validation
 
@@ -140,11 +143,16 @@ Attribution display belongs to `exercise-detail-screen`; the licence gate only m
 6. Licensing: a published record needs `owned` or `permitted`; published `permitted`/`cmd-mora` content needs `attribution`; every record's `kind` must allow its `licenseStatus` (see `docs/content-licensing.md`).
 7. At most one `published` Programming record per `categoryId`.
 8. Every Exercise has a `sessionPart` of `warm-up`, `main`, or `cool-down`; a missing value reports `exercises.<i>.sessionPart`, and an unknown value fails with the three allowed values.
-9. Every Exercise `boardData` passes `parseBoardData`; Board Data issues are re-prefixed under `exercises.<i>.boardData.`.
+9. Every Exercise has a `collection` of `library` or `weekly`; a missing or unknown value reports `exercises.<i>.collection` with `Exercise collection must be "library" or "weekly".`
+10. Every Exercise `references` entry needs a `label` and an absolute http(s) `url`; invalid URLs report `exercises.<i>.references.<j>.url: Reference url must be an absolute http(s) URL.` and more than three entries report `exercises.<i>.references: At most 3 reference citations are allowed per exercise.`
+11. Every Exercise `boardData` passes `parseBoardData`; Board Data issues are re-prefixed under `exercises.<i>.boardData.`.
 
 Issues use dot paths like Board Data issues, for example:
 
 - `exercises.26.sessionPart` — missing or unsupported session part.
+- `exercises.50.collection` — missing or unsupported exercise collection.
+- `exercises.50.references.0.url` — reference url that is not an absolute http(s) URL.
+- `exercises.50.references` — more than three reference citations.
 - `exercises.1.categoryIds.0` — unknown category id on the second exercise.
 - `exercises.1.id` — duplicate exercise id.
 - `exercises.1.categoryIds` — empty category list.
@@ -166,8 +174,10 @@ Port (`ContentRepository`) exposes raw package reads: `getExercises`, `getExerci
 | Use case | Behavior |
 | --- | --- |
 | `listCategories()` | the seven frozen RFEF categories in order |
-| `listExercises(repository, { categoryId? })` | published and publishable only, deduplicated by id, optionally filtered by one category |
-| `getExercise(repository, id)` | publishable exercise or `null` (archived, draft, unlicensed, and unknown ids return `null`) |
+| `listExercises(repository, { categoryId? })` | published and publishable only, deduplicated by id, optionally filtered by one category; spans both collections |
+| `listLibraryExercises(repository, categoryId?)` | the same publishable set narrowed to `collection: 'library'` |
+| `listWeeklyHighlights(repository, categoryId?)` | the same publishable set narrowed to `collection: 'weekly'` |
+| `getExercise(repository, id)` | publishable exercise or `null` (archived, draft, unlicensed, and unknown ids return `null`); can return a weekly record |
 | `getProgramming(repository, categoryId)` | the publishable record or `null`; never invents content |
 
 Visibility is `isPublishableExercise` / `isPublishableProgramming`: status `published` **and** a publishable license status. `isPublishedExercise` / `isPublishedProgramming` exist for status-only authoring checks and are never a visibility rule — a non-bundled repository cannot leak `pending`, `unlicensed`, or `reference-only` content into browsing or AI grounding.
@@ -176,9 +186,9 @@ A two-category exercise appears once under each category because the filter read
 
 `createBundledContentRepository()` is the infrastructure factory: it imports the JSON as `unknown`, parses it once, indexes exercises by id and Programming by category, and returns the cached repository. Route and other-module code must reach content through `@/modules/content`.
 
-Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → `buildCategoryBrowseModel` → `listExercises`/`getProgramming` → `ContentRepository` → bundled adapter → shared `parseBoardData`. The browse model groups the same `listExercises` result with `groupExercisesBySessionPart` into the fixed `warm-up` → `main` → `cool-down` order, preserving package order inside each group; grouping is presentation-only and adds no repository call.
+Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `ExploreScreen({ repository })` → session category selection → `buildCategoryBrowseModel` → `listLibraryExercises`/`getProgramming` → `ContentRepository` → bundled adapter → shared `parseBoardData`. The browse model groups the library-only result with `groupExercisesBySessionPart` into the fixed `warm-up` → `main` → `cool-down` order, preserving package order inside each group; grouping is presentation-only and adds no repository call.
 
-`ExploreScreen` is the first read-layer consumer. It renders the seven RFEF chips, a compact anonymous hero with counts from `listExercises`/`listCategories`, the AI entry link to the Asistente IA tab, the selected Programming glance card, a deterministic weekly slice, and the filtered Exercise Library. The pure view models call only `listExercises` and `getProgramming`, so visibility and deduplication stay in the read layer. The weekly slice takes the first exercise of each `sessionPart` group in package order, ordered warm-up → main → cool-down, and skips a part with no exercises; the methodology glance card maps only `formativeStage`, `focus`, `playModel`, `sessionDurationMinutes` and the first three `keyConcepts` of the publishable `Programming` record. Nothing is invented when the record or a session part is missing. The selected category is **session-only UI state** owned by `content/presentation` (mounted once in `src/app/_layout.tsx`): it survives tab and `/design-system` navigation, is never written to device storage, and resets on app restart. There is no "all categories" state and no default category.
+`ExploreScreen` is the first read-layer consumer. It renders the seven RFEF chips, a compact anonymous hero with counts from `listExercises`/`listCategories` (`71 Ejercicios` because the hero counts both collections), the AI entry link to the Asistente IA tab, the selected Programming glance card, a weekly highlight block, and the filtered Exercise Library. The pure view models call only the read layer, so visibility and deduplication stay there. `buildCategoryBrowseModel` reads `listLibraryExercises`, so the library stays at 7/9 exercises. `buildExploreGeneralModel` keeps `buildCategoryBrowseModel` for `programming` but builds the weekly block from `listWeeklyHighlights`, one highlight per `sessionPart` in the fixed warm-up → main → cool-down order; it is deterministic and has no scheduler or persisted "current week". The block subtitle reads `Una selección fuera de la biblioteca` and the counter reads `N ejercicios`. The methodology glance card maps only `formativeStage`, `focus`, `playModel`, `sessionDurationMinutes` and the first three `keyConcepts` of the publishable `Programming` record. Nothing is invented when the record or a session part is missing. The selected category is **session-only UI state** owned by `content/presentation` (mounted once in `src/app/_layout.tsx`): it survives tab and `/design-system` navigation, is never written to device storage, and resets on app restart. There is no "all categories" state and no default category.
 
 ## Adding Or Changing Content
 
@@ -186,15 +196,16 @@ Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `Ex
 2. Validate every new Board Data payload against `docs/board-data-schema.md` (the package parser does this automatically; the test suite fails if it does not).
 3. Keep exercise and programming ids unique and stable; ids are how browsing, saves, and AI grounding reference content.
 4. Record provenance with the source register in `docs/content-licensing.md`: `kind`, `sourceName`, and a `licenseStatus` that the kind allows, plus `attribution` when permission depends on credit.
-5. Publish only `owned` or `permitted` content; keep `pending`, `unlicensed`, and `reference-only` material `draft` or `archived`.
-6. Run `npm test` (content suites validate the real package, including the seed licensing audit) and `npm run verify`.
+5. Set `collection` to `library` for browsable drills or `weekly` for weekly highlights. Weekly records carry exactly one `references` citation in the current seed; a citation is not provenance and never satisfies the licence gate.
+6. Publish only `owned` or `permitted` content; keep `pending`, `unlicensed`, and `reference-only` material `draft` or `archived`.
+7. Run `npm test` (content suites validate the real package, including the seed licensing audit) and `npm run verify`.
 
 ## Known Gaps
 
-- The general Explorar screen now consumes the read layer for the hero counts, category filter, methodology glance card, deterministic weekly slice and grouped library. The dedicated category detail (full methodology, objectives, macrocycles/microcycles, open-on-board) belongs to `explore-by-category-screen`; exercise detail, attribution display and board rendering remain separate features.
-- The licence policy is enforced, but no screen displays `attribution` yet; `exercise-detail-screen` owns that copy and placement.
+- The general Explorar screen now consumes the read layer for the hero counts, category filter, methodology glance card, weekly highlight block and grouped library. The dedicated category detail (full methodology, objectives, macrocycles/microcycles, open-on-board) belongs to `explore-by-category-screen`; exercise detail, attribution display, reference citation display and board rendering remain separate features.
+- The licence policy is enforced, but no screen displays `attribution` or `references` yet; `exercise-detail-screen` owns that copy and placement.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
-- Every category now has a session-shaped library: six categories at seven exercises (2/3/2) and Infantil U14 at nine (2/5/2). The Infantil assignment places two extra drills in the main part and keeps the two cool-down drills; it is flagged for coach review in `docs/risks-and-open-questions.md`.
+- Every category now has a session-shaped library: six categories at seven exercises (2/3/2) and Infantil U14 at nine (2/5/2), plus three dedicated weekly highlights outside the library. The Infantil assignment places two extra drills in the main part and keeps the two cool-down drills; it is flagged for coach review in `docs/risks-and-open-questions.md`.
 - Exercise cards show no board preview yet; `exercise-preview-board-thumbnail` waits on `tactics-board-renderer`.
 - Board Data is authored but not rendered yet; legibility, 2:1 fidelity, and phase playback belong to the board features.

@@ -145,14 +145,16 @@ describe('Explore general screen structure', () => {
         );
       });
 
-      it('then the weekly block pins the session-shaped rule and the counter formatter', () => {
+      it('then the weekly block pins the library-independent subtitle and counter', () => {
         assert.match(weeklyExercisesSource, /Ejercicios de la Semana/);
-        assert.match(weeklyExercisesSource, /Un ejercicio de cada tramo de la sesión/);
+        assert.match(weeklyExercisesSource, /Una selección fuera de la biblioteca/);
         assert.match(
           weeklyExercisesSource,
           /Todavía no hay ejercicios para esta categoría\./,
         );
-        assert.match(weeklyExercisesSource, /formatWeeklySelection/);
+        assert.match(weeklyExercisesSource, /formatWeeklySelection\(exercises\.length\)/);
+        assert.doesNotMatch(weeklyExercisesSource, /formatWeeklySelection\([^)]*,/);
+        assert.doesNotMatch(weeklyExercisesSource, /totalCount\b(?!:)/);
         assert.doesNotMatch(weeklyExercisesSource, /Ver Todos/);
       });
 
