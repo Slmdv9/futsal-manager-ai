@@ -1,6 +1,8 @@
+import { Link } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import { AppText, Card } from '@/shared/ui';
+import { AppButton, AppText, Card } from '@/shared/ui';
 import { spacing } from '@/shared/theme';
+import { buildBoardHref } from '../view-models/board-routing';
 import {
   formatExerciseCount,
   formatExerciseMeta,
@@ -54,6 +56,16 @@ export function ExerciseLibraryList({ groups }: ExerciseLibraryListProps) {
                     <AppText variant="labelMd" color="textVariant">
                       {formatExerciseMeta(exercise)}
                     </AppText>
+                    <Link href={buildBoardHref(exercise.id)} asChild>
+                      <AppButton
+                        label="Abrir en Pizarra"
+                        variant="secondary"
+                        fullWidth
+                        style={styles.boardAction}
+                        accessibilityLabel={`Abrir ${exercise.title} en la Pizarra`}
+                        accessibilityHint="Abre la pestaña Pizarra con este ejercicio seleccionado"
+                      />
+                    </Link>
                   </View>
                 </Card>
               ))
@@ -86,5 +98,8 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     gap: spacing.sm,
+  },
+  boardAction: {
+    minHeight: spacing.xl + spacing.md,
   },
 });

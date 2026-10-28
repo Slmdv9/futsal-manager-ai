@@ -9,6 +9,11 @@ export {
   useCategorySelection,
 } from './presentation/state/category-selection-provider';
 export {
+  buildBoardExerciseTarget,
+  buildBoardHref,
+  type BoardExerciseTargetData,
+} from './presentation/view-models/board-routing';
+export {
   buildCategoryBrowseModel,
   formatCategoryLabel,
   formatExerciseCount,

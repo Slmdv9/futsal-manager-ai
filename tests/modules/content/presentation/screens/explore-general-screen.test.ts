@@ -27,6 +27,7 @@ const exerciseLibraryListSource = readPresentationFile(
 const exploreGeneralModelSource = readPresentationFile(
   'view-models/explore-general-model.ts',
 );
+const boardRoutingSource = readPresentationFile('view-models/board-routing.ts');
 
 const newOrChangedSources = [
   exploreScreenSource,
@@ -37,6 +38,7 @@ const newOrChangedSources = [
   categoryFilterBarSource,
   exerciseLibraryListSource,
   exploreGeneralModelSource,
+  boardRoutingSource,
 ];
 
 function expectationIndex(source: string, value: string): number {
@@ -210,6 +212,7 @@ describe('Explore general screen structure', () => {
         for (const source of newOrChangedSources) {
           assert.doesNotMatch(source, /#[0-9a-fA-F]{3,8}\b/);
           assert.doesNotMatch(source, /content\/infrastructure/);
+          assert.doesNotMatch(source, /@\/modules\/board/);
           assert.doesNotMatch(source, /Ver Pizarra Táctica/);
           assert.doesNotMatch(source, /Todas las Categorías/);
           assert.doesNotMatch(source, /Ver Todos/);
