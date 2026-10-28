@@ -28,6 +28,18 @@ const exploreGeneralModelSource = readPresentationFile(
   'view-models/explore-general-model.ts',
 );
 const boardRoutingSource = readPresentationFile('view-models/board-routing.ts');
+const exerciseDetailScreenSource = readPresentationFile(
+  'screens/exercise-detail-screen.tsx',
+);
+const exerciseDetailLinkSource = readPresentationFile(
+  'components/exercise-detail-link.tsx',
+);
+const exerciseDetailModelSource = readPresentationFile(
+  'view-models/exercise-detail-model.ts',
+);
+const exerciseDetailRoutingSource = readPresentationFile(
+  'view-models/exercise-detail-routing.ts',
+);
 
 const newOrChangedSources = [
   exploreScreenSource,
@@ -39,6 +51,10 @@ const newOrChangedSources = [
   exerciseLibraryListSource,
   exploreGeneralModelSource,
   boardRoutingSource,
+  exerciseDetailScreenSource,
+  exerciseDetailLinkSource,
+  exerciseDetailModelSource,
+  exerciseDetailRoutingSource,
 ];
 
 function expectationIndex(source: string, value: string): number {

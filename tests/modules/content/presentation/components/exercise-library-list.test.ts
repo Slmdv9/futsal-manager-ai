@@ -80,6 +80,79 @@ describe('Exercise library board action', () => {
         assert.match(exerciseLibraryListSource, /Sin ejercicios en este tramo\./);
       });
     });
+
+    describe('When the detail entry is inspected', () => {
+      it('then one ExerciseDetailLink wraps title, summary and meta before the board action', () => {
+        assert.equal(
+          (exerciseLibraryListSource.match(/<ExerciseDetailLink/g) ?? []).length,
+          1,
+        );
+        assert.match(
+          exerciseLibraryListSource,
+          /<ExerciseDetailLink\s+exerciseId=\{exercise\.id\}\s+title=\{exercise\.title\}\s*>/,
+        );
+        assert.equal(
+          exerciseLibraryListSource.indexOf('<ExerciseDetailLink') <
+            exerciseLibraryListSource.indexOf('<Link href={buildBoardHref'),
+          true,
+        );
+        const detailEntry = exerciseLibraryListSource.slice(
+          exerciseLibraryListSource.indexOf('<ExerciseDetailLink'),
+          exerciseLibraryListSource.indexOf('</ExerciseDetailLink>'),
+        );
+
+        assert.match(detailEntry, /\{exercise\.title\}/);
+        assert.match(detailEntry, /\{exercise\.summary\}/);
+        assert.match(detailEntry, /formatExerciseMeta\(exercise\)/);
+      });
+    });
+
+    describe('When the board action is re-checked after the detail entry', () => {
+      it('then the accepted Abrir en Pizarra action is unchanged', () => {
+        assert.equal(
+          (
+            exerciseLibraryListSource.match(
+              /<Link href=\{buildBoardHref\(exercise\.id\)\} asChild>/g,
+            ) ?? []
+          ).length,
+          1,
+        );
+        assert.equal(
+          (exerciseLibraryListSource.match(/label="Abrir en Pizarra"/g) ?? []).length,
+          1,
+        );
+        assert.match(exerciseLibraryListSource, /variant="secondary"/);
+        assert.match(exerciseLibraryListSource, /fullWidth/);
+        assert.match(exerciseLibraryListSource, /style=\{styles\.boardAction\}/);
+        assert.match(
+          exerciseLibraryListSource,
+          /accessibilityLabel=\{`Abrir \$\{exercise\.title\} en la Pizarra`\}/,
+        );
+        assert.match(exerciseLibraryListSource, /minHeight: spacing\.xl \+ spacing\.md/);
+      });
+    });
+  });
+
+  describe('Given the library headings and counts', () => {
+    describe('When the list copy is inspected', () => {
+      it('then headings, counts, empty states and the weekly scan are unchanged', () => {
+        assert.match(exerciseLibraryListSource, /Biblioteca de ejercicios/);
+        assert.match(exerciseLibraryListSource, /accessibilityRole="header"/);
+        assert.match(exerciseLibraryListSource, /formatExerciseCount\(total\)/);
+        assert.match(
+          exerciseLibraryListSource,
+          /formatExerciseCount\(group\.exercises\.length\)/,
+        );
+        assert.match(
+          exerciseLibraryListSource,
+          /Todavía no hay ejercicios para esta categoría\./,
+        );
+        assert.match(exerciseLibraryListSource, /Sin ejercicios en este tramo\./);
+        assert.doesNotMatch(weeklyExercisesSource, /Abrir en Pizarra/);
+        assert.doesNotMatch(weeklyExercisesSource, /buildBoardHref/);
+        assert.doesNotMatch(weeklyExercisesSource, /\bLink\b/);
+      });
+    });
   });
 
   describe('Given the weekly highlights block', () => {

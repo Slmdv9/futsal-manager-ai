@@ -7,6 +7,7 @@ import {
   formatWeeklySelection,
   type WeeklyExercise,
 } from '../view-models/explore-general-model';
+import { ExerciseDetailLink } from './exercise-detail-link';
 
 type WeeklyExercisesProps = {
   exercises: readonly WeeklyExercise[];
@@ -43,15 +44,20 @@ export function WeeklyExercises({ exercises }: WeeklyExercisesProps) {
           <Card key={exercise.id}>
             <View style={styles.cardContent}>
               <Chip label={label.toUpperCase()} variant={PART_CHIP_VARIANTS[part]} />
-              <AppText variant="headlineSm" numberOfLines={2}>
-                {exercise.title}
-              </AppText>
-              <AppText variant="bodySm" color="textVariant" numberOfLines={2}>
-                {exercise.summary}
-              </AppText>
-              <AppText variant="labelMd" color="textVariant">
-                {formatExerciseMeta(exercise)}
-              </AppText>
+              <ExerciseDetailLink
+                exerciseId={exercise.id}
+                title={exercise.title}
+              >
+                <AppText variant="headlineSm" numberOfLines={2}>
+                  {exercise.title}
+                </AppText>
+                <AppText variant="bodySm" color="textVariant" numberOfLines={2}>
+                  {exercise.summary}
+                </AppText>
+                <AppText variant="labelMd" color="textVariant">
+                  {formatExerciseMeta(exercise)}
+                </AppText>
+              </ExerciseDetailLink>
             </View>
           </Card>
         ))

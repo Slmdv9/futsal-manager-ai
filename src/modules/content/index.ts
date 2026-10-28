@@ -1,4 +1,5 @@
 export { ExploreScreen } from './presentation/screens/explore-screen';
+export { ExerciseDetailScreen } from './presentation/screens/exercise-detail-screen';
 export {
   INITIAL_CATEGORY_SELECTION,
   selectCategory,
@@ -13,6 +14,16 @@ export {
   buildBoardHref,
   type BoardExerciseTargetData,
 } from './presentation/view-models/board-routing';
+export {
+  buildExerciseDetailModel,
+  type ExerciseDetailModel,
+  type ExerciseDetailPhase,
+  type ExerciseDetailRow,
+} from './presentation/view-models/exercise-detail-model';
+export {
+  buildExerciseDetailHref,
+  type ExerciseDetailHref,
+} from './presentation/view-models/exercise-detail-routing';
 export {
   buildCategoryBrowseModel,
   formatCategoryLabel,

@@ -46,7 +46,7 @@ The concrete `ContentProvenance` shape, the package contract, and the validation
 
 `requiresAttribution(provenance)` is true when `licenseStatus === 'permitted'` or `kind === 'cmd-mora'`. A published record that satisfies it and omits `attribution` fails validation.
 
-Attribution *display* is not implemented yet: `exercise-detail-screen` renders the value in Spanish. The policy only guarantees the value exists.
+Attribution *display* is shipped: the exercise detail screen renders `provenance.attribution` verbatim under `Atribución` when present. The policy guarantees the value exists.
 
 ## Enforcement Points
 
@@ -87,7 +87,7 @@ The seed audit test (`tests/modules/content/infrastructure/seed-provenance.test.
 - A reference is a `{ label, url }` pointer to the public resource that inspired an original exercise; it grants no redistribution right and never satisfies the publish gate.
 - References must never appear in `provenance.sourceName` or `provenance.attribution`, and a cited source is still `reference-only` in the source register.
 - The weekly seed carries exactly one citation per record, with an absolute public http(s) URL; the parser allows up to three and rejects non-http(s) URLs.
-- The citation is displayed later by `exercise-detail-screen`; it must not imply endorsement or copied expression. The 21 weekly records are original authorship and passed a technical originality check during validation (no 5- or 6-word overlap and no identical titles against the four cited sources); this is not a legal opinion, so a human review is still advisable before public release.
+- The exercise detail screen displays the citation under `Inspirado en` with its label, public URL and the original-content disclaimer; it must not imply endorsement or copied expression. The 21 weekly records are original authorship and passed a technical originality check during validation (no 5- or 6-word overlap and no identical titles against the four cited sources); this is not a legal opinion, so a human review is still advisable before public release.
 
 ## Author Checklist
 

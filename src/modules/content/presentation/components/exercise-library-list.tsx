@@ -8,6 +8,7 @@ import {
   formatExerciseMeta,
   type SessionPartGroup,
 } from '../view-models/category-browse-model';
+import { ExerciseDetailLink } from './exercise-detail-link';
 
 type ExerciseLibraryListProps = {
   groups: readonly SessionPartGroup[];
@@ -49,13 +50,18 @@ export function ExerciseLibraryList({ groups }: ExerciseLibraryListProps) {
               group.exercises.map((exercise) => (
                 <Card key={exercise.id}>
                   <View style={styles.cardContent}>
-                    <AppText variant="headlineSm">{exercise.title}</AppText>
-                    <AppText variant="bodyMd" color="textVariant">
-                      {exercise.summary}
-                    </AppText>
-                    <AppText variant="labelMd" color="textVariant">
-                      {formatExerciseMeta(exercise)}
-                    </AppText>
+                    <ExerciseDetailLink
+                      exerciseId={exercise.id}
+                      title={exercise.title}
+                    >
+                      <AppText variant="headlineSm">{exercise.title}</AppText>
+                      <AppText variant="bodyMd" color="textVariant">
+                        {exercise.summary}
+                      </AppText>
+                      <AppText variant="labelMd" color="textVariant">
+                        {formatExerciseMeta(exercise)}
+                      </AppText>
+                    </ExerciseDetailLink>
                     <Link href={buildBoardHref(exercise.id)} asChild>
                       <AppButton
                         label="Abrir en Pizarra"

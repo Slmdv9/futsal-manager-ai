@@ -37,6 +37,7 @@ export default function RootLayout() {
       <CategorySelectionProvider>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="ejercicios/[exerciseId]" />
           <Stack.Screen name="design-system" />
         </Stack>
       </CategorySelectionProvider>

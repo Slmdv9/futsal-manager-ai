@@ -110,7 +110,7 @@ The current seed package is `original` with `licenseStatus: 'owned'`, `sourceNam
 - published `permitted` or `cmd-mora` content must carry an `attribution`;
 - the read layer also filters published-but-unlicensed records, so a repository that bypasses the parser cannot leak them.
 
-Attribution display belongs to `exercise-detail-screen`; the licence gate only makes the value required and exposes `requiresAttribution`.
+The licence gate makes the value required and exposes `requiresAttribution`; the exercise detail screen renders it under `Atribución` when present.
 
 ## Package Contract
 
@@ -202,8 +202,8 @@ Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `Ex
 
 ## Known Gaps
 
-- The general Explorar screen now consumes the read layer for the hero counts, category filter, methodology glance card, weekly highlight block and grouped library. The dedicated category detail (full methodology, objectives, macrocycles/microcycles, open-on-board) belongs to `explore-by-category-screen`; exercise detail, attribution display, reference citation display and board rendering remain separate features.
-- The licence policy is enforced, but no screen displays `attribution` or `references` yet; `exercise-detail-screen` owns that copy and placement.
+- The general Explorar screen consumes the read layer for the hero counts, category filter, methodology glance card, weekly highlight block and grouped library. The category experience (methodology, weekly block, library) lives on that same screen; the exercise detail screen renders metadata, the ordered phase text, `Inspirado en` and `Atribución`, while board rendering remains a separate feature.
+- The licence policy is enforced, and the exercise detail screen displays `provenance.attribution` under `Atribución` when present and `references` under `Inspirado en` when the exercise has citations; records without either render no source block.
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
 - Every category now has a session-shaped library: six categories at seven exercises (2/3/2) and Infantil U14 at nine (2/5/2), plus three dedicated weekly highlights outside the library. The Infantil assignment places two extra drills in the main part and keeps the two cool-down drills; it is flagged for coach review in `docs/risks-and-open-questions.md`.
