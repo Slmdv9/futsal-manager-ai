@@ -46,17 +46,13 @@ export function ExploreScreen({ repository }: ExploreScreenProps) {
           selectedCategoryId={selectedCategory?.id ?? null}
           onSelect={selectCategory}
         />
-        <AiSessionEntryCard />
         {browseModel ? (
           <>
             <MethodologyOverviewCard
               category={browseModel.category}
               methodology={generalModel.methodology}
             />
-            <WeeklyExercises
-              exercises={generalModel.weeklyExercises}
-              totalCount={browseModel.exercises.length}
-            />
+            <WeeklyExercises exercises={generalModel.weeklyExercises} />
             <ExerciseLibraryList groups={browseModel.sessionParts} />
           </>
         ) : (
@@ -72,6 +68,7 @@ export function ExploreScreen({ repository }: ExploreScreenProps) {
             </View>
           </Card>
         )}
+        <AiSessionEntryCard />
         <Link href="/design-system" asChild>
           <AppButton label="Ver sistema de diseño" variant="secondary" fullWidth />
         </Link>

@@ -50,20 +50,47 @@ function expectationIndex(source: string, value: string): number {
 describe('Explore general screen structure', () => {
   describe('Given the Explorar screen source', () => {
     describe('When the JSX composition is inspected', () => {
-      it('then it renders the hero, filter, AI card, methodology, weekly block, and library in prototype order', () => {
+      it('then it renders the hero, filter, methodology, weekly block, library, and AI card in the final order', () => {
         const order = [
           '<ExploreHero',
           '<CategoryFilterBar',
-          '<AiSessionEntryCard',
           '<MethodologyOverviewCard',
           '<WeeklyExercises',
           '<ExerciseLibraryList',
+          '<AiSessionEntryCard',
         ].map((tag) => expectationIndex(exploreScreenSource, tag));
 
         assert.deepEqual(
           [...order].sort((left, right) => left - right),
           order,
         );
+      });
+
+      it('then it renders the AI card once, after both category branches', () => {
+        const aiCardIndex = expectationIndex(exploreScreenSource, '<AiSessionEntryCard');
+
+        assert.equal(
+          exploreScreenSource.split('<AiSessionEntryCard').length - 1,
+          1,
+          'Expected a single AiSessionEntryCard element outside both category branches.',
+        );
+        assert.equal(
+          aiCardIndex > expectationIndex(exploreScreenSource, 'Elige una categoría'),
+          true,
+        );
+        assert.equal(
+          aiCardIndex > expectationIndex(exploreScreenSource, '<ExerciseLibraryList'),
+          true,
+        );
+      });
+
+      it('then it keeps the accepted AI card internals while moving it', () => {
+        assert.match(aiSessionEntryCardSource, /href="\/asistente"/);
+        assert.match(aiSessionEntryCardSource, /variant="ai"/);
+        assert.match(aiSessionEntryCardSource, /fullWidth/);
+        assert.match(aiSessionEntryCardSource, /minHeight: spacing\.xl \+ spacing\.md/);
+        assert.match(aiSessionEntryCardSource, /Pídele una sesión a la IA/);
+        assert.match(aiSessionEntryCardSource, /PRÓXIMAMENTE/);
       });
 
       it('then it retires ProgrammingSummaryCard and keeps the gallery link last', () => {
@@ -73,6 +100,16 @@ describe('Explore general screen structure', () => {
         assert.match(exploreScreenSource, /Ver sistema de diseño/);
         assert.equal(
           exploreScreenSource.indexOf('Ver sistema de diseño') >
+            exploreScreenSource.indexOf('<ExerciseLibraryList'),
+          true,
+        );
+        assert.equal(
+          exploreScreenSource.indexOf('<AiSessionEntryCard') <
+            exploreScreenSource.indexOf('href="/design-system"'),
+          true,
+        );
+        assert.equal(
+          exploreScreenSource.indexOf('href="/design-system"') >
             exploreScreenSource.indexOf('<ExerciseLibraryList'),
           true,
         );
@@ -154,7 +191,8 @@ describe('Explore general screen structure', () => {
         );
         assert.match(weeklyExercisesSource, /formatWeeklySelection\(exercises\.length\)/);
         assert.doesNotMatch(weeklyExercisesSource, /formatWeeklySelection\([^)]*,/);
-        assert.doesNotMatch(weeklyExercisesSource, /totalCount\b(?!:)/);
+        assert.doesNotMatch(weeklyExercisesSource, /totalCount/);
+        assert.doesNotMatch(exploreScreenSource, /totalCount/);
         assert.doesNotMatch(weeklyExercisesSource, /Ver Todos/);
       });
 

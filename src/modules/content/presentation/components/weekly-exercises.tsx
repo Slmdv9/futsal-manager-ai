@@ -10,7 +10,6 @@ import {
 
 type WeeklyExercisesProps = {
   exercises: readonly WeeklyExercise[];
-  totalCount: number;
 };
 
 const PART_CHIP_VARIANTS: Record<SessionPart, ChipVariant> = {
