@@ -1,3 +1,7 @@
-import { ExploreScreen } from '@/modules/content';
+import { createBundledContentRepository, ExploreScreen } from '@/modules/content';
 
-export default ExploreScreen;
+const repository = createBundledContentRepository();
+
+export default function ExplorarRoute() {
+  return <ExploreScreen repository={repository} />;
+}

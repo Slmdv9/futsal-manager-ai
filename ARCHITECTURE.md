@@ -23,17 +23,18 @@ src/
   app/                              # Expo Router routes and composition root
     (tabs)/
       index.tsx                     # Explorar -> content public API
-      pizarra.tsx                   # Pizarra -> board public API
+      pizarra.tsx                   # Pizarra -> board public API + content target
       asistente.tsx                 # Asistente IA -> ai public API
       mi-club.tsx                   # Mi Club -> club public API
       _layout.tsx                   # Tabs configuration
     _layout.tsx                     # Fonts, splash, root stack
     design-system.tsx               # Development gallery
+    ejercicios/[exerciseId].tsx     # Exercise detail -> content public API
   modules/
     content/
-      domain/
-      application/
-      infrastructure/
+      domain/                       # Categories, Exercise, Programming, package parser, port
+      application/                  # Published-only read use cases
+      infrastructure/               # Bundled content-package.json and repository adapter
       presentation/
         screens/
       index.ts                      # Public API
@@ -149,11 +150,18 @@ All modules may import `shared`. The only planned cross-module dependency is `ai
 
 ### `content`
 
-Owns the Exercise Library, Category reference data, Programming, the content read layer, and the Explorar/exercise-detail screens. The next feature, `content-model-and-store`, fills the domain, application, and infrastructure layers. Board Data comes from the shared kernel.
+Owns the Exercise Library, Category reference data, Programming, the content read layer, and the Explorar/exercise-detail screens. Board Data comes from the shared kernel.
+
+- `domain`: the seven frozen RFEF `Category` brackets (`category.ts`), `Exercise`, `ExerciseCollection` (`exercise-collection.ts`), `Programming`, the shared `SESSION_PARTS`/`SessionPart` vocabulary (`session-part.ts`), `ContentProvenance` with the licence policy helpers (`isPublishableProvenance`, `requiresAttribution`, `isLicenseStatusAllowedForKind`), the strict `content-package.ts` contract with `parseContentPackage`/`safeParseContentPackage` and `ContentValidationError`, and the `ContentRepository` port in `domain/ports`.
+- `application`: publishable-only read use cases — `listCategories`, `listExercises` (optional category filter, deduplicated, both collections), `listLibraryExercises` and `listWeeklyHighlights` (the same publishable set narrowed by `collection`), `getExercise`, `getProgramming` (single publishable record or `null`). Visibility uses `isPublishableExercise`/`isPublishableProgramming`, so published but unlicensed records are filtered even from a non-bundled repository.
+- `infrastructure`: `content/content-package.json`, the single versioned content package (`contentVersion` `1.2.0`, 71 exercises plus seven Programming records), and `bundled-content-repository.ts`, which imports the JSON as `unknown`, parses it once through `domain/content-package.ts`, indexes by exercise id and Programming category, and exposes `createBundledContentRepository()`.
+- `presentation`: the general Explorar composition plus the exercise detail surface. `ExploreScreen` receives the `ContentRepository` as a prop, reads the session-scoped `CategorySelectionProvider`/`useCategorySelection`, and composes the prop-driven `ExploreHero` (real counts from `listExercises`/`listCategories`, so `71 Ejercicios`), `CategoryFilterBar`, `MethodologyOverviewCard`, `WeeklyExercises`, `ExerciseLibraryList`, and `AiSessionEntryCard` last, directly above the retained `Ver sistema de diseño` technical footer. The pure `category-selection.ts` reducer and the `category-browse-model.ts` / `explore-general-model.ts` view models own the selection transitions, the library-only filtered/grouped list (from `listLibraryExercises`), the weekly highlight block (from `listWeeklyHighlights`, one exercise per session part, fixed warm-up → main → cool-down order, subtitle `Una selección fuera de la biblioteca`, counter `N ejercicios`), and the Programming-derived methodology glance card; no component filters status or provenance itself. Every library card carries exactly one `Abrir en Pizarra` action built with `buildBoardHref(exercise.id)` and a `Link asChild` around a full-width secondary `AppButton`; weekly cards expose no action. `board-routing.ts` owns that href plus `buildBoardExerciseTarget(exercise)`, a pure `Exercise` → board-safe target mapping that copies only `id`, `title`, `summary`, and `boardData`. `ExerciseDetailLink` wraps each library and weekly card's title, summary and meta in a single accessible `Link asChild` + `Pressable` that opens `/ejercicios/[exerciseId]` through `buildExerciseDetailHref`; it is a sibling of the library board action and the weekly card stays board-free. `ExerciseDetailScreen({ exercise })` takes the publishable exercise or `null`, builds `exercise-detail-model.ts` (seven fixed fact rows, verbatim copy, phases sorted by `order` and mapped to text only, optional lists, `references` defaulting to `[]` and `attribution` from provenance) and renders the header card, `Ficha del ejercicio`, `Restricciones`, `Paso a paso`, `Consignas para el entrenador`, `Inspirado en` and `Atribución` only when their data exists. `AiSessionEntryCard` is a navigation link to the existing Asistente IA tab (`Link href="/asistente"`): it imports no `ai` module code and performs no AI request. It renders once, outside the selected/unselected branch, so it is the last product card in both states — after the library when a category is selected and after the `Elige una categoría` prompt otherwise. The detail screen draws no pitch, SVG, token, arrow or phase playback; the animated board belongs to `tactics-board-renderer`.
+
+The bundled seed holds 50 library exercises, 21 weekly highlights, and seven Programming records, one per RFEF category: each category has a session-shaped library with a required `sessionPart` — seven exercises at 2 warm-up / 3 main / 2 cool-down, except Infantil U14 at 2/5/2 with its original nine exercises — plus three dedicated weekly highlights (indices 50–70) outside the library. The 24 appended library exercises occupy package indices 26–49, four per remaining category; `infantil-u14-base` keeps its plan version `1.1.0`. The content contract, invariants, and validation paths are documented in `docs/content-model.md`; the licensing gate, source register, citation rule, and author checklist in `docs/content-licensing.md`. The exercise detail screen renders `references` under `Inspirado en` with the original-content disclaimer and `provenance.attribution` under `Atribución` when present; board rendering remains a separate feature.
 
 ### `board`
 
-Owns the tactics board renderer and phase playback. It is a pure renderer: it draws the shared Board Data and never invents content. `tactics-board-renderer` fills the presentation layer; `board-phase-playback` adds playback state to the domain/application layers. No infrastructure adapter is expected unless board persistence is introduced.
+Owns the tactics board renderer and phase playback. It is a pure renderer: it draws the shared Board Data and never invents content. `presentation/board-exercise-target.ts` declares the `BoardExerciseTarget` input contract (`id`, `title`, `summary`, `boardData`); `BoardScreen({ exercise })` shows a selected-exercise card (`SELECCIONADO`, title, summary) plus the note that the animated 2:1 board arrives in the next phase, and keeps the accepted `SIGUIENTE FASE` fallback when no target arrives. `tactics-board-renderer` fills the presentation layer with the drawing, tokens, arrows, and phases; `board-phase-playback` adds playback state to the domain/application layers. The board never imports `content`. No infrastructure adapter is expected unless board persistence is introduced.
 
 ### `ai`
 
@@ -167,11 +175,13 @@ Owns the next-phase team, roster, and season surface. The MVP is anonymous, so o
 
 `src/app` is the only place where routing and dependency wiring meet:
 
-- `_layout.tsx` loads fonts, hides the splash screen, and configures the root stack.
+- `_layout.tsx` loads fonts, hides the splash screen, configures the root stack (`(tabs)`, `ejercicios/[exerciseId]`, `design-system`), and mounts `CategorySelectionProvider` from `@/modules/content` once around that stack, so the selected category survives tab switches, the exercise detail route and `(tabs)` ↔ `/design-system` navigation for the app session.
 - `(tabs)/_layout.tsx` configures the four tabs with `shared/ui` and `shared/theme`.
-- Each route file imports a screen from a module public API and default-exports it. Route files contain no business logic.
+- Each route file imports a screen from a module public API and default-exports a thin wrapper. Routes may read route params and call public use cases, but contain no business logic. `(tabs)/pizarra.tsx` reads `exerciseId`, resolves it through `getExercise`, and passes the mapped target to `BoardScreen`; `ejercicios/[exerciseId].tsx` reads and normalizes `exerciseId`, resolves it through `getExercise`, and passes the publishable exercise or `null` to `ExerciseDetailScreen`; `(tabs)/index.tsx` only creates the repository and renders `ExploreScreen`.
 - The `/design-system` route is a development gallery. It imports shared UI and theme only.
 - When a module needs an adapter, the composition root (or a small module-level container) creates it and passes it to the screen or a provider. Do not add a dependency-injection framework for the current scale.
+
+The current content wiring pattern is `route → adapter factory → screen prop`: `src/app/(tabs)/index.tsx` creates `createBundledContentRepository()` at module scope and renders `ExploreScreen({ repository })`. `src/app/(tabs)/pizarra.tsx` follows the same pattern and adds only route-param resolution: `useLocalSearchParams` reads `exerciseId`, `getExercise(repository, exerciseId)` returns a publishable exercise or `null`, `buildBoardExerciseTarget` maps it, and `BoardScreen exercise={…}` renders the target or the fallback. `src/app/ejercicios/[exerciseId].tsx` copies that flow without the board mapping: `useLocalSearchParams` reads and normalizes `exerciseId`, `getExercise(repository, exerciseId)` returns the publishable exercise or `null`, and `ExerciseDetailScreen exercise={…}` renders the detail or its not-found state. The adapter caches its parse, so the three module-scope repository instances do not parse the package again. Screens in `content/presentation` never import infrastructure; future screens copy this pattern rather than constructing adapters themselves.
 
 Future Expo Router API routes live under `src/app/api/...`. They are server-side infrastructure adapters: they may import module application/domain code and must never import presentation or expose secrets.
 
@@ -208,6 +218,7 @@ tests/
 - One test file per unit or cohesive behavior.
 - Name files `*.test.ts` or `*.test.tsx`.
 - Domain, application, and adapter tests use Node's built-in `node:test` through `tsx`. UI tests add React Native Testing Library when the first interactive screen lands.
+- `node:test` cannot load React Native, so node tests import module layers directly instead of a module `index.ts` that re-exports a screen. Public API surfaces are covered by a structural test on the barrel plus the device smoke for the route that imports it.
 - Keep fixtures next to the test that owns them.
 - Do not use the network in unit tests. Use fakes for ports.
 - Add a contract test for every module public API that another module consumes.
@@ -262,13 +273,13 @@ The test name should read as a complete rule, not as a function name. Keep the a
 
 ## Data Flows
 
-**Browse an exercise**
+**Browse by category**
 
-`app/(tabs)/index.tsx` -> `content` screen -> `content` use case -> `ContentRepository` port -> bundled JSON adapter -> shared `parseBoardData`.
+`app/(tabs)/index.tsx` -> `createBundledContentRepository` -> `content` `ExploreScreen` -> session `CategorySelectionProvider` -> `content` browse/weekly view models -> `listLibraryExercises`/`listWeeklyHighlights`/`getProgramming` -> `ContentRepository` port -> bundled package -> shared `parseBoardData`. The selection is in-memory only and resets on app restart; use cases return only publishable content.
 
 **Render a board**
 
-`app/(tabs)/pizarra.tsx` -> `board` screen -> board playback state -> shared `BoardData` -> SVG primitives. The board never fetches or invents content.
+`app/(tabs)/pizarra.tsx` -> `useLocalSearchParams` -> `content` `getExercise`/`buildBoardExerciseTarget` -> `BoardScreen exercise={…}` -> board playback state -> shared `BoardData` -> SVG primitives. Library cards build the href with `content` `buildBoardHref`, so the board opens on `/pizarra?exerciseId=<id>`; `content` passes only a board-safe target and never imports `board`, while `board` never imports `content`. Unknown, empty, unlicensed, or draft ids resolve to `null` and show the fallback. The board never fetches or invents content.
 
 **Ask the assistant**
 

@@ -26,8 +26,8 @@ A native mobile app built with React Native and Expo, targeting phones and table
 
 ## Data and Storage
 
-- Curated seed content lives as versioned JSON in the repo: Exercises (with Board Data) and per-Category Programming. It is validated against the Board Data schema at build time and shared by the app bundle and the API. No database in the MVP.
-- Content scope: Infantil U14 fully seeded (programming plus library), and a minimum of three exercises plus a programming record for each of the other six RFEF categories.
+- Curated seed content lives as a versioned JSON package in the repo: `src/modules/content/infrastructure/content/content-package.json` (`contentVersion` `1.2.0`) with every Exercise and Programming record. It is validated once through `parseContentPackage` when the bundled repository is created, read through published-only use cases, and shared by the app bundle and the API. Contract: `docs/content-model.md`. No database in the MVP.
+- Content scope: seven library exercises per RFEF category, each carrying a required `sessionPart` and a `collection` of `library` or `weekly`, grouped in Explorar as warm-up / main part / cool-down; Infantil U14 keeps its original nine library exercises. Each category also has three dedicated weekly highlights (one per session part) that do not repeat its library, and some records carry an optional inspiration citation (`references`). The package holds 50 library exercises + 21 weekly highlights = 71 exercises and seven Programming records (78 records).
 - No user accounts or personal data in the MVP, which keeps privacy scope small. Anonymous quota state (5 AI requests per day) is keyed by Expo installation ID plus a hashed IP and stored server-side, never only client-side.
 - Content and board playback work offline from the bundled JSON. AI-generated sessions and variants are persisted locally on the device so a coach can reopen them without connectivity.
 

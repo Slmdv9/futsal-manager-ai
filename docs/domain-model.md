@@ -3,10 +3,11 @@
 ## Core Concepts
 
 - **Category** — an official RFEF age bracket (Prebenjamín U8, Benjamín U10, Alevín U12, Infantil U14, Cadete U16, Juvenil U19, Senior). Immutable reference data.
-- **Exercise** — a drill with objective, categories, dimensions, players, materials, duration, intensity, coaching cues, and Board Data.
+- **Exercise** — a drill with `title`, `summary`, `focus`, `sessionPart` (warm-up, main part, or cool-down), `collection` (library drill or weekly highlight), `objective`, `categoryIds`, `players` (total plus goalkeepers), `space` (label, `widthM`, `lengthM`), `durationMinutes`, `intensity` (level plus optional percent), `workStructure`, `constraints`, `coachingCues`, optional `references` (inspiration citations, not provenance), and Board Data.
 - **Board Data** — structured, renderable description of an exercise: pitch type/aspect ratio, tokens (players, keepers), cones, arrows, labels, and an ordered list of Phases. Its versioned contract, coordinates, limits, and validation rules live in `docs/board-data-schema.md`; unvalidated Board Data must not be published or rendered.
 - **Phase** — one ordered step with its own token/arrow positions and a short explanation.
-- **Programming** — per-category methodology: formative stage, objectives, macrocycles, microcycles, session structure, and key concepts.
+- **Programming** — per-category methodology: `formativeStage`, `focus`, `playModel`, `sessionDurationMinutes`, `keyConcepts`, `objectives`, `sessionStructure` (warm-up, main, cool-down), and nested Macrocycle/Microcycle entries.
+- **Content package** — one versioned JSON package (`contentVersion` `1.2.0`) holding every Exercise and Programming record, validated once on load and read through the `content` use cases; only `published` records are readable. Its contract and invariants live in `docs/content-model.md`.
 - **Macrocycle / Microcycle** — nested time periods within a Season.
 - **Session** — an objective plus an ordered set of exercises (warm-up, main part, cool-down). Can be authored or AI-generated.
 - **AI Session Generator / AI Variant Adapter / Tactical Assistant** — AI capabilities grounded on the Exercise Library and Programming.
@@ -15,7 +16,7 @@
 ## Relationships
 
 - A Category has many Exercises (many-to-many) and exactly one Programming.
-- An Exercise has one Board Data with one or more Phases; an Exercise belongs to one or more Categories.
+- An Exercise has one Board Data with one or more Phases; an Exercise belongs to one or more Categories. An Exercise belongs to exactly one collection: the browsable library or the weekly highlights.
 - A Programming contains many Macrocycles; a Macrocycle contains many Microcycles; a Microcycle references Sessions/Session templates.
 - A Session (authored or AI-generated) contains ordered Exercises and an objective; an AI-generated Session is derived from a Category plus constraints.
 - A Variant is an Exercise derived from a source Exercise plus a constraint; it inherits the source's Category unless overridden.
@@ -26,6 +27,7 @@
 **Exercise**
 - `draft` → `published` (visible in the library). MVP library is curated, so most exercises enter as `published`.
 - `published` → `archived` (removed from browsing, retained for references).
+- Every Exercise and Programming record carries `provenance` (`kind`, `sourceName`, `licenseStatus`, optional `attribution`). Only `owned` or `permitted` content may be published, `kind` and `licenseStatus` cannot contradict, published permission-dependent content needs an `attribution`, and the read layer exposes only published records that pass the licence gate. Policy: `docs/content-licensing.md`.
 
 **Programming**
 - Authored per Category and versioned; `draft` → `published`. MVP presents the `published` version.
@@ -35,6 +37,9 @@
 
 **Board playback (UI state, not persisted)**
 - `idle` → `playing` (phase by phase) → `ended`; coach can step forward/back and replay ("Animar jugada").
+
+**Category selection (UI state, session only)**
+- `unselected` → `selected` (one RFEF bracket) → another `selected` replaces it; unknown ids are ignored and no "all categories" state exists. It survives navigation for the app session and resets to `unselected` on app restart; it is never persisted.
 
 **Next phase — Team / Season**
 - Team: `created` → `active` → `archived`.
