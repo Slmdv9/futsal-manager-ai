@@ -2,6 +2,8 @@
 
 ## Current Verified State
 
+- SDK maintenance (2026-11-01): authorized alignment of 11 Expo 58 patch dependencies on `chore/expo-sdk-alignment`; PR not opened, not pushed. `./init.sh` passed (417 tests / 306 suites, doctor 20/20), Expo dependency check and Android export passed. Galaxy M13 Expo Go smoke verified Explorar, baseline Pizarra and exercise detail with no matching JS/fatal errors. Renderer integration must be revalidated on its own branch. Remaining: 26 moderate audit advisories, native rebuild/iOS/tablet unverified. Compare: `https://github.com/Slmdv9/futsal-manager-ai/compare/feat/exercise-detail-screen...chore/expo-sdk-alignment`.
+
 - Repository root: `/Users/samuellopez/Desktop/NextDigital/Next_Training/AIExpert/repo/futsal-manager-ai`
 - Current branch: `feat/exercise-detail-screen` (stacked on `feat/explore-by-category-screen` @ `ff86167`)
 - Pull request: not opened yet; compare at `https://github.com/Slmdv9/futsal-manager-ai/compare/feat/explore-by-category-screen...feat/exercise-detail-screen`
