@@ -207,5 +207,5 @@ Browse flow: `app/(tabs)/index.tsx` → `createBundledContentRepository` → `Ex
 - CMD Mora's permission is recorded as a decision but not yet documented in writing, so no CMD Mora record is seeded.
 - The package is module infrastructure, not a shared root package; `offline-content-bundle` decides build-time gating and whether the raw package moves.
 - Every category now has a session-shaped library: six categories at seven exercises (2/3/2) and Infantil U14 at nine (2/5/2), plus three dedicated weekly highlights outside the library. The Infantil assignment places two extra drills in the main part and keeps the two cool-down drills; it is flagged for coach review in `docs/risks-and-open-questions.md`.
-- Exercise cards show no board preview yet; `exercise-preview-board-thumbnail` waits on `tactics-board-renderer`.
-- Board Data is authored but not rendered yet; legibility, 2:1 fidelity, and phase playback belong to the board features.
+- Exercise cards show no board preview yet; `exercise-preview-board-thumbnail` is next in feature-list order after renderer acceptance.
+- `tactics-board-renderer` renders one phase of validated Board Data in an accessible 2:1 SVG board (passing, independent revalidation pending). Phase selection, interpolation and animation belong to `board-phase-playback`.
